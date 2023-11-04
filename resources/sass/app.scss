@@ -1,0 +1,81 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+body {
+  &.body-auth {
+    background-color: $base-color;
+    color: #fff;
+    main {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+    .invalid-feedback { color: #fff; }
+    .form-control {
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      transition: outline 0.2s ease-in;
+      &:focus {
+        border: unset;
+        box-shadow: unset;
+        outline: 2px solid #fff;
+        outline-offset: 2px;
+      }
+    }
+  }
+}
+
+// LOGIN PAGES
+.btn-auth {
+  background-color: transparent;
+  color: $base-color;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+  z-index: 1;
+}
+
+.btn-empty {
+  background-color: transparent;
+  padding: 10px 20px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  z-index: 0;
+  font-size: 12px;
+  text-align: left;
+  &:active {
+    border: none;
+    color: $base-color;
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    z-index: -1;
+    transition: left 0.3s;
+  }
+  &:hover{
+    color: $base-color;
+    text-align: center;
+    &::before {
+      left: 0;
+    }
+  }
+}
+
+@import 'responsives';
