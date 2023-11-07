@@ -9,6 +9,8 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
+@import 'lang';
+
 body {
   &.body-auth {
     background-color: $base-color;
@@ -33,17 +35,19 @@ body {
   }
 }
 
-// LOGIN PAGES
+// ------------------------ //
+// LOGIN AND REGISTER PAGES //
+// ------------------------ //
+
 .btn-auth {
   background-color: transparent;
   color: $base-color;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.3s;
   z-index: 1;
 }
-
 .btn-empty {
   background-color: transparent;
   padding: 10px 20px;

@@ -19,6 +19,8 @@
   </head>
   
   <body class="body-auth">
+    @include('layouts.partials.lang')
+
     <main>
       @yield('content')
     </main>

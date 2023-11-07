@@ -13,14 +13,14 @@
       {{-- Login Form --}}
       <div class="col d-flex align-items-center">
         <div class="px-5">
-          <h2 class="text-center mb-4 fw-bold">EVERY RESCUE MISSION IS POSSIBLE WHERE WE WORK TOGETHER!</h2>
+          <h2 class="text-center mb-4 fw-bold">{{ __('session.title') }}</h2>
           <form method="POST" action="{{ route('login') }}" class="mx-lg-5 px-lg-5">
             @csrf
 
             {{-- Email Input --}}
             <div class="mb-3">
-              <label for="email">{{ __('Email Address') }}</label>
-              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
+              <label class="fw-bold mb-1" for="email">{{ __('session.email_address') }}</label>
+              <input id="email" placeholder="{{ __('session.placeholder.email') }}" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
                 value="{{ old('email') }}" required autocomplete="email" autofocus>
               @error('email')
                 <span class="invalid-feedback" role="alert">
@@ -32,8 +32,8 @@
   
             {{-- Password input --}}
             <div class="mb-5">
-              <label for="password">{{ __('Password') }}</label>
-              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
+              <label class="fw-bold mb-1" for="password">{{ __('session.password') }}</label>
+              <input id="password" placeholder="{{ __('session.placeholder.password') }}" type="password" class="form-control @error('password') is-invalid @enderror"
                 name="password" required autocomplete="current-password">
               @error('password')
                 <span class="invalid-feedback" role="alert">
@@ -46,10 +46,10 @@
             {{-- Buttons --}}
             <div class="d-flex mb-5 flex-column flex-lg-row">
               <button type="submit" class="btn btn-auth w-100">
-                {{ __('Submit') }}
+                {{ __('session.submit') }}
               </button>
               <a href="{{ route('register') }}" class="btn btn-empty w-100">
-                {{ __('Create account') }}
+                {{ __('session.create_account') }}
               </a>
             </div>
             {{-- End of buttons --}}

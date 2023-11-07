@@ -18,6 +18,8 @@
   </head>
   
   <body>
+    @include('layouts.partials.lang')
+    
     @include('layouts.partials.nav')
 
     <main class="py-4">

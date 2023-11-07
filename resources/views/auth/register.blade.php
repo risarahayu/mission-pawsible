@@ -13,14 +13,14 @@
       {{-- Register Form --}}
       <div class="col d-flex align-items-center">
         <div class="px-5">
-          <h2 class="text-center mb-4 fw-bold">EVERY RESCUE MISSION IS POSSIBLE WHERE WE WORK TOGETHER!</h2>
+          <h2 class="text-center mb-4 fw-bold">{{ __('session.title') }}</h2>
           <form method="POST" action="{{ route('register') }}" class="mx-xl-5 px-xl-5">
             @csrf
 
             {{-- Name input --}}
             <div class="mb-3">
-              <label for="name">{{ __('Name') }}</label>
-              <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+              <label class="fw-bold mb-1" for="name">{{ __('session.name') }}</label>
+              <input placeholder="{{ __('session.placeholder.name') }}" id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
                 value="{{ old('name') }}" required autocomplete="name" autofocus>
               @error('name')
                 <span class="invalid-feedback" role="alert">
@@ -32,8 +32,8 @@
 
             {{-- Email input --}}
             <div class="mb-3">
-              <label for="email">{{ __('Email Address') }}</label>
-              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+              <label class="fw-bold mb-1" for="email">{{ __('session.email') }}</label>
+              <input id="email" placeholder="{{ __('session.placeholder.email') }}" type="email" class="form-control @error('email') is-invalid @enderror"
                 name="email" value="{{ old('email') }}" required autocomplete="email">
               @error('email')
                 <span class="invalid-feedback" role="alert">
@@ -45,8 +45,8 @@
 
             {{-- Password input --}}
             <div class="mb-3">
-              <label for="password">{{ __('Password') }}</label>
-              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
+              <label class="fw-bold mb-1" for="password">{{ __('session.password') }}</label>
+              <input id="password" placeholder="{{ __('session.placeholder.password') }}" type="password" class="form-control @error('password') is-invalid @enderror"
                 name="password" required autocomplete="new-password">
               @error('password')
                 <span class="invalid-feedback" role="alert">
@@ -58,8 +58,8 @@
 
             {{-- Password confirm input --}}
             <div class="mb-5">
-              <label for="password-confirm">{{ __('Confirm Password') }}</label>
-              <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required
+              <label class="fw-bold mb-1" for="password-confirm">{{ __('session.confirm_password') }}</label>
+              <input id="password-confirm" placeholder="{{ __('session.placeholder.confirm_password') }}" type="password" class="form-control" name="password_confirmation" required
                 autocomplete="new-password">
             </div>
             {{-- End of password confirm input --}}
@@ -67,10 +67,10 @@
             {{-- Buttons --}}
             <div class="d-flex mb-5 flex-column flex-lg-row">
               <button type="submit" class="btn btn-auth w-100">
-                {{ __('Register') }}
+                {{ __('session.register') }}
               </button>
               <a href="{{ route('login') }}" class="btn btn-empty w-100">
-                {{ __('Already have account') }}
+                {{ __('session.already_have_account') }}
               </a>
             </div>
             {{-- End of buttons --}}
