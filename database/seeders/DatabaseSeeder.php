@@ -25,20 +25,20 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Admin Pertama',
             'email' => 'admin_1@example.com',
-            'password' => '123qweasd',
+            'password' => bcrypt('123qweasd'),
             'role' => 'admin',
         ]);
 
         DB::table('users')->insert([
             'name' => 'User Pertama',
             'email' => 'user_1@example.com',
-            'password' => '123qweasd',
+            'password' => bcrypt('123qweasd'),
         ]);
 
         DB::table('users')->insert([
             'name' => 'User Kedua',
             'email' => 'user_2@example.com',
-            'password' => '123qweasd',
+            'password' => bcrypt('123qweasd'),
         ]);
     }
 }
