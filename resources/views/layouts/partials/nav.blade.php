@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-md navbar-light navbar-base shadow-sm">
   <div class="container">
     <a class="navbar-brand" href="{{ url('/') }}">
-      {{ config('app.name', 'Laravel') }}
+      <img src="{{ asset('images/mp-logo.png') }}" alt="Mission Pawsible Logo">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -29,6 +29,18 @@
             </li>
           @endif
         @else
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)">Dog List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)">View List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)">Add New</a>
+          </li>
           <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
