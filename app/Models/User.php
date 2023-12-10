@@ -48,4 +48,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Dog::class);
     }
+
+    public function rescueRequests()
+    {
+        return $this->hasMany(RescueRequest::class, 'user_id');
+    }
+
+    public function rescued_dogs()
+    {
+        return $this->hasMany(RescueRequest::class, 'rescuer_id');
+    }
 }
