@@ -42,14 +42,27 @@
             <a class="nav-link" href="javascript:void(0)">Add New</a>
           </li>
           <li class="nav-item dropdown">
-            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            <a id="navbarDropdown" class="nav-link {{ request()->routeIs('user_contacts.create') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
               {{ Auth::user()->name }}
+              <i class="bi bi-person-circle"></i>
             </a>
 
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">
+                {{ __('My Contact') }}
+              </a>
+              @if (session('role') == 'rescuer')
+                <a class="dropdown-item" href="{{ route('role.set', ['role' => 'adopter']) }}">
+                  {{ __('Change to adopter') }}
+                </a>
+              @else
+                <a class="dropdown-item" href="{{ route('role.set', ['role' => 'rescuer']) }}">
+                  {{ __('Change to rescuer') }}
+                </a>
+              @endif
               <a class="dropdown-item" href="{{ route('logout') }}"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
                 {{ __('Logout') }}
               </a>
 

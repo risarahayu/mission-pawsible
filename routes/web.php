@@ -30,4 +30,11 @@ Route::get('/', function () {
 Route::namespace('App\Http\Controllers')->group(function () {
   Route::get('lang/change', 'LanguageController@change')->name('lang.change');
   Route::get('dashboard', 'HomeController@index')->name('home');
+
+  //Choose Role
+  Route::get('/role/{role}', 'RoleController@set_role')->name('role.set');
+  Route::get('/role', 'RoleController@index')->name('role.index');
+
+  //dog
+  Route::resource('dogs', 'DogController');
 });
