@@ -21,37 +21,15 @@ class AdoptionController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create(Request $request, Dog $dog)
     {
         $user = auth()->user();
-        $is_indonesian = $request->input('is_indonesian');
-        // dd($nationality_checked = !$request->input('is_indonesian') == null);
-        $nationality_checked = !$request->input('is_indonesian') == null;
-        return view('adoptions.create', compact('nationality_checked','user'));
-    }
+        
+        $is_indonesian = $request->input('is_indonesian'); // params is_indonesian yang terdapat di url
+        $nationality_checked = !$request->input('is_indonesian') == null; // untuk mengecek apakah ada params is_indonesian di action ini
+        // note: params yang kutau adalah parameter atau data yang dikirim kepada url atau route yang dapat kita olah atau gunakan nanti
 
-    public function createForm()
-    {
-        $action_name = 'create';
-        $adoption = new Adoption;
-        $user = auth()->user();
-        $stray_dogs = Dog::all();
-        return view('adoptions.create', compact('user', 'stray_dogs', 'action_name', 'adoption'));
-    }
-
-    public function nationalityCheck(Request $request){
-        // dd($request);
-        $action_name = 'create';
-        $adoption = new Adoption;
-        $user = auth()->user();
-        $stray_dogs = Dog::all();
-
-        $isIndonesian = $request->input('is_indonesian');
-        if ($isIndonesian == 1) {
-            return view('adoptions.create',compact('user', 'stray_dogs', 'action_name', 'adoption'));
-        } else {
-            return view('not-indonesian');
-        }
+        return view('adoptions.create', compact('nationality_checked', 'user', 'dog'));
     }
 
     /**
@@ -59,10 +37,7 @@ class AdoptionController extends Controller
      */
     public function store(StoreAdoptionRequest $request)
     {
-        dd($request);
-        $adoption = Adoption::create($request);
-        // $dogId = $adoption->dog->id;
-
+        $adoption = Adoption::create($request->validated()); // jangan lupa mengisikan method ->validated() jika ingin melakukan create secara langsung
 
         return redirect()->route('dogs.show', ['dog' => $adoption->dog_id])->with([
             'flash' => [

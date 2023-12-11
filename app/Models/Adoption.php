@@ -10,21 +10,21 @@ class Adoption extends Model
     use HasFactory;
 
     protected $fillable = [
-    'user_id', 
-    'dog_id',
-    'status',
-    'housing_type',
-    'housing_permission',
-    'housing_condition',
-    'pet_experience',
-    'residency_duration',
-    'planned_residency_duration',
-    'future_residency_country',
-    'pet_migration_plan',
-    'job',
-    'house_occupants',
-    'canine_residence',
-    'vaccinated'
+        'user_id', 
+        'dog_id',
+        'status',
+        'housing_type',
+        'housing_permission',
+        'housing_condition',
+        'pet_experience',
+        'residency_duration',
+        'planned_residency_duration',
+        'future_residency_country',
+        'pet_migration_plan',
+        'job',
+        'house_occupants',
+        'canine_residence',
+        'vaccinated'
     ];
 
     public function user()

@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<a href="{{ route('adoptions.create', ['indonesian' => 'yes']) }}">goto adoption</a>
-<section>
+  {{-- gunakan ini untuk tombol buat adopsinya --}}
+  <a href="{{ route('adoptions.create', ['dog' => $stray_dog->id]) }}">goto adoption</a>
+
+  <section>
     <div class="container">
       <div class="row flex-md-row flex-column-reverse">
         <div class="col-md-6 dog-show">
@@ -116,23 +118,23 @@
 @endsection
 
 @section('scripts')
-<script type="module">
-  $(function() {
-    $('.delete-dog').click(function() {
-      var self = $(this);
-      Swal.fire({
-        title: 'Are you sure?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#BD1A8D',
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          self.parent().find('form').submit();
-        }
-      })
-    });
-  })
-</script>
+  <script type="module">
+    $(function() {
+      $('.delete-dog').click(function() {
+        var self = $(this);
+        Swal.fire({
+          title: 'Are you sure?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#BD1A8D',
+          confirmButtonText: 'Yes',
+          cancelButtonText: 'No'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            self.parent().find('form').submit();
+          }
+        })
+      });
+    })
+  </script>
 @endsection
