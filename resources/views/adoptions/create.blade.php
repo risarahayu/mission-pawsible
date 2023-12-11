@@ -51,39 +51,35 @@
 @section('scripts')
   <!-- JavaScript Section -->
   <script type="module">
-    document.addEventListener("DOMContentLoaded", function () {
+    $(function () {
       // Mendengarkan perubahan pada radio button "housing_permission"
-      document.querySelectorAll('input[name="housing_permission"]').forEach(function (radio) {
-        radio.addEventListener('change', function () {
-          // Cek apakah pengguna memiliki persetujuan
-          if (this.value == '1') {
-            // Jika memiliki persetujuan, tampilkan pertanyaan berikutnya
-            document.getElementById('next-question').style.display = 'block';
-            document.getElementById('cannot-proceed').style.display = 'none';
-          } else {
-            // Jika tidak memiliki persetujuan, tampilkan pesan "Tidak bisa lanjut"
-            document.getElementById('next-question').style.display = 'none';
-            document.getElementById('cannot-proceed').style.display = 'block';
+      $('input[name="housing_permission"]').on('change', function () {
+        // Cek apakah pengguna memiliki persetujuan
+        if ($(this).val() == '1') {
+          // Jika memiliki persetujuan, tampilkan pertanyaan berikutnya
+          $('#next-question').show();
+          $('#cannot-proceed').hide();
+        } else {
+          // Jika tidak memiliki persetujuan, tampilkan pesan "Tidak bisa lanjut"
+          $('#next-question').hide();
+          $('#cannot-proceed').show();
 
-            // resetForm();
-          }
-        });
+          // resetForm();
+        }
       });
-    });
 
-    // job
-    document.addEventListener("DOMContentLoaded", function () {
+      // job
       // Mendengarkan perubahan pada dropdown "job"
-      document.getElementById('job').addEventListener('change', function () {
-        var jobValue = this.value;
+      $('#job').on('change', function () {
+        var jobValue = $(this).val();
 
         // Menampilkan atau menyembunyikan elemen berdasarkan pilihan pekerjaan
         if (jobValue == 'Full Time') {
-          document.getElementById('house_occupants').style.display = 'block';
-          document.getElementById('canine_residence').style.display = 'block';
+          $('#house_occupants').show();
+          $('#canine_residence').show();
         } else {
-          document.getElementById('house_occupants').style.display = 'none';
-          document.getElementById('canine_residence').style.display = 'none';
+          $('#house_occupants').hide();
+          $('#canine_residence').hide();
         }
       });
     });
