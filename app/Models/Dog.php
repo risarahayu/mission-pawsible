@@ -23,4 +23,9 @@ class Dog extends Model
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+    public function adoption()
+    {
+        return $this->hasOne(Adoption::class);
+    }
 }

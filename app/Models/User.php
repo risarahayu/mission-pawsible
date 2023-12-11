@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(RescueRequest::class, 'rescuer_id');
     }
+
+    public function adoptions()
+    {
+        return $this->hasMany(Adoption::class);
+    }
 }

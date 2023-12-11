@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<a href="{{ route('adoptions.create', ['indonesian' => 'yes']) }}">goto adoption</a>
 <section>
     <div class="container">
       <div class="row flex-md-row flex-column-reverse">

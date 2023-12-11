@@ -37,8 +37,12 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
   //dog
   Route::resource('dogs', 'DogController');
-
   
   //request rescue
   Route::resource('requests', 'RescueRequestController');
+
+  //adoption
+  Route::resource('adoptions', 'AdoptionController');
+  Route::post('adoptions/nationality_check', 'AdoptionController@nationalityCheck')->name('adoptions.nationality_check');
+  Route::get('/adoptions/create_form', 'AdoptionController@createForm')->name('adoptions.create_form');
 });
