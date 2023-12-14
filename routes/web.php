@@ -40,6 +40,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
   
   //request rescue
   Route::resource('requests', 'RescueRequestController');
+  Route::put('/requests/{request}/rescue', 'RescueRequestController@rescue')->name('requests.rescue');
 
   //adoption
   Route::resource('adoptions', 'AdoptionController')->except(['create']); // except create mengecualikan route create didalam resource

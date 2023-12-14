@@ -75,10 +75,10 @@
                     <div class="col-xl-5 d-flex align-items-center">
                       @php
                         if($stray_dog->rescued) {
-                          $dog_status = "Adopted";
-                          $status_style = "background-color: green;";
+                          $dog_status = "Rescued";
+                          $status_style = "background-color: green; color:white; ";
                         } else {
-                          $dog_status = 'Rescue the dog';
+                          $dog_status = 'Rescue dog';
                           $status_style = "background-color: #BD1A8D; color:white;";
                         }
                         @endphp
@@ -87,7 +87,7 @@
                       </button>
                     </div>
                     <div class="col-xl-7">
-                      <small class="fw-bold">Request by {{$stray_dog->adoptions_count}} people</small><br/>
+                      <!-- <small class="fw-bold">Request by {{$stray_dog->adoptions_count}} people</small><br/> -->
                       <small>Since {{ $stray_dog->created_at->format('Y-m-d') }}</small>
                     </div>
                   </div>

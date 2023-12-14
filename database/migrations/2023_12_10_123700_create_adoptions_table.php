@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('dog_id');
             $table->foreign('dog_id')->references('id')->on('dogs');
-            $table->string('status')->nullable();
+            $table->string('status')->nullable()->default('pending');
             $table->string('housing_type');
             $table->boolean('housing_permission');
             $table->boolean('housing_condition');

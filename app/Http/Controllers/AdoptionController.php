@@ -27,6 +27,7 @@ class AdoptionController extends Controller
         
         $is_indonesian = $request->input('is_indonesian'); // params is_indonesian yang terdapat di url
         $nationality_checked = !$request->input('is_indonesian') == null; // untuk mengecek apakah ada params is_indonesian di action ini
+        dd(!$request->input('is_indonesian') == null);
         // note: params yang kutau adalah parameter atau data yang dikirim kepada url atau route yang dapat kita olah atau gunakan nanti
 
         return view('adoptions.create', compact('nationality_checked', 'user', 'dog'));
@@ -67,9 +68,32 @@ class AdoptionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAdoptionRequest $request, Adoption $adoption)
+    public function update(Request $request, Adoption $adoption)
     {
-        //
+        
+        if ($request->status == 'cancel') {
+            $stray_dog = $adoption->dog;
+            $adoption->update(['status' => 'pending']);
+            $stray_dog->adoptions()->where('status', 'decline')->update(['status' => 'pending']);
+            $stray_dog->update(['adopted' => false]);
+            return redirect()->route('dogs.show', $stray_dog->id)->with([
+                'flash' => [
+                    'type' => 'danger',
+                    'message' => 'You have canceled the adopter',
+                ]
+            ]);
+        } else {
+            $stray_dog = $adoption->dog;
+            $adoption->update(['status' => 'accepted']);
+            $stray_dog->adoptions()->where('status', 'pending')->update(['status' => 'declined']);
+            $stray_dog->update(['adopted' => true]);
+            return redirect()->route('dogs.show', $stray_dog->id)->with([
+                'flash' => [
+                    'type' => 'success',
+                    'message' => 'You have selected the adopter',
+                ]
+            ]);
+        }
     }
 
     /**

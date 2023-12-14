@@ -29,18 +29,15 @@
             </li>
           @endif
         @else
+          @if (session('role') == 'rescuer')
           <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)">Dashboard</a>
+            <a class="nav-link" href="javascript:void(0)">Dog Rescue</a>
           </li>
+          @else
           <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)">Dog List</a>
+            <a class="nav-link" href="javascript:void(0)">Dog Adoption</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)">View List</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)">Add New</a>
-          </li>
+          @endif
           <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link {{ request()->routeIs('user_contacts.create') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
               {{ Auth::user()->name }}

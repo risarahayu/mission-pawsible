@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-  {{-- gunakan ini untuk tombol buat adopsinya --}}
-  <a href="{{ route('adoptions.create', ['dog' => $stray_dog->id]) }}">goto adoption</a>
-
   <section>
     <div class="container">
       <div class="row flex-md-row flex-column-reverse">
@@ -113,6 +110,67 @@
           <!-- <img class="img-fluid p-5 d-none d-md-block" src="{{ asset('images/lets-chat-withus.svg') }}"> -->
         </div>
       </div>
+      <div class="row justify-content-center mt-5  ">
+        <div class="col-6 text-center">
+          @if($user->id != $own->id)
+            @if($stray_dog->adopted == '1')
+              <p class="fs-2">Someone already adopt this dog!</p>
+            @elseif($stray_dog->adopted !== '1' && $userAdoption)
+              <p class="fs-2">Keep Update!</p>
+              <div class="btn btn-primary text-align">You already request this dog.</div>
+              <p class="fs-6 mt-3">Waiting for approval from the owener</p>
+            @else
+              <a href="{{ route('adoptions.create', ['dog' => $stray_dog->id]) }}">goto adoption</a>
+            @endif
+          @endif
+        </div>
+      </div>
+      @if(Auth::id() == $own->id)
+        <div class="row">
+          @foreach ($adoptions as $adoption)
+            <div class="col-md-4">
+              <div class="card">
+                <h5 class="card-title bold card-header"><i class="bi bi-person-circle me-3"></i>{{ $adoption->user->name }}</h5>
+                <div class="card-body">
+                  <div class="d-flex align-items-center" style="gap: 10px">
+                    <h4><i class="bi bi-envelope"></i></h4>
+                    <div>
+                      <small>Email</small>
+                      <p class="mb-0 fw-bold">{{ empty($adoption->user->email) ? "-" : $adoption->user->email }}</p>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center" style="gap: 10px">
+                    <h4><i class="bi bi-whatsapp"></i></h4>
+                    <div>
+                      <small>Whatsapp</small>
+                      <p class="mb-0 fw-bold">{{ empty($adoption->user->whatsapp) ? "-" : $adoption->user->whatsapp }}</p>
+                    </div>
+                  </div>
+                  @if($adoption->status == 'accepted')
+                    <form class="cancel-adoption" action="{{ route('adoptions.update', $adoption->id) }}" method="POST">
+                      @csrf
+                      @method('PUT')
+                      <input type="hidden" name="status" value="cancel">
+                      <button type="submit" class="btn btn-custom-submit w-100 btn-cancel-adoption">
+                        {{ __('Cancel') }}
+                      </button>
+                    </form>
+                  @else
+                    <form id="accept-form" action="{{ route('adoptions.update', $adoption->id) }}" method="POST">
+                      @csrf
+                      @method('PUT')
+                      <input type="hidden" name="status" value="accept">
+                      <button type="submit" class="btn btn-custom-submit w-100">
+                        {{ __('Accept') }}
+                      </button>
+                    </form>
+                  @endif
+                </div>
+              </div>    
+            </div>
+          @endforeach
+        </div>
+      @endif
     </div>
   </section>
 @endsection

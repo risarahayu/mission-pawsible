@@ -12,7 +12,6 @@
             {{$area_name}}
           @else
             <span>All</span>
-          
           @endif
         </span> stray dog</p>
       </div>

@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateRescueRequestRequest;
 use App\Models\Image;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class RescueRequestController extends Controller
 {
@@ -71,6 +72,7 @@ class RescueRequestController extends Controller
             
                     $imageModel = new Image();
                     $imageModel->filename = $publicPath;
+                    $imageModel->request_status = 'requested';
                     $strayDog->images()->save($imageModel);
                 }
             }
@@ -91,7 +93,8 @@ class RescueRequestController extends Controller
     {
             $stray_dog = $request;
             $finder = $stray_dog->user;
-            return view('requests.show', compact('stray_dog', 'finder'));
+            $rescuer = $stray_dog;
+            return view('requests.show', compact('stray_dog', 'finder', 'rescuer'));
     }
 
     /**
@@ -174,6 +177,33 @@ class RescueRequestController extends Controller
             'flash' => [
                 'type' => 'success',
                 'message' => 'Stray dog has been remove',
+            ]
+        ]);
+    }
+
+    public function rescue(Request $rescueRequest, RescueRequest $request){
+        $user = auth()->user();
+        $request->update([
+            'rescuer_id' => $user->id,
+            'rescued' => true,
+        ]);
+        if ($rescueRequest->hasFile('images')) {
+            foreach ($rescueRequest->file('images') as $image) {
+                $filename = $image->getClientOriginalName();
+                $path = $image->storeAs('public/stray_dog_images', $filename);
+                $publicPath = Storage::url($path);
+        
+                $imageModel = new Image();
+                $imageModel->filename = $publicPath;
+                $imageModel->request_status = 'rescuer';
+                $request->images()->save($imageModel);
+            }
+        }
+
+        return redirect()->route("requests.show", ['request' => $request->id])->with([
+            'flash' => [
+                'type' => 'success',
+                'message' => 'Stray dog has been updated successfully',
             ]
         ]);
     }

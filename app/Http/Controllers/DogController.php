@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dog;
+use App\Models\User;
 use App\Models\Area;
+use App\Models\Adoption;
 use App\Http\Requests\StoreDogRequest;
 use App\Http\Requests\UpdateDogRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Image;
+use Illuminate\Support\Facades\Auth;
 
 
 class DogController extends Controller
@@ -78,6 +81,8 @@ class DogController extends Controller
                 }
             }
         });
+
+       
         
         return redirect()->route("dogs.show", ['dog' => $strayDog->id])->with([
             'flash' => [
@@ -90,11 +95,29 @@ class DogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Dog $dog)
+    public function show(Dog $dog, Adoption $adoption)
     {
+        //request adoption
+        $user = Auth::user();
+
+        //cek anjingyang dimiliki dari user yg sedang login
+        $userDogs = $user->dogs;
+
+        //cek data dari anjingnya
         $stray_dog = $dog;
+
+        //Data adopsi dari user yang lagi login dengan anjing yang lgi dilihat di page ini
+        $userAdoption = $user->adoptions()->where('dog_id', $dog->id)->first();
+
+        //Cek pemilik anjing
         $own = $stray_dog->user;
-        return view('dogs.show', compact('stray_dog', 'own'));
+
+        //cek request adopsi untuk owener
+        $adoptions = $dog->adoptions;
+
+    
+        
+        return view('dogs.show', compact('user', 'stray_dog', 'userAdoption', 'own', 'adoptions'));
     }
 
     /**
