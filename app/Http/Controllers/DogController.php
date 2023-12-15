@@ -22,6 +22,7 @@ class DogController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -43,7 +44,7 @@ class DogController extends Controller
         $stray_dogs = Dog::all();
         $areas = Area::all();
         return view('dogs.create', compact('user', 'stray_dogs', 'areas', 'action_name', 'dog'));
-    
+
     }
 
     /**
@@ -52,7 +53,7 @@ class DogController extends Controller
     public function store(StoreDogRequest $request)
     {
         $strayDog = null;
-       
+
         DB::transaction(function () use ($request, &$strayDog) {
             // Create area
             $area_name = $request->input('area');
@@ -68,13 +69,13 @@ class DogController extends Controller
             // Create straydogs
             $stray_dog_request = array_merge($request->except(['_token', 'area']), ['area_id' => $area->id]);
             $strayDog = Dog::create($stray_dog_request);
-            
+
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
                     $filename = $image->getClientOriginalName();
                     $path = $image->storeAs('public/stray_dog_images', $filename);
                     $publicPath = Storage::url($path);
-            
+
                     $imageModel = new Image();
                     $imageModel->filename = $publicPath;
                     $strayDog->images()->save($imageModel);
@@ -82,8 +83,8 @@ class DogController extends Controller
             }
         });
 
-       
-        
+
+
         return redirect()->route("dogs.show", ['dog' => $strayDog->id])->with([
             'flash' => [
                 'type' => 'success',
@@ -115,8 +116,8 @@ class DogController extends Controller
         //cek request adopsi untuk owener
         $adoptions = $dog->adoptions;
 
-    
-        
+
+
         return view('dogs.show', compact('user', 'stray_dog', 'userAdoption', 'own', 'adoptions'));
     }
 
@@ -150,7 +151,7 @@ class DogController extends Controller
                 $newArea->save();
                 $dog->area_id = $newArea->id;
             }
-            
+
             // Update other attributes of the StrayDog model
             $dog->dog_type = $request->input('dog_type');
             $dog->color = $request->input('color');

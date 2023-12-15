@@ -13,19 +13,26 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- Menggunakan CDN hanya untuk plugin yang tidak bisa dipasang melalui npm -->
+    @include('layouts.partials.cdn')
+
     <!-- Scripts -->
     @vite(['resources/js/app.js', 'resources/sass/app.scss'])
   </head>
-  
+
   <body>
+    <!-- Setting bahasa -->
     @include('layouts.partials.lang')
-    
+
+    <!-- Navbar -->
     @include('layouts.partials.nav')
 
+    <!-- Isi konten utama -->
     <main class="py-4">
       @yield('content')
     </main>
 
+    <!-- Scripts agar script selalu dibawah -->
     @yield('scripts')
   </body>
 </html>

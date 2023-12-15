@@ -1,0 +1,30 @@
+.role {
+  .logo-wrapper {
+    text-align: center;
+    width: 25%;
+  }
+
+  .role-list {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    .btn-role {
+      color: white;
+      border: 2px solid white;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 450px;
+      font-size: 24px;
+      font-weight: bold;
+      padding: 25px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      i { font-size: 36px; }
+      &:hover {
+        background-color: white;
+        color: $base-color;
+      }
+    }
+  }
+}

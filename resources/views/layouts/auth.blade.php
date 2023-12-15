@@ -14,13 +14,18 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- Menggunakan CDN hanya untuk plugin yang tidak bisa dipasang melalui npm -->
+    @include('layouts.partials.cdn')
+
     <!-- Scripts -->
     @vite(['resources/js/app.js', 'resources/sass/app.scss'])
   </head>
-  
+
   <body class="body-auth">
+    <!-- Pilih bahasa -->
     @include('layouts.partials.lang')
 
+    <!-- Isi dari konten utama -->
     <main>
       @yield('content')
     </main>
