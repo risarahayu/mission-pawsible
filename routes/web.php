@@ -21,7 +21,7 @@ Auth::routes();
 // Route for root
 Route::get('/', function () {
   if (Auth::check()) {
-    return view('dashboards.index'); // if login session created will render dashboard/index view
+    return redirect()->route('home'); // if login session created will render dashboard/index view
   } else {
     return view('auth.login'); // if not logged in will render auth/login view
   }
@@ -37,7 +37,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
   //dog
   Route::resource('dogs', 'DogController');
-  
+
   //request rescue
   Route::resource('requests', 'RescueRequestController');
   Route::put('/requests/{request}/rescue', 'RescueRequestController@rescue')->name('requests.rescue');

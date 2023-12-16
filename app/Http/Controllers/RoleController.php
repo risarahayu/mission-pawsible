@@ -29,8 +29,10 @@ class RoleController extends Controller
         // menyimpan role kedalam session dengan key role
         session(['role' => $role]);
 
+        $redirect_url = session('role') == 'rescuer' ? 'requests.index' : 'dogs.index';
+
         // redirect ke route lalu menampilkan standar flash message
-        return redirect()->route("home")->with([
+        return redirect()->route($redirect_url)->with([
             'flash' => [
                 'type' => 'success',
                 'message' => 'Berhasil login',
