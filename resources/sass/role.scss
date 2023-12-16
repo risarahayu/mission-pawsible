@@ -1,3 +1,14 @@
+.header-role {
+  background-image: url('/images/role-index-background.jpg');
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  filter: brightness(60%);
+}
+
 .role {
   .logo-wrapper {
     text-align: center;
@@ -8,6 +19,7 @@
     display: flex;
     gap: 25px;
     justify-content: center;
+    align-items: center;
     .btn-role {
       color: white;
       border: 2px solid white;

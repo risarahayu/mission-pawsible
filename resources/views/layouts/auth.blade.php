@@ -22,6 +22,11 @@
   </head>
 
   <body class="body-auth">
+
+    @if(Route::has('role.index'))
+      <header class="header-role"></header>
+    @endif
+
     <!-- Pilih bahasa -->
     @include('layouts.partials.lang')
 

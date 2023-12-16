@@ -12,7 +12,7 @@
 
     {{-- List button role --}}
     <h1 class="display-6 text-white p-5 fw-bold">{{ __('role.title') }}</h1>
-    <div class="role-list">
+    <div class="role-list flex-column flex-lg-row">
       <a href="{{ route('role.set', ['role' => 'rescuer']) }}" class="btn btn-role">
         <i class="fa-solid fa-kit-medical"></i>{{ __('role.rescue') }}
       </a>

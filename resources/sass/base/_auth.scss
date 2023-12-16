@@ -29,9 +29,11 @@ body {
   padding: 10px 20px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-weight: bold;
   z-index: 1;
 }
 .btn-empty {
+  font-weight: bold;
   background-color: transparent;
   padding: 10px 20px;
   color: #fff;

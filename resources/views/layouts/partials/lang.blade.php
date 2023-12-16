@@ -1,4 +1,4 @@
-<div class="lang p-3 @auth session @endauth">
+<div class="lang p-3 @if(Route::has('role.index')) lang-role @endif">
   <div class="tabs">
     <input type="radio" id="radio-1" name="lang" value="en" @if(session()->get('locale') == 'en' || session()->get('locale') == '') checked='' @endif>
     <label class="tab" for="radio-1">EN</label>
@@ -10,7 +10,7 @@
 
 <script type="module">
   var url = "{{ route('lang.change') }}", selectedLang = $(".lang .tabs input[type='radio']:checked").val();
-  
+
   $(".lang .tabs input[type='radio']").change(function(){
     window.location.href = url + "?lang="+ $(this).val();
   });
