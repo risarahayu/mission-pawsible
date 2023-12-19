@@ -1,13 +1,30 @@
+a.dog-link {
+  text-decoration: none;
+}
+
 .dog-list {
+  box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+
   .dog-picture {
     height: 150px;
     overflow: hidden;
     position: relative;
+
     img {
       height: inherit;
       width: 100%;
       position: absolute;
       object-fit: cover;
+    }
+  }
+
+  .dog-brief {
+    h4 {
+      &.fw-bold {
+        text-decoration: underline;
+        text-decoration-color: $primary;
+        text-decoration-thickness: .2rem;
+      }
     }
   }
 }
@@ -17,6 +34,7 @@
     height: 250px;
     overflow: hidden;
     position: relative;
+
     img {
       height: inherit;
       width: 100%;
@@ -45,4 +63,61 @@
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.adoption-status {
+  .btn-adopted {
+    background-color: $green;
+    color: #fff;
+
+    &:hover {
+      background-color: $soft-green;
+      color: $secondary;
+    }
+  }
+
+  .btn-adopteable {
+    background-color: $primary;
+    color: #fff;
+
+    &:hover {
+      background-color: $secondary;
+      color: $soft-primary;
+    }
+  }
+}
+
+.dashboard-nodata-card {
+  &.dogs {
+    height: 50vh;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+    a {
+      text-decoration: none;
+      color: #6C757D;
+      transition: .3s;
+
+      &:hover {
+        color: #ADB5BD;
+      }
+    }
+
+    p {
+      &.txt-1 {
+        font-size: 1.5rem;
+      }
+
+      &.txt-2 {
+        font-size: 2rem;
+      }
+    }
+
+    img {
+      width: 6rem;
+      filter: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03)) drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));
+    }
+  }
 }
