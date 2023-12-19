@@ -45,7 +45,7 @@
       @if ($stray_dogs->isNotEmpty())        
         @foreach($stray_dogs as $stray_dog)
           <div class="col-md-4 mb-3">
-            <a href="{{ route('dogs.show', ['dog' => $stray_dog->id]) }}">
+            <a href="{{ route('dogs.show', ['dog' => $stray_dog->id]) }}" class="dog-link">
               <div class="card dog-list">
                 <div class="card-body">
                   <div class="row mb-3">
@@ -54,7 +54,7 @@
                         <img class="rounded" src="{{ asset($stray_dog->images->first()->filename) }}" alt="Stray Dog Image">
                       </div>
                     </div>
-                    <div class="col-7 d-flex flex-column justify-content-center">
+                    <div class="col-7 d-flex flex-column justify-content-center dog-brief">
                       <div class="d-flex align-items-center" style="gap: 15px;">
                         <i class="bi bi-gender-ambiguous dtl-icon"></i>
                         <div>
@@ -74,15 +74,9 @@
                   <div class="row adoption-status flex-column-reverse flex-xl-row">
                     <div class="col-xl-5 d-flex align-items-center">
                       @php
-                        if($stray_dog->adopted) {
-                          $dog_status = "Adopted";
-                          $status_style = "background-color: green;";
-                        } else {
-                          $dog_status = 'Adopteable';
-                          $status_style = "background-color: #BD1A8D; color:white;";
-                        }
-                        @endphp
-                      <button type="button" class="btn btn-custom-submit w-100" style="{{ $status_style }}">
+                        $dog_status = ($stray_dog->adopted) ? 'Adopted' : 'Adopteable';
+                      @endphp
+                      <button type="button" class="btn btn-custom-submit w-100 btn-{{ strtolower($dog_status) }}">
                         {{ $dog_status }}
                       </button>
                     </div>
@@ -97,14 +91,15 @@
           </div>
         @endforeach
       @else
-        <a href="{{ route('dogs.create') }}" style="text-decoration: none">
-          <div class="card dashboard-nodata-card">
-            <div class="card-body text-muted d-flex justify-content-center align-items-center flex-column">
-              <h4 class="m-0">No stray dog yet</h4>
-              <h1><i class="bi bi-plus-square-dotted me-3"></i>Register stray dog you found</h1>
+        <div class="dashboard-nodata-card dogs">
+          <a href="{{ route('dogs.create') }}">
+            <div class="d-flex flex-column align-items-center">
+              <img src="{{ asset('images/single-dog.png') }}" alt="Single Dog" width="6rem">
+              <p class="m-0 mt-2 txt-1">No stray dog yet</p>
+              <p class="m-0 txt-2"><i class="bi bi-plus-square-dotted me-3"></i>Register a found stray dog</p>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
       @endif
     </div>
   </div>
