@@ -5,14 +5,14 @@
   <div class="container">
     <div class="d-flex justify-content-between flex-wrap mt-3 mb-5">
       <div>
-        <h1 class="fw-bold">{{ __('Stray Dog List') }}</h1>
-        <p>We found <span class="fw-semibold">{{$stray_dogs->count()}} 
+        <h1 class="fw-bold">{{ __('Rescue Requests') }}</h1>
+        <p>We found <span class="fw-semibold">{{$stray_dogs->count()}}
           at
           @if(!empty($area_name))
             {{$area_name}}
           @else
             <span>All</span>
-          
+
           @endif
         </span> stray dog</p>
       </div>
@@ -31,10 +31,10 @@
           <li><a class="dropdown-item" href="{{ route('dogs.index') }}">All</a></li>
           @foreach($area as $areaItem)
             <li><a class="dropdown-item" href="{{-- route('straydogs.sort', ['area_name' => $areaItem->name]) --}}">{{ $areaItem->name }}</a></li>
-          @endforeach 
+          @endforeach
         </ul>
       </div>
-      
+
     </div>
   </div>
 </section>
@@ -42,7 +42,7 @@
 <section>
   <div class="container">
     <div class="row">
-      @if ($stray_dogs->isNotEmpty())        
+      @if ($stray_dogs->isNotEmpty())
         @foreach($stray_dogs as $stray_dog)
           <div class="col-md-4 mb-3">
             <a href="{{ route('requests.show', ['request' => $stray_dog->id]) }}">

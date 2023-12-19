@@ -16,11 +16,14 @@ class RescueRequestController extends Controller
 
     public function __construct()
     {
+        // Redirect back ke halaman login ketika belum login
         $this->middleware('auth');
+
+        // Redirect back ke [route('role.index')] ketika belum menerapkan role
+        $this->middleware('role');
     }
-    /**
-     * Display a listing of the resource.
-     */
+
+    // Display a listing of the resource.
     public function index()
     {
         $area = Area::all();
@@ -28,9 +31,7 @@ class RescueRequestController extends Controller
         return view('requests.index', compact('stray_dogs','area'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Show the form for creating a new resource.
     public function create()
     {
         $action_name = 'create';
@@ -41,13 +42,11 @@ class RescueRequestController extends Controller
         return view('requests.create', compact('user', 'stray_dogs', 'areas', 'action_name', 'dog'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Store a newly created resource in storage.
     public function store(StoreRescueRequestRequest $request)
     {
         $strayDog = null;
-       
+
         DB::transaction(function () use ($request, &$strayDog) {
             // Create area
             $area_name = $request->input('area');
@@ -63,13 +62,13 @@ class RescueRequestController extends Controller
             // Create straydogs
             $stray_dog_request = array_merge($request->except(['_token', 'area']), ['area_id' => $area->id]);
             $strayDog = RescueRequest::create($stray_dog_request);
-            
+
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
                     $filename = $image->getClientOriginalName();
                     $path = $image->storeAs('public/stray_dog_images', $filename);
                     $publicPath = Storage::url($path);
-            
+
                     $imageModel = new Image();
                     $imageModel->filename = $publicPath;
                     $imageModel->request_status = 'requested';
@@ -77,7 +76,7 @@ class RescueRequestController extends Controller
                 }
             }
         });
-        
+
         return redirect()->route("requests.show", ['request' => $strayDog->id])->with([
             'flash' => [
                 'type' => 'success',
@@ -86,9 +85,7 @@ class RescueRequestController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // Display the specified resource.
     public function show(RescueRequest $request)
     {
             $stray_dog = $request;
@@ -97,9 +94,7 @@ class RescueRequestController extends Controller
             return view('requests.show', compact('stray_dog', 'finder', 'rescuer'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Show the form for editing the specified resource.
     public function edit(RescueRequest $request)
     {
         $action_name = 'edit';
@@ -109,9 +104,7 @@ class RescueRequestController extends Controller
         return view('requests.edit', compact('dog', 'request', 'user', 'action_name', 'images'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Update the specified resource in storage.
     public function update(UpdateRescueRequestRequest $recueRequest, RescueRequest $request)
     {
         DB::transaction(function () use ($request, &$dog) {
@@ -128,7 +121,7 @@ class RescueRequestController extends Controller
                 $newArea->save();
                 $dog->area_id = $newArea->id;
             }
-            
+
             // Update other attributes of the StrayDog model
             $dog->dog_type = $request->input('dog_type');
             $dog->color = $request->input('color');
@@ -167,9 +160,7 @@ class RescueRequestController extends Controller
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Remove the specified resource from storage.
     public function destroy(RescueRequest $request)
     {
         $request->delete();
@@ -192,7 +183,7 @@ class RescueRequestController extends Controller
                 $filename = $image->getClientOriginalName();
                 $path = $image->storeAs('public/stray_dog_images', $filename);
                 $publicPath = Storage::url($path);
-        
+
                 $imageModel = new Image();
                 $imageModel->filename = $publicPath;
                 $imageModel->request_status = 'rescuer';
