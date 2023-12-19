@@ -42,52 +42,54 @@
 <section>
   <div class="container">
     <div class="row">
-      @if ($stray_dogs->isNotEmpty())        
+      @if ($stray_dogs->isNotEmpty())
         @foreach($stray_dogs as $stray_dog)
-          <div class="col-md-4 mb-3">
-            <a href="{{ route('dogs.show', ['dog' => $stray_dog->id]) }}" class="dog-link">
-              <div class="card dog-list">
-                <div class="card-body">
-                  <div class="row mb-3">
-                    <div class="col-5">
-                      <div class="dog-picture">
-                        <img class="rounded" src="{{ asset($stray_dog->images->first()->filename) }}" alt="Stray Dog Image">
+          <div class="col-md-6 mb-4">
+            <div class="dog-card">
+              <div class="row">
+                <div class="col-md-6 image-wrapper">
+                  @php
+                    $filename = $stray_dog->images->first()->filename;
+                    $filename = explode('/', $filename);
+                    $filename = end($filename);
+                  @endphp
+                  <img src="{{ asset($stray_dog->images->first()->filename) }}" alt="{{ $filename }}">
+                </div>
+                <div class="col-md-6 brief">
+                  <div class="wrapper">
+                    <div class="gender">
+                      <i class="bi bi-gender-ambiguous dtl-icon"></i>
+                      <div>
+                        <small>Gender</small><br/>
+                        <h4 class="fw-bold">{{ ucfirst($stray_dog->gender) }}</h4>
                       </div>
                     </div>
-                    <div class="col-7 d-flex flex-column justify-content-center dog-brief">
-                      <div class="d-flex align-items-center" style="gap: 15px;">
-                        <i class="bi bi-gender-ambiguous dtl-icon"></i>
-                        <div>
-                          <small>Gender</small><br/>
-                          <h4 class="fw-bold">{{ ucfirst($stray_dog->gender) }}</h4>
-                        </div>
-                      </div>
-                      <div class="d-flex align-items-center" style="gap: 15px;">
-                        <img class="dtl-icon" src="{{ asset('images/cil_animal.png') }}">
-                        <div>
-                          <small>Size</small><br/>
-                          <h4 class="fw-bold">{{ ucfirst($stray_dog->size) }}</h4>
-                        </div>
+                    <div class="size">
+                      <img class="dtl-icon" src="{{ asset('images/cil_animal.png') }}">
+                      <div>
+                        <small>Size</small><br/>
+                        <h4 class="fw-bold">{{ ucfirst($stray_dog->size) }}</h4>
                       </div>
                     </div>
-                  </div>
-                  <div class="row adoption-status flex-column-reverse flex-xl-row">
-                    <div class="col-xl-5 d-flex align-items-center">
+                    <div class="size">
+                      <i class="bi bi-clock-history dtl-icon"></i>
+                      <div>
+                        <small>Request by {{$stray_dog->adoptions_count}} people</small><br/>
+                        <h4 class="fw-bold">Since {{ $stray_dog->created_at->format('Y-m-d') }}</h4>
+                      </div>
+                    </div>
+                    <div class="button">
                       @php
                         $dog_status = ($stray_dog->adopted) ? 'Adopted' : 'Adopteable';
                       @endphp
-                      <button type="button" class="btn btn-custom-submit w-100 btn-{{ strtolower($dog_status) }}">
+                      <a href="{{ route('dogs.show', ['dog' => $stray_dog->id]) }}" class="btn btn-custom-submit w-100 btn-{{ strtolower($dog_status) }}">
                         {{ $dog_status }}
-                      </button>
-                    </div>
-                    <div class="col-xl-7">
-                      <small class="fw-bold">Request by {{$stray_dog->adoptions_count}} people</small><br/>
-                      <small>Since {{ $stray_dog->created_at->format('Y-m-d') }}</small>
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
-            </a>
+            </div>
           </div>
         @endforeach
       @else

@@ -74,15 +74,9 @@
                   <div class="row adoption-status flex-column-reverse flex-xl-row">
                     <div class="col-xl-5 d-flex align-items-center">
                       @php
-                        if($stray_dog->rescued) {
-                          $dog_status = "Rescued";
-                          $status_style = "background-color: green; color:white; ";
-                        } else {
-                          $dog_status = 'Rescue dog';
-                          $status_style = "background-color: #BD1A8D; color:white;";
-                        }
-                        @endphp
-                      <button type="button" class="btn btn-custom-submit w-100" style="{{ $status_style }}">
+                        $dog_status = ($stray_dog->adopted) ? 'Rescued' : 'Rescue';
+                      @endphp
+                      <button type="button" class="btn btn-custom-submit w-100 btn-{{ strtolower($dog_status) }}">
                         {{ $dog_status }}
                       </button>
                     </div>
@@ -97,14 +91,15 @@
           </div>
         @endforeach
       @else
-        <a href="{{ route('dogs.create') }}" style="text-decoration: none">
-          <div class="card dashboard-nodata-card">
-            <div class="card-body text-muted d-flex justify-content-center align-items-center flex-column">
-              <h4 class="m-0">No stray dog yet</h4>
-              <h1><i class="bi bi-plus-square-dotted me-3"></i>Register stray dog you found</h1>
+        <div class="dashboard-nodata-card dogs">
+          <a href="{{ route('dogs.create') }}">
+            <div class="d-flex flex-column align-items-center">
+              <img src="{{ asset('images/single-dog.png') }}" alt="Single Dog" width="6rem">
+              <p class="m-0 mt-2 txt-1">No stray dog yet</p>
+              <p class="m-0 txt-2"><i class="bi bi-plus-square-dotted me-3"></i>Register a found stray dog</p>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
       @endif
     </div>
   </div>
