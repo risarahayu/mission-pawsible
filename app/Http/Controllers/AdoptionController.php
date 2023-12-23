@@ -27,7 +27,6 @@ class AdoptionController extends Controller
         
         $is_indonesian = $request->input('is_indonesian'); // params is_indonesian yang terdapat di url
         $nationality_checked = !$request->input('is_indonesian') == null; // untuk mengecek apakah ada params is_indonesian di action ini
-        dd(!$request->input('is_indonesian') == null);
         // note: params yang kutau adalah parameter atau data yang dikirim kepada url atau route yang dapat kita olah atau gunakan nanti
 
         return view('adoptions.create', compact('nationality_checked', 'user', 'dog'));

@@ -48,3 +48,14 @@ footer {
     align-items: center;
   }
 }
+
+
+.btn-mps {
+  background-color: $primary;
+  color: #fff;
+
+  &:hover {
+    background-color: $secondary;
+    color: $soft-primary;
+  }
+}
