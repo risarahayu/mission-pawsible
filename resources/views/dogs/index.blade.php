@@ -1,12 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+
 <section>
   <div class="container">
-    <div class="d-flex justify-content-between flex-wrap mt-3 mb-5">
+    <div class="main-card d-flex justify-content-between">
+
+      <!-- title -->
       <div>
-        <h1 class="fw-bold">{{ __('Stray Dog List') }}</h1>
-        <p>We found <span class="fw-semibold">{{$stray_dogs->count()}} 
+        <h1 class="fw-bold">{{ __('Stray Dogs') }}</h1>
+        <p class="m-0">We found <span class="fw-semibold">{{$stray_dogs->count()}} 
           at
           @if(!empty($area_name))
             {{$area_name}}
@@ -15,39 +18,42 @@
           @endif
         </span> stray dog</p>
       </div>
-       <!-- search -->
-       <form action="/search/stray_dog" method="GET" class="input-group mb-3" style="max-width: 300px; height: fit-content;">
-        @csrf <!-- Add CSRF token -->
-        <input type="search" name="search" class="form-control" placeholder="Search">
-        <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
-      </form>
-      <!-- sort -->
-      <div class="dropdown">
-        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="bi bi-filter me-2"></i>Filter
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{{ route('dogs.index') }}">All</a></li>
-          @foreach($area as $areaItem)
-            <li><a class="dropdown-item" href="{{-- route('straydogs.sort', ['area_name' => $areaItem->name]) --}}">{{ $areaItem->name }}</a></li>
-          @endforeach 
-        </ul>
+
+      <div class="filter-search">
+        <!-- sort -->
+        <div class="dropdown">
+          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-filter me-2"></i>Filter
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ route('dogs.index') }}">All</a></li>
+            @foreach($area as $areaItem)
+              <li><a class="dropdown-item" href="{{-- route('straydogs.sort', ['area_name' => $areaItem->name]) --}}">{{ $areaItem->name }}</a></li>
+            @endforeach 
+          </ul>
+        </div>
+
+        <!-- search -->
+        <form action="/search/stray_dog" method="GET" class="input-group" style="max-width: 300px; height: fit-content;">
+          @csrf <!-- Add CSRF token -->
+          <input type="search" name="search" class="form-control" placeholder="Search">
+          <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
+        </form>
       </div>
-      
+
     </div>
   </div>
 </section>
-
 
 <section>
   <div class="container">
     <div class="row">
       @if ($stray_dogs->isNotEmpty())
         @foreach($stray_dogs as $stray_dog)
-          <div class="col-md-6 mb-4">
+          <div class="col-lg-6 mb-4">
             <div class="dog-card">
               <div class="row">
-                <div class="col-md-6 image-wrapper">
+                <div class="col-sm-6 image-wrapper">
                   @php
                     $filename = $stray_dog->images->first()->filename;
                     $filename = explode('/', $filename);
@@ -55,7 +61,7 @@
                   @endphp
                   <img src="{{ asset($stray_dog->images->first()->filename) }}" alt="{{ $filename }}">
                 </div>
-                <div class="col-md-6 brief">
+                <div class="col-sm-6 brief">
                   <div class="wrapper">
                     <div class="gender">
                       <i class="bi bi-gender-ambiguous dtl-icon"></i>
@@ -71,7 +77,7 @@
                         <h4 class="fw-bold">{{ ucfirst($stray_dog->size) }}</h4>
                       </div>
                     </div>
-                    <div class="size">
+                    <div class="size request-time">
                       <i class="bi bi-clock-history dtl-icon"></i>
                       <div>
                         <small>Request by {{$stray_dog->adoptions_count}} people</small><br/>

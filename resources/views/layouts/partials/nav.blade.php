@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light navbar-base shadow-sm">
   <div class="container">
     <a class="navbar-brand" href="{{ url('/') }}">
-      <img src="{{ asset('images/mp-logo.png') }}" alt="Mission Pawsible Logo">
+      <img class="img-fluid" src="{{ asset('images/mp-logo.png') }}" alt="Mission Pawsible Logo">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -15,8 +15,11 @@
 
       <!-- Right Side Of Navbar -->
       <ul class="navbar-nav ms-auto">
+
         <!-- Authentication Links -->
         @guest
+
+          <!-- Sepertinya tidak digunakan -->
           @if (Route::has('login'))
             <li class="nav-item">
               <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -28,20 +31,22 @@
               <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
             </li>
           @endif
+
         @else
-          @if (session('role') == 'rescuer')
+          
+          <!-- Route untuk rescuer atau adopter -->
           <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)">Dog Rescue</a>
+            @if (session('role') == 'rescuer')
+              <a class="nav-link" href="{{ route('dogs.create') }}"><img class="dtl-icon" src="{{ asset('images/paw.svg') }}">Rescues</a>
+            @else
+              <a class="nav-link" href="{{ route('requests.create') }}"><img class="dtl-icon" src="{{ asset('images/paw.svg') }}">Adoption</a>
+            @endif
           </li>
-          @else
-          <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)">Dog Adoption</a>
-          </li>
-          @endif
+
           <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link {{ request()->routeIs('user_contacts.create') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-              {{ Auth::user()->name }}
               <i class="bi bi-person-circle"></i>
+              Settings
             </a>
 
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -68,6 +73,7 @@
               </form>
             </div>
           </li>
+
         @endguest
       </ul>
     </div>

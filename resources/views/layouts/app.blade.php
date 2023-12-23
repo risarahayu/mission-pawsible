@@ -32,6 +32,8 @@
       @yield('content')
     </main>
 
+    <footer class="d-none"></footer>
+
     <!-- Scripts agar script selalu dibawah -->
     @yield('scripts')
   </body>

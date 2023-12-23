@@ -1,6 +1,7 @@
 .navbar-base {
   background-color: $base-color;
   font-family: "Inter Bold", sans-serif;
+  height: 10vh;
 
   .navbar-brand {
     img {
@@ -36,6 +37,12 @@
           width: 2rem;
         }
       }
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     .dropdown-toggle {
