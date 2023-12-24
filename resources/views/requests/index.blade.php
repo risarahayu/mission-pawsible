@@ -26,9 +26,9 @@
             <i class="bi bi-filter me-2"></i>Filter
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ route('dogs.index') }}">All</a></li>
+            <li><a class="dropdown-item" href="{{ route('requests.index') }}">All</a></li>
             @foreach($area as $areaItem)
-              <li><a class="dropdown-item" href="{{-- route('straydogs.sort', ['area_name' => $areaItem->name]) --}}">{{ $areaItem->name }}</a></li>
+              <li><a class="dropdown-item" href="{{ route('requests.index', ['area' => $areaItem->name]) }}">{{ $areaItem->name }}</a></li>
             @endforeach
           </ul>
         </div>

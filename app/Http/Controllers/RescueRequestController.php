@@ -24,10 +24,16 @@ class RescueRequestController extends Controller
     }
 
     // Display a listing of the resource.
-    public function index()
+    public function index(Request $request)
     {
         $area = Area::all();
-        $stray_dogs=RescueRequest::all();
+        $stray_dogs = RescueRequest::all();
+
+        if ($request->input('area')) {
+            $areaRequest = Area::all()->where('name', $request->input('area'))->first();
+            $stray_dogs = $stray_dogs->where('area_id', $areaRequest->id);
+        }
+
         return view('requests.index', compact('stray_dogs','area'));
     }
 
