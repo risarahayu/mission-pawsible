@@ -37,9 +37,15 @@
           <!-- Route untuk rescuer atau adopter -->
           <li class="nav-item">
             @if (session('role') == 'rescuer')
-              <a class="nav-link" href="{{ route('dogs.create') }}"><img class="dtl-icon" src="{{ asset('images/paw.svg') }}">Rescues</a>
+              <a class="nav-link" href="{{ route('requests.create') }}">
+                <img class="dtl-icon" src="{{ asset('images/paw.svg') }}">
+                Rescues
+              </a>
             @else
-              <a class="nav-link" href="{{ route('requests.create') }}"><img class="dtl-icon" src="{{ asset('images/paw.svg') }}">Adoption</a>
+              <a class="nav-link" href="{{ route('dogs.create') }}">
+                <img class="dtl-icon" src="{{ asset('images/paw.svg') }}">
+                Adoption
+              </a>
             @endif
           </li>
 

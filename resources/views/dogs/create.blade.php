@@ -1,60 +1,42 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-  <div class="row justify-content-center flex-column-reverse flex-lg-row">
-    <div class="col-lg-6">
-      <div class="d-flex align-items-center h-100">
-        <div class="card w-100">
-          <div class="card-header">{{ __('Stray Dog') }}</div>
-  
-          <div class="card-body">
-            <form method="POST" action="{{ route('dogs.store') }}" enctype="multipart/form-data">
-              @csrf
-              @include('dogs.partials.form')
-            </form>
-          </div>
+
+<section>
+  <div class="container">
+    <div class="form-card">
+      <h1 class="fw-bold text-center mb-5">{{ __('Stray Dog') }}</h1>
+
+      <div class="row justify-content-center">
+        <div class="col-md-5">
+          <form method="POST" action="{{ route('dogs.store') }}" enctype="multipart/form-data">
+            @csrf
+            @include('dogs.partials.form')
+          </form>
         </div>
       </div>
-    </div>
-
-    <div class="col-lg-6">
-      <div class="h-100 d-flex align-items-center p-5">
-        <img class="img-fluid" src="{{ asset('images/new-dog.svg') }}" alt="Example Image">
-      </div>
-    </div>
   </div>
-</div>
+</section>
 
 @endsection
 
 @section('scripts')
   <script type="module">
     $(function() {
+      const validateFields = $('.required');
+
+      function toggleInvalid(_this) {
+        !!$(_this).val() ? $(_this).removeClass('is-invalid') : $(_this).addClass('is-invalid')
+      }
+
+      validateFields.on('keyup change focusout', function() { toggleInvalid(this); });
+
       // FAKE SUBMIT
       $('#fake-submit').click(function() {
         // VARIABLE DEFINITION
-        var validateFields = $('.required');
-        var allFieldsFilled = validateFields.filter(function() {
-          return $(this).val() === '';
-        }).length === 0;
+        const allFieldsFilled = !!validateFields.filter(function() {return !!$(this).val();}).length;
+        validateFields.each(function() { toggleInvalid(this); });
 
-        validateFields.each(function() {
-          if ($(this).val() === '') {
-            $(this).addClass('is-invalid');
-          } else {
-            $(this).removeClass('is-invalid');
-          }
-        });
-
-        validateFields.keyup(function() {
-          if ($(this).val() === '') {
-            $(this).addClass('is-invalid');
-          } else {
-            $(this).removeClass('is-invalid');
-          };
-        });
-        
         if (allFieldsFilled) {
           console.log('Semua field telah diisi.');
           $('#fieldset-dog').toggleClass('d-block d-none');
@@ -96,9 +78,10 @@
       });
 
       $('#images').on('change', function (e) {
+
         // Kosongkan #new-images
         $('#new-images .images-wrapper').empty();
-        
+
         // Loop melalui file yang dipilih
         $.each(this.files, function (index, file) {
           // Buat elemen gambar baru
@@ -121,10 +104,11 @@
         if (this.files.length > 0) {
           $('#new-images').removeClass('d-none');
           $("#images").removeClass("required");
-          $(".image-preview").removeClass("d-none")
+          $(".image-preview").removeClass("d-none");
+          $(".image-preview").addClass("border");
         } else {
           $('#new-images').addClass('d-none');
-          $(".image-preview").addClass("d-none")
+          $(".image-preview").addClass("d-none");
         }
       });
     });

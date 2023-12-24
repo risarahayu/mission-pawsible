@@ -34,13 +34,16 @@ footer {
   height: 5vh;
 }
 
-.main-card {
+.main-card,
+.form-card {
   border: 1px solid rgba(0, 0, 0, 0.175);
   border-radius: 0.375rem;
   box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
   margin-bottom: 24px;
   padding: 16px;
-  
+}
+
+.main-card {
   .filter-search {
     display: flex;
     flex-direction: row;
@@ -49,6 +52,39 @@ footer {
   }
 }
 
+.form-card {
+  h1 {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      background: #BD1A8D;
+      width: 2rem;
+      height: 3px;
+      bottom: -0.65rem;
+      left: 50%;
+      right: 50%;
+      transition: 0.3s;
+      transform: translateX(-50%);
+    }
+  }
+
+  form {
+    .btn-custom-submit {
+      background-color: $primary;
+      color: #fff;
+      height: 3.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+
+      &:hover {
+        background-color: $secondary;
+        color: $soft-primary;
+      }
+    }
+  }
+}
 
 .btn-mps {
   background-color: $primary;

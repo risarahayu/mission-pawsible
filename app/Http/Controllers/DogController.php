@@ -88,7 +88,7 @@ class DogController extends Controller
         return redirect()->route("dogs.show", ['dog' => $strayDog->id])->with([
             'flash' => [
                 'type' => 'success',
-                'message' => 'Stray dog has been add successfully',
+                'message' => 'Stray dog has been added successfully',
             ]
         ]);
     }
