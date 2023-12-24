@@ -9,7 +9,7 @@
       <!-- title -->
       <div>
         <h1 class="fw-bold">{{ __('Stray Dogs') }}</h1>
-        <p class="m-0">We found <span class="fw-semibold">{{$stray_dogs->count()}} 
+        <p class="m-0">We found <span class="fw-semibold">{{$stray_dogs->count()}}
           at
           @if(!empty($area_name))
             {{$area_name}}
@@ -28,8 +28,8 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{{ route('dogs.index') }}">All</a></li>
             @foreach($area as $areaItem)
-              <li><a class="dropdown-item" href="{{-- route('straydogs.sort', ['area_name' => $areaItem->name]) --}}">{{ $areaItem->name }}</a></li>
-            @endforeach 
+              <li><a class="dropdown-item" href="{{ route('dogs.index', ['area' => $areaItem->name]) }}">{{ $areaItem->name }}</a></li>
+            @endforeach
           </ul>
         </div>
 

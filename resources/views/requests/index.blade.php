@@ -9,7 +9,7 @@
       <!-- title -->
       <div>
         <h1 class="fw-bold">{{ __('Rescue Requests') }}</h1>
-        <p class="m-0">We found <span class="fw-semibold">{{$stray_dogs->count()}} 
+        <p class="m-0">We found <span class="fw-semibold">{{$stray_dogs->count()}}
           at
           @if(!empty($area_name))
             {{$area_name}}
@@ -29,7 +29,7 @@
             <li><a class="dropdown-item" href="{{ route('dogs.index') }}">All</a></li>
             @foreach($area as $areaItem)
               <li><a class="dropdown-item" href="{{-- route('straydogs.sort', ['area_name' => $areaItem->name]) --}}">{{ $areaItem->name }}</a></li>
-            @endforeach 
+            @endforeach
           </ul>
         </div>
 
@@ -88,7 +88,7 @@
                       @php
                         $dog_status = ($stray_dog->adopted) ? 'Adopted' : 'Adopteable';
                       @endphp
-                      <a href="{{ route('dogs.show', ['dog' => $stray_dog->id]) }}" class="btn btn-custom-submit w-100 btn-{{ strtolower($dog_status) }}">
+                      <a href="{{ route('requests.show', $stray_dog->id) }}" class="btn btn-custom-submit w-100 btn-{{ strtolower($dog_status) }}">
                         {{ $dog_status }}
                       </a>
                     </div>
