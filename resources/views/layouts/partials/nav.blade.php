@@ -33,13 +33,13 @@
           @endif
 
         @else
-          
+
           <!-- Route untuk rescuer atau adopter -->
           <li class="nav-item">
             @if (session('role') == 'rescuer')
-              <a class="nav-link" href="{{ route('dogs.create') }}"><img class="dtl-icon" src="{{ asset('images/paw.svg') }}">Rescues</a>
+              <a class="nav-link" href="{{ route('requests.create') }}"><i class="fa-solid fa-circle-plus"></i>New Request</a>
             @else
-              <a class="nav-link" href="{{ route('requests.create') }}"><img class="dtl-icon" src="{{ asset('images/paw.svg') }}">Adoption</a>
+              <a class="nav-link" href="{{ route('dogs.create') }}"><i class="fa-solid fa-circle-plus"></i>Resgiter Dog</a>
             @endif
           </li>
 
@@ -50,7 +50,7 @@
             </a>
 
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#personal_information">
                 {{ __('My Contact') }}
               </a>
               @if (session('role') == 'rescuer')
@@ -76,6 +76,29 @@
 
         @endguest
       </ul>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="personal_information" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="personal_information_label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header justify-content-center">
+          <h1 class="modal-title fs-5" id="personal_information_label">Personal Information</h1>
+          {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="{{-- route('dogs.update', $dog->id) --}}" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" style="min-width: 100px" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" style="min-width: 100px">Save</button>
+        </div>
+      </div>
     </div>
   </div>
 </nav>

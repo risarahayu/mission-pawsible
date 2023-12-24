@@ -19,20 +19,34 @@
 
             {{-- Name input --}}
             <div class="mb-3">
-              <label class="fw-bold mb-1" for="name">{{ __('session.name') }}</label>
-              <input placeholder="{{ __('session.placeholder.name') }}" id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                value="{{ old('name') }}" required autocomplete="name" autofocus>
-              @error('name')
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-              @enderror
+              <div class="row row-cols-lg-2">
+                <div class="col">
+                  <label class="fw-bold mb-1" for="name">{{ __('session.name') }}</label>
+                  <input placeholder="{{ __('session.placeholder.name') }}" id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name"
+                    value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
+                  @error('first_name')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+                <div class="col">
+                  <label class="fw-bold mb-1" for="name">{{ __('session.name') }}</label>
+                  <input placeholder="{{ __('session.placeholder.name') }}" id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name"
+                    value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
+                  @error('last_name')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+              </div>
             </div>
             {{-- End of name input --}}
 
             {{-- Email input --}}
             <div class="mb-3">
-              <label class="fw-bold mb-1" for="email">{{ __('session.email') }}</label>
+              <label class="fw-bold mb-1" for="email">{{ __('session.email_address') }}</label>
               <input id="email" placeholder="{{ __('session.placeholder.email') }}" type="email" class="form-control @error('email') is-invalid @enderror"
                 name="email" value="{{ old('email') }}" required autocomplete="email">
               @error('email')
