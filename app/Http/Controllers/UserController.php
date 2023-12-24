@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserInfo;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -52,7 +53,15 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->update($request->only(['first_name', 'last_name']));
+
+        if ($user->userInfo()->exists()) {
+            $user->userInfo()->update($request->except(['_token', '_method', 'first_name', 'last_name']));
+        } else {
+            UserInfo::create(array_merge($request->except(['_token', '_method', 'first_name', 'last_name']), ['user_id' => $user->id]));
+        }
+
+        return redirect()->back();
     }
 
     /**

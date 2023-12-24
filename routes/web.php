@@ -45,4 +45,6 @@ Route::namespace('App\Http\Controllers')->group(function () {
   //adoption
   Route::resource('adoptions', 'AdoptionController')->except(['create']); // except create mengecualikan route create didalam resource
   Route::get('/adoptions/create/{dog}', 'AdoptionController@create')->name('adoptions.create'); // menggunakan custom karena memerlukan params dog dialam routenya
+
+  Route::resource('users', 'UserController');
 });
