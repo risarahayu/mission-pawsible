@@ -30,12 +30,12 @@
   </div>
 
   <div class="form-floating mb-3">
-    <input id="temprament" type="text" name="temprament"
-            class="form-control required @error('temprament') is-invalid @enderror"
-            autocomplete="temprament" placeholder="{{ __('Temprament') }}"
+    <input id="temprament" type="text" name="temperament"
+            class="form-control required @error('temperament') is-invalid @enderror"
+            autocomplete="temprament" placeholder="{{ __('Temperament') }}"
             value="{{ $dog->temperament }}"
             required>
-    <label for="temprament">{{ __('Temprament') }}</label>
+    <label for="temprament">{{ __('Temperament') }}</label>
     @error('temprament')
       <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>

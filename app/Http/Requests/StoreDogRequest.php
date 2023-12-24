@@ -23,7 +23,7 @@ class StoreDogRequest extends FormRequest
     {
         return [
             'user_id' => 'required',
-            'area' => 'required',
+            'area' => 'required|string',
             'dog_type' => 'required|string',
             'color' => 'required|string',
             'temperament' => 'required|string',
