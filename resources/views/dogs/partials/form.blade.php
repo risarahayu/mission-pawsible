@@ -1,103 +1,105 @@
 <input type="hidden" name="user_id" value="{{ $user->id }}">
-  
+
 <fieldset id="fieldset-dog" class="d-block">
-  <div class="row mb-3">
-    <label for="dog_type" class="col-md-4 col-form-label">{{ __('Dog Type') }}</label>
-    <div class="col-md-8">
-      <input id="dog_type" value="{{ $dog->dog_type }}" type="text" class="form-control required @error('dog_type') is-invalid @enderror" name="dog_type" required autocomplete="dog_type">
-      @error('dog_type')
-        <span class="invalid-feedback" role="alert">
-          <strong>{{ $message }}</strong>
-        </span>
-      @enderror
-    </div>
-  </div>
-  
-  <div class="row mb-3">
-    <label for="color" class="col-md-4 col-form-label">{{ __('Color') }}</label>
-    <div class="col-md-8">
-      <input id="color" value="{{ $dog->color }}" type="text" class="form-control required @error('color') is-invalid @enderror" name="color" required autocomplete="color">
-      @error('color')
-        <span class="invalid-feedback" role="alert">
-          <strong>{{ $message }}</strong>
-        </span>
-      @enderror
-    </div>
+  <div class="form-floating mb-3">
+    <input id="dog_type" type="text" name="dog_type"
+            class="form-control required @error('dog_type') is-invalid @enderror"
+            autocomplete="dog_type" placeholder="{{ __('Dog Type') }}"
+            value="{{ $dog->dog_type }}"
+            required>
+    <label for="dog_type">{{ __('Dog Type') }}</label>
+    @error('dog_type')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
   </div>
 
-  <div class="row mb-3">
-    <label for="temperament" class="col-md-4 col-form-label">{{ __('Temperament') }}</label>
-    <div class="col-md-8">
-      <input id="temperament" value="{{ $dog->temperament }}" type="text" class="form-control required @error('temperament') is-invalid @enderror" name="temperament" required autocomplete="temperament">
-      @error('temperament')
-        <span class="invalid-feedback" role="alert">
-          <strong>{{ $message }}</strong>
-        </span>
-      @enderror
-    </div>
+  <div class="form-floating mb-3">
+    <input id="color" type="text" name="color"
+            class="form-control required @error('color') is-invalid @enderror"
+            autocomplete="color" placeholder="{{ __('Color') }}"
+            value="{{ $dog->color }}"
+            required>
+    <label for="color">{{ __('Color') }}</label>
+    @error('color')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+  </div>
+
+  <div class="form-floating mb-3">
+    <input id="temprament" type="text" name="temprament"
+            class="form-control required @error('temprament') is-invalid @enderror"
+            autocomplete="temprament" placeholder="{{ __('Temprament') }}"
+            value="{{ $dog->temperament }}"
+            required>
+    <label for="temprament">{{ __('Temprament') }}</label>
+    @error('temprament')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+  </div>
+
+  <div class="form-floating mb-3">
+    <select id="gender" name="gender" class="form-select required @error('gender') is-invalid @enderror">
+      <option value=""></option>
+      <option value="male" {{ $dog->gender === 'male' ? 'selected' : '' }}>{{ __('Male') }}</option>
+      <option value="female" {{ $dog->gender === 'female' ? 'selected' : '' }}>{{ __('Female') }}</option>
+    </select>
+    <label for="gender">{{ __('Gender') }}</label>
+    @error('gender')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+  </div>
+
+  <div class="form-floating mb-3">
+    <select id="size" name="size" class="form-select required @error('size') is-invalid @enderror">
+      <option value=""></option>
+      <option value="Small >10kg" {{ $dog->size === 'Small >10kg' ? 'selected' : '' }}>Small >10kg</option>
+      <option value="Medium 11-15kg" {{ $dog->size === 'Medium 11-15kg' ? 'selected' : '' }}>Medium 11-15kg</option>
+      <option value="Large 16-20kg" {{ $dog->size === 'Large 16-20kg' ? 'selected' : '' }}>Large 16-20kg</option>
+      <option value="Extra Large 20+kg" {{ $dog->size === 'Extra Large 20+kg' ? 'selected' : '' }}>Extra Large 20+kg</option>
+    </select>
+    <label for="size">{{ __('Size') }}</label>
+    @error('size')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+  </div>
+
+  <div class="form-floating mb-3">
+    <textarea id="description" name="description" class="form-control required @error('description') is-invalid @enderror" style="height: 200px;">{{ $dog->description }}</textarea>
+    <label for="description">{{ __('Description') }}</label>
+    @error('description')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+  </div>
+
+  <div class="form-floating mb-3">
+    <input id="images" type="file" name="images[]"
+            class="form-control @error('images') is-invalid @enderror"
+            autocomplete="images" placeholder="{{ __('Pictures') }}"
+            value="{{ $dog->temperament }}"
+            multiple>
+    <label for="images">{{ __('Pictures') }}</label>
+    @error('images')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
   </div>
 
   <div class="row mb-3">
-    <label for="gender" class="col-md-4 col-form-label">{{ __('Gender') }}</label>
-    <div class="col-md-8">
-      <select class="form-select required select2 @error('area_id') is-invalid @enderror" name="gender">
-        <option value=""></option>
-        <option value="male" {{ $dog->gender === 'male' ? 'selected' : '' }}>{{ __('Male') }}</option>
-        <option value="female" {{ $dog->gender === 'female' ? 'selected' : '' }}>{{ __('Female') }}</option>
-      </select>
-      @error('gender')
-        <span class="invalid-feedback" role="alert">
-          <strong>{{ $message }}</strong>
-        </span>
-      @enderror
-    </div>
-  </div>
-
-  <div class="row mb-3">
-    <label for="size" class="col-md-4 col-form-label">{{ __('Size') }}</label>
-    <div class="col-md-8">
-      <select class="form-select required select2 @error('size') is-invalid @enderror" name="size">
-        <option value=""></option>
-        <option value="Small >10kg" {{ $dog->size === 'Small >10kg' ? 'selected' : '' }}>Small >10kg</option>
-        <option value="Medium 11-15kg" {{ $dog->size === 'Medium 11-15kg' ? 'selected' : '' }}>Medium 11-15kg</option>
-        <option value="Large 16-20kg" {{ $dog->size === 'Large 16-20kg' ? 'selected' : '' }}>Large 16-20kg</option>
-        <option value="Extra Large 20+kg" {{ $dog->size === 'Extra Large 20+kg' ? 'selected' : '' }}>Extra Large 20+kg</option>
-      </select>
-
-      @error('size')
-        <span class="invalid-feedback" role="alert">
-          <strong>{{ $message }}</strong>
-        </span>
-      @enderror
-    </div>
-  </div>
-
-  <div class="row mb-3">
-    <label for="description" class="col-md-4 col-form-label">{{ __('Description') }}</label>
-    <div class="col-md-8">
-      <textarea class="form-control required @error('description') is-invalid @enderror" id="description" name="description" required autocomplete="description">{{ $dog->description }}</textarea>
-      @error('description')
-        <span class="invalid-feedback" role="alert">
-          <strong>{{ $message }}</strong>
-        </span>
-      @enderror
-    </div>
-  </div>
-
-  <div class="row mb-3">
-    <label for="images" class="col-md-4 col-form-label">{{ __('Pictures') }}</label>
-    <div class="col-md-8">
-
-      <input id="images" type="file" class="form-control @error('images') is-invalid @enderror" name="images[]" autocomplete="images" multiple>
-      @error('images')
-        <span class="invalid-feedback" role="alert">
-          <strong>{{ $message }}</strong>
-        </span>
-      @enderror
-    </div>
-
     <div class="col-md-12 mt-3">
-      <div class="image-preview p-3 w-100 border">
+      <div class="image-preview p-3 w-100">
         @if ($action_name == "edit")
           <div id="old-images" class="position-relative mb-3">
             <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger">Delete</button>
@@ -124,34 +126,32 @@
   </div>
 
   <button type="button" id="fake-submit" class="btn btn-custom-submit w-100">
-    {{ __('Submit') }}
+    {{ __('Next') }}
   </button>
 </fieldset>
 
 <!-- AREA -->
 <fieldset id="fieldset-area" class="d-none">
-  <div class="row mb-3">
-    <label for="area" class="col-md-4 col-form-label">{{ __('District') }}</label>
-    <div class="col-md-8">
-      <input class="form-control" type="text" name="area" value="{{ optional($dog->area)->name }}">
-      @error('area')
-        <span class="invalid-feedback" role="alert">
-          <strong>{{ $message }}</strong>
-        </span>
-      @enderror
-    </div>
+  <div class="form-floating mb-3">
+    <input id="area" type="text" name="area" class="form-control" autocomplete="area" placeholder="{{ __('District') }}" value="{{ optional($dog->area)->name }}">
+    <label for="area">{{ __('District') }}</label>
+    @error('area')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
   </div>
-  <div class="row mb-3">
-    <label for="area" class="col-md-4 col-form-label">{{ __('Current Location') }}</label>
-    <div class="col-md-8">
-      <input class="form-control" type="text" name="map_link" value="{{ $dog->map_link }}">
-      @error('area')
-        <span class="invalid-feedback" role="alert">
-          <strong>{{ $message }}</strong>
-        </span>
-      @enderror
-    </div>
+
+  <div class="form-floating mb-5">
+    <input id="map_link" type="text" name="map_link" class="form-control" autocomplete="map_link" placeholder="{{ __('Current Location') }}" value="{{ $dog->map_link }}">
+    <label for="map_link">{{ __('Current Location') }}</label>
+    @error('map_link')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
   </div>
+
   <button type="submit" class="btn btn-custom-submit w-100">
     {{ __('Submit') }}
   </button>

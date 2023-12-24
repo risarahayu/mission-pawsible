@@ -1,31 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="d-flex align-items-center h-100">
-        <div class="card w-100">
-          <div class="card-header">{{ __('Edit Stray Dog') }}</div>
+<section>
+  <div class="container">
+    <div class="form-card">
+      <h1 class="fw-bold text-center mb-5">{{ __('Edit Stray Dog') }}</h1>
 
-          <div class="card-body">
-            <form method="POST" action="{{ route('dogs.update', $dog->id) }}" enctype="multipart/form-data">
-              @csrf
+      <div class="row justify-content-center">
+        <div class="col-md-5">
+          <form method="POST" action="{{ route('dogs.update', $dog->id) }}" enctype="multipart/form-data">
+            @csrf
               @method('PUT')
-              @include('dogs.partials.form')
-            </form>
-          </div>
+            @include('dogs.partials.form')
+          </form>
         </div>
       </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="h-100 d-flex align-items-center p-5">
-        <img class="img-fluid" src="{{ asset('images/new-dog.svg') }}" alt="Example Image">
-      </div>
-    </div>
   </div>
-</div>
+</section>
 @endsection
 
 @section('scripts')
