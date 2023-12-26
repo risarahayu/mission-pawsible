@@ -87,7 +87,6 @@
     <input id="images" type="file" name="images[]"
             class="form-control @error('images') is-invalid @enderror"
             autocomplete="images" placeholder="{{ __('Pictures') }}"
-            value="{{ $dog->temperament }}"
             multiple>
     <label for="images">{{ __('Pictures') }}</label>
     @error('images')
@@ -132,6 +131,33 @@
 
 <!-- AREA -->
 <fieldset id="fieldset-area" class="d-none">
+  <div class="form-floating mb-3">
+    <select id="vaccinated" name="vaccinated" class="form-select required @error('vaccinated') is-invalid @enderror">
+      <option value=""></option>
+      <option value="true" {{ $dog->vaccinated === true ? 'selected' : '' }}>{{ __('Yes') }}</option>
+      <option value="false" {{ $dog->vaccinated === false ? 'selected' : '' }}>{{ __('No') }}</option>
+    </select>
+    <label for="vaccinated">{{ __('vaccinated') }}</label>
+    @error('vaccinated')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+  </div>
+
+  <div class="form-floating mb-3">
+    <select id="sterilization" name="sterilization" class="form-select required @error('sterilization') is-invalid @enderror">
+      <option value=""></option>
+      <option value="true" {{ $dog->sterilization === true ? 'selected' : '' }}>{{ __('Yes') }}</option>
+      <option value="false" {{ $dog->sterilization === false ? 'selected' : '' }}>{{ __('No') }}</option>
+    </select>
+    <label for="sterilization">{{ __('sterilization') }}</label>
+    @error('sterilization')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+  </div>
   <div class="form-floating mb-3">
     <input id="area" type="text" name="area" class="form-control" autocomplete="area" placeholder="{{ __('District') }}" value="{{ optional($dog->area)->name }}">
     <label for="area">{{ __('District') }}</label>

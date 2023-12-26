@@ -77,7 +77,7 @@ class RescueRequestController extends Controller
 
                     $imageModel = new Image();
                     $imageModel->filename = $publicPath;
-                    $imageModel->request_status = 'requested';
+                    $imageModel->category = 'requested';
                     $strayDog->images()->save($imageModel);
                 }
             }
@@ -192,7 +192,7 @@ class RescueRequestController extends Controller
 
                 $imageModel = new Image();
                 $imageModel->filename = $publicPath;
-                $imageModel->request_status = 'rescuer';
+                $imageModel->category = 'rescuer';
                 $request->images()->save($imageModel);
             }
         }

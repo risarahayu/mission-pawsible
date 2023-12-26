@@ -32,6 +32,10 @@ class StoreDogRequest extends FormRequest
             'description' => 'required|string',
             'map_link' => 'nullable|string',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg',
+            'vaccinated' => 'required|string',
+            'sterilization' => 'required|string',
+            'vaccinated_certificate.*' => 'nullable|image|mimes:jpeg,png,jpg',
+            'sterilization_certificate.*' => 'nullable|image|mimes:jpeg,png,jpg',
         ];
     }
 }
