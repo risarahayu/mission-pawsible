@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('dogs', function (Blueprint $table) {
-            $table->boolean('sterilized')->after('adopted');
-            $table->boolean('vaccinated')->after('adopted');
+            $table->date('vaccinated_date')->after('adopted');
         });
     }
 
@@ -23,8 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('dogs', function (Blueprint $table) {
-            $table->dropColumn('vaccinated');
-            $table->dropColumn('sterilized');
+            $table->dropColumn('vaccinated_date');
         });
     }
 };
