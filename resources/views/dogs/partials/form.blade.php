@@ -132,13 +132,12 @@
 <!-- AREA -->
 <fieldset id="fieldset-area" class="d-none">
   <div class="form-floating mb-3">
-    <select id="vaccinated" name="vaccinated" class="form-select required @error('vaccinated') is-invalid @enderror">
-      <option value=""></option>
-      <option value="true" {{ $dog->vaccinated === true ? 'selected' : '' }}>{{ __('Yes') }}</option>
-      <option value="false" {{ $dog->vaccinated === false ? 'selected' : '' }}>{{ __('No') }}</option>
-    </select>
-    <label for="vaccinated">{{ __('vaccinated') }}</label>
-    @error('vaccinated')
+    <input id="vaccinated_date" type="date" name="vaccinated_date"
+            class="form-control required @error('vaccinated_date') is-invalid @enderror"
+            autocomplete="vaccinated_date" placeholder="{{ __('vaccinated_date') }}"
+            value="{{ optional(auth()->user()->userInfo)->vaccinated_date }}">
+    <label for="vaccinated_date">{{ __('vaccinated_date') }}</label>
+    @error('vaccinated_date')
       <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
       </span>
@@ -146,20 +145,33 @@
   </div>
 
   <div class="form-floating mb-3">
-    <select id="sterilization" name="sterilization" class="form-select required @error('sterilization') is-invalid @enderror">
-      <option value=""></option>
-      <option value="true" {{ $dog->sterilization === true ? 'selected' : '' }}>{{ __('Yes') }}</option>
-      <option value="false" {{ $dog->sterilization === false ? 'selected' : '' }}>{{ __('No') }}</option>
-    </select>
-    <label for="sterilization">{{ __('sterilization') }}</label>
-    @error('sterilization')
+    <input id="vaccination_certificate" type="file" name="vaccination_certificate[]"
+            class="form-control required @error('vaccination_certificate') is-invalid @enderror"
+            autocomplete="vaccination_certificate" placeholder="{{ __('Vaccination Certificate') }}"
+            multiple>
+    <label for="vaccination_certificate">{{ __('Vaccination Certificate') }}</label>
+    @error('vaccination_certificate')
       <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
       </span>
     @enderror
   </div>
+
   <div class="form-floating mb-3">
-    <input id="area" type="text" name="area" class="form-control" autocomplete="area" placeholder="{{ __('District') }}" value="{{ optional($dog->area)->name }}">
+    <input id="sterilization_certificate" type="file" name="sterilization_certificate[]"
+            class="form-control required @error('sterilization_certificate') is-invalid @enderror"
+            autocomplete="sterilization_certificate" placeholder="{{ __('Sterilization Certificate') }}"
+            multiple>
+    <label for="sterilization_certificate">{{ __('Sterilization Certificate') }}</label>
+    @error('sterilization_certificate')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+  </div>
+
+  <div class="form-floating mb-3">
+    <input id="area" type="text" name="area" class="form-control required" autocomplete="area" placeholder="{{ __('District') }}" value="{{ optional($dog->area)->name }}">
     <label for="area">{{ __('District') }}</label>
     @error('area')
       <span class="invalid-feedback" role="alert">
@@ -169,7 +181,7 @@
   </div>
 
   <div class="form-floating mb-5">
-    <input id="map_link" type="text" name="map_link" class="form-control" autocomplete="map_link" placeholder="{{ __('Current Location') }}" value="{{ $dog->map_link }}">
+    <input id="map_link" type="text" name="map_link" class="form-control required" autocomplete="map_link" placeholder="{{ __('Current Location') }}" value="{{ $dog->map_link }}">
     <label for="map_link">{{ __('Current Location') }}</label>
     @error('map_link')
       <span class="invalid-feedback" role="alert">

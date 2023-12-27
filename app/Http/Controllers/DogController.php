@@ -87,6 +87,32 @@ class DogController extends Controller
                     $strayDog->images()->save($imageModel);
                 }
             }
+
+            if  ($request->hasFile('vaccination_certificate')) {
+                foreach ($request->file('vaccination_certificate') as $image) {
+                    $filename = $image->getClientOriginalName();
+                    $path = $image->storeAs('public/stray_dog_images', $filename);
+                    $publicPath = Storage::url($path);
+
+                    $imageModel = new Image();
+                    $imageModel->filename = $publicPath;
+                    $imageModel->category = 'vaccination';
+                    $strayDog->images()->save($imageModel);
+                }
+            }
+
+            if  ($request->hasFile('sterilization_certificate')) {
+                foreach ($request->file('sterilization_certificate') as $image) {
+                    $filename = $image->getClientOriginalName();
+                    $path = $image->storeAs('public/stray_dog_images', $filename);
+                    $publicPath = Storage::url($path);
+
+                    $imageModel = new Image();
+                    $imageModel->filename = $publicPath;
+                    $imageModel->category = 'sterilization';
+                    $strayDog->images()->save($imageModel);
+                }
+            }
         });
 
 
