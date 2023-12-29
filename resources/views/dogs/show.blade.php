@@ -21,9 +21,13 @@
                   <div class="d-flex justify-content-end" style="gap: 5px;">
                     <a type="button" class="btn btn-mps" href="{{ route('dogs.edit', $stray_dog->id) }}"><i class="bi bi-pencil-square me-2"></i> Update</a>
                     @if (!$stray_dog->adopted)
-                      <button class="btn btn-danger delete-dog">
-                        <i class="bi bi-trash me-2"></i> Delete
-                      </button>
+                      <form action="{{ route('dogs.destroy', $stray_dog->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger delete-dog">
+                          <i class="bi bi-trash me-2"></i> Delete
+                        </button>
+                      </form>
                     @endif
                   </div>
                 </div>
@@ -134,11 +138,6 @@
             </div>
           @endif
           -->
-
-          <form action="{{ route('dogs.destroy', $stray_dog->id) }}" method="POST">
-            @csrf
-            @method('DELETE')
-          </form>
 
           <div id="carouselExampleIndicators" class="dog-picture-wrapper carousel slide" data-bs-ride="true">
             <div class="carousel-indicators">
