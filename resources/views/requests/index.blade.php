@@ -33,12 +33,14 @@
           </ul>
         </div>
 
-        <!-- search -->
-        <form action="/search/stray_dog" method="GET" class="input-group" style="max-width: 300px; height: fit-content;">
-          @csrf <!-- Add CSRF token -->
-          <input type="search" name="search" class="form-control" placeholder="Search">
-          <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
-        </form>
+        @if (false)
+          <!-- search -->
+          <form action="/search/stray_dog" method="GET" class="input-group" style="max-width: 300px; height: fit-content;">
+            @csrf <!-- Add CSRF token -->
+            <input type="search" name="search" class="form-control" placeholder="Search">
+            <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
+          </form>
+        @endif
       </div>
 
     </div>

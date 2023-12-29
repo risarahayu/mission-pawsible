@@ -33,12 +33,14 @@
           </ul>
         </div>
 
-        <!-- search -->
-        <form action="/search/stray_dog" method="GET" class="input-group" style="max-width: 300px; height: fit-content;">
-          @csrf <!-- Add CSRF token -->
-          <input type="search" name="search" class="form-control" placeholder="Search">
-          <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
-        </form>
+        @if (false)
+          <!-- search -->
+          <form action="/search/stray_dog" method="GET" class="input-group" style="max-width: 300px; height: fit-content;">
+            @csrf <!-- Add CSRF token -->
+            <input type="search" name="search" class="form-control" placeholder="Search">
+            <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
+          </form>
+        @endif
       </div>
 
     </div>
@@ -55,11 +57,11 @@
               <div class="row">
                 <div class="col-sm-6 image-wrapper">
                   @php
-                    $filename = $stray_dog->images->first()->filename;
+                    $filename = $stray_dog->images()->orderBy('category')->first()->filename;
                     $filename = explode('/', $filename);
                     $filename = end($filename);
                   @endphp
-                  <img src="{{ asset($stray_dog->images->first()->filename) }}" alt="{{ $filename }}">
+                  <img src="{{ asset($stray_dog->images()->orderBy('category')->first()->filename) }}" alt="{{ $filename }}">
                 </div>
                 <div class="col-sm-6 brief">
                   <div class="wrapper">

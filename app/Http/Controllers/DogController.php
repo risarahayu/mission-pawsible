@@ -192,11 +192,10 @@ class DogController extends Controller
             $dog->size = $request->input('size');
             $dog->description = $request->input('description');
             $dog->save();
-            // dd($request);
-            // Handle images update (if necessary)
 
+            // Handle images update (if necessary)
             if ($request->input('delete_image')) {
-                $dog->images()->delete();
+                $dog->images->where('category', null)->each->delete();
             }
 
             if ($request->hasFile('images')) {

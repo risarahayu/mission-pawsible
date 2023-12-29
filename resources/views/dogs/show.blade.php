@@ -12,7 +12,7 @@
 
       <!-- Dog information detail -->
       <div class="row flex-lg-row flex-column-reverse">
-        
+
         <div class="col-lg-6 dog-show">
           <div class="main-card d-flex justify-content-between">
             <div class="row">
@@ -39,7 +39,7 @@
                   </div>
                 </div>
               </div>
-  
+
               <!-- gender -->
               <div class="col-sm-6">
                 <div class="d-flex align-items-center" style="gap: 15px;">
@@ -50,7 +50,7 @@
                   </div>
                 </div>
               </div>
-  
+
               <!-- color -->
               <div class="col-sm-6">
                 <div class="d-flex align-items-center" style="gap: 15px;">
@@ -61,7 +61,7 @@
                   </div>
                 </div>
               </div>
-  
+
               <!-- size -->
               <div class="col-sm-6">
                 <div class="d-flex align-items-center" style="gap: 15px;">
@@ -72,7 +72,7 @@
                   </div>
                 </div>
               </div>
-  
+
               <!-- description -->
               <div class="col-sm-6">
                 <div class="d-flex align-items-center" style="gap: 15px;">
@@ -83,7 +83,7 @@
                   </div>
                 </div>
               </div>
-              
+
               <!-- contact -->
               <div class="col-sm-6">
                 <div class="d-flex align-items-center" style="gap: 15px;">
@@ -98,7 +98,7 @@
                   </div>
                 </div>
               </div>
-            
+
             </div>
           </div>
 
@@ -142,12 +142,12 @@
 
           <div id="carouselExampleIndicators" class="dog-picture-wrapper carousel slide" data-bs-ride="true">
             <div class="carousel-indicators">
-              @foreach ($stray_dog->images as $index => $image)
+              @foreach ($stray_dog->images()->orderBy('category')->get() as $index => $image)
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $index }}" class="@if($index === 0) active @endif" aria-current="true" aria-label="Slide {{ $index }}"></button>
               @endforeach
             </div>
             <div class="carousel-inner">
-              @foreach ($stray_dog->images as $index => $image)
+              @foreach ($stray_dog->images()->orderBy('category')->get() as $index => $image)
                 <div class="carousel-item @if($index === 0) active @endif">
                   <div class="dog-picture mx-auto">
                     <img class="rounded" src="{{ asset($image->filename) }}">
@@ -170,17 +170,17 @@
       </div>
     </div>
   </section>
-  
-  <!-- Adoption infromation -->
-  <section id="dog_adoption">
-    <div class="container">
 
-      <!-- Dog information title -->
-      <div class="main-card text-center mt-4">
-        <h3 class="fw-bold m-1">{{ __('Adopters') }}</h3>
-      </div>
-      
-      @if(Auth::id() == $own->id)
+  <!-- Adoption infromation -->
+  @if(Auth::id() == $own->id && $adoptions->count() > 0)
+    <section id="dog_adoption">
+      <div class="container">
+
+        <!-- Dog information title -->
+        <div class="main-card text-center mt-4">
+          <h3 class="fw-bold m-1">{{ __('Adopters') }}</h3>
+        </div>
+
         <div class="row">
           @foreach ($adoptions as $adoption)
             <div class="col-md-4">
@@ -204,7 +204,7 @@
                         <h4 class="fw-bold">{{ empty($adoption->user->whatsapp) ? "not set" : $adoption->user->whatsapp }}</h4>
                       </div>
                     </div>
-                    
+
                     @if($adoption->status == 'accepted')
                       <form class="cancel-adoption" action="{{ route('adoptions.update', $adoption->id) }}" method="POST">
                         @csrf
@@ -224,17 +224,17 @@
                         </button>
                       </form>
                     @endif
-                    
+
                   </div>
                 </div>
               </div>
             </div>
           @endforeach
         </div>
-      @endif
-      
-    </div>
-  </section>
+
+      </div>
+    </section>
+  @endif
 @endsection
 
 @section('scripts')
