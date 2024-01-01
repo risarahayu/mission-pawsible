@@ -21,9 +21,14 @@
 // Controllers styling
 @import 'dog';
 @import 'role';
+@import 'adoption';
 
 // Ini untuk responsive custom styling
 @import 'base/responsives';
+
+body {
+  background-image: url('/public/images/ptrn-1.jpg');
+}
 
 main {
   min-height: 85vh;
@@ -41,6 +46,7 @@ footer {
   box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
   margin-bottom: 24px;
   padding: 16px;
+  background-color: #fff;
 }
 
 .main-card {
@@ -49,6 +55,21 @@ footer {
     flex-direction: row;
     gap: 5px;
     align-items: center;
+  }
+}
+
+form {
+  .btn-custom-submit {
+    background-color: $primary;
+    color: #fff;
+    height: 3.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+
+    &:hover {
+      background-color: $secondary;
+      color: $soft-primary;
+    }
   }
 }
 
@@ -67,21 +88,6 @@ footer {
       right: 50%;
       transition: 0.3s;
       transform: translateX(-50%);
-    }
-  }
-
-  form {
-    .btn-custom-submit {
-      background-color: $primary;
-      color: #fff;
-      height: 3.5rem;
-      font-size: 1rem;
-      font-weight: bold;
-
-      &:hover {
-        background-color: $secondary;
-        color: $soft-primary;
-      }
     }
   }
 }

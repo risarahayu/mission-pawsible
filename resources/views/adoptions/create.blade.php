@@ -1,51 +1,42 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-  <div class="row justify-content-center flex-column-reverse flex-lg-row">
-    <div class="col-lg-6">
-      <div class="d-flex align-items-center h-100">
-        <div class="card w-100">
-          <div class="card-header">{{ __('Adoptions') }}</div>
-          <div class="card-body">
-            @if(!$nationality_checked)
-              <form action="{{ route('adoptions.create', ['dog' => $dog]) }}" method="get">
-                @csrf
-                <div class="mb-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="is_indonesian" id="yes" value="1">
-                    <label class="form-check-label" for="yes">Yes</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="is_indonesian" id="no" value="0">
-                    <label class="form-check-label" for="no">No</label>
-                  </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Continue</button>
-              </form>
-            @else
-              <form method="POST" action="{{ route('adoptions.store') }}" enctype="multipart/form-data">
-                @csrf
-                @include('adoptions.partials.form')
-                <div class="mt-3">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-              </form>
-            @endif
+  <section>
+    <div class="container adoptions">
+      @if(!$nationality_checked)
+        <form action="{{ route('adoptions.create', ['dog' => $dog]) }}" method="get">
+          @csrf
+          <div class="form-card">
+            <h1 class="fw-bold text-center mb-2">{{ __('Adoptions') }}</h1>
           </div>
-        </div>
-      </div>
-    </div>
+          <div class="form-card">
+            <label class="form-label">Are you Indonesian?</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="is_indonesian" id="yes" value="1">
+              <label class="form-check-label" for="yes">Yes</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="is_indonesian" id="no" value="0">
+              <label class="form-check-label" for="no">No</label>
+            </div>
+          </div>
 
-    <div class="col-lg-6">
-      <div class="h-100 d-flex align-items-center p-5">
-        <img class="img-fluid" src="{{ asset('images/new-dog.svg') }}" alt="Example Image">
-      </div>
+          <button type="submit" class="btn btn-primary">Continue</button>
+        </form>
+      @else
+        <form method="POST" action="{{ route('adoptions.store') }}" enctype="multipart/form-data">
+          @csrf
+          <div class="form-card">
+            <h1 class="fw-bold text-center mb-2">{{ __('Adoptions') }}</h1>
+          </div>
+          @include('adoptions.partials.form')
+          <div class="mt-3">
+            <button type="submit" class="btn btn-custom-submit w-100 d-none">Submit</button>
+          </div>
+        </form>
+      @endif
     </div>
-  </div>
-</div>
-
+  </section>
 @endsection
 
 @section('scripts')
@@ -55,14 +46,16 @@
       // Mendengarkan perubahan pada radio button "housing_permission"
       $('input[name="housing_permission"]').on('change', function () {
         // Cek apakah pengguna memiliki persetujuan
-        if ($(this).val() == '1') {
+        if (!!this.value) {
           // Jika memiliki persetujuan, tampilkan pertanyaan berikutnya
           $('#next-question').show();
           $('#cannot-proceed').hide();
+          $("button[type=submit]").removeClass("d-none");
         } else {
           // Jika tidak memiliki persetujuan, tampilkan pesan "Tidak bisa lanjut"
           $('#next-question').hide();
           $('#cannot-proceed').show();
+          $("button[type=submit]").addClass("d-none");
 
           // resetForm();
         }
