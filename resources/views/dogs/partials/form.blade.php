@@ -148,105 +148,113 @@
 
 {{-- Second fieldset is for Area and dog certificate --}}
 <fieldset id="fieldset-area" class="d-none">
-  {{-- Dog last vaccinated date --}}
-  <div class="form-floating mb-3">
-    <input id="vaccinated_date" type="date" name="vaccinated_date"
-            class="form-control required @error('vaccinated_date') is-invalid @enderror"
-            autocomplete="vaccinated_date" placeholder="{{ __('vaccinated_date') }}"
-            value="{{$dog->vaccinated_date }}" required>
-    <label for="vaccinated_date">{{ __('vaccinated_date') }}</label>
-    @error('vaccinated_date')
-      <span class="invalid-feedback" role="alert">
-        <strong>{{ $message }}</strong>
-      </span>
-    @enderror
-  </div>
+  @if ($controller_name == 'dog')
 
-  {{-- -----------VACCINATION CERTIFICATE----------- --}}
-    {{-- Dog vaccination certificate --}}
+    {{-- Dog last vaccinated date --}}
     <div class="form-floating mb-3">
-      <input id="vaccination_certificate" type="file" name="vaccination_certificate[]"
-              class="form-control required preview-input @error('vaccination_certificate') is-invalid @enderror"
-              autocomplete="vaccination_certificate" placeholder="{{ __('Vaccination Certificate') }}"
-              multiple>
-      <label for="vaccination_certificate">{{ __('Vaccination Certificate') }}</label>
-      @error('vaccination_certificate')
+      <input id="vaccinated_date" type="date" name="vaccinated_date"
+              class="form-control required @error('vaccinated_date') is-invalid @enderror"
+              autocomplete="vaccinated_date" placeholder="{{ __('vaccinated_date') }}"
+              value="{{$dog->vaccinated_date }}" required>
+      <label for="vaccinated_date">{{ __('vaccinated_date') }}</label>
+      @error('vaccinated_date')
         <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
         </span>
       @enderror
     </div>
 
-    {{-- Vaccination certificate preview --}}
-    <div class="image-preview border p-3 w-100 mb-3 @if($action_name == "create") d-none @endif" data-preview-id="vaccination_certificate">
-      @if ($action_name == "edit")
-        <div id="old-images" class="position-relative mb-3 old-images">
-          <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger" data-delete-id="delete_vaccination">Delete</button>
-          <p class="fw-bold">Old picture</p>
-          <div class="row row-cols-3">
-            @foreach ($images->where('category', 'vaccination') as $image)
-              <div class="col mt-3">
-                <img src="{{$image->filename}}" class="preview-image" alt="Image Preview">
-              </div>
-            @endforeach
+    {{-- -----------VACCINATION CERTIFICATE----------- --}}
+      {{-- Dog vaccination certificate --}}
+      <div class="form-floating mb-3">
+        <input id="vaccination_certificate" type="file" name="vaccination_certificate[]"
+                class="form-control required preview-input @error('vaccination_certificate') is-invalid @enderror"
+                autocomplete="vaccination_certificate" placeholder="{{ __('Vaccination Certificate') }}"
+                multiple>
+        <label for="vaccination_certificate">{{ __('Vaccination Certificate') }}</label>
+        @error('vaccination_certificate')
+          <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+          </span>
+        @enderror
+      </div>
+
+      {{-- Vaccination certificate preview --}}
+      <div class="image-preview border p-3 w-100 mb-3 @if($action_name == "create") d-none @endif" data-preview-id="vaccination_certificate">
+        @if ($action_name == "edit")
+          <div id="old-images" class="position-relative mb-3 old-images">
+            <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger" data-delete-id="delete_vaccination">Delete</button>
+            <p class="fw-bold">Old picture</p>
+            <div class="row row-cols-3">
+              @foreach ($images->where('category', 'vaccination') as $image)
+                <div class="col mt-3">
+                  <img src="{{$image->filename}}" class="preview-image" alt="Image Preview">
+                </div>
+              @endforeach
+            </div>
+          </div>
+        @endif
+
+        <div id="new-images" class="new-images position-relative mb-3 d-none">
+          <button type="button" id="delete-new-image" class="btn-delete-images btn btn-danger delete-new-image">Delete</button>
+          <p class="fw-bold">New picture</p>
+          <div class="images-wrapper row row-cols-3">
+            {{-- WILL ADD NEW IMAGE HERE USING JS --}}
           </div>
         </div>
-      @endif
-
-      <div id="new-images" class="new-images position-relative mb-3 d-none">
-        <button type="button" id="delete-new-image" class="btn-delete-images btn btn-danger delete-new-image">Delete</button>
-        <p class="fw-bold">New picture</p>
-        <div class="images-wrapper row row-cols-3">
-          {{-- WILL ADD NEW IMAGE HERE USING JS --}}
-        </div>
       </div>
-    </div>
-  {{-- -----------END----------- --}}
+    {{-- -----------END----------- --}}
 
-  {{-- -----------STERILIZATION CERTIFICATE----------- --}}
-    {{-- Dog sterilization certificate --}}
-    <div class="form-floating mb-3">
-      <input id="sterilization_certificate" type="file" name="sterilization_certificate[]"
-              class="form-control required preview-input @error('sterilization_certificate') is-invalid @enderror"
-              autocomplete="sterilization_certificate" placeholder="{{ __('Sterilization Certificate') }}"
-              multiple>
-      <label for="sterilization_certificate">{{ __('Sterilization Certificate') }}</label>
-      @error('sterilization_certificate')
-        <span class="invalid-feedback" role="alert">
-          <strong>{{ $message }}</strong>
-        </span>
-      @enderror
-    </div>
+    {{-- -----------STERILIZATION CERTIFICATE----------- --}}
+      {{-- Dog sterilization certificate --}}
+      <div class="form-floating mb-3">
+        <input id="sterilization_certificate" type="file" name="sterilization_certificate[]"
+                class="form-control required preview-input @error('sterilization_certificate') is-invalid @enderror"
+                autocomplete="sterilization_certificate" placeholder="{{ __('Sterilization Certificate') }}"
+                multiple>
+        <label for="sterilization_certificate">{{ __('Sterilization Certificate') }}</label>
+        @error('sterilization_certificate')
+          <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+          </span>
+        @enderror
+      </div>
 
-    {{-- sterilization certificate preview --}}
-    <div class="image-preview border p-3 w-100 mb-3 @if($action_name == "create") d-none @endif" data-preview-id="sterilization_certificate">
-      @if ($action_name == "edit")
-        <div id="old-images" class="position-relative mb-3 old-images">
-          <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger" data-delete-id="delete_sterilization">Delete</button>
-          <p class="fw-bold">Old picture</p>
-          <div class="row row-cols-3">
-            @foreach ($images->where('category', 'sterilization') as $image)
-              <div class="col mt-3">
-                <img src="{{$image->filename}}" class="preview-image" alt="Image Preview">
-              </div>
-            @endforeach
+      {{-- sterilization certificate preview --}}
+      <div class="image-preview border p-3 w-100 mb-3 @if($action_name == "create") d-none @endif" data-preview-id="sterilization_certificate">
+        @if ($action_name == "edit")
+          <div id="old-images" class="position-relative mb-3 old-images">
+            <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger" data-delete-id="delete_sterilization">Delete</button>
+            <p class="fw-bold">Old picture</p>
+            <div class="row row-cols-3">
+              @foreach ($images->where('category', 'sterilization') as $image)
+                <div class="col mt-3">
+                  <img src="{{$image->filename}}" class="preview-image" alt="Image Preview">
+                </div>
+              @endforeach
+            </div>
+          </div>
+        @endif
+
+        <div id="new-images" class="new-images position-relative mb-3 d-none">
+          <button type="button" id="delete-new-image" class="btn-delete-images btn btn-danger delete-new-image">Delete</button>
+          <p class="fw-bold">New picture</p>
+          <div class="images-wrapper row row-cols-3">
+            {{-- WILL ADD NEW IMAGE HERE USING JS --}}
           </div>
         </div>
-      @endif
-
-      <div id="new-images" class="new-images position-relative mb-3 d-none">
-        <button type="button" id="delete-new-image" class="btn-delete-images btn btn-danger delete-new-image">Delete</button>
-        <p class="fw-bold">New picture</p>
-        <div class="images-wrapper row row-cols-3">
-          {{-- WILL ADD NEW IMAGE HERE USING JS --}}
-        </div>
       </div>
-    </div>
-  {{-- -----------END----------- --}}
+    {{-- -----------END----------- --}}
+  @endif
 
   {{-- Dog area --}}
   <div class="form-floating mb-3">
-    <input id="area" type="text" name="area" class="form-control required" autocomplete="area" placeholder="{{ __('District') }}" value="{{ optional($dog->area)->name }}" required>
+    <select id="area" name="area" class="form-select required @error('area') is-invalid @enderror">
+      <option value=""></option>
+      @foreach (['badung', 'bangli', 'buleleng', 'gianyar', 'jembrana', 'karangasem', 'klungkung', 'tabanan', 'denpasar'] as $area)
+        <option value="{{ $area }}" {{ optional($dog->area)->name === $area ? 'selected' : '' }}>{{ ucfirst($area) }}</option>
+      @endforeach
+    </select>
     <label for="area">{{ __('District') }}</label>
     @error('area')
       <span class="invalid-feedback" role="alert">

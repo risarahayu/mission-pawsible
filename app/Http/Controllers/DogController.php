@@ -33,7 +33,7 @@ class DogController extends Controller
 
         if ($request->input('area')) {
             $areaRequest = Area::all()->where('name', $request->input('area'))->first();
-            $stray_dogs = $stray_dogs->where('area_id', $areaRequest->id);
+            $stray_dogs = $stray_dogs->where('area_id', optional($areaRequest)->id);
         }
 
         return view('dogs.index', compact('stray_dogs','area'));
@@ -44,12 +44,13 @@ class DogController extends Controller
      */
     public function create()
     {
+        $controller_name = 'dog';
         $action_name = 'create';
         $dog = new Dog;
         $user = auth()->user();
         $stray_dogs = Dog::all();
         $areas = Area::all();
-        return view('dogs.create', compact('user', 'stray_dogs', 'areas', 'action_name', 'dog'));
+        return view('dogs.create', compact('user', 'stray_dogs', 'areas', 'action_name', 'dog', 'controller_name'));
 
     }
 
@@ -158,10 +159,11 @@ class DogController extends Controller
      */
     public function edit(Dog $dog)
     {
+        $controller_name = 'dog';
         $action_name = 'edit';
         $user = $dog->user;
         $images = $dog->images;
-        return view('dogs.edit', compact('dog', 'user', 'action_name', 'images'));
+        return view('dogs.edit', compact('dog', 'user', 'action_name', 'images', 'controller_name'));
     }
 
     /**

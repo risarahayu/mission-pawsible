@@ -27,8 +27,8 @@
           </button>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{{ route('dogs.index') }}">All</a></li>
-            @foreach($area as $areaItem)
-              <li><a class="dropdown-item" href="{{ route('dogs.index', ['area' => $areaItem->name]) }}">{{ $areaItem->name }}</a></li>
+            @foreach (['badung', 'bangli', 'buleleng', 'gianyar', 'jembrana', 'karangasem', 'klungkung', 'tabanan', 'denpasar'] as $area)
+              <li><a class="dropdown-item" href="{{ route('dogs.index', ['area' => $area]) }}">{{ ucfirst($area) }}</a></li>
             @endforeach
           </ul>
         </div>

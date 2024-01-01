@@ -24,10 +24,10 @@
                       <form action="{{ route('dogs.destroy', $stray_dog->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger delete-dog">
-                          <i class="bi bi-trash me-2"></i> Delete
-                        </button>
                       </form>
+                      <button class="btn btn-danger delete-dog">
+                        <i class="bi bi-trash me-2"></i> Delete
+                      </button>
                     @endif
                   </div>
                 </div>
@@ -171,65 +171,74 @@
   </section>
 
   <!-- Adoption infromation -->
-  @if(Auth::id() == $own->id && $adoptions->count() > 0)
+  @if(Auth::id() == $own->id)
     <section id="dog_adoption">
       <div class="container">
 
-        <!-- Dog information title -->
-        <div class="main-card text-center mt-4">
-          <h3 class="fw-bold m-1">{{ __('Adopters') }}</h3>
-        </div>
+        @if ($adoptions->count() > 0)
+          <!-- Dog information title -->
+          <div class="main-card text-center mt-4">
+            <h3 class="fw-bold m-1">{{ __('Adopters') }}</h3>
+          </div>
 
-        <div class="row">
-          @foreach ($adoptions as $adoption)
-            <div class="col-md-4">
-              <div class="dog-card">
-                <div class="brief">
-                  <div class="wrapper">
+          <div class="row">
+            @foreach ($adoptions as $adoption)
+              <div class="col-md-4">
+                <div class="dog-card">
+                  <div class="brief">
+                    <div class="wrapper">
 
-                    <h4 class="text-center fw-bold">{{ $adoption->user->name }}</h4>
-                    <hr class="mt-1">
-                    <div class="gender">
-                      <i class="bi bi-envelope dtl-icon"></i>
-                      <div>
-                        <small>Gender</small><br/>
-                        <h4 class="fw-bold">{{ empty($adoption->user->email) ? "not set" : $adoption->user->email }}</h4>
+                      <h4 class="text-center fw-bold">{{ $adoption->user->name }}</h4>
+                      <hr class="mt-1">
+                      <div class="gender">
+                        <i class="bi bi-envelope dtl-icon"></i>
+                        <div>
+                          <small>Gender</small><br/>
+                          <h4 class="fw-bold">{{ empty($adoption->user->email) ? "not set" : $adoption->user->email }}</h4>
+                        </div>
                       </div>
-                    </div>
-                    <div class="size">
-                      <i class="bi bi-whatsapp dtl-icon"></i>
-                      <div>
-                        <small>Size</small><br/>
-                        <h4 class="fw-bold">{{ empty($adoption->user->whatsapp) ? "not set" : $adoption->user->whatsapp }}</h4>
+                      <div class="size">
+                        <i class="bi bi-whatsapp dtl-icon"></i>
+                        <div>
+                          <small>Size</small><br/>
+                          <h4 class="fw-bold">{{ empty($adoption->user->whatsapp) ? "not set" : $adoption->user->whatsapp }}</h4>
+                        </div>
                       </div>
+
+                      @if($adoption->status == 'accepted')
+                        <form class="cancel-adoption" action="{{ route('adoptions.update', $adoption->id) }}" method="POST">
+                          @csrf
+                          @method('PUT')
+                          <input type="hidden" name="status" value="cancel">
+                          <button type="submit" class="btn btn-mps mt-3 fw-bold w-100 btn-cancel-adoption">
+                            {{ __('Cancel') }}
+                          </button>
+                        </form>
+                      @else
+                        <form id="accept-form" action="{{ route('adoptions.update', $adoption->id) }}" method="POST">
+                          @csrf
+                          @method('PUT')
+                          <input type="hidden" name="status" value="accept">
+                          <button type="submit" class="btn btn-mps mt-3 fw-bold w-100">
+                            {{ __('Accept') }}
+                          </button>
+                        </form>
+                      @endif
+
                     </div>
-
-                    @if($adoption->status == 'accepted')
-                      <form class="cancel-adoption" action="{{ route('adoptions.update', $adoption->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="status" value="cancel">
-                        <button type="submit" class="btn btn-mps mt-3 fw-bold w-100 btn-cancel-adoption">
-                          {{ __('Cancel') }}
-                        </button>
-                      </form>
-                    @else
-                      <form id="accept-form" action="{{ route('adoptions.update', $adoption->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="status" value="accept">
-                        <button type="submit" class="btn btn-mps mt-3 fw-bold w-100">
-                          {{ __('Accept') }}
-                        </button>
-                      </form>
-                    @endif
-
                   </div>
                 </div>
               </div>
+            @endforeach
+          </div>
+        @else
+          <div class="dashboard-nodata-card dogs">
+            <div class="d-flex flex-column align-items-center">
+              <img src="{{ asset('images/single-dog.png') }}" alt="Single Dog" width="6rem">
+              <p class="m-0 mt-2 txt-1">No adopter yet</p>
             </div>
-          @endforeach
-        </div>
+          </div>
+        @endif
 
       </div>
     </section>

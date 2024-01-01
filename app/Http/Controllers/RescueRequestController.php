@@ -10,6 +10,7 @@ use App\Models\Image;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RescueRequestController extends Controller
 {
@@ -31,7 +32,7 @@ class RescueRequestController extends Controller
 
         if ($request->input('area')) {
             $areaRequest = Area::all()->where('name', $request->input('area'))->first();
-            $stray_dogs = $stray_dogs->where('area_id', $areaRequest->id);
+            $stray_dogs = $stray_dogs->where('area_id', optional($areaRequest)->id);
         }
 
         return view('requests.index', compact('stray_dogs','area'));
@@ -40,12 +41,13 @@ class RescueRequestController extends Controller
     // Show the form for creating a new resource.
     public function create()
     {
+        $controller_name = 'request';
         $action_name = 'create';
         $dog = new RescueRequest;
         $user = auth()->user();
         $stray_dogs = RescueRequest::all();
         $areas = Area::all();
-        return view('requests.create', compact('user', 'stray_dogs', 'areas', 'action_name', 'dog'));
+        return view('requests.create', compact('user', 'stray_dogs', 'areas', 'action_name', 'dog', 'controller_name'));
     }
 
     // Store a newly created resource in storage.
@@ -94,20 +96,22 @@ class RescueRequestController extends Controller
     // Display the specified resource.
     public function show(RescueRequest $request)
     {
-            $stray_dog = $request;
-            $finder = $stray_dog->user;
-            $rescuer = $stray_dog;
-            return view('requests.show', compact('stray_dog', 'finder', 'rescuer'));
+        $stray_dog = $request;
+        $rescuer = $stray_dog;
+        $user = Auth::user();
+        $own = $stray_dog->user;
+        return view('requests.show', compact('stray_dog', 'user', 'rescuer', 'own'));
     }
 
     // Show the form for editing the specified resource.
     public function edit(RescueRequest $request)
     {
+        $controller_name = 'request';
         $action_name = 'edit';
         $dog = $request;
         $user = $dog->user;
         $images = $dog->images;
-        return view('requests.edit', compact('dog', 'request', 'user', 'action_name', 'images'));
+        return view('requests.edit', compact('dog', 'request', 'user', 'action_name', 'images', 'controller_name'));
     }
 
     // Update the specified resource in storage.
