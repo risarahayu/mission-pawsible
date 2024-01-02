@@ -29,4 +29,9 @@ class Dog extends Model
     {
         return $this->hasMany(Adoption::class);
     }
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
 }
