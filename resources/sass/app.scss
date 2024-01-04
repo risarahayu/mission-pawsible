@@ -131,3 +131,46 @@ form {
     color: $secondary;
   }
 }
+
+.btn-rescued {
+  background-color: $secondary;
+  color: $soft-primary;
+
+  &:hover {
+    background-color: $soft-primary;
+    color: $secondary;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.custom-link {
+  color: $secondary;
+  text-decoration: none;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    background: $soft-primary;
+    width: 35%;
+    height: 2px;
+    bottom: -0.019rem;
+    left: 50%;
+    right: 50%;
+    transition: 0.3s;
+    transform: translateX(-50%);
+  }
+
+  &:hover {
+    &::before {
+      background: $primary;
+      width: 85%;
+      height: 2px;
+      bottom: -0.09rem;
+      transition: 0.3s;
+    }
+  }
+}
