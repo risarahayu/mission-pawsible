@@ -2,7 +2,7 @@
 
 return [
     'title' => 'Stray Dog',
-    
+
     // index
     'index' => [
         'count' => 'We found :count at :area stray dog',
@@ -10,7 +10,11 @@ return [
         'empty' => 'No stray dog yet',
         'register' => 'Register a found stray dog',
         'filter' => 'Filter',
-        'all' => 'All'
+        'all' => 'All',
+        'request_by' => 'Request by :count people',
+        'since' => 'Since :date',
+        'adoptable' => 'Adoptable',
+        'adopted' => 'Adopted',
     ],
 
     // create

@@ -10,7 +10,11 @@ return [
         'empty' => 'Belum ada anjing terlantar',
         'register' => 'Daftarkan anjing terlantar yang ditemukan',
         'filter' => 'Filter',
-        'all' => 'Semua'
+        'all' => 'Semua',
+        'request_by' => 'Diminta oleh :count orang',
+        'since' => 'Sejak :date',
+        'adoptable' => 'Dapat diadopsi',
+        'adopted' => 'Diadopsi',
     ],
 
     // create

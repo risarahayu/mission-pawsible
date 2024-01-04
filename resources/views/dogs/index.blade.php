@@ -79,16 +79,17 @@
                     <div class="size request-time">
                       <i class="bi bi-clock-history dtl-icon"></i>
                       <div>
-                        <small>Request by {{$stray_dog->adoptions_count}} people</small><br/>
-                        <h4 class="fw-bold">Since {{ $stray_dog->created_at->format('Y-m-d') }}</h4>
+                        <small>{{__('dog.index.request_by', ['count' => $stray_dog->adoptions->count()])}}</small><br/>
+                        <h4 class="fw-bold">{{ __('dog.index.since', ['date' => $stray_dog->created_at->format('Y-m-d')]) }}</h4>
                       </div>
                     </div>
                     <div class="button">
                       @php
-                        $dog_status = ($stray_dog->adopted) ? 'Adopted' : 'Adopteable';
+                        $dog_status = ($stray_dog->adopted) ? "adopted" : "adopteable";
+                        $status = ($stray_dog->adopted) ? __('dog.index.adopted') : __('dog.index.adoptable');
                       @endphp
                       <a href="{{ route('dogs.show', ['dog' => $stray_dog->id]) }}" class="btn btn-custom-submit w-100 btn-{{ strtolower($dog_status) }}">
-                        {{ $dog_status }}
+                        {{ $status }}
                       </a>
                     </div>
                   </div>
