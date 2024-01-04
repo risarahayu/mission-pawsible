@@ -1,4 +1,4 @@
-<div class="lang p-3 @if(Route::has('role.index')) lang-role @endif">
+<div class="lang p-3 @if(Auth::user() && session('role'))lang-home @else lang-role @endif">
   <div class="tabs">
     <input type="radio" id="radio-1" name="lang" value="en" @if(session()->get('locale') == 'en' || session()->get('locale') == '') checked='' @endif>
     <label class="tab" for="radio-1">EN</label>

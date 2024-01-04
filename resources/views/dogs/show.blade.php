@@ -188,7 +188,7 @@
                   <div class="brief">
                     <div class="wrapper">
 
-                      <h4 class="text-center fw-bold">{{ $adoption->user->name }}</h4>
+                      <h4 class="text-center fw-bold">{{ $adoption->user->first_name }} {{ $adoption->user->last_name }}</h4>
                       <hr class="mt-1">
                       <div class="gender">
                         <i class="bi bi-envelope dtl-icon"></i>

@@ -5,6 +5,6 @@ return [
     'title' => 'Hi, What are you looking for?',
 
     // Buttons
-    'rescue' => 'Rescue Dog',
-    'adopt'=> 'Adopt Dog',
+    'rescue' => 'Rescue',
+    'adopt'=> 'Adoption',
 ];

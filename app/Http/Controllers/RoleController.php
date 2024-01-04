@@ -7,6 +7,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class RoleController extends Controller
 {
@@ -21,12 +23,15 @@ class RoleController extends Controller
 
     // Action index role, page untuk memilih role setelah login
     public function index(){
+        Session::forget('role');
+
         return view('role.index');
     }
 
     // Action untuk set role(mengganti role) yang diinginkan
     public function set_role($role){
         // menyimpan role kedalam session dengan key role
+        $user = Auth::user();
         session(['role' => $role]);
 
         $redirect_url = session('role') == 'rescuer' ? 'requests.index' : 'dogs.index';
@@ -35,8 +40,8 @@ class RoleController extends Controller
         return redirect()->route($redirect_url)->with([
             'flash' => [
                 'type' => 'success',
-                'message' => 'Berhasil login',
+                'message' => __('flash.role_selected', ['name' => "$user->first_name $user->last_name", 'role' => $role]),
             ]
-        ]);
+        ])->with('flash.once', true);
     }
 }

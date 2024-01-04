@@ -90,7 +90,7 @@ class RescueRequestController extends Controller
                 'type' => 'success',
                 'message' => 'Stray dog has been add successfully',
             ]
-        ]);
+        ])->with('flash.once', true);
     }
 
     // Display the specified resource.
@@ -167,7 +167,7 @@ class RescueRequestController extends Controller
                 'type' => 'success',
                 'message' => 'Stray dog has been updated successfully',
             ]
-        ]);
+        ])->with('flash.once', true);
     }
 
     // Remove the specified resource from storage.
@@ -179,7 +179,7 @@ class RescueRequestController extends Controller
                 'type' => 'success',
                 'message' => 'Stray dog has been remove',
             ]
-        ]);
+        ])->with('flash.once', true);
     }
 
     public function rescue(Request $rescueRequest, RescueRequest $request){
@@ -206,6 +206,6 @@ class RescueRequestController extends Controller
                 'type' => 'success',
                 'message' => 'Stray dog has been updated successfully',
             ]
-        ]);
+        ])->with('flash.once', true);
     }
 }

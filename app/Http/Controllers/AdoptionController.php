@@ -10,6 +10,15 @@ use App\Http\Requests\UpdateAdoptionRequest;
 
 class AdoptionController extends Controller
 {
+    public function __construct()
+    {
+        // Redirect back ke halaman login ketika belum login
+        $this->middleware('auth');
+
+        // Redirect back ke [route('role.index')] ketika belum menerapkan role
+        $this->middleware('role');
+    }
+    
     /**
      * Display a listing of the resource.
      */
@@ -44,7 +53,7 @@ class AdoptionController extends Controller
                 'type' => 'success',
                 'message' => 'Adoption record has been created successfully.',
             ]
-        ]);
+        ])->with('flash.once', true);
         
     }
 
@@ -80,7 +89,7 @@ class AdoptionController extends Controller
                     'type' => 'danger',
                     'message' => 'You have canceled the adopter',
                 ]
-            ]);
+            ])->with('flash.once', true);
         } else {
             $stray_dog = $adoption->dog;
             $adoption->update(['status' => 'accepted']);
@@ -91,7 +100,7 @@ class AdoptionController extends Controller
                     'type' => 'success',
                     'message' => 'You have selected the adopter',
                 ]
-            ]);
+            ])->with('flash.once', true);
         }
     }
 

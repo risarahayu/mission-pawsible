@@ -50,6 +50,7 @@
             </a>
 
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              @include('layouts.partials.lang')
               <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#personal_information">
                 {{ __('My Contact') }}
               </a>

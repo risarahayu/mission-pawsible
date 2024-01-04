@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 
 class DogController extends Controller
@@ -20,7 +21,11 @@ class DogController extends Controller
 
     public function __construct()
     {
+        // Redirect back ke halaman login ketika belum login
         $this->middleware('auth');
+
+        // Redirect back ke [route('role.index')] ketika belum menerapkan role
+        $this->middleware('role');
     }
 
     /**
@@ -123,7 +128,7 @@ class DogController extends Controller
                 'type' => 'success',
                 'message' => 'Stray dog has been added successfully',
             ]
-        ]);
+        ])->with('flash.once', true);
     }
 
     /**
@@ -220,7 +225,7 @@ class DogController extends Controller
                 'type' => 'success',
                 'message' => 'Stray dog has been updated successfully',
             ]
-        ]);
+        ])->with('flash.once', true);
     }
 
     /**
@@ -234,6 +239,6 @@ class DogController extends Controller
                 'type' => 'success',
                 'message' => 'Stray dog has been remove',
             ]
-        ]);
+        ])->with('flash.once', true);
     }
 }

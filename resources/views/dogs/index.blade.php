@@ -8,25 +8,22 @@
 
       <!-- title -->
       <div>
-        <h1 class="fw-bold">{{ __('Stray Dogs') }}</h1>
-        <p class="m-0">We found <span class="fw-semibold">{{$stray_dogs->count()}}
-          at
-          @if(!empty($area_name))
-            {{$area_name}}
-          @else
-            <span>All</span>
-          @endif
-        </span> stray dog</p>
+        <h1 class="fw-bold">{{ __('dog.title') }}</h1>
+        @if(!empty($area_name))
+          <p class="m-0">{{ __('dog.index.count', ['count'=>$stray_dogs->count(), 'area'=> $area_name]) }}
+        @else
+          <p class="m-0">{{ __('dog.index.all_count', ['count'=>$stray_dogs->count()]) }}
+        @endif
       </div>
 
       <div class="filter-search">
         <!-- sort -->
         <div class="dropdown">
           <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-filter me-2"></i>Filter
+            <i class="bi bi-filter me-2"></i>{{ __('dog.index.filter') }}
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{{ route('dogs.index') }}">All</a></li>
+            <li><a class="dropdown-item" href="{{ route('dogs.index') }}">{{ __('dog.index.all') }}</a></li>
             @foreach (['badung', 'bangli', 'buleleng', 'gianyar', 'jembrana', 'karangasem', 'klungkung', 'tabanan', 'denpasar'] as $area)
               <li><a class="dropdown-item" href="{{ route('dogs.index', ['area' => $area]) }}">{{ ucfirst($area) }}</a></li>
             @endforeach
@@ -105,8 +102,8 @@
           <a href="{{ route('dogs.create') }}">
             <div class="d-flex flex-column align-items-center">
               <img src="{{ asset('images/single-dog.png') }}" alt="Single Dog" width="6rem">
-              <p class="m-0 mt-2 txt-1">No stray dog yet</p>
-              <p class="m-0 txt-2"><i class="bi bi-plus-square-dotted me-3"></i>Register a found stray dog</p>
+              <p class="m-0 mt-2 txt-1">{{ __('dog.index.empty') }}</p>
+              <p class="m-0 txt-2"><i class="bi bi-plus-square-dotted me-3"></i>{{ __('dog.index.register') }}</p>
             </div>
           </a>
         </div>

@@ -175,7 +175,7 @@
       <div class="row mt-5">
       @if($stray_dog->rescued == '1')
       <div class="card">
-        <h5 class="card-title bold card-header"><i class="bi bi-person-circle me-3"></i>{{ $rescuer->user->name }}</h5>
+        <h5 class="card-title bold card-header"><i class="bi bi-person-circle me-3"></i>{{ $rescuer->user->first_name }} {{ $rescuer->user->last_name }}</h5>
         <div class="card-body">
           @if(Auth::id() == $finder->id || Auth::id() == $rescuer->rescuer_id)
             <div class="d-flex align-items-center" style="gap: 10px">

@@ -40,7 +40,7 @@ class HomeController extends Controller
                 'type' => 'success',
                 'message' => 'Stray dog has been add successfully',
             ]
-        ]);
+        ])->with('flash.once', true);
         // return view('dashboards.index');
     }
 }

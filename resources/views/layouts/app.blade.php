@@ -21,8 +21,10 @@
   </head>
 
   <body>
-    <!-- Setting bahasa -->
-    @include('layouts.partials.lang')
+    @if (!session('role'))
+      <!-- Setting bahasa -->
+      @include('layouts.partials.lang')
+    @endif
 
     <!-- Navbar -->
     @include('layouts.partials.nav')
@@ -36,5 +38,13 @@
 
     <!-- Scripts agar script selalu dibawah -->
     @yield('scripts')
+
+    @if(session('flash'))
+      <script type="module">
+        $(function() {
+          toastr["{{ session('flash.type') }}"]("{{ session('flash.message') }}");
+        });
+      </script>
+    @endif
   </body>
 </html>

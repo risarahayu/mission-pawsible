@@ -13,6 +13,15 @@ $background-color_2: #fff;
     }
   }
 
+  &.lang-home {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    .tabs {
+      width: fit-content;
+    }
+  }
+
   .tabs {
     display: flex;
     position: relative;

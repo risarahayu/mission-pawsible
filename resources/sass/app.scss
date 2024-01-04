@@ -9,6 +9,26 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
+// Toastr
+@import 'toastr';
+#toast-container {
+  & > .toast {
+    background-image: none !important; position: relative;
+    &:before {
+      font-family: FontAwesome; font-size: 24px; line-height: 18px; color: #FFF;
+      position: absolute; top: 45%; left: 15px; transform: translateY(-50%);
+    } 
+    &.toast-warning:before { content: "\f071"; }
+    &.toast-error:before { content: "\f06a"; }
+    &.toast-info:before { content: "\f05a"; }
+    &.toast-success:before { content: "\f058"; }
+  }
+  &.toast-top-custom { top: 112px; right: 12px; }
+  .toast { opacity: 1 !important; font-weight: bold; }
+  .toast-success { background-color: $base-color; }
+  .toast-error { background-color: $red-error; }
+}
+
 // Language
 @import 'base/lang';
 

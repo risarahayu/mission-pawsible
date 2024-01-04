@@ -30,11 +30,13 @@ class StoreDogRequest extends FormRequest
             'gender' => 'required|string',
             'size' => 'required|string',
             'description' => 'required|string',
-            'map_link' => 'nullable|string',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg',
+            'map_link' => 'required|string',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg',
             'vaccinated_date' => 'required|date',
-            'vaccination_certificate.*' => 'nullable|image|mimes:jpeg,png,jpg',
-            'sterilization_certificate.*' => 'nullable|image|mimes:jpeg,png,jpg',
+            'vaccination_certificate.*' => 'required|image|mimes:jpeg,png,jpg',
+            'sterilization_certificate.*' => 'required|image|mimes:jpeg,png,jpg',
         ];
     }
+
+    protected $redirectTo = '/role';
 }
