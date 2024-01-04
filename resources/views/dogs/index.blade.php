@@ -65,15 +65,15 @@
                     <div class="gender">
                       <i class="bi bi-gender-ambiguous dtl-icon"></i>
                       <div>
-                        <small>Gender</small><br/>
-                        <h4 class="fw-bold">{{ ucfirst($stray_dog->gender) }}</h4>
+                        <small>{{ __('dog.form.gender') }}</small><br/>
+                        <h4 class="fw-bold">{{ __(ucfirst($stray_dog->gender)) }}</h4>
                       </div>
                     </div>
                     <div class="size">
                       <img class="dtl-icon" src="{{ asset('images/cil_animal.png') }}">
                       <div>
-                        <small>Size</small><br/>
-                        <h4 class="fw-bold">{{ ucfirst($stray_dog->size) }}</h4>
+                        <small>{{ __('dog.form.size') }}</small><br/>
+                        <h4 class="fw-bold">{{ __("dog.form.option.$stray_dog->size") }}</h4>
                       </div>
                     </div>
                     <div class="size request-time">

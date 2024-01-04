@@ -105,40 +105,9 @@
 
             </div>
           </div>
-
-          <!-- Adoption button -->
-          <div class="text-center w-100">
-            @if($user->id != $own->id)
-              @if($stray_dog->adopted == '1')
-                <p class="fs-2">Someone already adopt this dog!</p>
-              @elseif($stray_dog->adopted !== '1' && $userAdoption)
-                <p class="fs-2">Keep Update!</p>
-                <div class="btn btn-primary fw-bold fs-5">You already request this dog.</div>
-                <p class="fs-6 mt-3">Waiting for approval from the owener</p>
-              @else
-                <a class="btn btn-mps w-100 fw-bold fs-5" href="{{ route('adoptions.create', ['dog' => $stray_dog->id]) }}">Adopt this dog</a>
-              @endif
-            @endif
-          </div>
         </div>
 
         <div class="col-lg-6 text-center position-relative">
-
-          <!--
-          @if(Auth::id()==$stray_dog->user_id)
-            <div class="show-buttons-group">
-              <div class="d-flex justify-content-end" style="gap: 5px;">
-                <a type="button" class="btn btn-mps" href="{{ route('dogs.edit', $stray_dog->id) }}"><i class="bi bi-pencil-square me-2"></i> Update</a>
-                @if (!$stray_dog->adopted)
-                  <button class="btn btn-danger delete-dog">
-                    <i class="bi bi-trash me-2"></i> Delete
-                  </button>
-                @endif
-              </div>
-            </div>
-          @endif
-          -->
-
           <div id="carouselExampleIndicators" class="dog-picture-wrapper carousel slide" data-bs-ride="true">
             <div class="carousel-indicators">
               @foreach ($stray_dog->images()->orderBy('category')->get() as $index => $image)
@@ -177,7 +146,7 @@
       <div class="card">
         <h5 class="card-title bold card-header"><i class="bi bi-person-circle me-3"></i>{{ $rescuer->user->first_name }} {{ $rescuer->user->last_name }}</h5>
         <div class="card-body">
-          @if(Auth::id() == $finder->id || Auth::id() == $rescuer->rescuer_id)
+          @if(Auth::id() == $own->id || Auth::id() == $rescuer->rescuer_id)
             <div class="d-flex align-items-center" style="gap: 10px">
               <h4><i class="bi bi-envelope"></i></h4>
               <div>
