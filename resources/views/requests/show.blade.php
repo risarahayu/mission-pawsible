@@ -4,7 +4,6 @@
   <!-- Dog information -->
   <section id="dog_information">
     <div class="container">
-
       <!-- Dog information title -->
       <div class="main-card text-center">
         <h3 class="fw-bold m-1">{{ __('DOG INFORMATIONS') }}</h3>
@@ -12,14 +11,13 @@
 
       <!-- Dog information detail -->
       <div class="row flex-lg-row flex-column-reverse">
-
         <div class="col-lg-6 dog-show">
           <div class="main-card d-flex justify-content-between">
             <div class="row">
-              @if(Auth::id()==$stray_dog->user_id)
-                <div class="col-12 mb-3">
-                  <div class="d-flex justify-content-end" style="gap: 5px;">
-                    <a type="button" class="btn btn-mps" href="{{ route('dogs.edit', $stray_dog->id) }}"><i class="bi bi-pencil-square me-2"></i> Update</a>
+              <div class="col-12 mb-3">
+                <div class="d-flex justify-content-end" style="gap: 5px;">
+                  @if(Auth::id()==$stray_dog->user_id)
+                    <a type="button" class="btn btn-mps" href="{{ route('dogs.edit', $stray_dog->id) }}"><i class="bi bi-pencil-square me-2"></i> Edit</a>
                     @if (!$stray_dog->adopted)
                       <form action="{{ route('dogs.destroy', $stray_dog->id) }}" method="POST">
                         @csrf
@@ -29,9 +27,15 @@
                         <i class="bi bi-trash me-2"></i> Delete
                       </button>
                     @endif
-                  </div>
+                  @else
+                    @unless($stray_dog->rescued == '1')
+                      <a type="button" class="btn btn-rescue" data-bs-toggle="modal" data-bs-target="#rescue">
+                        <i class="fa-solid fa-hand-holding-heart me-2"></i> Rescue
+                      </a>
+                    @endunless
+                  @endif
                 </div>
-              @endif
+              </div>
 
               <!-- Dog type -->
               <div class="col-sm-6">
@@ -137,68 +141,21 @@
         </div>
       </div>
     </div>
-  </section>
 
-  <section>
-    <div class="container">
-      <div class="row mt-5">
-      @if($stray_dog->rescued == '1')
-      <div class="card">
-        <h5 class="card-title bold card-header"><i class="bi bi-person-circle me-3"></i>{{ $rescuer->user->first_name }} {{ $rescuer->user->last_name }}</h5>
-        <div class="card-body">
-          @if(Auth::id() == $own->id || Auth::id() == $rescuer->rescuer_id)
-            <div class="d-flex align-items-center" style="gap: 10px">
-              <h4><i class="bi bi-envelope"></i></h4>
-              <div>
-                <small>Email</small>
-                <p class="mb-0 fw-bold">{{ empty($rescuer->user->email) ? "-" : $rescuer->user->email }}</p>
-              </div>
+    @unless(Auth::id()==$stray_dog->user_id)
+      <div class="modal fade" id="rescue" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rescue_label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header justify-content-center">
+              <h1 class="modal-title fs-5" id="rescue_label">{{ __('Rescue this dog') }}</h1>
             </div>
-            <div class="d-flex align-items-center" style="gap: 10px">
-              <h4><i class="bi bi-whatsapp"></i></h4>
-              <div>
-                <small>Whatsapp</small>
-                <p class="mb-0 fw-bold">{{ empty($rescuer->user->whatsapp) ? "-" : $rescuer->whatsapp }}</p>
-              </div>
-            </div>
-            <div id="carouselExampleIndicators" class="dog-picture-wrapper carousel slide mt-5" data-bs-ride="true">
-              <div class="carousel-indicators">
-                @foreach ($stray_dog->images->where('request_status', 'rescuer') as $image)
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $loop->index }}" class="@if($loop->index === 0) active @endif" aria-current="true" aria-label="Slide {{ $loop->index }}"></button>
-                @endforeach
-              </div>
-              @endif
-            <div class="carousel-inner">
-              @foreach ($stray_dog->images->where('request_status', 'rescuer') as $image)
-                <div class="carousel-item @if($loop->index === 0) active @endif">
-                  <div class="dog-picture mx-auto">
-                    <img class="rounded" src="{{ asset($image->filename) }}">
-                  </div>
-                </div>
-              @endforeach
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-        </div>
-      </div>
-      @else
-        <div class="d-flex align-items-center h-100">
-          <div class="card w-100">
-            <div class="card-header">{{ __('Rescue this dog') }}</div>
+            <form method="POST" action="{{ route('requests.rescue', ['request' => $stray_dog->id]) }}" enctype="multipart/form-data">
+              @csrf
+              @method('PUT')
 
-            <div class="card-body">
-              <form method="POST" action="{{ route('requests.rescue', ['request' => $stray_dog->id]) }}" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
+              <div class="modal-body py-5">
                 <label for="images" class="col-md-4 col-form-label">{{ __('Pictures') }}</label>
-                <div class="col-md-8">
+                <div class="col">
                   <input id="images" type="file" class="form-control @error('images') is-invalid @enderror" name="images[]" autocomplete="images" multiple>
                   @error('images')
                     <span class="invalid-feedback" role="alert">
@@ -206,13 +163,95 @@
                     </span>
                   @enderror
                 </div>
-                <button type="submit" class="btn btn-custom-submit w-100">
-                  {{ __('Submit') }}
-                </button>
-              </form>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" style="min-width: 100px" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" style="min-width: 100px">{{ __('Submit') }}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    @endunless
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="row mt-5">
+      @if($stray_dog->rescued == '1')
+        <div class="card">
+          <h5 class="card-title bold card-header"><i class="bi bi-person-circle me-3"></i>{{ $rescuer->user->first_name }} {{ $rescuer->user->last_name }}</h5>
+          <div class="card-body">
+            @if(Auth::id() == $own->id || Auth::id() == $rescuer->rescuer_id)
+              <div class="d-flex align-items-center" style="gap: 10px">
+                <h4><i class="bi bi-envelope"></i></h4>
+                <div>
+                  <small>Email</small>
+                  <p class="mb-0 fw-bold">{{ empty($rescuer->user->email) ? "-" : $rescuer->user->email }}</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-center" style="gap: 10px">
+                <h4><i class="bi bi-whatsapp"></i></h4>
+                <div>
+                  <small>Whatsapp</small>
+                  <p class="mb-0 fw-bold">{{ empty($rescuer->user->whatsapp) ? "-" : $rescuer->whatsapp }}</p>
+                </div>
+              </div>
+              <div id="carouselExampleIndicators" class="dog-picture-wrapper carousel slide mt-5" data-bs-ride="true">
+                <div class="carousel-indicators">
+                  @foreach ($stray_dog->images->where('request_status', 'rescuer') as $image)
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $loop->index }}" class="@if($loop->index === 0) active @endif" aria-current="true" aria-label="Slide {{ $loop->index }}"></button>
+                  @endforeach
+                </div>
+                @endif
+              <div class="carousel-inner">
+                @foreach ($stray_dog->images->where('request_status', 'rescuer') as $image)
+                  <div class="carousel-item @if($loop->index === 0) active @endif">
+                    <div class="dog-picture mx-auto">
+                      <img class="rounded" src="{{ asset($image->filename) }}">
+                    </div>
+                  </div>
+                @endforeach
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
             </div>
           </div>
         </div>
+      @else
+        @if(false)
+          <div class="d-flex align-items-center h-100">
+            <div class="card w-100">
+              <div class="card-header">{{ __('Rescue this dog') }}</div>
+
+              <div class="card-body">
+                <form method="POST" action="{{ route('requests.rescue', ['request' => $stray_dog->id]) }}" enctype="multipart/form-data">
+                  @csrf
+                  @method('PUT')
+                  <label for="images" class="col-md-4 col-form-label">{{ __('Pictures') }}</label>
+                  <div class="col-md-8">
+                    <input id="images" type="file" class="form-control @error('images') is-invalid @enderror" name="images[]" autocomplete="images" multiple>
+                    @error('images')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
+                  </div>
+                  <button type="submit" class="btn btn-custom-submit w-100">
+                    {{ __('Submit') }}
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        @endif
       @endif
       </div>
     </div>

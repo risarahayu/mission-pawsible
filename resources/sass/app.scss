@@ -121,3 +121,13 @@ form {
     color: $soft-primary;
   }
 }
+
+.btn-rescue {
+  background-color: $green;
+  color: #fff;
+
+  &:hover {
+    background-color: $soft-green;
+    color: $secondary;
+  }
+}
