@@ -96,11 +96,12 @@ class RescueRequestController extends Controller
     // Display the specified resource.
     public function show(RescueRequest $request)
     {
+        $controller_name = 'rescue_request';
         $stray_dog = $request;
         $rescuer = $stray_dog;
         $user = Auth::user();
         $own = $stray_dog->user;
-        return view('requests.show', compact('stray_dog', 'user', 'rescuer', 'own'));
+        return view('requests.show', compact('stray_dog', 'user', 'rescuer', 'own', 'controller_name'));
     }
 
     // Show the form for editing the specified resource.

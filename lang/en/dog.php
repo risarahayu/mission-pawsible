@@ -17,6 +17,13 @@ return [
         'adopted' => 'Adopted',
     ],
 
+    'show' => [
+        'title' => 'Dog Information',
+        'no_adopter' => 'No adopter yet',
+        'registered_by' => 'Registered by',
+        'adopters' => 'Adopters',
+    ],
+
     // create
     'form' => [
         'dog_type' => 'Dog type',

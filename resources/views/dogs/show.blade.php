@@ -7,103 +7,39 @@
 
       <!-- Dog information title -->
       <div class="main-card text-center">
-        <h3 class="fw-bold m-1">{{ __('DOG INFORMATIONS') }}</h3>
+        <h3 class="fw-bold m-1">{{ __('dog.show.title') }}</h3>
       </div>
 
       <!-- Dog information detail -->
       <div class="row flex-lg-row flex-column-reverse">
 
         <div class="col-lg-6 dog-show">
-          <div class="main-card d-flex justify-content-between">
-            <div class="row">
+          
+          <div class="main-card">
+            <!-- Action button -->
+            <div class="d-flex justify-content-end" style="gap: 5px;">
               @if(Auth::id()==$stray_dog->user_id)
-                <div class="col-12 mb-3">
-                  <div class="d-flex justify-content-end" style="gap: 5px;">
-                    <a type="button" class="btn btn-mps" href="{{ route('dogs.edit', $stray_dog->id) }}"><i class="bi bi-pencil-square me-2"></i> Edit</a>
-                    @if (!$stray_dog->adopted)
-                      <form action="{{ route('dogs.destroy', $stray_dog->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                      </form>
-                      <button class="btn btn-danger delete-dog">
-                        <i class="bi bi-trash me-2"></i> Delete
-                      </button>
-                    @endif
-                  </div>
-                </div>
+                <a type="button" class="btn btn-mps" href="{{ route('dogs.edit', $stray_dog->id) }}"><i class="bi bi-pencil-square me-2"></i> {{ __('app.button.edit') }}</a>
+                @if (!$stray_dog->adopted)
+                  <form action="{{ route('dogs.destroy', $stray_dog->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                  </form>
+                  <button class="btn btn-danger delete-dog">
+                    <i class="bi bi-trash me-2"></i> {{ __('app.button.delete') }}
+                  </button>
+                @endif
+              @else
+                @if (!$stray_dog->adopted && $user->adoptions->where('dog_id', $stray_dog->id)->isEmpty())
+                  <a type="button" class="btn btn-mps" href="{{ route('adoptions.create', ['dog' => $stray_dog->id]) }}">
+                    <i class="fa-solid fa-hand-holding-heart me-2"></i> {{ __('app.button.adopt') }}
+                  </a>
+                @endif
               @endif
-
-              <!-- Dog type -->
-              <div class="col-sm-6">
-                <div class="d-flex align-items-center" style="gap: 15px;">
-                  <img class="dtl-icon" src="{{ asset('images/dog-type.png') }}">
-                  <div>
-                    <small>Dog Type</small><br/>
-                    <h4 class="fw-bold">{{ ucfirst($stray_dog->dog_type) }}</h4>
-                  </div>
-                </div>
-              </div>
-
-              <!-- gender -->
-              <div class="col-sm-6">
-                <div class="d-flex align-items-center" style="gap: 15px;">
-                  <i class="bi bi-gender-ambiguous dtl-icon"></i>
-                  <div>
-                    <small>Gender</small><br/>
-                    <h4 class="fw-bold">{{ ucfirst($stray_dog->gender) }}</h4>
-                  </div>
-                </div>
-              </div>
-
-              <!-- color -->
-              <div class="col-sm-6">
-                <div class="d-flex align-items-center" style="gap: 15px;">
-                  <i class="bi bi-palette2 dtl-icon"></i>
-                  <div>
-                    <small>Color(s)</small><br/>
-                    <h4 class="fw-bold">{{ ucfirst($stray_dog->color) }}</h4>
-                  </div>
-                </div>
-              </div>
-
-              <!-- size -->
-              <div class="col-sm-6">
-                <div class="d-flex align-items-center" style="gap: 15px;">
-                  <img class="dtl-icon" src="{{ asset('images/cil_animal.png') }}">
-                  <div>
-                    <small>Size</small><br/>
-                    <h4 class="fw-bold">{{ ucfirst($stray_dog->size) }}</h4>
-                  </div>
-                </div>
-              </div>
-
-              <!-- description -->
-              <div class="col-sm-6">
-                <div class="d-flex align-items-center" style="gap: 15px;">
-                  <i class="bi bi-file-earmark-text dtl-icon"></i>
-                  <div>
-                    <small>Description</small><br/>
-                    <h4 class="fw-bold">{{ ucfirst($stray_dog->description) }}</h4>
-                  </div>
-                </div>
-              </div>
-
-              <!-- contact -->
-              <div class="col-sm-6">
-                <div class="d-flex align-items-center" style="gap: 15px;">
-                  <i class="bi bi-whatsapp dtl-icon"></i>
-                  <div>
-                    <small>By {{ $own->name }}</small><br/>
-                    @if (optional($own->userContact)->whatsapp)
-                      <h4 class="fw-bold">{{ optional($own->userContact)->whatsapp }}</h4>
-                    @else
-                      <h4 class="fw-bold">{{ $own->email }}</h4>
-                    @endif
-                  </div>
-                </div>
-              </div>
-
             </div>
+
+            <!-- Dog details -->
+            @include('dogs.partials.dog_detail')
           </div>
 
           <!-- Adoption button -->
@@ -115,56 +51,14 @@
                 <p class="fs-2">Keep Update!</p>
                 <div class="btn btn-primary fw-bold fs-5">You already request this dog.</div>
                 <p class="fs-6 mt-3">Waiting for approval from the owener</p>
-              @else
-                <a class="btn btn-mps w-100 fw-bold fs-5" href="{{ route('adoptions.create', ['dog' => $stray_dog->id]) }}">Adopt this dog</a>
               @endif
             @endif
           </div>
         </div>
 
         <div class="col-lg-6 text-center position-relative">
-
-          <!--
-          @if(Auth::id()==$stray_dog->user_id)
-            <div class="show-buttons-group">
-              <div class="d-flex justify-content-end" style="gap: 5px;">
-                <a type="button" class="btn btn-mps" href="{{ route('dogs.edit', $stray_dog->id) }}"><i class="bi bi-pencil-square me-2"></i> Update</a>
-                @if (!$stray_dog->adopted)
-                  <button class="btn btn-danger delete-dog">
-                    <i class="bi bi-trash me-2"></i> Delete
-                  </button>
-                @endif
-              </div>
-            </div>
-          @endif
-          -->
-
-          <div id="carouselExampleIndicators" class="dog-picture-wrapper carousel slide" data-bs-ride="true">
-            <div class="carousel-indicators">
-              @foreach ($stray_dog->images()->orderBy('category')->get() as $index => $image)
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $index }}" class="@if($index === 0) active @endif" aria-current="true" aria-label="Slide {{ $index }}"></button>
-              @endforeach
-            </div>
-            <div class="carousel-inner">
-              @foreach ($stray_dog->images()->orderBy('category')->get() as $index => $image)
-                <div class="carousel-item @if($index === 0) active @endif">
-                  <div class="dog-picture mx-auto">
-                    <img class="rounded" src="{{ asset($image->filename) }}">
-                  </div>
-                </div>
-              @endforeach
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-          <!-- <img class="img-fluid p-5 d-none d-md-block" src="{{ asset('images/lets-chat-withus.svg') }}"> -->
-
+          <!-- Dog picture carousel -->
+          @include('dogs.partials.dog_carousel')
         </div>
       </div>
     </div>

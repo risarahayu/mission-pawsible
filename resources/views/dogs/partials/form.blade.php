@@ -115,7 +115,7 @@
       @if ($action_name == "edit")
         {{-- For edit page, showing uploaded picture --}}
         <div id="old-images" class="position-relative mb-3 old-images">
-          <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger delete-old-image" data-delete-id="delete_image">{{ __('dog.form.button.delete') }}</button>
+          <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger delete-old-image" data-delete-id="delete_image">{{ __('app.button.delete') }}</button>
           <p class="fw-bold">{{ __('dog.form.old_picture') }}</p>
           <div class="row row-cols-3">
             @foreach ($images->where('category', null) as $image)
@@ -129,7 +129,7 @@
 
       {{-- New pciture preview for dog --}}
       <div id="new-images" class="new-images position-relative mb-3 d-none">
-        <button type="button" id="delete-new-image" class="btn-delete-images btn btn-danger delete-new-image">{{ __('dog.form.button.delete') }}</button>
+        <button type="button" id="delete-new-image" class="btn-delete-images btn btn-danger delete-new-image">{{ __('app.button.delete') }}</button>
         <p class="fw-bold">{{ $action_name === 'create' ? __('dog.form.preview') : __('dog.form.new_picture') }}</p>
         <div class="images-wrapper row row-cols-3">
           {{-- WILL ADD NEW IMAGE HERE USING JS --}}
@@ -140,7 +140,7 @@
 
   {{-- Custom fake submit, Js file -> views/dogs/partials/js.blade.php --}}
   <button type="button" id="fake-submit" class="btn btn-custom-submit w-100">
-    {{ __('dog.form.button.next') }}
+    {{ __('app.button.next') }}
   </button>
 </fieldset>
 
@@ -183,7 +183,7 @@
       <div class="image-preview border p-3 w-100 mb-3 @if($action_name == "create") d-none @endif" data-preview-id="vaccination_certificate">
         @if ($action_name == "edit")
           <div id="old-images" class="position-relative mb-3 old-images">
-            <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger" data-delete-id="delete_vaccination">{{ __('dog.form.button.delete') }}</button>
+            <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger" data-delete-id="delete_vaccination">{{ __('app.button.delete') }}</button>
             <p class="fw-bold">{{ __('dog.form.old_picture') }}</p>
             <div class="row row-cols-3">
               @foreach ($images->where('category', 'vaccination') as $image)
@@ -196,7 +196,7 @@
         @endif
 
         <div id="new-images" class="new-images position-relative mb-3 d-none">
-          <button type="button" id="delete-new-image" class="btn-delete-images btn btn-danger delete-new-image">{{ __('dog.form.button.delete') }}</button>
+          <button type="button" id="delete-new-image" class="btn-delete-images btn btn-danger delete-new-image">{{ __('app.button.delete') }}</button>
           <p class="fw-bold">{{ $action_name === 'create' ? __('dog.form.preview') : __('dog.form.new_picture') }}</p>
           <div class="images-wrapper row row-cols-3">
             {{-- WILL ADD NEW IMAGE HERE USING JS --}}
@@ -224,7 +224,7 @@
       <div class="image-preview border p-3 w-100 mb-3 @if($action_name == "create") d-none @endif" data-preview-id="sterilization_certificate">
         @if ($action_name == "edit")
           <div id="old-images" class="position-relative mb-3 old-images">
-            <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger" data-delete-id="delete_sterilization">{{ __('dog.form.button.delete') }}</button>
+            <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger" data-delete-id="delete_sterilization">{{ __('app.button.delete') }}</button>
             <p class="fw-bold">{{ __('dog.form.old_picture') }}</p>
             <div class="row row-cols-3">
               @foreach ($images->where('category', 'sterilization') as $image)
@@ -237,7 +237,7 @@
         @endif
 
         <div id="new-images" class="new-images position-relative mb-3 d-none">
-          <button type="button" id="delete-new-image" class="btn-delete-images btn btn-danger delete-new-image">{{ __('dog.form.button.delete') }}</button>
+          <button type="button" id="delete-new-image" class="btn-delete-images btn btn-danger delete-new-image">{{ __('app.button.delete') }}</button>
           <p class="fw-bold">{{ $action_name === 'create' ? __('dog.form.preview') : __('dog.form.new_picture') }}</p>
           <div class="images-wrapper row row-cols-3">
             {{-- WILL ADD NEW IMAGE HERE USING JS --}}
@@ -276,6 +276,6 @@
 
   {{-- This is real submit --}}
   <button type="submit" class="btn btn-custom-submit w-100">
-    {{ __('dog.form.button.submit') }}
+    {{ __('app.button.submit') }}
   </button>
 </fieldset>

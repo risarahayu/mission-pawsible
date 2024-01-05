@@ -35,12 +35,6 @@ class HomeController extends Controller
     public function index()
     {
         $redirect_route = session('role') == 'adopter' ? 'dogs.index' : 'requests.index';
-        return redirect()->route($redirect_route)->with([
-            'flash' => [
-                'type' => 'success',
-                'message' => 'Stray dog has been add successfully',
-            ]
-        ])->with('flash.once', true);
-        // return view('dashboards.index');
+        return redirect()->route($redirect_route);
     }
 }

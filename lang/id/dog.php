@@ -17,6 +17,13 @@ return [
         'adopted' => 'Diadopsi',
     ],
 
+    'show' => [
+        'title' => 'Informasi Anjing',
+        'no_adopter' => 'Belum ada pengadopsi',
+        'registered_by' => 'Didaftarkan oleh',
+        'adopters' => 'Pengadopsi',
+    ],
+
     // create
     'form' => [
         'dog_type' => 'Jenis Anjing',
@@ -41,11 +48,6 @@ return [
             'medium' => 'Sedang 11-15kg',
             'large' => 'Besar 16-20kg',
             'extra' => 'Sangat besar 20+kg',
-        ],
-        'button' => [
-            'next' => 'Selanjutnya',
-            'submit' => 'Kirim',
-            'delete' => 'Hapus',
         ],
     ],
 ];

@@ -154,9 +154,9 @@ class DogController extends Controller
         //cek request adopsi untuk owener
         $adoptions = $dog->adoptions;
 
+        $controller_name = 'dog';
 
-
-        return view('dogs.show', compact('user', 'stray_dog', 'userAdoption', 'own', 'adoptions'));
+        return view('dogs.show', compact('user', 'stray_dog', 'userAdoption', 'own', 'adoptions', 'controller_name'));
     }
 
     /**
