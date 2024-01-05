@@ -9,7 +9,8 @@ class AddRequestStatusToImages extends Migration
     public function up()
     {
         Schema::table('images', function (Blueprint $table) {
-            $table->enum('request_status', ['requested', 'rescuer'])->nullable();
+            // $table->enum('request_status', ['requested', 'rescuer'])->nullable();
+            $table->string('request_status')->nullable();
         });
     }
 

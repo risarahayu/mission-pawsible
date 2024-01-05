@@ -3,7 +3,7 @@
 @section('content')
   <section>
     <div class="container adoptions">
-      @if(!$nationality_checked)
+      @if(!$is_indonesian)
         <form action="{{ route('adoptions.create', ['dog' => $dog]) }}" method="get">
           @csrf
           <div class="form-card">
@@ -16,7 +16,7 @@
               <label class="form-check-label" for="yes">Yes</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="is_indonesian" id="no" value="0">
+              <input class="form-check-input" type="radio" name="is_indonesian" id="no" value="2">
               <label class="form-check-label" for="no">No</label>
             </div>
           </div>

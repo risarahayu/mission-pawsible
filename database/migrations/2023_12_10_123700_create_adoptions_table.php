@@ -18,18 +18,18 @@ return new class extends Migration
             $table->unsignedBigInteger('dog_id');
             $table->foreign('dog_id')->references('id')->on('dogs');
             $table->string('status')->nullable()->default('pending');
-            $table->string('housing_type');
-            $table->boolean('housing_permission');
-            $table->boolean('housing_condition');
+            $table->string('housing_type')->nullable();
+            $table->boolean('housing_permission')->nullable();
+            $table->boolean('housing_condition')->nullable();
             $table->text('pet_experience')->nullable();
-            $table->string('residency_duration');
-            $table->string('planned_residency_duration');
+            $table->string('residency_duration')->nullable();
+            $table->string('planned_residency_duration')->nullable();
             $table->string('future_residency_country')->nullable();
-            $table->boolean('pet_migration_plan'); 
-            $table->string('job'); 
+            $table->boolean('pet_migration_plan')->nullable();
+            $table->string('job')->nullable();
             $table->string('house_occupants')->nullable();
             $table->string('canine_residence')->nullable();
-            $table->boolean('vaccinated'); 
+            $table->boolean('vaccinated')->nullable();
             $table->timestamps();
         });
     }

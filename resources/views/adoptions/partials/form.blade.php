@@ -1,86 +1,89 @@
 <input type="hidden" name="user_id" value="{{ $user->id }}">
 <input type="hidden" name="dog_id" value="{{ $dog->id }}">
 
-<!-- Housing Permission Radio Buttons -->
-<div class="form-card">
-    <label class="form-label">Do you have 100% approval from your family / partner / housemate / landlord? </label>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="housing_permission" id="housing_permission_yes" value="1">
-      <label class="form-check-label" for="housing_permission_yes">
-        Yes
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="housing_permission" id="housing_permission_no" value="">
-      <label class="form-check-label" for="housing_permission_no">
-        No
-      </label>
-    </div>
-</div>
-
-<div id="next-question" style="display: none;">
-  <!-- Housing Type Dropdown -->
+@if($nationality_checked=='1'||'2')
+  
+  <!-- Housing Permission Radio Buttons -->
   <div class="form-card">
-    <div>
-      <label for="housing_type" class="form-label">Housing Type</label>
-      <select class="form-select" id="housing_type" name="housing_type" required>
-        <option value="Private Villa">Private Villa</option>
-        <option value="Guesthouse">Guesthouse</option>
-        <option value="Kos">Kos</option>
-        <option value="Compound">Compound</option>
-      </select>
-    </div>
+      <label class="form-label">Do you have 100% approval from your family / partner / housemate / landlord? </label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="housing_permission" id="housing_permission_yes" value="1">
+        <label class="form-check-label" for="housing_permission_yes">
+          Yes
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="housing_permission" id="housing_permission_no" value="">
+        <label class="form-check-label" for="housing_permission_no">
+          No
+        </label>
+      </div>
   </div>
 
-  <!-- Housing Condition Radio Buttons -->
-  <div class="form-card">
-    <label class="form-label">Is your yard fully enclosed without the use of cages, chains, or unrestricted animal roaming?</label>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="housing_condition" id="housing_condition_good" value="1">
-      <label class="form-check-label" for="housing_condition_good">Yes</label>
+  <div id="next-question" style="display: none;">
+    <!-- Housing Type Dropdown -->
+    <div class="form-card">
+      <div>
+        <label for="housing_type" class="form-label">Housing Type</label>
+        <select class="form-select" id="housing_type" name="housing_type" required>
+          <option value="Private Villa">Private Villa</option>
+          <option value="Guesthouse">Guesthouse</option>
+          <option value="Kos">Kos</option>
+          <option value="Compound">Compound</option>
+        </select>
+      </div>
     </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="housing_condition" id="housing_condition_poor" value="0">
-      <label class="form-check-label" for="housing_condition_poor">No</label>
+
+    <!-- Housing Condition Radio Buttons -->
+    <div class="form-card">
+      <label class="form-label">Is your yard fully enclosed without the use of cages, chains, or unrestricted animal roaming?</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="housing_condition" id="housing_condition_good" value="1">
+        <label class="form-check-label" for="housing_condition_good">Yes</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="housing_condition" id="housing_condition_poor" value="0">
+        <label class="form-check-label" for="housing_condition_poor">No</label>
+      </div>
     </div>
-  </div>
 
-  <!-- Pet Experience -->
-  <div class="form-card">
-    <label for="pet_experience" class="form-label">Have you had a dog before? If so, please give us details</label>
-    <textarea class="form-control" id="pet_experience" name="pet_experience" style="height: 200px;" required></textarea>
-  </div>
-
-  <!-- Residency Duration -->
-  <div class="form-card">
-    <label for="residency_duration" class="form-label">How Long have you lived in Bali?</label>
-    <input type="text" class="form-control" id="residency_duration" name="residency_duration" required>
-  </div>
-
-  <!-- Planned Residency Duration -->
-  <div class="form-card">
-    <label for="planned_residency_duration" class="form-label">How long do you plan to be in Bali?</label>
-    <input type="text" class="form-control" id="planned_residency_duration" name="planned_residency_duration" required>
-  </div>
-
-  <!-- Future Residency Country -->
-  <div class="form-card">
-    <label for="future_residency_country" class="form-label">If departing from Bali, which country would be your subsequent destination?</label>
-    <input type="text" class="form-control" id="future_residency_country" name="future_residency_country" required>
-  </div>
-
-  <!-- Pet Migration Plan Radio Buttons -->
-  <div class="form-card">
-    <label class="form-label">In the event of departing from Bali, do you plan to relocate with your pets?</label>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="pet_migration_plan" id="pet_migration_plan_yes" value="1">
-      <label class="form-check-label" for="pet_migration_plan_yes">Yes</label>
+    <!-- Pet Experience -->
+    <div class="form-card">
+      <label for="pet_experience" class="form-label">Have you had a dog before? If so, please give us details</label>
+      <textarea class="form-control" id="pet_experience" name="pet_experience" style="height: 200px;" required></textarea>
     </div>
-    <div class="form-check">
-      <input class="form-check-input" type="radio" name="pet_migration_plan" id="pet_migration_plan_no" value="0">
-      <label class="form-check-label" for="pet_migration_plan_no">No</label>
+  @if($is_indonesian=="2")
+    <!-- Residency Duration -->
+    <div class="form-card">
+      <label for="residency_duration" class="form-label">How Long have you lived in Bali?</label>
+      <input type="text" class="form-control" id="residency_duration" name="residency_duration" required>
     </div>
-  </div>
+
+    <!-- Planned Residency Duration -->
+    <div class="form-card">
+      <label for="planned_residency_duration" class="form-label">How long do you plan to be in Bali?</label>
+      <input type="text" class="form-control" id="planned_residency_duration" name="planned_residency_duration" required>
+    </div>
+
+    <!-- Future Residency Country -->
+    <div class="form-card">
+      <label for="future_residency_country" class="form-label">If departing from Bali, which country would be your subsequent destination?</label>
+      <input type="text" class="form-control" id="future_residency_country" name="future_residency_country" required>
+    </div>
+
+    <!-- Pet Migration Plan Radio Buttons -->
+    <div class="form-card">
+      <label class="form-label">In the event of departing from Bali, do you plan to relocate with your pets?</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="pet_migration_plan" id="pet_migration_plan_yes" value="1">
+        <label class="form-check-label" for="pet_migration_plan_yes">Yes</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="pet_migration_plan" id="pet_migration_plan_no" value="0">
+        <label class="form-check-label" for="pet_migration_plan_no">No</label>
+      </div>
+    </div>
+  @endif
 
   <!-- Job Dropdown -->
   <div class="form-card">
@@ -119,3 +122,4 @@
     </div>
   </div>
 </div>
+@endif

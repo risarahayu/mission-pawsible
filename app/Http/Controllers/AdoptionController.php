@@ -37,8 +37,8 @@ class AdoptionController extends Controller
         $is_indonesian = $request->input('is_indonesian'); // params is_indonesian yang terdapat di url
         $nationality_checked = !$request->input('is_indonesian') == null; // untuk mengecek apakah ada params is_indonesian di action ini
         // note: params yang kutau adalah parameter atau data yang dikirim kepada url atau route yang dapat kita olah atau gunakan nanti
-
-        return view('adoptions.create', compact('nationality_checked', 'user', 'dog'));
+    //    dd($is_indonesian);
+        return view('adoptions.create', compact('nationality_checked','is_indonesian', 'user', 'dog'));
     }
 
     /**
@@ -46,6 +46,7 @@ class AdoptionController extends Controller
      */
     public function store(StoreAdoptionRequest $request)
     {
+        // dd($request);
         $adoption = Adoption::create($request->validated()); // jangan lupa mengisikan method ->validated() jika ingin melakukan create secara langsung
 
         return redirect()->route('dogs.show', ['dog' => $adoption->dog_id])->with([

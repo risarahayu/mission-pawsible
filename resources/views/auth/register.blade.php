@@ -21,8 +21,8 @@
             <div class="mb-3">
               <div class="row row-cols-lg-2">
                 <div class="col">
-                  <label class="fw-bold mb-1" for="name">{{ __('session.name') }}</label>
-                  <input placeholder="{{ __('session.placeholder.name') }}" id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name"
+                  <label class="fw-bold mb-1" for="name">{{ __('session.first_name') }}</label>
+                  <input placeholder="{{ __('session.placeholder.first_name') }}" id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name"
                     value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
                   @error('first_name')
                     <span class="invalid-feedback" role="alert">
@@ -31,8 +31,8 @@
                   @enderror
                 </div>
                 <div class="col">
-                  <label class="fw-bold mb-1" for="name">{{ __('session.name') }}</label>
-                  <input placeholder="{{ __('session.placeholder.name') }}" id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name"
+                  <label class="fw-bold mb-1" for="name">{{ __('session.last_name') }}</label>
+                  <input placeholder="{{ __('session.placeholder.last_name') }}" id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name"
                     value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
                   @error('last_name')
                     <span class="invalid-feedback" role="alert">

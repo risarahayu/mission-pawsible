@@ -81,21 +81,43 @@
                 <div class="dog-card">
                   <div class="brief">
                     <div class="wrapper">
-
-                      <h4 class="text-center fw-bold">{{ $adoption->user->first_name }} {{ $adoption->user->last_name }}</h4>
+                      <a class="cursor-pointer custom-link" data-bs-toggle="modal" data-bs-target="#rescuer_information">
+                        <h4 class="text-center fw-bold">{{ $adoption->user->first_name }} {{ $adoption->user->last_name }}</h4>
+                      </a>
                       <hr class="mt-1">
                       <div class="gender">
                         <i class="bi bi-envelope dtl-icon"></i>
                         <div>
-                          <small>Gender</small><br/>
+                          <small>Email</small><br/>
                           <h4 class="fw-bold">{{ empty($adoption->user->email) ? "not set" : $adoption->user->email }}</h4>
                         </div>
                       </div>
                       <div class="size">
                         <i class="bi bi-whatsapp dtl-icon"></i>
                         <div>
-                          <small>Size</small><br/>
+                          <small>Whatsapp</small><br/>
                           <h4 class="fw-bold">{{ empty($adoption->user->whatsapp) ? "not set" : $adoption->user->whatsapp }}</h4>
+                        </div>
+                      </div>
+                      <div class="size">
+                        <i class="bi bi-facebook dtl-icon"></i>
+                        <div>
+                          <small>Facebook</small><br/>
+                          <h4 class="fw-bold">{{ empty($adoption->user->facebook) ? "not set" : $adoption->user->facebook }}</h4>
+                        </div>
+                      </div>
+                      <div class="size">
+                        <i class="bi bi-instagram dtl-icon"></i>
+                        <div>
+                          <small>Instagram</small><br/>
+                          <h4 class="fw-bold">{{ empty($adoption->user->instagram) ? "not set" : $adoption->user->instagram }}</h4>
+                        </div>
+                      </div>
+                      <div class="size">
+                        <i class="bi bi-geo-alt dtl-icon"></i>
+                        <div>
+                          <small>Location</small><br/>
+                          <h4 class="fw-bold">{{ empty($adoption->user->street_address) ? "not set" : $adoption->user->street_address }}</h4>
                         </div>
                       </div>
 
@@ -119,6 +141,70 @@
                         </form>
                       @endif
 
+                    </div>
+                  </div>
+                </div>
+
+                <!-- MODAL -->
+                <div class="modal fade" id="rescuer_information" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rescuer_information_label" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header justify-content-center">
+                        <h1 class="modal-title fs-5" id="rescuer_information_label">
+                          <i class="bi bi-person-circle me-2"></i>{{ $adoption->user->first_name . ' ' . $adoption->user->last_name }}
+                        </h1>
+                      </div>
+                      <div class="modal-body py-4 px-5">
+                        <div class="d-flex align-items-center" style="gap: 10px">
+                          <h4><i class="bi bi-house"></i></h4>
+                          <div>
+                            <small>Housing type</small>
+                            <p class="mb-0 fw-bold">{{ $adoption->housing_type }}</p>
+                          </div>
+                        </div>
+                        @if($adoption->residency_duration)
+                          <div class="d-flex align-items-center" style="gap: 10px">
+                            <h4><i class="bi bi-calendar"></i></h4>
+                            <div>
+                              <small>Residence Duration</small>
+                              <p class="mb-0 fw-bold">{{ $adoption->residency_duration }}</p>
+                            </div>
+                          </div>
+                          <div class="d-flex align-items-center" style="gap: 10px">
+                            <h4><i class="bi bi-calendar4-range"></i></h4>
+                            <div>
+                              <small>Residence Duration Planned</small>
+                              <p class="mb-0 fw-bold">{{ $adoption->planned_residency_duration }}</p>
+                            </div>
+                          </div>
+                          <div class="d-flex align-items-center" style="gap: 10px">
+                            <h4><i class="bi bi-luggage"></i></h4>
+                            <div>
+                              <small>Future Residency Country</small>
+                              <p class="mb-0 fw-bold">{{ $adoption->future_residency_country }}</p>
+                            </div>
+                          </div>
+                          <div class="d-flex align-items-center" style="gap: 10px">
+                            <h4><i class="bi bi-luggage"></i></h4>
+                            <div>
+                              <small>Pet Migration Plan</small>
+                              <p class="mb-0 fw-bold">{{ $adoption->pet_migration_plan }}</p>
+                            </div>
+                          </div>
+                          <div class="d-flex align-items-center" style="gap: 10px">
+                            <h4><i class="bi bi-luggage"></i></h4>
+                            <div>
+                              <small>Job</small>
+                              <p class="mb-0 fw-bold">{{ $adoption->job }}</p>
+                            </div>
+                          </div>
+                        @endif
+                        
+                      </div>
+
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" style="min-width: 100px" data-bs-dismiss="modal">Close</button>
+                      </div>
                     </div>
                   </div>
                 </div>
