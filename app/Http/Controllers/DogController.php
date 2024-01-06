@@ -64,6 +64,7 @@ class DogController extends Controller
      */
     public function store(StoreDogRequest $request)
     {
+        dd($request->input('sterilization_date'));
         $strayDog = null;
 
         DB::transaction(function () use ($request, &$strayDog) {
@@ -79,8 +80,10 @@ class DogController extends Controller
             }
 
             // Create straydogs
+            
             $stray_dog_request = array_merge($request->except(['_token', 'area']), ['area_id' => $area->id]);
             $strayDog = Dog::create($stray_dog_request);
+            // dd($stray_dog_request);
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {

@@ -33,8 +33,9 @@ class StoreDogRequest extends FormRequest
             'map_link' => 'required|string',
             'images.*' => 'required|image|mimes:jpeg,png,jpg',
             'vaccinated_date' => 'required|date',
+            'sterilization_date' => 'required|date',
             'vaccination_certificate.*' => 'required|image|mimes:jpeg,png,jpg',
-            'sterilization_certificate.*' => 'required|image|mimes:jpeg,png,jpg',
+            'sterilization_certificate.*' => 'nullable|image|mimes:jpeg,png,jpg',
         ];
     }
 

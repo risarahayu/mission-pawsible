@@ -156,7 +156,7 @@
               class="form-control required @error('vaccinated_date') is-invalid @enderror"
               autocomplete="vaccinated_date" placeholder="{{ __('vaccinated_date') }}"
               value="{{ $action_name === "create" ? old('vaccinated_date') : $dog->vaccinated_date }}" required>
-      <label for="vaccinated_date">{{ __('vaccinated_date') }}</label>
+      <label for="vaccinated_date">{{ __('Last Vaccinated Date') }}</label>
       @error('vaccinated_date')
         <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -205,13 +205,28 @@
       </div>
     {{-- -----------END----------- --}}
 
+    {{-- Sterilization date --}}
+    <div class="form-floating mb-3">
+      <input id="sterilization_date " type="date" name="sterilization_date"
+              class="form-control required @error('sterilization_date') is-invalid @enderror"
+              autocomplete="sterilization_date" placeholder="{{ __('Sterilization Date') }}"
+              value="{{ $action_name === "create" ? old('sterilization_date') : $dog->sterilization_date }}" >
+      <label for="sterilization_date">{{ __('Sterilization Date') }}</label>
+      @error('sterilization_date')
+          <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+          </span>
+      @enderror
+    </div>
+
     {{-- -----------STERILIZATION CERTIFICATE----------- --}}
+
       {{-- Dog sterilization certificate --}}
       <div class="form-floating mb-3">
         <input id="sterilization_certificate" type="file" name="sterilization_certificate[]"
-                class="form-control required preview-input @error('sterilization_certificate') is-invalid @enderror"
-                autocomplete="sterilization_certificate" placeholder="{{ __('Sterilization Certificate') }}"
-                multiple>
+              class="form-control "
+              autocomplete="sterilization_certificate" placeholder="{{ __('Evidence that shows the dog has been sterilized (optional)') }}"
+              multiple> 
         <label for="sterilization_certificate">{{ __('Sterilization Certificate') }}</label>
         @error('sterilization_certificate')
           <span class="invalid-feedback" role="alert">

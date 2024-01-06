@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import Icons from 'unplugin-icons/vite'
 
 export default defineConfig({
   plugins: [
@@ -10,6 +11,7 @@ export default defineConfig({
       ],
       refresh: true,
     }),
+    Icons({ autoInstall: true, }),
   ],
   resolve: {
     alias: {

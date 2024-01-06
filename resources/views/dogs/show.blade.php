@@ -156,7 +156,7 @@
                       </div>
                       <div class="modal-body py-4 px-5">
                         <div class="d-flex align-items-center" style="gap: 10px">
-                          <h4><i class="bi bi-house"></i></h4>
+                          <h4><i class="fa-solid fa-house"></i></h4>
                           <div>
                             <small>Housing type</small>
                             <p class="mb-0 fw-bold">{{ $adoption->housing_type }}</p>
@@ -164,41 +164,74 @@
                         </div>
                         @if($adoption->residency_duration)
                           <div class="d-flex align-items-center" style="gap: 10px">
-                            <h4><i class="bi bi-calendar"></i></h4>
+                            <h4><i class="fa-solid fa-calendar"></i></h4>
                             <div>
                               <small>Residence Duration</small>
                               <p class="mb-0 fw-bold">{{ $adoption->residency_duration }}</p>
                             </div>
                           </div>
+                        @endif
+                        @if($adoption->planned_residency_duration)
                           <div class="d-flex align-items-center" style="gap: 10px">
-                            <h4><i class="bi bi-calendar4-range"></i></h4>
+                            <h4><i class="fa-solid fa-calendar"></i></i></h4>
                             <div>
                               <small>Residence Duration Planned</small>
                               <p class="mb-0 fw-bold">{{ $adoption->planned_residency_duration }}</p>
                             </div>
                           </div>
+                        @endif
+                        @if($adoption->future_residency_country)
                           <div class="d-flex align-items-center" style="gap: 10px">
-                            <h4><i class="bi bi-luggage"></i></h4>
+                            <h4><i class="fa-solid fa-flag"></i></h4>
                             <div>
                               <small>Future Residency Country</small>
                               <p class="mb-0 fw-bold">{{ $adoption->future_residency_country }}</p>
                             </div>
                           </div>
+                        @endif
+                        @if($adoption->pet_migration_plan)
                           <div class="d-flex align-items-center" style="gap: 10px">
-                            <h4><i class="bi bi-luggage"></i></h4>
+                            <h4><i class="fa-solid fa-dog"></i></h4>
                             <div>
                               <small>Pet Migration Plan</small>
                               <p class="mb-0 fw-bold">{{ $adoption->pet_migration_plan }}</p>
                             </div>
                           </div>
+                        @endif
                           <div class="d-flex align-items-center" style="gap: 10px">
-                            <h4><i class="bi bi-luggage"></i></h4>
+                            <h4><i class="fa-solid fa-briefcase"></i></h4>
                             <div>
                               <small>Job</small>
                               <p class="mb-0 fw-bold">{{ $adoption->job }}</p>
                             </div>
                           </div>
-                        @endif
+                        <div class="d-flex align-items-center" style="gap: 10px">
+                          <h4><i class="fa-solid fa-house-user"></i></h4>
+                          <div>
+                            <small>House Occupants</small>
+                            <p class="mb-0 fw-bold">{{ $adoption->house_occupants }}</p>
+                          </div>
+                        </div>
+                        <div class="d-flex align-items-center" style="gap: 10px">
+                          <h4><i class="fa-solid fa-shield-dog"></i></h4>
+                          <div>
+                            <small>Canine Residence</small>
+                            <p class="mb-0 fw-bold">{{ $adoption->canine_residence }}</p>
+                          </div>
+                        </div>
+                        <div class="d-flex align-items-center" style="gap: 10px">
+                          <h4><i class="fa-solid fa-dog"></i></h4>
+                          <div>
+                            <small>Pet Experience</small>
+                            @if($adoption->vaccinated==true)
+                              <p>Have experience with vaccinated dog</p>
+                            @elseif($adoption->vaccinated==false)
+                              <p>Don't have experience with vaccinated dog</p>
+                            @else
+                              <p>Don't have experience</p>
+                            @endif
+                          </div>
+                        </div>
                         
                       </div>
 
