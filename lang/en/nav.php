@@ -8,4 +8,6 @@ return [
   
     'register' => 'Register Dog',
     'request' => 'New Request',
+    'dog_list' => 'Dog List',
+    'my_dog' => 'My Dog',
 ];

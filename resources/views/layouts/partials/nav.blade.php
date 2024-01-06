@@ -43,30 +43,37 @@
             @endif
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('dogs.index') }}">{{ __('nav.dog_list') }}</a>
+          <li>
+
           <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link {{ request()->routeIs('user_contacts.create') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
               <i class="bi bi-person-circle"></i>
-              {{ __('nav.settings') }}
+              {{Auth::user()->first_name}}
             </a>
 
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               @include('layouts.partials.lang')
               <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#personal_information">
-                {{ __('nav.contact') }}
+                <i class="bi bi-person-lines-fill px-2"></i> {{ __('nav.contact') }}
+              </a>
+              <a class="dropdown-item border-bottom" href="{{ route('my_dog') }}">
+                <i class="fa-solid fa-dog px-2"></i>{{ __('nav.my_dog') }}
               </a>
               @if (session('role') == 'rescuer')
                 <a class="dropdown-item" href="{{ route('role.set', ['role' => 'adopter']) }}">
-                  {{ __('nav.adopter') }}
+                  <i class="bi bi-arrow-repeat px-2"></i>{{ __('nav.adopter') }}
                 </a>
               @else
                 <a class="dropdown-item" href="{{ route('role.set', ['role' => 'rescuer']) }}">
-                  {{ __('nav.rescuer') }}
+                  <i class="fa-solid fa-repeat px-2"></i></i> {{ __('nav.rescuer') }}
                 </a>
               @endif
               <a class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
+                <i class="fa-solid fa-right-from-bracket px-2"></i>{{ __('Logout') }}
               </a>
 
               <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

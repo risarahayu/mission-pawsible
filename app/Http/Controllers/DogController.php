@@ -242,4 +242,12 @@ class DogController extends Controller
             ]
         ])->with('flash.once', true);
     }
+
+    public function my_dog()
+    {
+        $user=Auth::user();
+        dd($user);
+
+        // return view('dog.my_dog');
+    }
 }

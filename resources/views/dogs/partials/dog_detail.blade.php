@@ -69,6 +69,42 @@
     </div>
   </div>
 
+  <!-- Vaccinated -->
+  <div class="col-sm-6">
+    <div class="d-flex align-items-center" style="gap: 15px;">
+      <i class="bi bi-geo-alt dtl-icon"></i>
+      <div>
+        <small>Last Vacinnated</small><br/>
+          <h4 class="fw-bold">{{$stray_dog->vaccinated_date}}</h4>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sterilization -->
+  <div class="col-sm-6">
+    <div class="d-flex align-items-center" style="gap: 15px;">
+      <i class="bi bi-geo-alt dtl-icon"></i>
+      <div>
+        <small>Sterilization</small><br/>
+          <h4 class="fw-bold">{{$stray_dog->sterilization_date}}</h4>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAP Link -->
+  <div class="col-sm-6">
+    <div class="d-flex align-items-center" style="gap: 15px;">
+      <i class="bi bi-geo-alt dtl-icon"></i>
+      <div>
+        <small>Location</small><br/>
+          <a href="{{$stray_dog->map_link}}">
+            <h4 class="fw-bold">{{$stray_dog->area->name}}</h4>
+          </a>
+      </div>
+    </div>
+  </div>
+
+
   @if($controller_name === 'rescue_request' && $stray_dog->rescued)
     <div class="col-sm-6">
       <div class="d-flex align-items-center" style="gap: 15px;">
