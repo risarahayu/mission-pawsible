@@ -224,7 +224,7 @@
       {{-- Dog sterilization certificate --}}
       <div class="form-floating mb-3">
         <input id="sterilization_certificate" type="file" name="sterilization_certificate[]"
-              class="form-control "
+              class="form-control preview-input"
               autocomplete="sterilization_certificate" placeholder="{{ __('Evidence that shows the dog has been sterilized (optional)') }}"
               multiple> 
         <label for="sterilization_certificate">{{ __('Sterilization Certificate') }}</label>
