@@ -96,7 +96,7 @@ class RescueRequestController extends Controller
     // Display the specified resource.
     public function show(RescueRequest $request)
     {
-        $controller_name = 'rescue_request';
+        $controller_name = 'request';
         $stray_dog = $request;
         $rescuer = $stray_dog;
         $user = Auth::user();
@@ -116,8 +116,10 @@ class RescueRequestController extends Controller
     }
 
     // Update the specified resource in storage.
-    public function update(UpdateRescueRequestRequest $recueRequest, RescueRequest $request)
+    public function update(UpdateRescueRequestRequest $rescueRequest, RescueRequest $request)
     {
+        $dog = $request;
+        $request = $rescueRequest;
         DB::transaction(function () use ($request, &$dog) {
             // Update area (if necessary)
             $area_name = $request->input('area');
@@ -163,7 +165,7 @@ class RescueRequestController extends Controller
             }
         });
 
-        return redirect()->route("dogs.show", ['dog' => $dog->id])->with([
+        return redirect()->route("requests.show", ['request' => $dog->id])->with([
             'flash' => [
                 'type' => 'success',
                 'message' => 'Stray dog has been updated successfully',

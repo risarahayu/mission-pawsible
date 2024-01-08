@@ -43,9 +43,9 @@
             @endif
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="{{ route('dogs.index') }}">{{ __('nav.dog_list') }}</a>
-          <li>
+          <li> -->
 
           <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link {{ request()->routeIs('user_contacts.create') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -58,7 +58,7 @@
               <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#personal_information">
                 <i class="bi bi-person-lines-fill px-2"></i> {{ __('nav.contact') }}
               </a>
-              <a class="dropdown-item border-bottom" href="{{ route('my_dog') }}">
+              <a class="dropdown-item border-bottom" href="{{ route('dog.my_dog') }}">
                 <i class="fa-solid fa-dog px-2"></i>{{ __('nav.my_dog') }}
               </a>
               @if (session('role') == 'rescuer')

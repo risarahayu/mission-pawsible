@@ -118,7 +118,8 @@
           <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger delete-old-image" data-delete-id="delete_image">{{ __('app.button.delete') }}</button>
           <p class="fw-bold">{{ __('dog.form.old_picture') }}</p>
           <div class="row row-cols-3">
-            @foreach ($images->where('category', null) as $image)
+            @php $dog_images = $controller_name == 'dog' ? $images->where('category', null) : $images @endphp
+            @foreach ($dog_images as $image)
               <div class="col mt-3">
                 <img src="{{$image->filename}}" class="preview-image" alt="Image Preview">
               </div>
@@ -236,8 +237,8 @@
       </div>
 
       {{-- sterilization certificate preview --}}
-      <div class="image-preview border p-3 w-100 mb-3 @if($action_name == "create") d-none @endif" data-preview-id="sterilization_certificate">
-        @if ($action_name == "edit")
+      <div class="image-preview border p-3 w-100 mb-3 @if($action_name == 'create' || $images->where('category', 'sterilization')->count() == 0) d-none @endif" data-preview-id="sterilization_certificate">
+        @if ($action_name == "edit" && $images->where('category', 'sterilization')->count() > 0)
           <div id="old-images" class="position-relative mb-3 old-images">
             <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger" data-delete-id="delete_sterilization">{{ __('app.button.delete') }}</button>
             <p class="fw-bold">{{ __('dog.form.old_picture') }}</p>

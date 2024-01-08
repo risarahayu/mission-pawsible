@@ -37,7 +37,8 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
   //dog
   Route::resource('dogs', 'DogController');
-  Route::get('dogs/my_dog', 'DogController@my_dog')->name('my_dog');
+  Route::get('dog/my_dog', 'DogController@my_dog')->name('dog.my_dog');
+  // Route::get('dog/my_dog_list', 'DogController@DogList')->name('dog_List');
 
   //request rescue
   Route::resource('requests', 'RescueRequestController');

@@ -8,13 +8,16 @@ return [
         'count' => 'Kami menemukan :count anjing terlantar di daerah :area',
         'all_count' => 'Kami menemukan :count anjing terlantar di berbagai area',
         'empty' => 'Belum ada anjing terlantar',
-        'register' => 'Daftarkan anjing terlantar yang ditemukan',
+        'empty_adopted_dog'=>'Belum ada anjing yang diadopsi',
+        'empty_rescued_dog' => 'Belum ada anjing yang diselamatkan',
+        'register' => 'Daftarkan anjing',
         'filter' => 'Filter',
         'all' => 'Semua',
         'request_by' => 'Diminta oleh :count orang',
         'since' => 'Sejak :date',
         'adoptable' => 'Dapat diadopsi',
         'adopted' => 'Diadopsi',
+        'pending'=>'Menunggu aprrove',
     ],
 
     'show' => [

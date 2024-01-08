@@ -6,6 +6,7 @@ use App\Models\Dog;
 use App\Models\User;
 use App\Models\Area;
 use App\Models\Adoption;
+use App\Models\RescueRequest;
 use App\Http\Requests\StoreDogRequest;
 use App\Http\Requests\UpdateDogRequest;
 use Illuminate\Support\Facades\DB;
@@ -205,10 +206,14 @@ class DogController extends Controller
             if ($request->input('delete_image')) {
                 $dog->images->where('category', null)->each->delete();
             }
+            if ($request->input('delete_vaccication')) {
+                $dog->images->where('category', 'vaccination')->each->delete();
+            }
+            if ($request->input('delete_sterilization')) {
+                $dog->images->where('category', 'sterilization')->each->delete();
+            }
 
             if ($request->hasFile('images')) {
-                // $strayDog->images()->delete();
-
                 foreach ($request->file('images') as $image) {
                     $filename = $image->getClientOriginalName();
                     $path = $image->storeAs('public/stray_dog_images', $filename);
@@ -216,6 +221,32 @@ class DogController extends Controller
 
                     $imageModel = new Image();
                     $imageModel->filename = $publicPath;
+                    $dog->images()->save($imageModel);
+                }
+            }
+
+            if  ($request->hasFile('vaccination_certificate')) {
+                foreach ($request->file('vaccination_certificate') as $image) {
+                    $filename = $image->getClientOriginalName();
+                    $path = $image->storeAs('public/stray_dog_images', $filename);
+                    $publicPath = Storage::url($path);
+
+                    $imageModel = new Image();
+                    $imageModel->filename = $publicPath;
+                    $imageModel->category = 'vaccination';
+                    $dog->images()->save($imageModel);
+                }
+            }
+
+            if  ($request->hasFile('sterilization_certificate')) {
+                foreach ($request->file('sterilization_certificate') as $image) {
+                    $filename = $image->getClientOriginalName();
+                    $path = $image->storeAs('public/stray_dog_images', $filename);
+                    $publicPath = Storage::url($path);
+
+                    $imageModel = new Image();
+                    $imageModel->filename = $publicPath;
+                    $imageModel->category = 'sterilization';
                     $dog->images()->save($imageModel);
                 }
             }
@@ -245,9 +276,17 @@ class DogController extends Controller
 
     public function my_dog()
     {
+        // dd($user=Auth::user());
         $user=Auth::user();
-        dd($user);
+        $adoptions=Adoption::where('user_id',$user->id)->get();
+        // dd($adoptions);
+        //atau
+        // $user->adoptions
 
-        // return view('dog.my_dog');
+        $rescues=RescueRequest::where('user_id',$user->id)->get();
+        // dd($rescues);
+
+        $myDogs=Dog::where('user_id',$user->id)->get();
+        return view('dogs.my_dog', compact('adoptions','rescues','myDogs'));
     }
 }

@@ -16,9 +16,9 @@
             <!-- Action button -->
             <div class="d-flex justify-content-end" style="gap: 5px;">
               @if(Auth::id()==$stray_dog->user_id)
-                <a type="button" class="btn btn-mps" href="{{ route('dogs.edit', $stray_dog->id) }}"><i class="bi bi-pencil-square me-2"></i> {{ __('app.button.edit') }}</a>
+                <a type="button" class="btn btn-mps" href="{{ route('requests.edit', $stray_dog->id) }}"><i class="bi bi-pencil-square me-2"></i> {{ __('app.button.edit') }}</a>
                 @if (!$stray_dog->rescued)
-                  <form action="{{ route('dogs.destroy', $stray_dog->id) }}" method="POST">
+                  <form action="{{ route('requests.destroy', $stray_dog->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                   </form>

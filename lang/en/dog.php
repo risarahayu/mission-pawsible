@@ -8,13 +8,16 @@ return [
         'count' => 'We found :count at :area stray dog',
         'all_count' => 'We found :count stray dog at All area',
         'empty' => 'No stray dog yet',
-        'register' => 'Register a found stray dog',
+        'empty_adopted_dog'=>'No dogs have been adopted yet',
+        'empty_rescued_dog' => 'No dogs have been rescued yet',
+        'register' => 'Register a stray dog',
         'filter' => 'Filter',
         'all' => 'All',
         'request_by' => 'Request by :count people',
         'since' => 'Since :date',
         'adoptable' => 'Adoptable',
         'adopted' => 'Adopted',
+        'pending'=>'Waiting for approval',
     ],
 
     'show' => [
