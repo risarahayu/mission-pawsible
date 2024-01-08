@@ -84,11 +84,11 @@
                 <div class="row">
                   <div class="col-sm-6 image-wrapper">
                     @php
-                      $filename = $stray_dog->dog->images()->orderBy('category')->first()->filename;
+                      $filename = $stray_dog->images()->orderBy('category')->first()->filename;
                       $filename = explode('/', $filename);
                       $filename = end($filename);
                     @endphp
-                    <img src="{{ asset($stray_dog->dog->images()->orderBy('category')->first()->filename) }}" alt="{{ $filename }}">
+                    <img src="{{ asset($stray_dog->images()->orderBy('category')->first()->filename) }}" alt="{{ $filename }}">
                   </div>
                   <div class="col-sm-6 brief">
                     <div class="wrapper">
@@ -96,7 +96,7 @@
                         <i class="bi bi-gender-ambiguous dtl-icon"></i>
                         <div>
                           <small>{{ __('dog.form.gender') }}</small><br/>
-                          <h4 class="fw-bold">{{ __(ucfirst($stray_dog->dog->gender)) }}</h4>
+                          <h4 class="fw-bold">{{ __(ucfirst($stray_dog->gender)) }}</h4>
                         </div>
                       </div>
                       <div class="size">
