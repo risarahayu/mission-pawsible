@@ -1,6 +1,9 @@
 body {
   &.body-auth {
     background-image: url('/images/pexels-edgar-daniel-hernández-cervantes-3628100 1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: #fff;
     main {
       min-height: 100vh;

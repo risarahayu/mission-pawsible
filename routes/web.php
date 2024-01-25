@@ -36,11 +36,11 @@ Route::namespace('App\Http\Controllers')->group(function () {
   Route::get('/role', 'RoleController@index')->name('role.index');
 
   //dog
-  Route::resource('dogs', 'DogController');
-  Route::get('dog/my_dog', 'DogController@my_dog')->name('dog.my_dog');
-  Route::get('dog/my_dog/list', 'DogController@dog_list')->name('dog.my_dog.list');
-  Route::get('dog/my_dog/adoption_request', 'DogController@adoption_request')->name('dog.my_dog.adoption_request');
+  Route::get('dogs/my_dog', 'DogController@my_dog')->name('dog.my_dog');
+  Route::get('dogs/my_dog/list', 'DogController@dog_list')->name('dog.my_dog.list');
+  Route::get('dogs/my_dog/adoption_request', 'DogController@adoption_request')->name('dog.my_dog.adoption_request');
   // Route::get('dog/my_dog_list', 'DogController@DogList')->name('dog_List');
+  Route::resource('dogs', 'DogController');
 
   //request rescue
   Route::resource('requests', 'RescueRequestController');
@@ -50,8 +50,8 @@ Route::namespace('App\Http\Controllers')->group(function () {
   Route::resource('adoptions', 'AdoptionController')->except(['create']); // except create mengecualikan route create didalam resource
   Route::get('/adoptions/create/{dog}', 'AdoptionController@create')->name('adoptions.create'); // menggunakan custom karena memerlukan params dog dialam routenya
 
-  Route::resource('users', 'UserController');
   Route::get('/users/view_contact', 'UserController@view_contact')->name('users.view_contact');
+  Route::resource('users', 'UserController');
 
 });
 
