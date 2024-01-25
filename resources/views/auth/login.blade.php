@@ -44,9 +44,9 @@
             {{-- End of password input --}}
   
             {{-- Buttons --}}
-            <div class="d-flex mb-5 flex-column flex-lg-row">
+            <div class="d-flex mb-5 flex-column">
               <button type="submit" class="btn btn-auth w-100">
-                {{ __('session.submit') }}
+                {{ __('session.login') }}
               </button>
               <a href="{{ route('register') }}" class="btn btn-empty w-100">
                 {{ __('session.create_account') }}
@@ -62,10 +62,10 @@
     </div>
   </div>
 
-  <script type="module">
+  <!-- <script type="module">
     $(function() {
       $('.btn-empty').mouseenter(function() { $('.btn-auth').css('color', '#fff') })
       $('.btn-empty').mouseleave(function() { $('.btn-auth').css('color', '#BD1A8D') })
     })
-  </script>
+  </script> -->
 @endsection

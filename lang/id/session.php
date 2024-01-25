@@ -18,6 +18,7 @@ return [
 
     // Tombol
     'submit' => 'Kirim',
+    'login'=>'Masuk',
     'create_account' => 'Buat Akun',
     'register' => 'Daftar',
     'already_have_account' => 'Sudah memiliki akun',

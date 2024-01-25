@@ -29,6 +29,7 @@
 
     <!-- Pilih bahasa -->
     @include('layouts.partials.lang')
+    
 
     <!-- Isi dari konten utama -->
     <main>

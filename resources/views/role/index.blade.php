@@ -4,21 +4,25 @@
   <div class="container text-center role">
 
     {{-- Logo mission pawsible --}}
-    <div class="w-100 d-flex justify-content-center">
+    <!-- <div class="w-100 d-flex justify-content-center">
       <div class="logo-wrapper text-center">
         <img class="img-fluid" src="{{ url('/images/mp_logo_big.svg') }}" alt="Image" />
       </div>
-    </div>
+    </div> -->
 
     {{-- List button role --}}
-    <h1 class="display-6 text-white p-5 fw-bold">{{ __('role.title') }}</h1>
-    <div class="role-list flex-column flex-lg-row">
-      <a href="{{ route('role.set', ['role' => 'rescuer']) }}" class="btn btn-role">
-        <i class="fa-solid fa-kit-medical"></i>{{ __('role.rescue') }}
+    <h3 class="fs-4 text-white pb-5  text-start">{{ __('role.title') }}</h3>
+    <div class="role-list flex-column ">
+      <a href="{{ route('role.set', ['role' => 'adopter']) }}" class="btn btn-role">
+        {{ __('role.option_1') }}<i class="bi bi-arrow-right-short"></i>
       </a>
       <a href="{{ route('role.set', ['role' => 'adopter']) }}" class="btn btn-role">
-        <i class="fa-solid fa-hand-holding-heart"></i>{{ __('role.adopt') }}
+        {{ __('role.option_2') }}<i class="bi bi-arrow-right-short"></i>
       </a>
+      <a href="{{ route('role.set', ['role' => 'rescuer']) }}" class="btn btn-role">
+        {{ __('role.option_3') }}<i class="bi bi-arrow-right-short"></i>
+      </a>
+
     </div>
 
   </div>

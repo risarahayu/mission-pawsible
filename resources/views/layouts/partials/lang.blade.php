@@ -1,4 +1,4 @@
-<div class="lang p-3 @if(Auth::user() && session('role'))lang-home @else lang-role @endif">
+<div class="lang d-flex align-items-center p-3 @if(Auth::user() && session('role'))lang-home @else lang-role @endif">
   <div class="tabs">
     <input type="radio" id="radio-1" name="lang" value="en" @if(session()->get('locale') == 'en' || session()->get('locale') == '') checked='' @endif>
     <label class="tab" for="radio-1">EN</label>
@@ -6,7 +6,9 @@
     <label class="tab" for="radio-2">ID</label>
     <span class="glider"></span>
   </div>
+
 </div>
+
 
 <script type="module">
   var url = "{{ route('lang.change') }}", selectedLang = $(".lang .tabs input[type='radio']:checked").val();

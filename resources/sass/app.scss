@@ -47,7 +47,7 @@
 @import 'base/responsives';
 
 body {
-  background-image: url('/public/images/ptrn-1.jpg');
+  // background-image: url('/public/images/ptrn-1.jpg');
 }
 
 main {
@@ -78,20 +78,25 @@ footer {
   }
 }
 
-form {
-  .btn-custom-submit {
-    background-color: $primary;
-    color: #fff;
-    height: 3.5rem;
-    font-size: 1rem;
-    font-weight: bold;
 
-    &:hover {
-      background-color: $secondary;
-      color: $soft-primary;
-    }
+.btn-custom-submit {
+  background-color: $primary;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+
+  &:hover {
+    background-color: $secondary;
+    color: $soft-primary;
   }
 }
+
+form {
+  .btn-custom-submit {
+    height: 3.5rem;
+  }
+}
+
 
 .form-card {
   h1 {
@@ -173,4 +178,8 @@ form {
       transition: 0.3s;
     }
   }
+}
+
+.text-base-color{
+  color: $base-color;
 }

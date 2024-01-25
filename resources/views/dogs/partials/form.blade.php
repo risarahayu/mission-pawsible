@@ -8,13 +8,13 @@
 {{-- First fieldset for dog information --}}
 <fieldset id="fieldset-dog" class="d-block">
   {{-- Dog type / category --}}
-  <div class="form-floating mb-3">
+  <div class="mb-3">
+    <label for="dog_type" class="form-label"><span class="text-danger">*</span>{{ __('dog.form.dog_type') }}</label>
     <input id="dog_type" type="text" name="dog_type"
             class="form-control required @error('dog_type') is-invalid @enderror"
-            autocomplete="dog_type" placeholder="{{ __('dog.form.dog_type') }}"
+            autocomplete="dog_type" placeholder="{{ __('dog.form.placeholder.dog_type') }}"
             value="{{ $action_name === "create" ? old('dog_type') : $dog->dog_type }}"
             required>
-    <label for="dog_type">{{ __('dog.form.dog_type') }}</label>
     @error('dog_type')
       <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
@@ -23,13 +23,13 @@
   </div>
 
   {{-- Dog color --}}
-  <div class="form-floating mb-3">
+  <div class="mb-3">
+    <label for="color" class="form-label"><span class="text-danger">*</span>{{ __('dog.form.color') }}</label>
     <input id="color" type="text" name="color"
             class="form-control required @error('color') is-invalid @enderror"
-            autocomplete="color" placeholder="{{ __('dog.form.color') }}"
+            autocomplete="color" placeholder="{{ __('dog.form.placeholder.color') }}"
             value="{{ $action_name === "create" ? old('color') :  $dog->color }}"
             required>
-    <label for="color">{{ __('dog.form.color') }}</label>
     @error('color')
       <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
@@ -38,13 +38,13 @@
   </div>
 
   {{-- Dog temperament --}}
-  <div class="form-floating mb-3">
+  <div class="mb-3">
+    <label for="temprament"class="form-label"><span class="text-danger">*</span>{{ __('dog.form.temperament') }}</label>
     <input id="temprament" type="text" name="temperament"
             class="form-control required @error('temperament') is-invalid @enderror"
-            autocomplete="temprament" placeholder="{{ __('dog.form.temperament') }}"
+            autocomplete="temprament" placeholder="{{ __('dog.form.placeholder.temperament') }}"
             value="{{ $action_name === "create" ? old('temperament') :  $dog->temperament }}"
             required>
-    <label for="temprament">{{ __('dog.form.temperament') }}</label>
     @error('temprament')
       <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
@@ -53,13 +53,13 @@
   </div>
 
   {{-- Dog gender, remember only 2 gender --}}
-  <div class="form-floating mb-3">
+  <label for="gender" class="form-label"><span class="text-danger">*</span>{{ __('dog.form.gender') }}</label>
+  <div class="mb-3">
     <select id="gender" name="gender" class="form-select required @error('gender') is-invalid @enderror">
-      <option value=""></option>
+      <option value="">{{ __('dog.form.placeholder.gender') }}</option>
       <option value="male" {{ ($action_name === "create" ? old('gender') :  $dog->gender) === 'male' ? 'selected' : '' }}>{{ __('dog.form.option.male') }}</option>
       <option value="female" {{ ($action_name === "create" ? old('gender') :  $dog->gender) === 'female' ? 'selected' : '' }}>{{ __('dog.form.option.female') }}</option>
     </select>
-    <label for="gender">{{ __('dog.form.gender') }}</label>
     @error('gender')
       <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
@@ -68,15 +68,15 @@
   </div>
 
   {{-- Dog size --}}
-  <div class="form-floating mb-3">
+  <label for="size" class="form-label"><span class="text-danger">*</span>{{ __('dog.form.size') }}</label>
+  <div class="mb-3">
     <select id="size" name="size" class="form-select required @error('size') is-invalid @enderror">
-      <option value=""></option>
+      <option value="">{{ __('dog.form.placeholder.size') }}</option>
       <option value="small" {{ ($action_name === "create" ? old('size') : $dog->size) === 'small' ? 'selected' : '' }}>{{ __('dog.form.option.small') }}</option>
       <option value="medium" {{ ($action_name === "create" ? old('size') : $dog->size) === 'medium' ? 'selected' : '' }}>{{ __('dog.form.option.medium') }}</option>
       <option value="large" {{ ($action_name === "create" ? old('size') : $dog->size) === 'large' ? 'selected' : '' }}>{{ __('dog.form.option.large') }}</option>
       <option value="extra" {{ ($action_name === "create" ? old('size') : $dog->size) === 'extra' ? 'selected' : '' }}>{{ __('dog.form.option.extra') }}</option>
     </select>
-    <label for="size">{{ __('dog.form.size') }}</label>
     @error('size')
       <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
@@ -85,9 +85,9 @@
   </div>
 
   {{-- Dog description / detail --}}
-  <div class="form-floating mb-3">
-    <textarea id="description" name="description" class="form-control required @error('description') is-invalid @enderror" style="height: 200px;">{{ $action_name === "create" ? old('description') : $dog->description }}</textarea>
-    <label for="description">{{ __('dog.form.description') }}</label>
+  <div class="mb-3">
+    <label for="description" class="form-label"><span class="text-danger">*</span>{{ __('dog.form.description') }}</label>
+    <textarea id="description" placeholder="{{ __('dog.form.placeholder.description') }}" name="description" class="form-control required @error('description') is-invalid @enderror" style="height: 200px;">{{ $action_name === "create" ? old('description') : $dog->description }}</textarea>
     @error('description')
       <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
@@ -97,12 +97,13 @@
 
   {{-- -----------DOG PICTURE----------- --}}
     {{-- Dog picture, input only --}}
-    <div class="form-floating mb-3">
+    <div class="mb-3">
+      <label for="images" class="form-label"><span class="text-danger">*</span>{{ __('dog.form.dog_picture') }}</label>
       <input id="images" type="file" name="images[]"
               class="form-control required preview-input @error('images') is-invalid @enderror"
-              autocomplete="images" placeholder="{{ __('Pictures') }}"
+              autocomplete="images" placeholder="{{ __('dog.form.placeholder.dog_picture') }}"
               multiple>
-      <label for="images">{{ __('dog.form.picture') }}</label>
+      <div class="form-text">{{ __('dog.form.placeholder.dog_picture') }}</div>
       @error('images')
         <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -139,25 +140,25 @@
     </div>
   {{-- -----------END----------- --}}
 
-  {{-- Custom fake submit, Js file -> views/dogs/partials/js.blade.php --}}
+  <!-- {{-- Custom fake submit, Js file -> views/dogs/partials/js.blade.php --}}
   <button type="button" id="fake-submit" class="btn btn-custom-submit w-100">
     {{ __('app.button.next') }}
   </button>
-</fieldset>
+</fieldset> -->
 
 {{----------------NEXT PAGE----------------}}
 
 {{-- Second fieldset is for Area and dog certificate --}}
-<fieldset id="fieldset-area" class="d-none">
+<!-- <fieldset id="fieldset-area" class="d-none"> -->
   @if ($controller_name == 'dog')
 
     {{-- Dog last vaccinated date --}}
-    <div class="form-floating mb-3">
+    <div class="mb-3">
+      <label for="vaccinated_date" class="form-label"><span class="text-danger">*</span>{{ __('dog.form.vaccinated_date') }}</label>
       <input id="vaccinated_date" type="date" name="vaccinated_date"
               class="form-control required @error('vaccinated_date') is-invalid @enderror"
               autocomplete="vaccinated_date" placeholder="{{ __('vaccinated_date') }}"
               value="{{ $action_name === "create" ? old('vaccinated_date') : $dog->vaccinated_date }}" required>
-      <label for="vaccinated_date">{{ __('Last Vaccinated Date') }}</label>
       @error('vaccinated_date')
         <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -167,12 +168,13 @@
 
     {{-- -----------VACCINATION CERTIFICATE----------- --}}
       {{-- Dog vaccination certificate --}}
-      <div class="form-floating mb-3">
+      <div class="mb-3">
+        <label for="vaccination_certificate" class="form-label"><span class="text-danger">*</span>{{ __('dog.form.vaccination_certificate') }}</label>
         <input id="vaccination_certificate" type="file" name="vaccination_certificate[]"
                 class="form-control required preview-input @error('vaccination_certificate') is-invalid @enderror"
-                autocomplete="vaccination_certificate" placeholder="{{ __('Vaccination Certificate') }}"
+                autocomplete="vaccination_certificate" placeholder="{!! __('dog.form.placeholder.vaccinated_certificate') !!}"
                 multiple>
-        <label for="vaccination_certificate">{{ __('Vaccination Certificate') }}</label>
+        <div class="form-text">{!! __('dog.form.placeholder.vaccination_certificate') !!}</div>
         @error('vaccination_certificate')
           <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -207,28 +209,29 @@
     {{-- -----------END----------- --}}
 
     {{-- Sterilization date --}}
-    <div class="form-floating mb-3">
+    <!-- <div class="mb-3">
+      <label for="sterilization_date" class="form-label">{{ __('Sterilization Date') }}</label>
       <input id="sterilization_date " type="date" name="sterilization_date"
-              class="form-control required @error('sterilization_date') is-invalid @enderror"
+              class="form-control @error('sterilization_date') is-invalid @enderror"
               autocomplete="sterilization_date" placeholder="{{ __('Sterilization Date') }}"
               value="{{ $action_name === "create" ? old('sterilization_date') : $dog->sterilization_date }}" >
-      <label for="sterilization_date">{{ __('Sterilization Date') }}</label>
       @error('sterilization_date')
           <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
           </span>
       @enderror
-    </div>
+    </div> -->
 
     {{-- -----------STERILIZATION CERTIFICATE----------- --}}
 
       {{-- Dog sterilization certificate --}}
-      <div class="form-floating mb-3">
+      <div class="mb-3">
+        <label for="sterilization_certificate" class="form-label"><span class="text-danger">*</span>{{ __('dog.form.sterilization_certificate') }}</label>
         <input id="sterilization_certificate" type="file" name="sterilization_certificate[]"
               class="form-control preview-input"
               autocomplete="sterilization_certificate" placeholder="{{ __('Evidence that shows the dog has been sterilized (optional)') }}"
               multiple> 
-        <label for="sterilization_certificate">{{ __('Sterilization Certificate') }}</label>
+        <div class="form-text">{!! __('dog.form.placeholder.sterilization_certificate') !!}</div>
         @error('sterilization_certificate')
           <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -264,14 +267,14 @@
   @endif
 
   {{-- Dog area --}}
-  <div class="form-floating mb-3">
+  <div class="mb-3">
+    <label for="area" class="form-label"><span class="text-danger">*</span>{{ __('District') }}</label>
     <select id="area" name="area" class="form-select required @error('area') is-invalid @enderror">
-      <option value=""></option>
+      <option value="">{{ __('dog.form.placeholder.area') }}</option>
       @foreach (['badung', 'bangli', 'buleleng', 'gianyar', 'jembrana', 'karangasem', 'klungkung', 'tabanan', 'denpasar'] as $area)
         <option value="{{ $area }}" {{ ($action_name === "create" ? old('area') : optional($dog->area)->name) === $area ? 'selected' : '' }}>{{ ucfirst($area) }}</option>
       @endforeach
     </select>
-    <label for="area">{{ __('District') }}</label>
     @error('area')
       <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
@@ -280,9 +283,9 @@
   </div>
 
   {{-- Dog area map link --}}
-  <div class="form-floating mb-5">
-    <input id="map_link" type="text" name="map_link" class="form-control required" autocomplete="map_link" placeholder="{{ __('Current Location') }}" value="{{ $action_name === "create" ? old('map_link') : $dog->map_link }}" required>
-    <label for="map_link">{{ __('Current Location') }}</label>
+  <div class="mb-5">
+    <label class="form-label" for="map_link"><span class="text-danger">*</span>{{ __('dog.form.map_link') }}</label>
+    <input id="map_link" type="text" name="map_link" class="form-control required" autocomplete="map_link" placeholder="{{ __('dog.form.placeholder.map_link') }}" value="{{ $action_name === "create" ? old('map_link') : $dog->map_link }}" required>
     @error('map_link')
       <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
@@ -292,6 +295,6 @@
 
   {{-- This is real submit --}}
   <button type="submit" class="btn btn-custom-submit w-100">
-    {{ __('app.button.submit') }}
+    {{ __('dog.form.button.submit') }}
   </button>
 </fieldset>

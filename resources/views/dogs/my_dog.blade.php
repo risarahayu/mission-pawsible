@@ -213,5 +213,5 @@
       </div>
     </div>
   </section>
-c
+
 @endsection

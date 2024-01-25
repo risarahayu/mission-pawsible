@@ -3,6 +3,11 @@
 @section('content')
   <section>
     <div class="container adoptions">
+      <img class="step-image" src="{{asset('images/step/step 1.svg')}}" alt="">
+      <div class="text-center m-auto my-2 text-base-color">
+        <p class="fs-4 m-0">Step 1</p>
+        <p class="alert alert-info m-auto mb-3">Complete the adoption form</p>
+      </div>
       @if(!$is_indonesian)
         <form action="{{ route('adoptions.create', ['dog' => $dog]) }}" method="get">
           @csrf

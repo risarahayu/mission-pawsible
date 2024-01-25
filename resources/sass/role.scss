@@ -1,5 +1,4 @@
 .header-role {
-  background-image: url('/images/role-index-background.jpg');
   background-position: center;
   background-size: cover;
   position: absolute;
@@ -18,19 +17,22 @@
   .role-list {
     display: flex;
     gap: 25px;
-    justify-content: center;
-    align-items: center;
+    // justify-content: center;
+    // align-items: center;
     .btn-role {
+      text-align: left;
+      align-items: center;
+      justify-content: space-between;
       color: white;
       border: 2px solid white;
       border-radius: 10px;
       width: 100%;
       max-width: 450px;
       font-size: 24px;
-      font-weight: bold;
-      padding: 25px 10px;
+      font-weight: semi-bold;
+      padding: 10px;
       display: flex;
-      flex-direction: column;
+      // flex-direction: column;
       gap: 10px;
       i { font-size: 36px; }
       &:hover {

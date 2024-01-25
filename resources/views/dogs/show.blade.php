@@ -46,7 +46,11 @@
           <div class="text-center w-100">
             @if($user->id != $own->id)
               @if($stray_dog->adopted == '1')
-                <p class="fs-2">Someone already adopt this dog!</p>
+                @if($user->id != $stray_dog->user_id)
+                  <p class="fs-2">Someone already adopt this dog!</p>
+                @else
+                  <p class="fs-2">You get it</p>
+                @endif
               @elseif($stray_dog->adopted !== '1' && $userAdoption)
                 <p class="fs-2">Keep Update!</p>
                 <div class="btn btn-primary fw-bold fs-5">You already request this dog.</div>
@@ -82,42 +86,42 @@
                   <div class="brief">
                     <div class="wrapper">
                       <a class="cursor-pointer custom-link" data-bs-toggle="modal" data-bs-target="#rescuer_information">
-                        <h4 class="text-center fw-bold">{{ $adoption->user->first_name }} {{ $adoption->user->last_name }}</h4>
+                        <h6 class="text-center fw-bold">{{ $adoption->user->first_name }} {{ $adoption->user->last_name }}</h6>
                       </a>
                       <hr class="mt-1">
                       <div class="gender">
                         <i class="bi bi-envelope dtl-icon"></i>
                         <div>
                           <small>Email</small><br/>
-                          <h4 class="fw-bold">{{ empty($adoption->user->email) ? "not set" : $adoption->user->email }}</h4>
+                          <h6 class="fw-bold">{{ empty($adoption->user->email) ? "not set" : $adoption->user->email }}</h6>
                         </div>
                       </div>
                       <div class="size">
                         <i class="bi bi-whatsapp dtl-icon"></i>
                         <div>
                           <small>Whatsapp</small><br/>
-                          <h4 class="fw-bold">{{ empty($adoption->user->whatsapp) ? "not set" : $adoption->user->whatsapp }}</h4>
+                          <h6 class="fw-bold">{{ empty($adoption->user->whatsapp) ? "not set" : $adoption->user->whatsapp }}</h6>
                         </div>
                       </div>
                       <div class="size">
                         <i class="bi bi-facebook dtl-icon"></i>
                         <div>
                           <small>Facebook</small><br/>
-                          <h4 class="fw-bold">{{ empty($adoption->user->facebook) ? "not set" : $adoption->user->facebook }}</h4>
+                          <h6 class="fw-bold">{{ empty($adoption->user->facebook) ? "not set" : $adoption->user->facebook }}</h6>
                         </div>
                       </div>
                       <div class="size">
                         <i class="bi bi-instagram dtl-icon"></i>
                         <div>
                           <small>Instagram</small><br/>
-                          <h4 class="fw-bold">{{ empty($adoption->user->instagram) ? "not set" : $adoption->user->instagram }}</h4>
+                          <h6 class="fw-bold">{{ empty($adoption->user->instagram) ? "not set" : $adoption->user->instagram }}</h6>
                         </div>
                       </div>
                       <div class="size">
                         <i class="bi bi-geo-alt dtl-icon"></i>
                         <div>
                           <small>Location</small><br/>
-                          <h4 class="fw-bold">{{ empty($adoption->user->street_address) ? "not set" : $adoption->user->street_address }}</h4>
+                          <h6 class="fw-bold">{{ empty($adoption->user->street_address) ? "not set" : $adoption->user->street_address }}</h6>
                         </div>
                       </div>
 
@@ -156,7 +160,7 @@
                       </div>
                       <div class="modal-body py-4 px-5">
                         <div class="d-flex align-items-center" style="gap: 10px">
-                          <h4><i class="fa-solid fa-house"></i></h4>
+                          <h6><i class="fa-solid fa-house"></i></h6>
                           <div>
                             <small>Housing type</small>
                             <p class="mb-0 fw-bold">{{ $adoption->housing_type }}</p>
@@ -164,7 +168,7 @@
                         </div>
                         @if($adoption->residency_duration)
                           <div class="d-flex align-items-center" style="gap: 10px">
-                            <h4><i class="fa-solid fa-calendar"></i></h4>
+                            <h6><i class="fa-solid fa-calendar"></i></h6>
                             <div>
                               <small>Residence Duration</small>
                               <p class="mb-0 fw-bold">{{ $adoption->residency_duration }}</p>
@@ -173,7 +177,7 @@
                         @endif
                         @if($adoption->planned_residency_duration)
                           <div class="d-flex align-items-center" style="gap: 10px">
-                            <h4><i class="fa-solid fa-calendar"></i></i></h4>
+                            <h6><i class="fa-solid fa-calendar"></i></h6>
                             <div>
                               <small>Residence Duration Planned</small>
                               <p class="mb-0 fw-bold">{{ $adoption->planned_residency_duration }}</p>
@@ -182,7 +186,7 @@
                         @endif
                         @if($adoption->future_residency_country)
                           <div class="d-flex align-items-center" style="gap: 10px">
-                            <h4><i class="fa-solid fa-flag"></i></h4>
+                            <h6><i class="fa-solid fa-flag"></i></h6>
                             <div>
                               <small>Future Residency Country</small>
                               <p class="mb-0 fw-bold">{{ $adoption->future_residency_country }}</p>
@@ -191,7 +195,7 @@
                         @endif
                         @if($adoption->pet_migration_plan)
                           <div class="d-flex align-items-center" style="gap: 10px">
-                            <h4><i class="fa-solid fa-dog"></i></h4>
+                            <h6><i class="fa-solid fa-dog"></i></h6>
                             <div>
                               <small>Pet Migration Plan</small>
                               <p class="mb-0 fw-bold">{{ $adoption->pet_migration_plan }}</p>
@@ -199,7 +203,7 @@
                           </div>
                         @endif
                           <div class="d-flex align-items-center" style="gap: 10px">
-                            <h4><i class="fa-solid fa-briefcase"></i></h4>
+                            <h6><i class="fa-solid fa-briefcase"></i></h6>
                             <div>
                               <small>Job</small>
                               <p class="mb-0 fw-bold">{{ $adoption->job }}</p>

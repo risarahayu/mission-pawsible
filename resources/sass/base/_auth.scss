@@ -1,6 +1,6 @@
 body {
   &.body-auth {
-    background-color: $base-color;
+    background-image: url('/images/pexels-edgar-daniel-hernández-cervantes-3628100 1.png');
     color: #fff;
     main {
       min-height: 100vh;
@@ -23,14 +23,18 @@ body {
 }
 
 .btn-auth {
-  background-color: transparent;
+  background-color: #fff;
   color: $base-color;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  // transition: background-color 0.3s;
   font-weight: bold;
   z-index: 1;
+  &:hover {
+    background-color: $base-color;
+    color: #fff;
+  }
 }
 .btn-empty {
   font-weight: bold;
@@ -42,28 +46,50 @@ body {
   position: relative;
   z-index: 0;
   font-size: 12px;
-  text-align: left;
-  &:active {
-    border: none;
-    color: $base-color;
-  }
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    border-radius: 10px;
-    z-index: -1;
-    transition: left 0.3s;
-  }
-  &:hover{
-    color: $base-color;
-    text-align: center;
-    &::before {
-      left: 0;
-    }
-  }
 }
+
+// .btn-auth {
+//   background-color: transparent;
+//   color: $base-color;
+//   border: none;
+//   padding: 10px 20px;
+//   cursor: pointer;
+//   transition: background-color 0.3s;
+//   font-weight: bold;
+//   z-index: 1;
+// }
+// .btn-empty {
+//   font-weight: bold;
+//   background-color: transparent;
+//   padding: 10px 20px;
+//   color: #fff;
+//   cursor: pointer;
+//   transition: all 0.3s ease-in-out;
+//   position: relative;
+//   z-index: 0;
+//   font-size: 12px;
+//   text-align: left;
+//   &:active {
+//     border: none;
+//     color: $base-color;
+//   }
+//   &::before {
+//     content: '';
+//     position: absolute;
+//     top: 0;
+//     left: -100%;
+//     width: 100%;
+//     height: 100%;
+//     background-color: #fff;
+//     border-radius: 10px;
+//     z-index: -1;
+//     transition: left 0.3s;
+//   }
+//   &:hover{
+//     color: $base-color;
+//     text-align: center;
+//     &::before {
+//       left: 0;
+//     }
+//   }
+// }

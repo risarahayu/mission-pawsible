@@ -62,6 +62,7 @@
               <label class="fw-bold mb-1" for="password">{{ __('session.password') }}</label>
               <input id="password" placeholder="{{ __('session.placeholder.password') }}" type="password" class="form-control @error('password') is-invalid @enderror"
                 name="password" required autocomplete="new-password">
+              <p class="form-text text-white">Input minimal 8 charachter</p>
               @error('password')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
@@ -79,7 +80,7 @@
             {{-- End of password confirm input --}}
 
             {{-- Buttons --}}
-            <div class="d-flex mb-5 flex-column flex-lg-row">
+            <div class="d-flex mb-5 flex-column">
               <button type="submit" class="btn btn-auth w-100">
                 {{ __('session.register') }}
               </button>

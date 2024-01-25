@@ -35,14 +35,17 @@ class DogController extends Controller
     public function index(Request $request)
     {
         $area = Area::all();
-        $stray_dogs = Dog::all();
+        $stray_dogs = Dog::where('adopted',false)->get();
+        // dd(Dog::where('adopted',false)->get());
+        $area_name = null;
 
         if ($request->input('area')) {
-            $areaRequest = Area::all()->where('name', $request->input('area'))->first();
+            $area_name = $request->input('area');
+            $areaRequest = $area->where('name', $area_name)->first();
             $stray_dogs = $stray_dogs->where('area_id', optional($areaRequest)->id);
         }
 
-        return view('dogs.index', compact('stray_dogs','area'));
+        return view('dogs.index', compact('stray_dogs', 'area', 'area_name'));
     }
 
     /**
@@ -288,5 +291,21 @@ class DogController extends Controller
 
         $myDogs=Dog::where('user_id',$user->id)->get();
         return view('dogs.my_dog', compact('adoptions','rescues','myDogs'));
+    }
+
+    public function dog_list(){
+        $user=Auth::user();
+        $myDogs=Dog::where('user_id',$user->id)->get();
+        $count=$myDogs->count();
+
+        return view('dogs.dog_list', compact('myDogs','count'));
+    }
+
+    public function adoption_request(){
+        
+        $user=Auth::user();
+        $adoptions=Adoption::where('user_id',$user->id)->get();
+        $count=$adoptions->count();
+        return view('dogs.adoption_request', compact('adoptions','count'));
     }
 }

@@ -20,6 +20,7 @@ return [
 
     // Button
     'submit' => 'Submit',
+    'login'=>'Login',
     'create_account' => 'Create account',
     'register' => 'Register',
     'already_have_account' => 'Already have account',

@@ -1,122 +1,7 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-base shadow-sm">
-  <div class="container">
-    <a class="navbar-brand" href="{{ url('/') }}">
-      <img class="img-fluid" src="{{ asset('images/mp-logo.png') }}" alt="Mission Pawsible Logo">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+@extends('layouts.app')
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!-- Left Side Of Navbar -->
-      <ul class="navbar-nav me-auto">
-      </ul>
-
-      <!-- Right Side Of Navbar -->
-      <ul class="navbar-nav ms-auto" style="gap: 10px;">
-
-        <!-- Authentication Links -->
-        @guest
-
-          <!-- Sepertinya tidak digunakan -->
-          @if (Route::has('login'))
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-            </li>
-          @endif
-
-          @if (Route::has('register'))
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-            </li>
-          @endif
-
-        @else
-
-          <!-- Route untuk rescuer atau adopter -->
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url('/') }}"><img src="{{asset('images/explore_dog.svg')}}" width="30px" class="img-fluid" alt="">{{ __('nav.explore') }}</a>
-          </li>
-            <!-- my dog dropdown -->
-          <li class="nav-item dropdown">
-            <!-- <a class="nav-link" href="{{ route('dog.my_dog') }}"> -->
-            <a id="navbarDropdown" class="nav-link {{ request()->routeIs('dog.my_dog') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-              <i class="fa-solid fa-dog px-2"></i>{{ __('nav.my_dog') }}<i class="bi bi-caret-down-fill"></i>
-            </a>
-
-            <div class="dropdown-menu p-3 dropdown-menu-end row" aria-labelledby="navbarDropdown">
-              <div class="card dropdown-item mb-3">
-                <div class="card-body">
-                  <h5 class="card-title">{{ __('nav.my_adoption_requests') }}</h5>
-                  <p class="card-text">Explore dogs awaiting your adoption approval</p>
-                  <a class="btn btn-primary" href="{{ route('dog.my_dog.adoption_request') }}">See detail</a>
-                </div>
-              </div>
-                
-              <div class="card dropdown-item">
-                <div class="card-body">
-                  <h5 class="card-title">{{ __('nav.my_dog_listing') }}</h5>
-                  <p class="card-text">Monitor your dogs and find new adopters for them</p>
-                  <a class="btn btn-primary" href="{{ route('dog.my_dog.adoption_request') }}">See detail</a>
-                </div>
-            </div>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a id="navbarDropdown" class="nav-link {{ request()->routeIs('user_contacts.create') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-              <i class="bi bi-person-circle"></i>
-              {{Auth::user()->first_name}}<i class="bi bi-caret-down-fill"></i>
-            </a>
-
-            <div class="dropdown-menu dropdown-menu-end p-2" aria-labelledby="navbarDropdown">
-              @include('layouts.partials.lang')
-              <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#personal_information">
-                <i class="bi bi-person-lines-fill px-2"></i> {{ __('nav.contact') }}
-              </a>
-              <a class="dropdown-item  border-bottom pb-3" href="{{ route('logout') }}"
-                onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                <i class="fa-solid fa-right-from-bracket px-2"></i>{{ __('Logout') }}
-              </a>
-
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-              </form>
-
-              @if (session('role') == 'rescuer')
-              <div class="card dropdown-item my-3">
-                <div class="card-body">
-                  <h5 class="card-title">{{ __('nav.adopter') }}</h5>
-                  <p class="card-text">Let's find a new adopter for your dog</p>
-                  <a class="btn btn-primary" href="{{ route('role.set', ['role' => 'adopter']) }}">Change Role</a>
-                </div>
-              </div>
-                <!-- <a class="dropdown-item" href="{{ route('role.set', ['role' => 'adopter']) }}">
-                  <i class="bi bi-arrow-repeat px-2"></i>{{ __('nav.adopter') }}
-                </a> -->
-              @else
-              <div class="card dropdown-item my-3">
-                <div class="card-body">
-                  <h5 class="card-title">{{ __('nav.rescuer') }}</h5>
-                  <p class="card-text">Let's find a rescuer or foster for the dogs</p>
-                  <a class="btn btn-primary" href="{{ route('role.set', ['role' => 'rescuer']) }}">Change Role</a>
-                </div>
-              </div>
-                <!-- <a class="dropdown-item" href="{{ route('role.set', ['role' => 'rescuer']) }}">
-                  <i class="fa-solid fa-repeat px-2"></i></i> {{ __('nav.rescuer') }}
-                </a> -->
-              @endif
-            </div>
-          </li>
-
-        @endguest
-      </ul>
-    </div>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="personal_information" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="personal_information_label" aria-hidden="true">
+@section('content')
+<div class="" id="personal_information" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="personal_information_label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header justify-content-center">
@@ -280,4 +165,5 @@
       </div>
     </div>
   </div>
-</nav>
+
+@endsection

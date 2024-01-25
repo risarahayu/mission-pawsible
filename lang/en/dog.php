@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'title' => 'Stray Dog',
+    'title' => 'Tell us about the dog',
+    'alert'=>"Hey there! The dogs featured on our website are all vaccinated and sterilized.<br> They're ready for a loving home!",
 
     // index
     'index' => [
@@ -18,6 +19,7 @@ return [
         'adoptable' => 'Adoptable',
         'adopted' => 'Adopted',
         'pending'=>'Waiting for approval',
+        'see_detail' => 'See Detail',
     ],
 
     'show' => [
@@ -29,21 +31,21 @@ return [
 
     // create
     'form' => [
-        'dog_type' => 'Dog type',
+        'dog_type' => 'Dog Type',
         'color' => 'Color',
         'temperament' => 'Temperament',
         'gender' => 'Gender',
         'size' => 'Size',
         'description' => 'Description',
-        'picture' => 'Picture',
+        'dog_picture' => 'Dog Picture',
         'preview' => 'Preview',
         'new_picture' => 'New Picture',
         'old_picture' => 'Old Picture',
-        'vaccinated_date' => 'Vaccinated date',
-        'vaccination_certificate' => 'Vaccination certificate',
-        'sterilization_certificate' => 'Sterilization certificate',
-        'district' => 'District',
-        'map_link' => 'Google map link',
+        'vaccinated_date' => 'Last Vaccinated Date',
+        'vaccination_certificate' => 'Vaccinated Proof',
+        'sterilization_certificate' => 'Sterilization Proof',
+        'district' => 'Area',
+        'map_link' => 'Google Map Link',
         'option' => [
             'male' => 'Male',
             'female' => 'Female',
@@ -57,5 +59,19 @@ return [
             'submit' => 'Submit',
             'delete' => 'Delete',
         ],
+        'placeholder' => [
+            'dog_type' => 'Example : Local Dog',
+            'color' => 'Example : Brawn, Black, White',
+            'temperament'=> 'Example : Aggressive, Calm, Energetic',
+            'gender' => "Choose the dog's gender",
+            'size' => "Choose the dog's size",
+            'area' => "Choose the dog's area",
+            'description' => 'Tell us about the dog condition',
+            'dog_picture' => 'Take pictures of the dog',
+            'vaccination_certificate'=>'Please upload <span class="text-primary">the vaccination book, photo, or any other documentation </span>that can prove your dog has been vaccinated',
+            'sterilization_certificate'=>'Please upload <span class="text-primary">the sterilization book/photo or any other documentation</span> proof that can demonstrate that your dog has been sterilized',
+            'map_link' => "Please provide the link to the dog's location",
+        ],
     ],
+
 ];

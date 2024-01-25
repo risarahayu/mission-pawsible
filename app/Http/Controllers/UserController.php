@@ -71,4 +71,8 @@ class UserController extends Controller
     {
         //
     }
+
+    public function view_contact(){
+        return view('auth.update_profile');
+    }
 }
