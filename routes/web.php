@@ -36,21 +36,26 @@ Route::namespace('App\Http\Controllers')->group(function () {
   Route::get('/role', 'RoleController@index')->name('role.index');
 
   //dog
-  Route::get('dogs/my_dog', 'DogController@my_dog')->name('dog.my_dog');
-  Route::get('dogs/my_dog/list', 'DogController@dog_list')->name('dog.my_dog.list');
-  Route::get('dogs/my_dog/adoption_request', 'DogController@adoption_request')->name('dog.my_dog.adoption_request');
+  Route::get('/dogs/my_dog', 'DogController@my_dog')->name('dog.my_dog');
+  Route::get('/dogs/my_dog/list', 'DogController@dog_list')->name('dog.my_dog.list');
+  Route::get('/dogs/view_contact/{dog}', 'DogController@view_contact')->name('dogs.view_contact');
+  Route::get('/dogs/my_dog/adoption_request', 'DogController@adoption_request')->name('dog.my_dog.adoption_request');
   // Route::get('dog/my_dog_list', 'DogController@DogList')->name('dog_List');
+  Route::put('/dogs/{user}/update_contact/{dog}', 'DogController@update_contact')->name('dogs.update_contact');
   Route::resource('dogs', 'DogController');
+  Route::get('/dogs/additional_contact/{dog}', 'DogController@additional_contact')->name('dogs.additional_contact');
 
   //request rescue
   Route::resource('requests', 'RescueRequestController');
   Route::put('/requests/{request}/rescue', 'RescueRequestController@rescue')->name('requests.rescue');
 
   //adoption
+  Route::get('/adoptions/additional_contact/{adoption}', 'AdoptionController@additional_contact')->name('adoptions.additional_contact');
+  Route::get('/adoptions/view_contact/{adoption}', 'AdoptionController@view_contact')->name('adoptions.view_contact');
   Route::resource('adoptions', 'AdoptionController')->except(['create']); // except create mengecualikan route create didalam resource
+  Route::put('/adoptions/{user}/update_contact/{adoption}', 'AdoptionController@update_contact')->name('adoptions.update_contact');
   Route::get('/adoptions/create/{dog}', 'AdoptionController@create')->name('adoptions.create'); // menggunakan custom karena memerlukan params dog dialam routenya
 
-  Route::get('/users/view_contact', 'UserController@view_contact')->name('users.view_contact');
   Route::resource('users', 'UserController');
 
 });

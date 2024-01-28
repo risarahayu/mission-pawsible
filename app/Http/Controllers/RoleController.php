@@ -29,12 +29,13 @@ class RoleController extends Controller
     }
 
     // Action untuk set role(mengganti role) yang diinginkan
-    public function set_role($role){
+    public function set_role(Request $request, $role){
         // menyimpan role kedalam session dengan key role
         $user = Auth::user();
         session(['role' => $role]);
 
         $redirect_url = session('role') == 'rescuer' ? 'requests.index' : 'dogs.index';
+        if ($request->input('create')) { $redirect_url = 'dogs.create'; }
 
         // redirect ke route lalu menampilkan standar flash message
         return redirect()->route($redirect_url)->with([

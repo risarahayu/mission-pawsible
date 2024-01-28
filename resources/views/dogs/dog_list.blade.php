@@ -20,36 +20,47 @@
                       @endphp
                       <img src="{{ asset($stray_dog->images()->orderBy('category')->first()->filename) }}" alt="{{ $filename }}">
                     </div>
+
                     <div class="col-sm-6 brief">
                       <div class="wrapper">
                         <div class="gender">
                           <i class="bi bi-gender-ambiguous dtl-icon"></i>
                           <div>
                             <small>{{ __('dog.form.gender') }}</small><br/>
-                            <h4 class="fw-bold">{{ __(ucfirst($stray_dog->gender)) }}</h4>
+                            <h6 class="fw-bold">{{ __(ucfirst($stray_dog->gender)) }}</h6>
                           </div>
                         </div>
                         <div class="size">
                           <img class="dtl-icon" src="{{ asset('images/cil_animal.png') }}">
                           <div>
                             <small>{{ __('dog.form.size') }}</small><br/>
-                            <h4 class="fw-bold">{{ __("dog.form.option.$stray_dog->size") }}</h4>
+                            @php $dog_size = $stray_dog->size @endphp
+                            <h6 class="fw-bold">{{ __("dog.form.option.$dog_size") }}</h6>
                           </div>
                         </div>
-                        <div class="size request-time">
+                        <!-- <div class="size request-time">
                           <i class="bi bi-clock-history dtl-icon"></i>
                           <div>
                             <small>{{__('dog.index.request_by', ['count' => $stray_dog->count()])}}</small><br/>
-                            <h4 class="fw-bold">{{ __('dog.index.since', ['date' => $stray_dog->created_at->format('Y-m-d')]) }}</h4>
+                            <h6 class="fw-bold">{{ __('dog.index.since', ['date' => $stray_dog->created_at->format('Y-m-d')]) }}</h6>
                           </div>
+                        </div> -->
+                        <div class="size">
+                        <i class="bi bi-geo-alt"></i>
+                        <div>
+                          <small>{{ __('dog.form.district') }}</small><br/>
+                          <h6 class="fw-bold m-0">{{$stray_dog->area->name}}</h6>
                         </div>
+                      </div>
+                      <div class="size request-time border-top pt-2">
+                        <div>
+                          <small><i class="bi bi-person" style="margin-right: 15px"></i> {{__('dog.index.request_by', ['count' => $stray_dog->count()])}}</small><br/>
+                          <small class=" m-0"><i class="bi bi-clock-history" style="margin-right: 15px"></i>{{ __('dog.index.since', ['date' => $stray_dog->created_at->format('Y-m-d')]) }}</small>
+                        </div>
+                      </div>
                         <div class="button">
-                          @php
-                            $dog_status = ($stray_dog->adopted) ? "adopted" : "adopteable";
-                            $status = ($stray_dog->adopted) ? __('dog.index.adopted') : __('dog.index.adoptable');
-                          @endphp
-                          <a href="{{ route('dogs.show', ['dog' => $stray_dog->id]) }}" class="btn btn-custom-submit w-100 btn-{{ strtolower($dog_status) }}">
-                            {{ $status }}
+                          <a href="{{ route('dogs.show', ['dog' => $stray_dog->id]) }}" class="btn btn-custom-submit w-100">
+                            {{ __('dog.index.see_detail')}}
                           </a>
                         </div>
                       </div>

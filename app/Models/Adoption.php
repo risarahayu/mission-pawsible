@@ -36,4 +36,9 @@ class Adoption extends Model
     {
         return $this->belongsTo(Dog::class);
     }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
 }

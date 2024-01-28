@@ -58,7 +58,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{ __('nav.my_dog_listing') }}</h5>
                   <p class="card-text">Monitor your dogs and find new adopters for them</p>
-                  <a class="btn btn-primary" href="{{ route('dog.my_dog.adoption_request') }}">See detail</a>
+                  <a class="btn btn-primary" href="{{ route('dog.my_dog.list') }}">See detail</a>
                 </div>
             </div>
           </li>

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Adoption;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Dog;
+use App\Models\User;
+use App\Models\userInfo;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreAdoptionRequest;
 use App\Http\Requests\UpdateAdoptionRequest;
@@ -46,16 +49,41 @@ class AdoptionController extends Controller
      */
     public function store(StoreAdoptionRequest $request)
     {
-        // dd($request);
         $adoption = Adoption::create($request->validated()); // jangan lupa mengisikan method ->validated() jika ingin melakukan create secara langsung
+        
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $filename = $image->getClientOriginalName();
+                $path = $image->storeAs('public/adoption_images', $filename);
+                $publicPath = Storage::url($path);
 
-        return redirect()->route('dogs.show', ['dog' => $adoption->dog_id])->with([
+                $imageModel = new Image();
+                $imageModel->filename = $publicPath;
+                $adoption->images()->save($imageModel);
+            }
+        }
+
+        return redirect()->route('adoptions.view_contact', ['adoption' => $adoption])->with([
             'flash' => [
                 'type' => 'success',
                 'message' => 'Adoption record has been created successfully.',
             ]
         ])->with('flash.once', true);
         
+        
+    }
+
+    public function update_contact(Request $request, User $user, Adoption $adoption)
+    {
+        $user->update($request->only(['first_name', 'last_name']));
+
+        if ($user->userInfo()->exists()) {
+            $user->userInfo()->update($request->except(['_token', '_method', 'first_name', 'last_name']));
+        } else {
+            UserInfo::create(array_merge($request->except(['_token', '_method', 'first_name', 'last_name']), ['user_id' => $user->id]));
+        }
+
+        return redirect()->route('adoptions.additional_contact', ['adoption' => $adoption->id]);
     }
 
     /**
@@ -111,5 +139,17 @@ class AdoptionController extends Controller
     public function destroy(Adoption $adoption)
     {
         //
+    }
+
+    public function view_contact(Adoption $adoption){
+        $data = $adoption;
+        $user = Auth::user();
+        return view('auth.update_profile', compact('user', 'data'));
+    }
+
+    public function additional_contact(Adoption $adoption){
+        // Adoption::find()
+        $dog_owner = $adoption->dog->user;
+        return view('adoptions.additional_contact', compact('dog_owner'));
     }
 }

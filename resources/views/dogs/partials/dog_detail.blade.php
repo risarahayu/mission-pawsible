@@ -90,7 +90,7 @@
       <img class="dtl-icon" src="{{ asset('images/healthicons_surgical-sterilization-outline.png') }}">
         <div>
           <small>Sterilization</small><br/>
-            <h6 class="fw-bold">{{$stray_dog->sterilization_date}}</h6>
+            <h6 class="fw-bold">Already sterilized</h6>
         </div>
       </div>
     </div>

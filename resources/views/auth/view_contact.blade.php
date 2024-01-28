@@ -9,7 +9,7 @@
         <p class="alert alert-info m-auto mb-3">Check your contact and ensure you are easily reachable</p>
       </div>
       <!-- <p class="fs-4"> </p> -->
-      <form method="POST" action="{{ route('adoptions.update_contact', [$user->id, $data->id]) }}" enctype="multipart/form-data">
+      <form method="POST" action="{{ route('dogs.update_contact', [$user->id, $data->id]) }}" enctype="multipart/form-data">
         <div class="modal-body">
           @csrf
           @method('PUT')

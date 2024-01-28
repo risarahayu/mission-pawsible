@@ -16,7 +16,7 @@
       <a href="{{ route('role.set', ['role' => 'adopter']) }}" class="btn btn-role">
         {{ __('role.option_1') }}<i class="bi bi-arrow-right-short"></i>
       </a>
-      <a href="{{ route('role.set', ['role' => 'adopter']) }}" class="btn btn-role">
+      <a href="{{ route('role.set', ['role' => 'adopter', 'create' => true]) }}" class="btn btn-role">
         {{ __('role.option_2') }}<i class="bi bi-arrow-right-short"></i>
       </a>
       <a href="{{ route('role.set', ['role' => 'rescuer']) }}" class="btn btn-role">

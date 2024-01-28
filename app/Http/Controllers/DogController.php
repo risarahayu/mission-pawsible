@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Area;
 use App\Models\Adoption;
 use App\Models\RescueRequest;
+use App\Models\userInfo;
 use App\Http\Requests\StoreDogRequest;
 use App\Http\Requests\UpdateDogRequest;
 use Illuminate\Support\Facades\DB;
@@ -128,7 +129,8 @@ class DogController extends Controller
 
 
 
-        return redirect()->route("dogs.show", ['dog' => $strayDog->id])->with([
+        // return redirect()->route("dogs.show", ['dog' => $strayDog->id])->with([
+        return redirect()->route('dogs.view_contact', ['dog' => $strayDog->id])->with([
             'flash' => [
                 'type' => 'success',
                 'message' => 'Stray dog has been added successfully',
@@ -153,6 +155,9 @@ class DogController extends Controller
         //Data adopsi dari user yang lagi login dengan anjing yang lgi dilihat di page ini
         $userAdoption = $user->adoptions()->where('dog_id', $dog->id)->first();
 
+        //Cek data adopter yang terpilih
+        $own_new = $stray_dog->adoptions()->where('status', 'accepted')->first();
+
         //Cek pemilik anjing
         $own = $stray_dog->user;
 
@@ -161,7 +166,7 @@ class DogController extends Controller
 
         $controller_name = 'dog';
 
-        return view('dogs.show', compact('user', 'stray_dog', 'userAdoption', 'own', 'adoptions', 'controller_name'));
+        return view('dogs.show', compact('user', 'stray_dog', 'userAdoption', 'own', 'adoptions', 'controller_name','own_new'));
     }
 
     /**
@@ -307,5 +312,51 @@ class DogController extends Controller
         $adoptions=Adoption::where('user_id',$user->id)->get();
         $count=$adoptions->count();
         return view('dogs.adoption_request', compact('adoptions','count'));
+    }
+
+    public function view_contact(Dog $dog){
+        $data = $dog;
+        $user = Auth::user();
+        return view('auth.view_contact', compact('user', 'data'));
+    }
+
+    public function update_contact(Request $request, User $user, Dog $dog)
+    {
+        $user->update($request->only(['first_name', 'last_name']));
+
+        if ($user->userInfo()->exists()) {
+            $user->userInfo()->update($request->except(['_token', '_method', 'first_name', 'last_name']));
+        } else {
+            UserInfo::create(array_merge($request->except(['_token', '_method', 'first_name', 'last_name']), ['user_id' => $user->id]));
+        }
+
+        return redirect()->route('dogs.additional_contact', ['dog' => $dog->id]);
+    }
+
+    public function additional_contact(Dog $dog){
+        //request adoption
+        $user = Auth::user();
+
+        //cek anjingyang dimiliki dari user yg sedang login
+        $userDogs = $user->dogs;
+
+        //cek data dari anjingnya
+        $stray_dog = $dog;
+
+        //Data adopsi dari user yang lagi login dengan anjing yang lgi dilihat di page ini
+        $userAdoption = $user->adoptions()->where('dog_id', $dog->id)->first();
+
+        //Cek data adopter yang terpilih
+        $own_new = $stray_dog->adoptions()->where('status', 'accepted')->first();
+
+        //Cek pemilik anjing
+        $own = $stray_dog->user;
+
+        //cek request adopsi untuk owener
+        $adoptions = $dog->adoptions;
+
+        $controller_name = 'dog';
+
+        return view('dogs.additional_contact', compact('user', 'stray_dog', 'userAdoption', 'own', 'adoptions', 'controller_name','own_new'));
     }
 }

@@ -90,6 +90,18 @@ footer {
     color: $soft-primary;
   }
 }
+.btn-submit-custom-border{
+  background-color: #fff;
+  color:$base-color;
+  font-size: 1rem;
+  border-color: $base-color;
+  font-weight: bold;
+
+  &:hover {
+    background-color: $secondary;
+    color: $soft-primary;
+  }
+}
 
 form {
   .btn-custom-submit {

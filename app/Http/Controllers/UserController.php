@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Adoption;
 use App\Models\UserInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -72,7 +74,8 @@ class UserController extends Controller
         //
     }
 
-    public function view_contact(){
-        return view('auth.update_profile');
+    public function view_contact(Adoption $adoption){
+        $user = Auth::user();
+        return view('auth.update_profile', compact('user', 'adoption'));
     }
 }

@@ -36,7 +36,7 @@
           </div>
           @include('adoptions.partials.form')
           <div class="mt-3">
-            <button type="submit" class="btn btn-custom-submit w-100 d-none">Submit</button>
+            <button type="submit" class="btn btn-custom-submit w-100 d-none" id="submitButton" disabled>Submit</button>
           </div>
         </form>
       @endif
@@ -66,6 +66,14 @@
         }
       });
 
+      $('input[name="house_occupants"]').on('change', function () {
+        if ($(this).val() == "1") {
+          $("#canine_residence").addClass("d-none");
+        } else {
+          $("#canine_residence").removeClass("d-none");
+        }
+      });
+
       // job
       // Mendengarkan perubahan pada dropdown "job"
       $('#job').on('change', function () {
@@ -80,6 +88,69 @@
           $('#canine_residence').hide();
         }
       });
+
+      // Fungsi ini akan dipanggil ketika tombol "Delete New Image" diklik
+      $('.delete-new-image').on('click', function () {
+        var parents = $(this).parents('.image-preview');
+        var targetId = parents.data('previewId');
+
+        // Kosongkan nilai dari input file #images
+        $(`#${targetId}`).val('');
+
+        // Sembunyikan #new-images parent dari #delete-new-image
+        $(this).parent().addClass('d-none');
+
+        if (parents.find('.old-images').length == 0) {
+          parents.addClass("d-none");
+          $(`#${targetId}`).addClass("required");
+        } else {
+          parents.removeClass("d-none");
+        }
+      });
+
+      $('.preview-input').on('change', function (e) {
+        var imagePreview = $(`[data-preview-id="${$(this).prop('id')}"]`);
+
+        // Kosongkan #new-images
+        imagePreview.find('.images-wrapper').empty();
+
+        // Loop melalui file yang dipilih
+        $.each(this.files, function (index, file) {
+          // Buat elemen gambar baru
+          var img = $('<img/>', {
+            class: 'preview-image',
+            alt: 'Image Preview',
+          });
+
+          // Buat objek URL untuk file yang dipilih
+          var imgURL = URL.createObjectURL(file);
+
+          // Atur sumber gambar ke URL objek yang dibuat
+          img.attr('src', imgURL);
+
+          // Tambahkan gambar ke #new-images
+          imagePreview.find('.images-wrapper').append(img);
+        });
+
+        // Tampilkan #new-images jika ada gambar yang dipilih
+        if (this.files.length > 0) {
+          imagePreview.find('.new-images').removeClass('d-none');
+          $(this).removeClass("required");
+          imagePreview.removeClass("d-none");
+          imagePreview.addClass("border");
+        } else {
+          $(this).addClass("required");
+          $('#new-images').addClass('d-none');
+          imagePreview.addClass("d-none");
+        }
+      });
+    });
+  </script>
+
+  <!-- button -->
+  <script>
+    document.getElementById('agreementCheckbox').addEventListener('change', function() {
+      document.getElementById('submitButton').disabled = !this.checked;
     });
   </script>
 @endsection
