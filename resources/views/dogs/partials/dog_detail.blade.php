@@ -94,6 +94,16 @@
         </div>
       </div>
     </div>
+
+    <!-- Since -->
+    <div class="col-sm-6">
+      <div class="d-flex align-items-center" style="gap: 15px;">
+        <i class="bi bi-clock-history dtl-icon"></i>
+        <div class="size request-time">
+          <small class="">{{ __('dog.index.since', ['date' => $stray_dog->created_at->format('Y-m-d')]) }}</small>
+        </div>
+      </div>
+    </div>
   @endif
 
   <!-- description -->

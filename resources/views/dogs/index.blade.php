@@ -59,7 +59,39 @@
             <div class="dog-card">
               <div class="row">
                 <div class="col-sm-6 image-wrapper">
-                  <h5 class="position-absolute bg-info-subtle p-2 m-2 rounded fs-6">Adoptable</h5>
+                  <h5 class="position-absolute bg-info-subtle p-2 m-2 rounded fs-6">
+                    @php
+                      if ($stray_dog->adopted == false) {
+                        if ($stray_dog->adoptions->where('status', 'pending')->where('user_id', auth()->user()->id)->first()) {
+                            echo '
+                                <h5 class="position-absolute bg-warning-subtle p-2 m-2 rounded fs-6">
+                                    <i class="bi bi-exclamation-circle"></i> Waiting for approval
+                                </h5>
+                            ';
+                          } elseif ($stray_dog->adoptions->where('status', 'pending')->where('user_id', '!=', auth()->user()->id)->first()) {
+                            echo '
+                                <h5 class="position-absolute bg-info-subtle p-2 m-2 rounded fs-6">
+                                    Adoptable
+                                </h5>
+                            ';
+                          }
+                    } elseif ($stray_dog->dog->adopted == true &&  $stray_dog->where('user_id', auth()->user()->id)->first()) {
+                        echo '
+                            <h5 class="position-absolute bg-success-subtle p-2 m-2 rounded fs-6">
+                                <i class="bi bi-check-circle"></i> You got this
+                            </h5>
+                        ';
+                    } else {
+                        echo '
+                            <h5 class="position-absolute bg-danger-subtle p-2 m-2 rounded fs-6">
+                              <i class="bi bi-x-circle"> Adopted by other
+                            </h5>
+                        ';
+                    }
+                  
+                    @endphp
+
+                  </h5>
                   @php
                     $filename = $stray_dog->images()->orderBy('category')->first()->filename;
                     $filename = explode('/', $filename);
@@ -90,9 +122,9 @@
                         <h6 class="fw-bold m-0">{{$stray_dog->area->name}}</h6>
                       </div>
                     </div>
-                    <div class="size request-time">
+                    <div class="size request-time border-top pt-2">
                       <div>
-                        <!-- <small><i class="bi bi-person" style="margin-right: 15px"></i> {{__('dog.index.request_by', ['count' => $stray_dog->adoptions->count()])}}</small><br/> -->
+                        <small><i class="bi bi-person dtl-icon" style="margin-right: 15px"></i> {{__('dog.index.request_by', ['count' => $stray_dog->adoptions->count()])}}</small><br/>
                         <small class=" m-0"><i class="bi bi-clock-history" style="margin-right: 15px"></i>{{ __('dog.index.since', ['date' => $stray_dog->created_at->format('Y-m-d')]) }}</small>
                       </div>
                     </div>

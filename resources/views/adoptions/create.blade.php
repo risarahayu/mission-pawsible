@@ -8,7 +8,7 @@
         <p class="fs-4 m-0">Step 1</p>
         <p class="alert alert-info m-auto mb-3">Complete the adoption form</p>
       </div>
-      @if(!$is_indonesian)
+      @if(is_null($is_indonesian))
         <form action="{{ route('adoptions.create', ['dog' => $dog]) }}" method="get">
           @csrf
           <div class="form-card">
@@ -21,7 +21,7 @@
               <label class="form-check-label" for="yes">Yes</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="is_indonesian" id="no" value="2">
+              <input class="form-check-input" type="radio" name="is_indonesian" id="no" value="0">
               <label class="form-check-label" for="no">No</label>
             </div>
           </div>
@@ -29,7 +29,7 @@
           <button type="submit" class="btn btn-primary">Continue</button>
         </form>
       @else
-        <form method="POST" action="{{ route('adoptions.store') }}" enctype="multipart/form-data">
+        <form id="adoption_form" method="POST" action="{{ route('adoptions.store') }}" enctype="multipart/form-data">
           @csrf
           <div class="form-card">
             <h1 class="fw-bold text-center mb-2">{{ __('Adoptions') }}</h1>
@@ -143,6 +143,46 @@
           $('#new-images').addClass('d-none');
           imagePreview.addClass("d-none");
         }
+      });
+
+      var housing_type = {{ $is_indonesian ? 30 : 25 }};
+      var housing_condition = 0;
+      var dog_experience = 0;
+      var vaccinated = 0;
+      var pet_migration_plan = 0;
+      var job = 0;
+      var house_occupants = 0;
+
+      $(".calculate-score").change(function () {
+        if ($(this).prop('name') == "housing_type") {
+          housing_type = $(this).find('option:selected').data('score');
+        } else if ($(this).prop('name') == "housing_condition") {
+          housing_condition = $(this).data('score');
+        } else if ($(this).prop('name') == "dog_experience") {
+          if ($(this).val() == '1') {
+            $('#vaccinatedForm').toggleClass('d-none d-block');
+          } else {
+            $('#vaccinatedForm').toggleClass('d-block d-none');
+          }
+          dog_experience = $(this).data('score');
+        } else if ($(this).prop('name') == "vaccinated") {
+          vaccinated = $(this).data('score');
+        } else if ($(this).prop('name') == "pet_migration_plan") {
+          pet_migration_plan = $(this).data('score');
+        } else if ($(this).prop('name') == "job") {
+          job = $(this).find('option:selected').data('score');
+        } else if ($(this).prop('name') == "house_occupants") {
+          house_occupants = $(this).data('score');
+        }
+      });
+
+      $("form#adoption_form").submit(function(event) {
+        event.preventDefault();
+
+        var total_score = housing_type + housing_condition + dog_experience + vaccinated + pet_migration_plan + job + house_occupants;
+        debugger;
+        $("input[name='score']").val(total_score);
+        $(this).unbind('submit').submit();
       });
     });
   </script>

@@ -4,6 +4,10 @@
     <div class="wrapper">
       <!-- <a class="cursor-pointer custom-link" data-bs-toggle="modal" data-bs-target="#rescuer_information"> -->
         <h6 class="text-center fw-bold">{{ $adoption->user->first_name }} {{ $adoption->user->last_name }}</h6>
+        <div class="progress position-relative" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar" style="width: {{ $adoption->score }}%">{{$adoption->score}}% Potential</div>
+          <!-- <span class="position-absolute text-white" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">{{$adoption->score}}% Potential</span> -->
+        </div>
       <!-- </a> -->
       <hr class="mt-1">
       <div class="gender">

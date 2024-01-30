@@ -1,6 +1,6 @@
 <input type="hidden" name="user_id" value="{{ $user->id }}">
 <input type="hidden" name="dog_id" value="{{ $dog->id }}">
-<input type="hidden" name="score">
+<input type="hidden" name="score" value="0">
 
 @if($nationality_checked=='1'||'2')
   
@@ -26,11 +26,11 @@
     <div class="form-card">
       <div>
         <label for="housing_type" class="form-label">Housing Type</label>
-        <select class="form-select" id="housing_type" name="housing_type" required>
-          <option value="Compound" data-score="{{ $is_indonesian=='1' ? 30 : 25 }}">Compound / Private House</option>
-          <option value="Private Villa" data-score="{{ $is_indonesian=='1' ? 25 : 20 }}">Private Villa</option>
-          <option value="Guesthouse" data-score="{{ $is_indonesian=='1' ? 20 : 15 }}">Guesthouse</option>
-          <option value="Kos" data-score="0">Kos</option>
+        <select class="form-select calculate-score" id="housing_type" name="housing_type" required>
+          <option value="compound" data-score="{{ $is_indonesian ? 30 : 25 }}">Compound / Private House</option>
+          <option value="private_villa" data-score="{{ $is_indonesian ? 25 : 20 }}">Private Villa</option>
+          <option value="guesthouse" data-score="{{ $is_indonesian ? 20 : 15 }}">Guesthouse</option>
+          <option value="kos" data-score="0">Kos</option>
         </select>
       </div>
     </div>
@@ -39,12 +39,12 @@
     <div class="form-card">
       <label class="form-label">Is your yard fully enclosed without the use of cages, chains, or unrestricted animal roaming?</label>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="housing_condition" id="housing_condition_good" value="1">
-        <label class="form-check-label" for="housing_condition_good" data-score="{{ $is_indonesian=='1' ? 30 : 25 }}">Yes</label>
+        <input class="form-check-input calculate-score" type="radio" name="housing_condition" id="housing_condition_good" data-score="{{ $is_indonesian ? 30 : 25 }}" value="1">
+        <label class="form-check-label" for="housing_condition_good">Yes</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="housing_condition" id="housing_condition_poor" value="0">
-        <label class="form-check-label" for="housing_condition_poor" data-score="0">No</label>
+        <input class="form-check-input calculate-score" type="radio" name="housing_condition" id="housing_condition_poor" data-score="0" value="0">
+        <label class="form-check-label" for="housing_condition_poor">No</label>
       </div>
     </div>
 
@@ -79,12 +79,12 @@
     <div class="form-card">
       <label>Have you had a dog before?</label><br>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="dog_experience" id="dog_experience_good" value="1" onclick="toggleForm()">
-        <label class="form-check-label" for="dog_experience_good" data-score="{{ $is_indonesian=='1' ? 10 : 5 }}">Yes</label>
+        <input class="form-check-input calculate-score" type="radio" name="dog_experience" id="dog_experience_good" data-score="{{ $is_indonesian ? 10 : 5 }}" value="1">
+        <label class="form-check-label" for="dog_experience_good">Yes</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="dog_experience" id="dog_experience_poor" value="0" onclick="toggleForm()">
-        <label class="form-check-label" for="dog_experience_poor" data-score="0">No</label>
+        <input class="form-check-input calculate-score" type="radio" name="dog_experience" id="dog_experience_poor" data-score="0" value="0">
+        <label class="form-check-label" for="dog_experience_poor">No</label>
       </div>
 
       <!-- Tambahkan style="display: none;" pada textarea -->
@@ -92,37 +92,19 @@
     </div>
 
     <!-- Vaccinated Radio Buttons -->
-    <div class="form-card" id="vaccinatedForm" style="display:none;">
+    <div class="form-card d-none" id="vaccinatedForm">
       <label class="form-label">Are your pets fully vaccinated?</label>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="vaccinated" id="vaccinated_yes" data-score="{{ $is_indonesian=='1' ? 10 : 5 }}" value="1">
+        <input class="form-check-input calculate-score" type="radio" name="vaccinated" id="vaccinated_yes" data-score="{{ $is_indonesian ? 10 : 5 }}" value="1">
         <label class="form-check-label" for="vaccinated_yes">Yes</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="vaccinated" id="vaccinated_no" data-score="0" value="0">
+        <input class="form-check-input calculate-score" type="radio" name="vaccinated" id="vaccinated_no" data-score="0" value="0">
         <label class="form-check-label" for="vaccinated_no">No</label>
       </div>
     </div>
 
-    <script>
-      function toggleForm() {
-          var dogExperience = document.querySelector('input[name="dog_experience"]:checked').value;
-          var petExperienceForm = document.getElementById('petExperience');
-          var vaccinatedForm = document.getElementById('vaccinatedForm');
-
-          // Sembunyikan semua formulir tambahan
-          petExperienceForm.style.display = 'none';
-          vaccinatedForm.style.display = 'none';
-
-          // Tampilkan formulir tambahan yang sesuai berdasarkan jawaban
-          if (dogExperience === 'yes') {
-              petExperienceForm.style.display = 'block';
-              vaccinatedForm.style.display = 'block';
-          }
-      }
-    </script>
-
-    @if($is_indonesian=="2")
+    @if(!$is_indonesian)
       <!-- Residency Duration -->
       <div class="form-card">
         <label for="residency_duration" class="form-label">How Long have you lived in Bali?</label>
@@ -145,11 +127,11 @@
       <div class="form-card">
         <label class="form-label">In the event of departing from Bali, do you plan to relocate with your pets?</label>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="pet_migration_plan" id="pet_migration_plan_yes" data-score="20" value="1">
+          <input class="form-check-input calculate-score" type="radio" name="pet_migration_plan" id="pet_migration_plan_yes" data-score="20" value="1">
           <label class="form-check-label" for="pet_migration_plan_yes">Yes</label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="pet_migration_plan" id="pet_migration_plan_no" data-score="20" value="0">
+          <input class="form-check-input calculate-score" type="radio" name="pet_migration_plan" id="pet_migration_plan_no" data-score="0" value="0">
           <label class="form-check-label" for="pet_migration_plan_no">No</label>
         </div>
       </div>
@@ -158,12 +140,10 @@
     <!-- Job Dropdown -->
     <div class="form-card">
       <label for="job" class="form-label">Do you have a job? If so, which one is your occupation:</label>
-      <select class="form-select" id="job" name="job" required>
-        <option value="Full Time" data-score="0">Full Time</option>
-        <option value="Part Time" data-score="15">Part Time</option>
-        <option value="Casual" data-score="15">Casual</option>
-        <option value="Work From Home" data-score="20">Work From Home</option>
-        <option value="Not Applicable" data-score="0">Not Applicable</option>
+      <select class="form-select calculate-score" id="job" name="job" required>
+        <option value="wfo" data-score="0">Full Time</option>
+        <option value="wfh" data-score="20">Work From Home</option>
+        <option value="na" data-score="0">Not Applicable</option>
       </select>
     </div>
 
@@ -171,12 +151,12 @@
     <div class="form-card" id="house_occupants">
       <label for="house_occupants" class="form-label">If you work full-time, is there someone present at home to look after the dogs throughout the day?</label>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="house_occupants" id="house_occupants_good" value="1">
-        <label class="form-check-label" for="house_occupants_good" data-score="20">Yes</label>
+        <input class="form-check-input calculate-score" type="radio" name="house_occupants" id="house_occupants_good" data-score="15" value="1">
+        <label class="form-check-label" for="house_occupants_good">Yes</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="house_occupants" id="house_occupants_poor" value="0">
-        <label class="form-check-label" for="house_occupants_poor" data-score="0">No</label>
+        <input class="form-check-input calculate-score" type="radio" name="house_occupants" id="house_occupants_poor" data-score="0" value="0">
+        <label class="form-check-label" for="house_occupants_poor">No</label>
       </div>
     </div>
 

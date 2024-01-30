@@ -24,7 +24,8 @@ class Adoption extends Model
         'job',
         'house_occupants',
         'canine_residence',
-        'vaccinated'
+        'vaccinated',
+        'score'
     ];
 
     public function user()

@@ -63,6 +63,9 @@
           Chat your new dog adopter!
         </div>
         <p class="text-center">Please coordinate among yourselves for the pickup of the dog. Congratulations!</p>
+        <div class="alert alert-info m-auto text-center" role="alert" style="width:75% !important;">
+          We recommend monitoring your dog's condition during the first 2 weeks to ensure a smooth adjustment to the new environment. Sufficient monitoring can be done through private chat.
+        </div>
       @endif
 
 

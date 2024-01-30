@@ -309,9 +309,14 @@ class DogController extends Controller
     public function adoption_request(){
         
         $user=Auth::user();
-        $adoptions=Adoption::where('user_id',$user->id)->get();
+        $adoptions=Adoption::where('user_id',$user->id)->where('status','pending')->get();
         $count=$adoptions->count();
-        return view('dogs.adoption_request', compact('adoptions','count'));
+
+        $history = Adoption::where('user_id',$user->id)->where('status', 'accepted')->get(); 
+        $history_count=$history->count();
+        // dd($history);
+
+        return view('dogs.adoption_request', compact('adoptions','count','history','history_count'));
     }
 
     public function view_contact(Dog $dog){

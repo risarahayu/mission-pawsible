@@ -37,6 +37,7 @@ class StoreAdoptionRequest extends FormRequest
         'canine_residence' => 'nullable|string',
         'vaccinated' => 'nullable|boolean',
         'images.*' => 'required|image|mimes:jpeg,png,jpg',
+        'score' => 'required|integer',
     ];
 }
 

@@ -6,10 +6,13 @@ use App\Models\Adoption;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Dog;
 use App\Models\User;
+use App\Models\Image;
 use App\Models\userInfo;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreAdoptionRequest;
 use App\Http\Requests\UpdateAdoptionRequest;
+use Illuminate\Support\Facades\Storage;
+
 
 class AdoptionController extends Controller
 {
@@ -36,7 +39,6 @@ class AdoptionController extends Controller
     public function create(Request $request, Dog $dog)
     {
         $user = auth()->user();
-        
         $is_indonesian = $request->input('is_indonesian'); // params is_indonesian yang terdapat di url
         $nationality_checked = !$request->input('is_indonesian') == null; // untuk mengecek apakah ada params is_indonesian di action ini
         // note: params yang kutau adalah parameter atau data yang dikirim kepada url atau route yang dapat kita olah atau gunakan nanti
