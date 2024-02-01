@@ -39,7 +39,7 @@ class RescueRequestController extends Controller
             $stray_dogs = $stray_dogs->where('area_id', optional($areaRequest)->id);
         }
 
-        return view('requests.index', compact('stray_dogs','area', 'area_name'));
+        return view('requests.index', compact('stray_dogs', 'area', 'area_name'));
     }
 
     // Show the form for creating a new resource.
@@ -100,7 +100,7 @@ class RescueRequestController extends Controller
     // Display the specified resource.
     public function show(RescueRequest $request)
     {
-        //kita bawa id requestnya makanya disiini Rescue Request, biasanya kalo mengarahkan biasa ga usah diisi, 
+        //kita bawa id requestnya makanya disiini Rescue Request, biasanya kalo mengarahkan biasa ga usah diisi,
         //passing dari 2 controller yang berbeda
         //dibawa melalui route, makanya di route selalu isi {request}
         $controller_name = 'request';
@@ -193,7 +193,8 @@ class RescueRequestController extends Controller
         ])->with('flash.once', true);
     }
 
-    public function rescue(Request $rescueRequest, RescueRequest $request){
+    public function rescue(Request $rescueRequest, RescueRequest $request)
+    {
         $user = auth()->user();
         $request->update([
             'rescuer_id' => $user->id,
@@ -220,7 +221,8 @@ class RescueRequestController extends Controller
         ])->with('flash.once', true);
     }
 
-    public function view_contact(RescueRequest $request){
+    public function view_contact(RescueRequest $request)
+    {
         $data = $request;
         $user = Auth::user();
         return view('requests.view_contact', compact('user', 'data'));
@@ -241,26 +243,25 @@ class RescueRequestController extends Controller
         return redirect()->route('requests.additional_contact', ['request' => $request->id]);
     }
 
-    public function additional_contact(RescueRequest $request){
+    public function additional_contact(RescueRequest $request)
+    {
         $dog_finder = $request->user;
         $stray_dog = $request;
         $find = RescueRequest::find($request->id);
-        $images =  $find->images()->where('category','rescuer')->get();
-        
-        
-        
-        $users = User::all()->where('role', 'rescuer');
-        dd($users);
+        $images =  $find->images()->where('category', 'rescuer')->get();
 
-        return view('requests.additional_contact', compact('dog_finder','stray_dog', 'users','images'));
+        $users = User::all()->where('role', 'rescuer');
+
+        return view('requests.additional_contact', compact('dog_finder', 'stray_dog', 'users', 'images'));
     }
 
-    public function dog_list(){
-       
-        $user=Auth::user();
-        $stray_dogs=RescueRequest::where('user_id',$user->id)->get();
-        $count=$stray_dogs->count();
+    public function dog_list()
+    {
 
-        return view('dogs.my_dog_list', compact('stray_dogs','count'));
+        $user = Auth::user();
+        $stray_dogs = RescueRequest::where('user_id', $user->id)->get();
+        $count = $stray_dogs->count();
+
+        return view('dogs.my_dog_list', compact('stray_dogs', 'count'));
     }
 }

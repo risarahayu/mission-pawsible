@@ -21,10 +21,10 @@
               <h1 class="modal-title fs-5" id="rescue_label">{{ __('You can choose one of rescuer to help you. Just chat by Whatsapp') }}</h1>
             </div>
             <div class="row">
-            
+              {{ dd("hello") }}
               @foreach($users as $user)
                 <div class="col-md-4">
-                  @include('admins.partials.rescuer_card')
+                  @include('admins.partials.rescuer_card', ['user' => $user])
                 </div>
               @endforeach
             </div>
@@ -38,7 +38,7 @@
           </button>
         </h2>
         <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">                  
+          <div class="accordion-body">
             <div class="form-card text-center">
               <h1 class="modal-title fs-5" id="rescue_label">{{ __('Rescue this dog') }}</h1>
             </div>
@@ -73,7 +73,7 @@
                   <button type="submit" class="btn btn-primary" style="min-width: 100px">{{ __('Submit') }}</button>
                 </div>
               </form>
-            </div>              
+            </div>
           </div>
         </div>
       </div>
@@ -90,7 +90,7 @@
       @include('dogs.partials.dog_carousel')
     </div>
     <div class="col-md-6">
-      @include('admins.partials.rescuer_card')
+      @include('admins.partials.rescuer_card', ['user' => $stray_dog->rescuer])
     </div>
   </div>
 @endif

@@ -9,7 +9,7 @@ class RescueRequest extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 'area_id','rescuer_id', 'dog_type', 'color', 'temperament',
+        'user_id', 'area_id', 'rescuer_id', 'dog_type', 'color', 'temperament',
         'gender', 'size', 'description', 'map_link', 'rescued',
     ];
 
@@ -25,7 +25,7 @@ class RescueRequest extends Model
 
     public function rescuer()
     {
-        return $this->belongsTo(User::class)->optional();
+        return $this->belongsTo(User::class); #->optional();
     }
 
     public function images()
