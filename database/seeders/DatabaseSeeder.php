@@ -22,13 +22,13 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        // DB::table('users')->insert([
-        //     'first_name' => 'Admin',
-        //     'last_name' => 'Pertama',
-        //     'email' => 'admin_1@example.com',
-        //     'password' => bcrypt('123qweasd'),
-        //     'role' => 'admin',
-        // ]);
+        DB::table('users')->insert([
+            'first_name' => 'Admin',
+            'last_name' => 'Pertama',
+            'email' => 'admin_1@example.com',
+            'password' => bcrypt('123qweasd'),
+            'role' => 'admin',
+        ]);
 
         DB::table('users')->insert([
             'first_name' => 'User',

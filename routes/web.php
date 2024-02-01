@@ -46,7 +46,11 @@ Route::namespace('App\Http\Controllers')->group(function () {
   Route::get('/dogs/additional_contact/{dog}', 'DogController@additional_contact')->name('dogs.additional_contact');
 
   //request rescue
+  Route::get('/requests/my_dog/list', 'RescueRequestController@dog_list')->name('requests.my_dog.list');
+  Route::get('/requests/additional_contact/{request}', 'RescueRequestController@additional_contact')->name('requests.additional_contact');
+  Route::get('/requests/view_contact/{request}', 'RescueRequestController@view_contact')->name('requests.view_contact'); // paramater yang ada controller harus sama dengan parameter di route
   Route::resource('requests', 'RescueRequestController');
+  Route::put('/requests/{user}/update_contact/{request}', 'RescueRequestController@update_contact')->name('requests.update_contact');
   Route::put('/requests/{request}/rescue', 'RescueRequestController@rescue')->name('requests.rescue');
 
   //adoption
@@ -57,6 +61,9 @@ Route::namespace('App\Http\Controllers')->group(function () {
   Route::get('/adoptions/create/{dog}', 'AdoptionController@create')->name('adoptions.create'); // menggunakan custom karena memerlukan params dog dialam routenya
 
   Route::resource('users', 'UserController');
+
+  //Admin
+  Route::resource('admins', 'AdminController');
 
 });
 

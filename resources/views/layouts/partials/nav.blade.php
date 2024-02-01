@@ -33,35 +33,51 @@
           @endif
 
         @else
-
-          <!-- Route untuk rescuer atau adopter -->
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url('/') }}"><img src="{{asset('images/explore_dog.svg')}}" width="30px" class="img-fluid" alt="">{{ __('nav.explore') }}</a>
-          </li>
-            <!-- my dog dropdown -->
-          <li class="nav-item dropdown">
-            <!-- <a class="nav-link" href="{{ route('dog.my_dog') }}"> -->
-            <a id="navbarDropdown" class="nav-link {{ request()->routeIs('dog.my_dog') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-              <i class="fa-solid fa-dog px-2"></i>{{ __('nav.my_dog') }}<i class="bi bi-caret-down-fill"></i>
-            </a>
-
-            <div class="dropdown-menu p-3 dropdown-menu-end row" aria-labelledby="navbarDropdown">
-              <div class="card dropdown-item mb-3">
-                <div class="card-body">
-                  <h5 class="card-title">{{ __('nav.my_adoption_requests') }}</h5>
-                  <p class="card-text">Explore dogs awaiting your adoption approval</p>
-                  <a class="btn btn-primary" href="{{ route('dog.my_dog.adoption_request') }}">See detail</a>
+          @if (session('role') == 'admin')
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('admins.index') }}"><i class="fa-solid fa-shield-dog"></i>{{ __('nav.solo_rescuer') }}</a>
+            </li>
+          @else
+            @if(session('role') == 'adopter')
+              <!-- Route untuk rescuer atau adopter -->
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/') }}"><img src="{{asset('images/explore_dog.svg')}}" width="30px" class="img-fluid" alt="">{{ __('nav.explore') }}</a>
+              </li>
+            @endif
+              <!-- my dog dropdown -->
+            <li class="nav-item dropdown">
+              <!-- <a class="nav-link" href="{{ route('dog.my_dog') }}"> -->
+              <a id="navbarDropdown" class="nav-link {{ request()->routeIs('dog.my_dog') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                <i class="fa-solid fa-dog px-2"></i>{{ __('nav.my_dog') }}<i class="bi bi-caret-down-fill"></i>
+              </a>
+              <div class="dropdown-menu p-3 dropdown-menu-end row" aria-labelledby="navbarDropdown">
+                @if (session('role') == 'adopter')
+                <div class="card dropdown-item mb-3">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ __('nav.my_adoption_requests') }}</h5>
+                      <p class="card-text">Explore dogs awaiting your adoption approval</p>
+                      <a class="btn btn-primary" href="{{ route('dog.my_dog.adoption_request') }}">See detail</a>
+                    </div>
+                  </div>
+                @endif
+              
+                  <div class="card dropdown-item">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ __('nav.my_dog_listing') }}</h5>
+                      @if(session('role') == 'adopter')
+                        <p class="card-text">Monitor your dogs and find new adopters for them</p>
+                        <a class="btn btn-primary" href="{{ route('dog.my_dog.list') }}">See detail</a>
+                      @else
+                        <p class="card-text">Monitor your dogs and find rescuer for them</p>
+                        <a class="btn btn-primary" href="{{ route('requests.my_dog.list') }}">See detail</a>
+                      @endif
+                    </div>
                 </div>
-              </div>
-                
-              <div class="card dropdown-item">
-                <div class="card-body">
-                  <h5 class="card-title">{{ __('nav.my_dog_listing') }}</h5>
-                  <p class="card-text">Monitor your dogs and find new adopters for them</p>
-                  <a class="btn btn-primary" href="{{ route('dog.my_dog.list') }}">See detail</a>
-                </div>
-            </div>
-          </li>
+              
+            </li>
+          
+
+          @endif
 
           <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link {{ request()->routeIs('user_contacts.create') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -71,9 +87,11 @@
 
             <div class="dropdown-menu dropdown-menu-end p-2" aria-labelledby="navbarDropdown">
               @include('layouts.partials.lang')
-              <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#personal_information">
-                <i class="bi bi-person-lines-fill px-2"></i> {{ __('nav.contact') }}
-              </a>
+              @if(session('role')=='adopter'||'rescuer')
+                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#personal_information">
+                  <i class="bi bi-person-lines-fill px-2"></i> {{ __('nav.contact') }}
+                </a>
+              @endif
               <a class="dropdown-item  border-bottom pb-3" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
@@ -88,14 +106,14 @@
               <div class="card dropdown-item my-3">
                 <div class="card-body">
                   <h5 class="card-title">{{ __('nav.adopter') }}</h5>
-                  <p class="card-text">Let's find a new adopter for your dog</p>
+                  <p class="card-text">Let's find a new adopter for your dog<br>or find a new pet for you</p>
                   <a class="btn btn-primary" href="{{ route('role.set', ['role' => 'adopter']) }}">Change Role</a>
                 </div>
               </div>
                 <!-- <a class="dropdown-item" href="{{ route('role.set', ['role' => 'adopter']) }}">
                   <i class="bi bi-arrow-repeat px-2"></i>{{ __('nav.adopter') }}
                 </a> -->
-              @else
+              @elseif (session('role') == 'adopter')
               <div class="card dropdown-item my-3">
                 <div class="card-body">
                   <h5 class="card-title">{{ __('nav.rescuer') }}</h5>

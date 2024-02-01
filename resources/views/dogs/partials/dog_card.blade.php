@@ -6,39 +6,37 @@
           <div class="row">
             <div class="col-sm-6 image-wrapper">
             
-              @php
-                $dog_status = ($stray_dog->dog->adopted) ? __('dog.index.adopted') : "adopteable";
-                $status = ($stray_dog->dog->adopted) ? __('dog.index.adopted') : __('dog.index.pending');
+
                 
-                if ($stray_dog->dog->adopted == false) {
-                  if ($stray_dog->user_id == auth()->user()->id) {
-                      echo '
-                          <h5 class="position-absolute bg-warning-subtle p-2 m-2 rounded fs-6">
-                              <i class="bi bi-exclamation-circle"></i> Waiting for approval
-                          </h5>
-                      ';
-                  } elseif ($stray_dog->user_id != auth()->user()->id) {
-                      echo '
-                          <h5 class="position-absolute bg-info-subtle p-2 m-2 rounded fs-6">
-                              Adoptable
-                          </h5>
-                      ';
-                  }
-              } elseif ($stray_dog->dog->adopted == true && $stray_dog->user_id == auth()->user()->id) {
-                  echo '
-                      <h5 class="position-absolute bg-success-subtle p-2 m-2 rounded fs-6">
-                          <i class="bi bi-check-circle"></i> You got this
-                      </h5>
-                  ';
-              } else {
-                  echo '
-                      <h5 class="position-absolute bg-danger-subtle p-2 m-2 rounded fs-6">
-                        <i class="bi bi-x-circle"> Adopted by other
-                      </h5>
-                  ';
-              }
+                @if ($stray_dog->dog->adopted == false) 
+                  @if ($stray_dog->user_id == auth()->user()->id) 
+                      
+                    <h5 class="position-absolute bg-warning-subtle p-2 m-2 rounded fs-6">
+                      <i class="bi bi-exclamation-circle"></i> Waiting for approval
+                    </h5>
+                      
+                  @elseif ($stray_dog->user_id != auth()->user()->id) 
+                      
+                    <h5 class="position-absolute bg-info-subtle p-2 m-2 rounded fs-6">
+                      Adoptable
+                    </h5>
+                  
+                  @endif
+                @elseif ($stray_dog->dog->adopted == true && $stray_dog->user_id == auth()->user()->id) 
+                  
+                  <h5 class="position-absolute bg-success-subtle p-2 m-2 rounded fs-6">
+                    <i class="bi bi-check-circle"></i> You got this
+                  </h5>
+                  
+                @else 
+                  
+                  <h5 class="position-absolute bg-danger-subtle p-2 m-2 rounded fs-6">
+                    <i class="bi bi-x-circle"> Adopted by other
+                  </h5>
                 
-              @endphp
+                @endif
+                
+
           
               @php
                 $filename = $stray_dog->dog->images()->orderBy('category')->first()->filename;

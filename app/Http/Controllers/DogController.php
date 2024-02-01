@@ -37,7 +37,6 @@ class DogController extends Controller
     {
         $area = Area::all();
         $stray_dogs = Dog::where('adopted',false)->get();
-        // dd(Dog::where('adopted',false)->get());
         $area_name = null;
 
         if ($request->input('area')) {
@@ -300,10 +299,10 @@ class DogController extends Controller
 
     public function dog_list(){
         $user=Auth::user();
-        $myDogs=Dog::where('user_id',$user->id)->get();
-        $count=$myDogs->count();
+        $stray_dogs=Dog::where('user_id',$user->id)->get();
+        $count=$stray_dogs->count();
 
-        return view('dogs.dog_list', compact('myDogs','count'));
+        return view('dogs.my_dog_list', compact('stray_dogs','count'));
     }
 
     public function adoption_request(){
@@ -322,7 +321,7 @@ class DogController extends Controller
     public function view_contact(Dog $dog){
         $data = $dog;
         $user = Auth::user();
-        return view('auth.view_contact', compact('user', 'data'));
+        return view('dogs.view_contact', compact('user', 'data'));
     }
 
     public function update_contact(Request $request, User $user, Dog $dog)

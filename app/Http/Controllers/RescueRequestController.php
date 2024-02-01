@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\RescueRequest;
 use App\Models\Area;
+use App\Models\UserInfo;
 use App\Http\Requests\StoreRescueRequestRequest;
 use App\Http\Requests\UpdateRescueRequestRequest;
 use App\Models\Image;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -29,13 +31,15 @@ class RescueRequestController extends Controller
     {
         $area = Area::all();
         $stray_dogs = RescueRequest::all();
+        $area_name = null;
 
         if ($request->input('area')) {
-            $areaRequest = Area::all()->where('name', $request->input('area'))->first();
+            $area_name = $request->input('area');
+            $areaRequest = $area->where('name', $area_name)->first();
             $stray_dogs = $stray_dogs->where('area_id', optional($areaRequest)->id);
         }
 
-        return view('requests.index', compact('stray_dogs','area'));
+        return view('requests.index', compact('stray_dogs','area', 'area_name'));
     }
 
     // Show the form for creating a new resource.
@@ -85,7 +89,7 @@ class RescueRequestController extends Controller
             }
         });
 
-        return redirect()->route("requests.show", ['request' => $strayDog->id])->with([
+        return redirect()->route("requests.view_contact", ['request' => $strayDog->id])->with([
             'flash' => [
                 'type' => 'success',
                 'message' => 'Stray dog has been add successfully',
@@ -96,12 +100,16 @@ class RescueRequestController extends Controller
     // Display the specified resource.
     public function show(RescueRequest $request)
     {
+        //kita bawa id requestnya makanya disiini Rescue Request, biasanya kalo mengarahkan biasa ga usah diisi, 
+        //passing dari 2 controller yang berbeda
+        //dibawa melalui route, makanya di route selalu isi {request}
         $controller_name = 'request';
         $stray_dog = $request;
         $rescuer = $stray_dog;
         $user = Auth::user();
         $own = $stray_dog->user;
-        return view('requests.show', compact('stray_dog', 'user', 'rescuer', 'own', 'controller_name'));
+        $users = User::all()->where('role', 'rescuer');
+        return view('requests.show', compact('stray_dog', 'user', 'rescuer', 'own', 'controller_name', 'users'));
     }
 
     // Show the form for editing the specified resource.
@@ -210,5 +218,49 @@ class RescueRequestController extends Controller
                 'message' => 'Stray dog has been updated successfully',
             ]
         ])->with('flash.once', true);
+    }
+
+    public function view_contact(RescueRequest $request){
+        $data = $request;
+        $user = Auth::user();
+        return view('requests.view_contact', compact('user', 'data'));
+    }
+
+    public function update_contact(Request $request_params, User $user, RescueRequest $request)
+    {
+        // $request dari route
+        // $request_params dimodifikasi karena penamaan sudah digunakan oleh route
+        $user->update($request_params->only(['first_name', 'last_name']));
+
+        if ($user->userInfo()->exists()) {
+            $user->userInfo()->update($request_params->except(['_token', '_method', 'first_name', 'last_name']));
+        } else {
+            UserInfo::create(array_merge($request_params->except(['_token', '_method', 'first_name', 'last_name']), ['user_id' => $user->id]));
+        }
+
+        return redirect()->route('requests.additional_contact', ['request' => $request->id]);
+    }
+
+    public function additional_contact(RescueRequest $request){
+        $dog_finder = $request->user;
+        $stray_dog = $request;
+        $find = RescueRequest::find($request->id);
+        $images =  $find->images()->where('category','rescuer')->get();
+        
+        
+        
+        $users = User::all()->where('role', 'rescuer');
+        dd($users);
+
+        return view('requests.additional_contact', compact('dog_finder','stray_dog', 'users','images'));
+    }
+
+    public function dog_list(){
+       
+        $user=Auth::user();
+        $stray_dogs=RescueRequest::where('user_id',$user->id)->get();
+        $count=$stray_dogs->count();
+
+        return view('dogs.my_dog_list', compact('stray_dogs','count'));
     }
 }

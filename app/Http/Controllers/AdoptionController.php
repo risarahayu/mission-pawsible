@@ -146,7 +146,7 @@ class AdoptionController extends Controller
     public function view_contact(Adoption $adoption){
         $data = $adoption;
         $user = Auth::user();
-        return view('auth.update_profile', compact('user', 'data'));
+        return view('adoptions.view_contact', compact('user', 'data'));
     }
 
     public function additional_contact(Adoption $adoption){

@@ -23,9 +23,30 @@ class RoleController extends Controller
 
     // Action index role, page untuk memilih role setelah login
     public function index(){
+        //kalo masih ada session yang masih nyangkut, session nyimpennya di browser
+        // dd(session());
         Session::forget('role');
-
-        return view('role.index');
+        $user = Auth::user();
+        
+        if ($user->role == 'admin') {
+            session(['role' => 'admin']);
+            return redirect()->route('admins.index')->with([
+                'flash' => [
+                    'type' => 'success',
+                    'message' => __('flash.role_selected', ['name' => "$user->first_name $user->last_name", 'role' => session('role')]),
+                ]
+            ])->with('flash.once', true);
+        } elseif ($user->role == 'rescuer') {
+            session(['role' => 'rescuer']);
+            return redirect()->route('requests.create')->with([
+                'flash' => [
+                    'type' => 'success',
+                    'message' => __('flash.role_selected', ['name' => "$user->first_name $user->last_name", 'role' => session('role')]),
+                ]
+            ])->with('flash.once', true);
+        } else {
+            return view('role.index');
+        }
     }
 
     // Action untuk set role(mengganti role) yang diinginkan
@@ -34,7 +55,7 @@ class RoleController extends Controller
         $user = Auth::user();
         session(['role' => $role]);
 
-        $redirect_url = session('role') == 'rescuer' ? 'requests.index' : 'dogs.index';
+        $redirect_url = session('role') == 'rescuer' ? 'requests.create' : 'dogs.index';
         if ($request->input('create')) { $redirect_url = 'dogs.create'; }
 
         // redirect ke route lalu menampilkan standar flash message

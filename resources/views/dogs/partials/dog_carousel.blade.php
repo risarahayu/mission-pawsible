@@ -1,3 +1,4 @@
+
 <div id="carouselExampleIndicators" class="dog-picture-wrapper carousel slide" data-bs-ride="true">
   <div class="carousel-indicators">
     @foreach ($stray_dog->images()->orderBy('category')->get() as $index => $image)
