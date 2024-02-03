@@ -21,6 +21,13 @@
           <h6 class="fw-bold">{{ empty($user->userInfo->whatsapp) ? "not set" : $user->userInfo->whatsapp }}</h6>
         </div>
       </div>
+      <div class="size">
+        <i class="fa-solid fa-shield-dog"></i>
+        <div>
+          <small>Rescue</small><br/>
+          <a href="{{route('admins.rescuer.detail', ['rescuer_id'=>$user->id])}}"><h6 class="fw-bold">{{ empty($user->rescued_dogs) ? "not set" : $user->rescued_dogs->count().''}} dog(s)</h6></a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

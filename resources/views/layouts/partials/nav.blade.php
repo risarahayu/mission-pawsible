@@ -87,7 +87,7 @@
 
             <div class="dropdown-menu dropdown-menu-end p-2" aria-labelledby="navbarDropdown">
               @include('layouts.partials.lang')
-              @if(session('role')=='adopter'||'rescuer')
+              @if(session('role')=='adopter'|| session('role') =='rescuer')
                 <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#personal_information">
                   <i class="bi bi-person-lines-fill px-2"></i> {{ __('nav.contact') }}
                 </a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\RescueRequest;
 use App\Models\UserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -16,6 +17,12 @@ class AdminController extends Controller
     {
 
         $users = User::where('role','rescuer')->get();
+        
+       
+        foreach ($users as $user) {
+            // dd($rescuedDogs = $user->rescued_dogs);
+        }
+
         $count =  $users->count();
         return view('admins.index', compact('users','count'));
     }
@@ -93,5 +100,10 @@ class AdminController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+    public function rescuer_detail($rescuer_id){
+        $rescuer = User::find($rescuer_id);
+        $rescuedDogs = $rescuer->rescued_dogs;
+     return view ('admins.rescuer_detail', compact('rescuedDogs','rescuer'));
     }
 }

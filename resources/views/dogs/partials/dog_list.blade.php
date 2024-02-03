@@ -1,7 +1,7 @@
 <!-- button -->
 @if (session('role') == 'rescuer')
   <a class="btn btn-custom-submit mb-3" href="{{ route('requests.create') }}"><i class="fa-solid fa-circle-plus" ></i> {{ __('nav.request') }}</a>
-@else
+@elseif(session('role') == 'adopter')
   <a class="btn btn-custom-submit mb-3" href="{{ route('dogs.create') }}"><i class="fa-solid fa-circle-plus"></i> {{ __('nav.register') }}</a>
 @endif
 <div class="row">
@@ -91,13 +91,16 @@
                 <div class="size request-time border-top pt-2">
                   <div>
                     <small><i class="bi bi-person dtl-icon" style="margin-right: 10px"></i>
-                      @if (session('role') == 'rescuer'|| 'solo_rescuer')
+                      @if (session('role') == 'rescuer')
                         Registered by {{$stray_dog->user->first_name." ".$stray_dog->user->last_name }}
                       @else
                         {{__('dog.index.request_by', ['count' => $stray_dog->adoptions->count()])}}
                       @endif
                     </small><br/>
                     <small class=" m-0"><i class="bi bi-clock-history" style="margin-right: 15px"></i>{{ __('dog.index.since', ['date' => $stray_dog->created_at->format('Y-m-d')]) }}</small>
+                    @if(session('role') == 'rescuer'|| session('role')=='admin')
+                      <br><small class=" m-0"><i class="fa-solid fa-shield-dog" style="margin-right: 15px"></i>{{ __('dog.index.rescued_date', ['date' => $stray_dog->updated_at->format('Y-m-d')]) }}</small>
+                    @endif
                   </div>
                 </div>
                 <div class="button mt-1">

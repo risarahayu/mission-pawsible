@@ -21,7 +21,7 @@
               <h1 class="modal-title fs-5" id="rescue_label">{{ __('You can choose one of rescuer to help you. Just chat by Whatsapp') }}</h1>
             </div>
             <div class="row">
-              {{ dd("hello") }}
+              
               @foreach($users as $user)
                 <div class="col-md-4">
                   @include('admins.partials.rescuer_card', ['user' => $user])
@@ -87,7 +87,7 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      @include('dogs.partials.dog_carousel')
+      @include('dogs.partials.dog_carousel',['stray_dog'=>$stray_dog])
     </div>
     <div class="col-md-6">
       @include('admins.partials.rescuer_card', ['user' => $stray_dog->rescuer])

@@ -247,12 +247,12 @@ class RescueRequestController extends Controller
     {
         $dog_finder = $request->user;
         $stray_dog = $request;
-        $find = RescueRequest::find($request->id);
-        $images =  $find->images()->where('category', 'rescuer')->get();
+        // $find = RescueRequest::find($request->id);
+        // $images =  $find->images()->where('category', 'rescuer')->get();
 
         $users = User::all()->where('role', 'rescuer');
 
-        return view('requests.additional_contact', compact('dog_finder', 'stray_dog', 'users', 'images'));
+        return view('requests.additional_contact', compact('dog_finder', 'stray_dog', 'users'));
     }
 
     public function dog_list()

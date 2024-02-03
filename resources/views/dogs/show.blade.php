@@ -29,7 +29,7 @@
                     <i class="bi bi-trash me-2"></i> {{ __('app.button.delete') }}
                   </button>
                 @endif
-              @else
+              @elseif(session('role')=='adopter')
                 @if (!$stray_dog->adopted && $user->adoptions->where('dog_id', $stray_dog->id)->isEmpty())
                   <a type="button" class="btn btn-mps" href="{{ route('adoptions.create', ['dog' => $stray_dog->id]) }}">
                     <i class="fa-solid fa-hand-holding-heart me-2"></i> {{ __('app.button.adopt') }}

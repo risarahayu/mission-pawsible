@@ -22,6 +22,7 @@ return [
         'adopted' => 'Adopted',
         'pending'=>'Waiting for approval',
         'see_detail' => 'See Detail',
+        'rescued_date'=>'Rescued',
     ],
 
     'show' => [
