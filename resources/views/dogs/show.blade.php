@@ -14,7 +14,7 @@
       <div class="row flex-lg-row flex-column-reverse">
 
         <div class="col-lg-6 dog-show">
-          
+
           <div class="main-card">
             <!-- Action button -->
             <div class="d-flex justify-content-end" style="gap: 5px;">

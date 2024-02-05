@@ -5,28 +5,28 @@
     <div class="container adoptions">
       <img class="step-image" src="{{asset('images/step/step 1.svg')}}" alt="">
       <div class="text-center m-auto my-2 text-base-color">
-        <p class="fs-4 m-0">Step 1</p>
-        <p class="alert alert-info m-auto mb-3">Complete the adoption form</p>
+        <p class="fs-4 m-0">{{ __('app.step.first') }}</p>
+        <p class="alert alert-info m-auto mb-3">{{ __('adoption.alert.complete_adoption') }}</p>
       </div>
       @if(is_null($is_indonesian))
         <form action="{{ route('adoptions.create', ['dog' => $dog]) }}" method="get">
           @csrf
           <div class="form-card">
-            <h1 class="fw-bold text-center mb-2">{{ __('Adoptions') }}</h1>
+            <h1 class="fw-bold text-center mb-2">{{ __('adoption.title') }}</h1>
           </div>
           <div class="form-card">
-            <label class="form-label">Are you Indonesian?</label>
+            <label class="form-label">{{ __('adoption.question.indonesian') }}</label>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="is_indonesian" id="yes" value="1">
-              <label class="form-check-label" for="yes">Yes</label>
+              <label class="form-check-label" for="yes">{{ __('app.option.yes') }}</label>
             </div>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="is_indonesian" id="no" value="0">
-              <label class="form-check-label" for="no">No</label>
+              <label class="form-check-label" for="no">{{ __('app.option.no') }}</label>
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary">Continue</button>
+          <button type="submit" class="btn btn-primary">{{ __('app.button.continue') }}</button>
         </form>
       @else
         <form id="adoption_form" method="POST" action="{{ route('adoptions.store') }}" enctype="multipart/form-data">

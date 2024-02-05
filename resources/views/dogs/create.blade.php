@@ -6,8 +6,8 @@
   <div class="container">
     <img class="step-image" src="{{asset('images/step/step 1.svg')}}" alt="">
     <div class="text-center m-auto my-2 text-base-color">
-      <p class="fs-4 m-0">Step 1</p>
-      <p class="alert alert-info m-auto mb-3">Resgister the dog</p>
+      <p class="fs-4 m-0">{{ __('app.step.first') }}</p>
+      <p class="alert alert-info m-auto mb-3">{{ __('dog.index.register') }}</p>
     </div>
     <div class="form-card">
       <h1 class="fw-bold text-center mb-5">{{ __('dog.title') }}</h1>

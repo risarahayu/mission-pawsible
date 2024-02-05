@@ -3,20 +3,20 @@
 <input type="hidden" name="score" value="0">
 
 @if($nationality_checked=='1'||'2')
-  
+
   <!-- Housing Permission Radio Buttons -->
   <div class="form-card">
-    <label class="form-label">Do you have 100% approval from your family / partner / housemate / landlord? </label>
+    <label class="form-label">{{ __('adoption.question.housing_permission') }}</label>
     <div class="form-check">
       <input class="form-check-input" type="radio" name="housing_permission" id="housing_permission_yes" value="1">
       <label class="form-check-label" for="housing_permission_yes">
-        Yes
+        {{ __('app.option.yes') }}
       </label>
     </div>
     <div class="form-check">
       <input class="form-check-input" type="radio" name="housing_permission" id="housing_permission_no" value="">
       <label class="form-check-label" for="housing_permission_no">
-        No
+        {{ __('app.option.no') }}
       </label>
     </div>
   </div>
@@ -25,45 +25,45 @@
     <!-- Housing Type Dropdown -->
     <div class="form-card">
       <div>
-        <label for="housing_type" class="form-label">Housing Type</label>
+        <label for="housing_type" class="form-label">{{ __('adoption.question.housing_type') }}</label>
         <select class="form-select calculate-score" id="housing_type" name="housing_type" required>
-          <option value="compound" data-score="{{ $is_indonesian ? 30 : 25 }}">Compound / Private House</option>
-          <option value="private_villa" data-score="{{ $is_indonesian ? 25 : 20 }}">Private Villa</option>
-          <option value="guesthouse" data-score="{{ $is_indonesian ? 20 : 15 }}">Guesthouse</option>
-          <option value="kos" data-score="0">Kos</option>
+          <option value="compound" data-score="{{ $is_indonesian ? 30 : 25 }}">{{ __('adoption.option.compound') }}</option>
+          <option value="private_villa" data-score="{{ $is_indonesian ? 25 : 20 }}">{{ __('adoption.option.private_villa') }}</option>
+          <option value="guesthouse" data-score="{{ $is_indonesian ? 20 : 15 }}">{{ __('adoption.option.guesthouse') }}</option>
+          <option value="kos" data-score="0">{{ __('adoption.option.kos') }}</option>
         </select>
       </div>
     </div>
 
     <!-- Housing Condition Radio Buttons -->
     <div class="form-card">
-      <label class="form-label">Is your yard fully enclosed without the use of cages, chains, or unrestricted animal roaming?</label>
+      <label class="form-label">{{ __('adoption.question.housing_condition') }}</label>
       <div class="form-check">
         <input class="form-check-input calculate-score" type="radio" name="housing_condition" id="housing_condition_good" data-score="{{ $is_indonesian ? 30 : 25 }}" value="1">
-        <label class="form-check-label" for="housing_condition_good">Yes</label>
+        <label class="form-check-label" for="housing_condition_good">{{ __('app.option.yes') }}</label>
       </div>
       <div class="form-check">
         <input class="form-check-input calculate-score" type="radio" name="housing_condition" id="housing_condition_poor" data-score="0" value="0">
-        <label class="form-check-label" for="housing_condition_poor">No</label>
+        <label class="form-check-label" for="housing_condition_poor">{{ __('app.option.no') }}</label>
       </div>
     </div>
 
     <!-- Housing picutre -->
     <div class="form-card">
       <div class="mb-3">
-        <label for="images" class="form-label"><span class="text-danger">*</span>{{ __('dog.form.dog_picture') }}</label>
+        <label for="images" class="form-label"><span class="text-danger">*</span>{{ __('adoption.question.housing_picture') }}</label>
         <input id="images" type="file" name="images[]"
                 class="form-control required preview-input @error('images') is-invalid @enderror"
-                autocomplete="images" placeholder="{{ __('dog.form.placeholder.dog_picture') }}"
+                autocomplete="images" placeholder="{{ __('adoption.placeholder.housing_picture') }}"
                 multiple>
-        <div class="form-text">{{ __('dog.form.placeholder.house_picture') }}</div>
+        <div class="form-text">{{ __('adoption.placeholder.housing_picture') }}</div>
         @error('images')
           <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
           </span>
         @enderror
       </div>
-  
+
       <div class="image-preview border p-3 w-100 mb-3 d-none" data-preview-id="images">
         <div id="new-images" class="new-images position-relative mb-3 d-none">
           <button type="button" id="delete-new-image" class="btn-delete-images btn btn-danger delete-new-image">{{ __('app.button.delete') }}</button>
@@ -77,14 +77,14 @@
 
     <!-- Pet Experience -->
     <div class="form-card">
-      <label>Have you had a dog before?</label><br>
+      <label>{{ __('adoption.question.dog_experience') }}</label><br>
       <div class="form-check">
         <input class="form-check-input calculate-score" type="radio" name="dog_experience" id="dog_experience_good" data-score="{{ $is_indonesian ? 10 : 5 }}" value="1">
-        <label class="form-check-label" for="dog_experience_good">Yes</label>
+        <label class="form-check-label" for="dog_experience_good">{{ __('app.option.yes') }}</label>
       </div>
       <div class="form-check">
         <input class="form-check-input calculate-score" type="radio" name="dog_experience" id="dog_experience_poor" data-score="0" value="0">
-        <label class="form-check-label" for="dog_experience_poor">No</label>
+        <label class="form-check-label" for="dog_experience_poor">{{ __('app.option.no') }}</label>
       </div>
 
       <!-- Tambahkan style="display: none;" pada textarea -->
@@ -93,96 +93,96 @@
 
     <!-- Vaccinated Radio Buttons -->
     <div class="form-card d-none" id="vaccinatedForm">
-      <label class="form-label">Are your pets fully vaccinated?</label>
+      <label class="form-label">{{ __('adoption.question.vaccinated') }}</label>
       <div class="form-check">
         <input class="form-check-input calculate-score" type="radio" name="vaccinated" id="vaccinated_yes" data-score="{{ $is_indonesian ? 10 : 5 }}" value="1">
-        <label class="form-check-label" for="vaccinated_yes">Yes</label>
+        <label class="form-check-label" for="vaccinated_yes">{{ __('app.option.yes') }}</label>
       </div>
       <div class="form-check">
         <input class="form-check-input calculate-score" type="radio" name="vaccinated" id="vaccinated_no" data-score="0" value="0">
-        <label class="form-check-label" for="vaccinated_no">No</label>
+        <label class="form-check-label" for="vaccinated_no">{{ __('app.option.no') }}</label>
       </div>
     </div>
 
     @if(!$is_indonesian)
       <!-- Residency Duration -->
       <div class="form-card">
-        <label for="residency_duration" class="form-label">How Long have you lived in Bali?</label>
+        <label for="residency_duration" class="form-label">{{ __('adoption.question.residency_duration') }}</label>
         <input type="text" class="form-control" id="residency_duration" name="residency_duration" required>
       </div>
 
       <!-- Planned Residency Duration -->
       <div class="form-card">
-        <label for="planned_residency_duration" class="form-label">How long do you plan to be in Bali?</label>
+        <label for="planned_residency_duration" class="form-label">{{ __('adoption.question.planned_residency_duration') }}</label>
         <input type="text" class="form-control" id="planned_residency_duration" name="planned_residency_duration" required>
       </div>
 
       <!-- Future Residency Country -->
       <div class="form-card">
-        <label for="future_residency_country" class="form-label">When departing from Bali, which country would be your subsequent destination?</label>
+        <label for="future_residency_country" class="form-label">{{ __('adoption.question.future_residency_country') }}</label>
         <input type="text" class="form-control" id="future_residency_country" name="future_residency_country" required>
       </div>
 
       <!-- Pet Migration Plan Radio Buttons -->
       <div class="form-card">
-        <label class="form-label">In the event of departing from Bali, do you plan to relocate with your pets?</label>
+        <label class="form-label">{{ __('adoption.question.pet_migration_plan') }}</label>
         <div class="form-check">
           <input class="form-check-input calculate-score" type="radio" name="pet_migration_plan" id="pet_migration_plan_yes" data-score="20" value="1">
-          <label class="form-check-label" for="pet_migration_plan_yes">Yes</label>
+          <label class="form-check-label" for="pet_migration_plan_yes">{{ __('app.option.yes') }}</label>
         </div>
         <div class="form-check">
           <input class="form-check-input calculate-score" type="radio" name="pet_migration_plan" id="pet_migration_plan_no" data-score="0" value="0">
-          <label class="form-check-label" for="pet_migration_plan_no">No</label>
+          <label class="form-check-label" for="pet_migration_plan_no">{{ __('app.option.no') }}</label>
         </div>
       </div>
     @endif
 
     <!-- Job Dropdown -->
     <div class="form-card">
-      <label for="job" class="form-label">Do you have a job? If so, which one is your occupation:</label>
+      <label for="job" class="form-label">{{ __('adoption.question.job') }}</label>
       <select class="form-select calculate-score" id="job" name="job" required>
-        <option value="wfo" data-score="0">Full Time</option>
-        <option value="wfh" data-score="20">Work From Home</option>
-        <option value="na" data-score="0">Not Applicable</option>
+        <option value="wfo" data-score="0">{{ __('adoption.option.wfo') }}</option>
+        <option value="wfh" data-score="20">{{ __('adoption.option.wfh') }}</option>
+        <option value="na" data-score="0">{{ __('adoption.option.na') }}</option>
       </select>
     </div>
 
     <!-- Who is Home -->
     <div class="form-card" id="house_occupants">
-      <label for="house_occupants" class="form-label">If you work full-time, is there someone present at home to look after the dogs throughout the day?</label>
+      <label for="house_occupants" class="form-label">{{ __('adoption.question.house_occupants') }}</label>
       <div class="form-check">
         <input class="form-check-input calculate-score" type="radio" name="house_occupants" id="house_occupants_good" data-score="15" value="1">
-        <label class="form-check-label" for="house_occupants_good">Yes</label>
+        <label class="form-check-label" for="house_occupants_good">{{ __('app.option.yes') }}</label>
       </div>
       <div class="form-check">
         <input class="form-check-input calculate-score" type="radio" name="house_occupants" id="house_occupants_poor" data-score="0" value="0">
-        <label class="form-check-label" for="house_occupants_poor">No</label>
+        <label class="form-check-label" for="house_occupants_poor">{{ __('app.option.no') }}</label>
       </div>
     </div>
 
     <!-- Canine Residence -->
     <div class="form-card d-none" id="canine_residence">
-      <label for="canine_residence" class="form-label">If "No" where are they kept?</label>
+      <label for="canine_residence" class="form-label">{{ __('adoption.question.canine_residence') }}</label>
       <input type="text" class="form-control" name="canine_residence" >
     </div>
 
     <div class="form-card">
       <p>
-        <strong>Syarat dan Ketentuan Adopsi Hewan Peliharaan:</strong>
+        <strong>{{ __('adoption.term_and_condition.title') }}</strong>
       </p>
 
       <p>
-          Dengan mengajukan permohonan adopsi, pemohon setuju dan memahami bahwa:
+        {{ __('adoption.term_and_condition.sub_title') }}
       </p>
 
       <ol>
-          <li>Pemilik baru harus memberikan perawatan yang baik dan penuh cinta kepada hewan peliharaan yang diadopsi.</li>
-          <li>Pemilik baru bertanggung jawab atas semua biaya perawatan hewan, termasuk vaksinasi yang diperlukan.</li>
-          <li>Pemilik baru wajib memastikan keadaan kesehatan dan kebahagiaan hewan peliharaan yang diadopsi.</li>
-          <li>Pengelola berhak melakukan pemantauan setelah adopsi untuk memastikan bahwa hewan peliharaan mendapatkan perawatan yang optimal.</li>
-          <li>Pengelola berhak untuk memutuskan adopsi jika terdapat penelantaran atau perlakuan tidak baik terhadap hewan peliharaan.</li>
-          <li>Pemohon dianggap telah membaca, memahami, dan menerima syarat dan ketentuan ini sebelum mengajukan permohonan adopsi.</li>
-          <li>Adopsi anjing bukan untuk diperjualbelikan</li>
+        <li>{{ __('adoption.term_and_condition.line_1') }}</li>
+        <li>{{ __('adoption.term_and_condition.line_2') }}</li>
+        <li>{{ __('adoption.term_and_condition.line_3') }}</li>
+        <li>{{ __('adoption.term_and_condition.line_4') }}</li>
+        <li>{{ __('adoption.term_and_condition.line_5') }}</li>
+        <li>{{ __('adoption.term_and_condition.line_6') }}</li>
+        <li>{{ __('adoption.term_and_condition.line_7') }}</li>
       </ol>
 
       <p>
@@ -191,7 +191,7 @@
       <div class="form-check mt-3">
         <input class="form-check-input" type="checkbox" value="" id="agreementCheckbox" required>
         <label class="form-check-label" for="agreementCheckbox">
-            Saya menyetujui semua syarat dan ketentuan di atas.
+          {{ __('adoption.term_and_condition.checkbox') }}
         </label>
       </div>
     </div>

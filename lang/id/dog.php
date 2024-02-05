@@ -11,7 +11,7 @@ return [
         'count' => 'Kami menemukan :count anjing liar di :area',
         'all_count' => 'Kami menemukan :count anjing liar di semua area',
         'empty' => 'Belum ada anjing liar',
-        'empty_adopted_dog'=>'Belum ada anjing yang diadopsi',
+        'empty_adopted_dog' => 'Belum ada anjing yang diadopsi',
         'empty_rescued_dog' => 'Belum ada anjing yang diselamatkan',
         'register' => 'Daftarkan anjing liar',
         'filter' => 'Filter',
@@ -61,7 +61,7 @@ return [
             'small' => 'Kecil <10kg',
             'medium' => 'Sedang 11-15kg',
             'large' => 'Besar 16-20kg',
-            'extra' => 'Sangat Besar 20+kg',
+            'extra' => 'Sangat besar 20+kg',
         ],
         'button' => [
             'next' => 'Berikutnya',
@@ -71,15 +71,41 @@ return [
         'placeholder' => [
             'dog_type' => 'Contoh: Anjing Lokal',
             'color' => 'Contoh: Cokelat, Hitam, Putih',
-            'temperament'=> 'Contoh: Agresif, Tenang, Energik',
+            'temperament' => 'Contoh: Agresif, Tenang, Energik',
             'gender' => "Pilih jenis kelamin anjing",
             'size' => "Pilih ukuran anjing",
             'area' => "Pilih daerah anjing",
             'description' => 'Beritahu kami tentang kondisi kesehatan anjing',
             'dog_picture' => 'Ambil foto anjing',
-            'vaccination_certificate'=>'Silakan unggah <span class="text-primary">buku vaksinasi, foto, atau dokumen lainnya </span>yang dapat membuktikan bahwa anjing Anda telah divaksinasi',
-            'sterilization_certificate'=>'Silakan unggah <span class="text-primary">buku/ foto sterilisasi atau dokumen lainnya</span> sebagai bukti bahwa anjing Anda telah disterilisasi',
+            'vaccination_certificate' => 'Silakan unggah <span class="text-primary">buku vaksinasi, foto, atau dokumen lainnya </span>yang dapat membuktikan bahwa anjing Anda telah divaksinasi',
+            'sterilization_certificate' => 'Silakan unggah <span class="text-primary">buku/ foto sterilisasi atau dokumen lainnya</span> sebagai bukti bahwa anjing Anda telah disterilisasi',
             'map_link' => "Berikan tautan ke lokasi anjing",
         ],
+        'button' => [
+            'next' => 'Berikutnya',
+            'submit' => 'Kirim',
+            'delete' => 'Hapus',
+        ],
+        'placeholder' => [
+            'dog_type' => 'Contoh: Anjing Lokal',
+            'color' => 'Contoh: Cokelat, Hitam, Putih',
+            'temperament' => 'Contoh: Agresif, Tenang, Energik',
+            'gender' => "Pilih jenis kelamin anjing",
+            'size' => "Pilih ukuran anjing",
+            'area' => "Pilih daerah anjing",
+            'description' => 'Beritahu kami tentang kondisi kesehatan anjing',
+            'dog_picture' => 'Ambil foto anjing',
+            'vaccination_certificate' => 'Silakan unggah <span class="text-primary">buku vaksinasi, foto, atau dokumen lainnya </span>yang dapat membuktikan bahwa anjing Anda telah divaksinasi',
+            'sterilization_certificate' => 'Silakan unggah <span class="text-primary">buku/ foto sterilisasi atau dokumen lainnya</span> sebagai bukti bahwa anjing Anda telah disterilisasi',
+            'map_link' => "Berikan tautan ke lokasi anjing",
+        ],
+    ],
+
+    'additional_contact' => [
+        'alert' => [
+            'title' => 'Pantau status anjing Anda',
+            'content' => 'Anda dapat mempromosikan anjing Anda di berbagai platform media sosial,<br>dan kami sangat menyarankan untuk mengarahkan individu yang tertarik<br>untuk mengirimkan aplikasi adopsi melalui situs web kami untuk tujuan keamanan.'
+        ],
+        'no_adopter' => 'Belum ada pengadopsi',
     ],
 ];

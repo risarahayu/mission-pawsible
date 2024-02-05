@@ -5,8 +5,8 @@
       @if(!$stray_dog->adopted)
         @if($stray_dog->adoptions->count() == 0)
           <img class="step-image pt-5" src="{{asset('images/step/step 3.svg')}}" alt="">
-          <div class="text-center m-auto my-2 text-base-color fs-5 "> 
-            Waiting for Potential Adopter
+          <div class="text-center m-auto my-2 text-base-color fs-5 ">
+            {{ __('app.step.waiting_adopter') }}
           </div>
           <!-- colapse -->
           <!-- <div class="text-center">
@@ -17,7 +17,7 @@
               <div class="card card-body">
                 <p class="alert alert-warning  mb-3 text-start">
                   <span class="fw-semibold"><i class="bi bi-1-circle-fill"></i> Monitor the status of your dog</span><br>
-                  You can promote your dog on various social media platforms, <br>and we highly recommend directing interested 
+                  You can promote your dog on various social media platforms, <br>and we highly recommend directing interested
                   individuals <br>to submit adoption applications through our website for security purposes.
                 </p>
 
@@ -41,15 +41,14 @@
               </div>
             </div>
           </div> -->
-        
+
           <p class="alert alert-info m-auto mb-3 text-center">
-            <span class="fw-semibold">Monitor the status of your dog</span><br>
-            You can promote your dog on various social media platforms, <br>and we highly recommend directing interested 
-            individuals <br>to submit adoption applications through our website for security purposes.
+            <span class="fw-semibold">{{ __('dog.additional_contact.alert.title') }}</span><br>
+            {!! __('dog.additional_contact.alert.content') !!}
           </p>
         @elseif($stray_dog->adoptions->count() > 0)
           <img class="step-image pt-5" src="{{asset('images/step/step 3.svg')}}" alt="">
-          <div class="text-center m-auto my-2 text-base-color fs-5 "> 
+          <div class="text-center m-auto my-2 text-base-color fs-5 ">
             Adopter Selection
           </div>
           <p class="alert alert-info m-auto mb-3 text-center">
@@ -59,7 +58,7 @@
         @endif
       @else
         <img class="step-image pt-5" src="{{asset('images/step/step 3 finish.svg')}}" alt="">
-        <div class="text-center m-auto my-2 text-base-color fs-5 "> 
+        <div class="text-center m-auto my-2 text-base-color fs-5 ">
           Chat your new dog adopter!
         </div>
         <p class="text-center">Please coordinate among yourselves for the pickup of the dog. Congratulations!</p>
@@ -126,7 +125,7 @@
           <div class="dashboard-nodata-card dogs">
             <div class="d-flex flex-column align-items-center">
               <img src="{{ asset('images/single-dog.png') }}" alt="Single Dog" width="6rem">
-              <p class="m-0 mt-2 txt-1">No adopter yet</p>
+              <p class="m-0 mt-2 txt-1">{{ __('dog.additional_contact.no_adopter') }}</p>
             </div>
           </div>
         @endif

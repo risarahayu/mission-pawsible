@@ -7,34 +7,39 @@ use Illuminate\Support\Facades\App;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+  /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
 
-    // Fungsi untuk melakukan sesuatu sebelum menjalankan action
-    public function __construct()
-    {
-        // ini langsung dari laravelnya, Fungsi untuk
-        // Redirect back ke halaman login ketika belum login
-        $this->middleware('auth');
+  // Fungsi untuk melakukan sesuatu sebelum menjalankan action
+  public function __construct()
+  {
+    // ini langsung dari laravelnya, Fungsi untuk
+    // Redirect back ke halaman login ketika belum login
+    $this->middleware('auth');
 
-        // Ini adalah custom middleware
-        // untuk mengecek [session('role')] sudah di terapkan
-        // sebelum melakukan [action], Redirect back ke [route('role.index')] ketika belum menerapkan role
-        $this->middleware('role');
-    }
+    // Ini adalah custom middleware
+    // untuk mengecek [session('role')] sudah di terapkan
+    // sebelum melakukan [action], Redirect back ke [route('role.index')] ketika belum menerapkan role
+    $this->middleware('role');
+  }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+  /**
+   * Show the application dashboard.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
 
-    public function index()
-    {
-        $redirect_route = session('role') == 'adopter' ? 'dogs.index' : 'requests.index';
-        return redirect()->route($redirect_route);
-    }
+  public function index()
+  {
+    $redirect_route = session('role') == 'adopter' ? 'dogs.index' : 'requests.index';
+
+    if (session('role') == 'admin') {
+      $redirect_route = 'admins.index';
+    };
+
+    return redirect()->route($redirect_route);
+  }
 }

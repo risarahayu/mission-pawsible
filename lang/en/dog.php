@@ -11,7 +11,7 @@ return [
         'count' => 'We found :count at :area stray dog',
         'all_count' => 'We found :count stray dog at All area',
         'empty' => 'No stray dog yet',
-        'empty_adopted_dog'=>'No dogs have been adopted yet',
+        'empty_adopted_dog' => 'No dogs have been adopted yet',
         'empty_rescued_dog' => 'No dogs have been rescued yet',
         'register' => 'Register a stray dog',
         'filter' => 'Filter',
@@ -20,7 +20,7 @@ return [
         'since' => 'Since :date',
         'adoptable' => 'Adoptable',
         'adopted' => 'Adopted',
-        'pending'=>'Waiting for approval',
+        'pending' => 'Waiting for approval',
         'see_detail' => 'See Detail',
         'rescued_date' => 'Rescued',
     ],
@@ -71,15 +71,23 @@ return [
         'placeholder' => [
             'dog_type' => 'Example : Local Dog',
             'color' => 'Example : Brawn, Black, White',
-            'temperament'=> 'Example : Aggressive, Calm, Energetic',
+            'temperament' => 'Example : Aggressive, Calm, Energetic',
             'gender' => "Choose the dog's gender",
             'size' => "Choose the dog's size",
             'area' => "Choose the dog's area",
             'description' => 'Tell us about the dog health condition',
             'dog_picture' => 'Take pictures of the dog',
-            'vaccination_certificate'=>'Please upload <span class="text-primary">the vaccination book, photo, or any other documentation </span>that can prove your dog has been vaccinated',
-            'sterilization_certificate'=>'Please upload <span class="text-primary">the sterilization book/photo or any other documentation</span> proof that can demonstrate that your dog has been sterilized',
+            'vaccination_certificate' => 'Please upload <span class="text-primary">the vaccination book, photo, or any other documentation </span>that can prove your dog has been vaccinated',
+            'sterilization_certificate' => 'Please upload <span class="text-primary">the sterilization book/photo or any other documentation</span> proof that can demonstrate that your dog has been sterilized',
             'map_link' => "Please provide the link to the dog's location",
         ],
+    ],
+
+    'additional_contact' => [
+        'alert' => [
+            'title' => 'Pantau status anjing Anda',
+            'content' => 'Anda dapat mempromosikan anjing Anda di berbagai platform media sosial,<br>dan kami sangat menyarankan untuk mengarahkan individu yang tertarik<br>untuk mengirimkan aplikasi adopsi melalui situs web kami untuk tujuan keamanan.'
+        ],
+        'no_adopter' => 'No adopter yet',
     ],
 ];
