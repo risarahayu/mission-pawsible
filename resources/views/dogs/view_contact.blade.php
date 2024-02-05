@@ -19,7 +19,7 @@
           </div>
 
           <div class="form-card">
-            @include('dogs.partials.form_contact')
+            @include('auth.partials.form_contact')
 
             <div class="modal-footer">
               <!-- <button type="button" class="btn btn-secondary" style="min-width: 100px" data-bs-dismiss="modal">Close</button> -->

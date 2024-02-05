@@ -54,28 +54,28 @@
                 @if (session('role') == 'adopter')
                 <div class="card dropdown-item mb-3">
                     <div class="card-body">
-                      <h5 class="card-title">{{ __('nav.my_adoption_requests') }}</h5>
-                      <p class="card-text">Explore dogs awaiting your adoption approval</p>
-                      <a class="btn btn-primary" href="{{ route('dog.my_dog.adoption_request') }}">See detail</a>
+                      <h5 class="card-title">{{ __('nav.my_adoption_requests.title') }}</h5>
+                      <p class="card-text">{{ __('nav.my_adoption_requests.sub_title') }}</p>
+                      <a class="btn btn-primary" href="{{ route('dog.my_dog.adoption_request') }}">{{ __('app.button.see_detail') }}</a>
                     </div>
                   </div>
                 @endif
-              
+
                   <div class="card dropdown-item">
                     <div class="card-body">
-                      <h5 class="card-title">{{ __('nav.my_dog_listing') }}</h5>
+                      <h5 class="card-title">{{ __('nav.my_dog_listing.title') }}</h5>
                       @if(session('role') == 'adopter')
-                        <p class="card-text">Monitor your dogs and find new adopters for them</p>
-                        <a class="btn btn-primary" href="{{ route('dog.my_dog.list') }}">See detail</a>
+                        <p class="card-text">{{ __('nav.my_dog_listing.adopter') }}</p>
+                        <a class="btn btn-primary" href="{{ route('dog.my_dog.list') }}">{{ __('app.button.see_detail') }}</a>
                       @else
-                        <p class="card-text">Monitor your dogs and find rescuer for them</p>
-                        <a class="btn btn-primary" href="{{ route('requests.my_dog.list') }}">See detail</a>
+                        <p class="card-text">{{ __('nav.my_dog_listing.rescuer') }}</p>
+                        <a class="btn btn-primary" href="{{ route('requests.my_dog.list') }}">{{ __('app.button.see_detail') }}</a>
                       @endif
                     </div>
                 </div>
-              
+
             </li>
-          
+
 
           @endif
 
@@ -103,27 +103,21 @@
               </form>
 
               @if (session('role') == 'rescuer')
-              <div class="card dropdown-item my-3">
-                <div class="card-body">
-                  <h5 class="card-title">{{ __('nav.adopter') }}</h5>
-                  <p class="card-text">Let's find a new adopter for your dog<br>or find a new pet for you</p>
-                  <a class="btn btn-primary" href="{{ route('role.set', ['role' => 'adopter']) }}">Change Role</a>
+                <div class="card dropdown-item my-3">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ __('nav.adopter.title') }}</h5>
+                    <p class="card-text">{!! __('nav.adopter.sub_title') !!}</p>
+                    <a class="btn btn-primary" href="{{ route('role.set', ['role' => 'adopter']) }}">Change Role</a>
+                  </div>
                 </div>
-              </div>
-                <!-- <a class="dropdown-item" href="{{ route('role.set', ['role' => 'adopter']) }}">
-                  <i class="bi bi-arrow-repeat px-2"></i>{{ __('nav.adopter') }}
-                </a> -->
               @elseif (session('role') == 'adopter')
-              <div class="card dropdown-item my-3">
-                <div class="card-body">
-                  <h5 class="card-title">{{ __('nav.rescuer') }}</h5>
-                  <p class="card-text">Let's find a rescuer or foster for the dogs</p>
-                  <a class="btn btn-primary" href="{{ route('role.set', ['role' => 'rescuer']) }}">Change Role</a>
+                <div class="card dropdown-item my-3">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ __('nav.rescuer.title') }}</h5>
+                    <p class="card-text">{!! __('nav.rescuer.sub_title') !!}</p>
+                    <a class="btn btn-primary" href="{{ route('role.set', ['role' => 'rescuer']) }}">Change Role</a>
+                  </div>
                 </div>
-              </div>
-                <!-- <a class="dropdown-item" href="{{ route('role.set', ['role' => 'rescuer']) }}">
-                  <i class="fa-solid fa-repeat px-2"></i></i> {{ __('nav.rescuer') }}
-                </a> -->
               @endif
             </div>
           </li>

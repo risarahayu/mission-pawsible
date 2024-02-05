@@ -8,5 +8,7 @@ return [
         'next' => 'Selanjutnya',
         'adopt' => 'Adopsi',
         'rescue' => 'Selamatkan',
+		    'see_detail' => 'Lihat detail',
+        'change_role' => 'Ganti Peran',
     ],
 ];
