@@ -107,7 +107,7 @@
                   <div class="card-body">
                     <h5 class="card-title">{{ __('nav.adopter.title') }}</h5>
                     <p class="card-text">{!! __('nav.adopter.sub_title') !!}</p>
-                    <a class="btn btn-primary" href="{{ route('role.set', ['role' => 'adopter']) }}">Change Role</a>
+                    <a class="btn btn-primary" href="{{ route('role.set', ['role' => 'adopter']) }}">{{ __('app.button.change_role') }}</a>
                   </div>
                 </div>
               @elseif (session('role') == 'adopter')
@@ -115,7 +115,7 @@
                   <div class="card-body">
                     <h5 class="card-title">{{ __('nav.rescuer.title') }}</h5>
                     <p class="card-text">{!! __('nav.rescuer.sub_title') !!}</p>
-                    <a class="btn btn-primary" href="{{ route('role.set', ['role' => 'rescuer']) }}">Change Role</a>
+                    <a class="btn btn-primary" href="{{ route('role.set', ['role' => 'rescuer']) }}">{{ __('app.button.change_role') }}</a>
                   </div>
                 </div>
               @endif
