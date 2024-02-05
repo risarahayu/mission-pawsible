@@ -4,7 +4,7 @@ return [
     'title' => "Let's save the dog",
     'sub_title' => 'You can adopt some of them or you also can register your dog to find new adopter',
     'sub_title_request' => 'We will assist in rescuing the dog you find on the street',
-    'alert'=>"Hey there! The dogs featured on our website are all vaccinated and sterilized.<br> They're ready for a loving home!",
+    'alert' => "Hey there! The dogs featured on our website are all vaccinated and sterilized.<br> They're ready for a loving home!",
 
     // index
     'index' => [
@@ -22,7 +22,7 @@ return [
         'adopted' => 'Adopted',
         'pending'=>'Waiting for approval',
         'see_detail' => 'See Detail',
-        'rescued_date'=>'Rescued',
+        'rescued_date' => 'Rescued',
     ],
 
     'show' => [
@@ -30,6 +30,12 @@ return [
         'no_adopter' => 'No adopter yet',
         'registered_by' => 'Registered by',
         'adopters' => 'Adopters',
+
+        'already_adopted' => 'Someone already adopt this dog!',
+        'got_it' => 'You got it',
+        'keep_update' => 'Keep Update!',
+        'already_request' => 'You already request this dog.',
+        'waiting_approval' => 'Waiting for approval from the owner',
     ],
 
     // create
@@ -76,5 +82,4 @@ return [
             'map_link' => "Please provide the link to the dog's location",
         ],
     ],
-
 ];
