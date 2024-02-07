@@ -53,4 +53,8 @@ return [
 
         'checkbox' => 'Saya menyetujui semua syarat dan ketentuan di atas.',
     ],
+
+    'additional_contact' => [
+        'alert' => 'Pantau status permintaan adopsi Anda atau hubungi pemilik anjing untuk pembaruan.'
+    ],
 ];

@@ -30,7 +30,18 @@ return [
     'view_contact' => [
         'title' => 'My Profile',
         'alert' => 'Check your contact and ensure you are easily reachable',
+    ],
 
+    'status' => [
+    	  'waiting_for_approval' => 'Waiting for approval',
+        'adoptable' => 'Adoptable',
+        'waiting_for_potential_adopter' => 'Waiting for potential adopter',
+        'you_got_it' => 'You got it',
+        'adopted_by_other' => 'Adopted by other'
+    ],
+
+    'profile' => [
+        'email' => 'Email',
         'first_name' => 'First Name',
         'last_name' => 'Last Name',
         'birthday' => 'Birthday',
@@ -41,5 +52,7 @@ return [
         'city' => 'City',
         'province' => 'Province',
         'postal' => 'Postal Code',
-    ],
+        'location' => 'Location',
+        'potential' => 'Potential',
+    ]
 ];

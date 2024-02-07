@@ -27,7 +27,7 @@ class StoreAdoptionRequest extends FormRequest
         'housing_type' => 'required|string',
         'housing_permission' => 'required|boolean',
         'housing_condition' => 'required|boolean',
-        'pet_experience' => 'nullable|string',
+        'pet_experience' => 'nullable|boolean',
         'residency_duration' => 'nullable|string',
         'planned_residency_duration' => 'nullable|string',
         'future_residency_country' => 'nullable|string',

@@ -80,7 +80,7 @@
         var jobValue = $(this).val();
 
         // Menampilkan atau menyembunyikan elemen berdasarkan pilihan pekerjaan
-        if (jobValue == 'Full Time') {
+        if (jobValue == 'wfo') {
           $('#house_occupants').show();
           $('#canine_residence').show();
         } else {
@@ -180,7 +180,6 @@
         event.preventDefault();
 
         var total_score = housing_type + housing_condition + dog_experience + vaccinated + pet_migration_plan + job + house_occupants;
-        debugger;
         $("input[name='score']").val(total_score);
         $(this).unbind('submit').submit();
       });

@@ -83,7 +83,7 @@ class DogController extends Controller
             }
 
             // Create straydogs
-            
+
             $stray_dog_request = array_merge($request->except(['_token', 'area']), ['area_id' => $area->id]);
             $strayDog = Dog::create($stray_dog_request);
 
@@ -306,12 +306,12 @@ class DogController extends Controller
     }
 
     public function adoption_request(){
-        
+
         $user=Auth::user();
         $adoptions=Adoption::where('user_id',$user->id)->where('status','pending')->get();
         $count=$adoptions->count();
 
-        $history = Adoption::where('user_id',$user->id)->where('status', 'accepted')->get(); 
+        $history = Adoption::where('user_id',$user->id)->where('status', 'accepted')->get();
         $history_count=$history->count();
         // dd($history);
 

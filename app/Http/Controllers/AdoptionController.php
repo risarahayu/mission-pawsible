@@ -24,7 +24,7 @@ class AdoptionController extends Controller
         // Redirect back ke [route('role.index')] ketika belum menerapkan role
         $this->middleware('role');
     }
-    
+
     /**
      * Display a listing of the resource.
      */
@@ -52,7 +52,7 @@ class AdoptionController extends Controller
     public function store(StoreAdoptionRequest $request)
     {
         $adoption = Adoption::create($request->validated()); // jangan lupa mengisikan method ->validated() jika ingin melakukan create secara langsung
-        
+
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $filename = $image->getClientOriginalName();
@@ -71,8 +71,6 @@ class AdoptionController extends Controller
                 'message' => 'Adoption record has been created successfully.',
             ]
         ])->with('flash.once', true);
-        
-        
     }
 
     public function update_contact(Request $request, User $user, Adoption $adoption)
@@ -109,7 +107,6 @@ class AdoptionController extends Controller
      */
     public function update(Request $request, Adoption $adoption)
     {
-        
         if ($request->status == 'cancel') {
             $stray_dog = $adoption->dog;
             $adoption->update(['status' => 'pending']);
@@ -150,8 +147,7 @@ class AdoptionController extends Controller
     }
 
     public function additional_contact(Adoption $adoption){
-        // Adoption::find()
-        $dog_owner = $adoption->dog->user;
-        return view('adoptions.additional_contact', compact('dog_owner'));
+        $controller_name = "adoption";
+        return view('adoptions.additional_contact', compact('adoption', 'controller_name'));
     }
 }

@@ -53,4 +53,8 @@ return [
 
         'checkbox' => 'I agree to all the terms and conditions above.',
     ],
+
+    'additional_contact' => [
+        'alert' => 'Monitor the status of your request adoption or contact the dog owner for updates.'
+    ],
 ];

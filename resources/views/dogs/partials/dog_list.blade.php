@@ -16,36 +16,32 @@
                 @if ($stray_dog->adopted == false)
                   @if($stray_dog->where('user_id', '!=', auth()->user()->id)->first())
                     <h5 class="position-absolute bg-info-subtle p-2 m-2 rounded fs-6">
-                      Adoptable
+                      {{ __('app.status.adoptable') }}
                     </h5>
                   @endif
                   @if(!$stray_dog->adoptions->where('user_id', '=', auth()->user()->id)->first())
-                      <h5 class="position-absolute bg-info-subtle p-2 m-2 rounded fs-6">
-                          Waiting for potential adopter
-                      </h5>
+                    <h5 class="position-absolute bg-info-subtle p-2 m-2 rounded fs-6">
+                      {{ __('app.status.waiting_for_potential_adopter') }}
+                    </h5>
                   @endif
-
-                  
                   @if ($stray_dog->adoptions->where('status', 'pending')->where('user_id', auth()->user()->id)->first())
-                  <h5 class="position-absolute bg-info-subtle p-2 m-2 rounded fs-6">
-                      <h5 class="position-absolute bg-warning-subtle p-2 m-2 rounded fs-6">
-                        <i class="bi bi-exclamation-circle"></i> Waiting for approval
-                      </h5>
-                    elseif ($stray_dog->adoptions->where('status', 'pending')->where('user_id', '!=', auth()->user()->id)->first())
-                      <h5 class="position-absolute bg-info-subtle p-2 m-2 rounded fs-6">
-                        Adoptable
-                      </h5>
-                    @endif
+                    <h5 class="position-absolute bg-warning-subtle p-2 m-2 rounded fs-6">
+                      <i class="bi bi-exclamation-circle"></i> {{ __('app.status.waiting_for_approval') }}
+                    </h5>
+                  @elseif ($stray_dog->adoptions->where('status', 'pending')->where('user_id', '!=', auth()->user()->id)->first())
+                    <h5 class="position-absolute bg-info-subtle p-2 m-2 rounded fs-6">
+                      {{ __('app.status.adoptable') }}
+                    </h5>
                   @elseif ($stray_dog->dog->adopted == true &&  $stray_dog->where('user_id', auth()->user()->id)->first())
                     <h5 class="position-absolute bg-success-subtle p-2 m-2 rounded fs-6">
-                      <i class="bi bi-check-circle"></i> You got this
+                      <i class="bi bi-check-circle"></i> {{ __('app.status.you_got_it') }}
                     </h5>
                   @else
                     <h5 class="position-absolute bg-danger-subtle p-2 m-2 rounded fs-6">
-                      <i class="bi bi-x-circle"> Adopted by other
+                      <i class="bi bi-x-circle"> {{ __('app.status.adopted_by_other') }}
                     </h5>
                   @endif
-                </h5>
+                @endif
               @endif
               @if (session('role') == 'rescuer')
                 @if($stray_dog->rescued)
@@ -110,7 +106,7 @@
                   @endphp -->
 
                   <a href="{{ session('role') == 'rescuer'? route('requests.show', ['request' => $stray_dog->id]) : route('dogs.show', ['dog' => $stray_dog->id]) }}" class="btn btn-custom-submit w-100">
-                    {{ __('dog.index.see_detail') }}
+                    {{ __('app.button.see_detail') }}
                   </a>
                 </div>
               </div>

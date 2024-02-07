@@ -30,7 +30,18 @@ return [
     'view_contact' => [
         'title' => 'Profil Saya',
         'alert' => 'Periksa kontak Anda dan pastikan Anda dapat dihubungi dengan mudah',
+    ],
 
+    'status' => [
+        'waiting_for_approval' => 'Menunggu persetujuan',
+        'adoptable' => 'Dapat diadopsi',
+        'waiting_for_potential_adopter' => 'Menunggu calon pengadopsi',
+        'you_got_it' => 'Anda mendapatkannya',
+        'adopted_by_other' => 'Telah diadopsi oleh orang lain'
+    ],
+
+    'profile' => [
+        'email' => 'Email',
         'first_name' => 'Nama Depan',
         'last_name' => 'Nama Belakang',
         'birthday' => 'Tanggal Lahir',
@@ -41,5 +52,7 @@ return [
         'city' => 'Kota',
         'province' => 'Provinsi',
         'postal' => 'Kode Pos',
-    ],
+        'location' => 'Location',
+        'potential' => 'Berpotensi',
+    ]
 ];
