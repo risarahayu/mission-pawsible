@@ -36,7 +36,7 @@ class DogController extends Controller
     public function index(Request $request)
     {
         $area = Area::all();
-        $stray_dogs = Dog::where('adopted',false)->get();
+        $stray_dogs = Dog::where('adopted', false)->get();
         $area_name = null;
 
         if ($request->input('area')) {
@@ -60,7 +60,6 @@ class DogController extends Controller
         $stray_dogs = Dog::all();
         $areas = Area::all();
         return view('dogs.create', compact('user', 'stray_dogs', 'areas', 'action_name', 'dog', 'controller_name'));
-
     }
 
     /**
@@ -99,7 +98,7 @@ class DogController extends Controller
                 }
             }
 
-            if  ($request->hasFile('vaccination_certificate')) {
+            if ($request->hasFile('vaccination_certificate')) {
                 foreach ($request->file('vaccination_certificate') as $image) {
                     $filename = $image->getClientOriginalName();
                     $path = $image->storeAs('public/stray_dog_images', $filename);
@@ -112,7 +111,7 @@ class DogController extends Controller
                 }
             }
 
-            if  ($request->hasFile('sterilization_certificate')) {
+            if ($request->hasFile('sterilization_certificate')) {
                 foreach ($request->file('sterilization_certificate') as $image) {
                     $filename = $image->getClientOriginalName();
                     $path = $image->storeAs('public/stray_dog_images', $filename);
@@ -165,7 +164,7 @@ class DogController extends Controller
 
         $controller_name = 'dog';
 
-        return view('dogs.show', compact('user', 'stray_dog', 'userAdoption', 'own', 'adoptions', 'controller_name','own_new'));
+        return view('dogs.show', compact('user', 'stray_dog', 'userAdoption', 'own', 'adoptions', 'controller_name', 'own_new'));
     }
 
     /**
@@ -232,7 +231,7 @@ class DogController extends Controller
                 }
             }
 
-            if  ($request->hasFile('vaccination_certificate')) {
+            if ($request->hasFile('vaccination_certificate')) {
                 foreach ($request->file('vaccination_certificate') as $image) {
                     $filename = $image->getClientOriginalName();
                     $path = $image->storeAs('public/stray_dog_images', $filename);
@@ -245,7 +244,7 @@ class DogController extends Controller
                 }
             }
 
-            if  ($request->hasFile('sterilization_certificate')) {
+            if ($request->hasFile('sterilization_certificate')) {
                 foreach ($request->file('sterilization_certificate') as $image) {
                     $filename = $image->getClientOriginalName();
                     $path = $image->storeAs('public/stray_dog_images', $filename);
@@ -284,41 +283,44 @@ class DogController extends Controller
     public function my_dog()
     {
         // dd($user=Auth::user());
-        $user=Auth::user();
-        $adoptions=Adoption::where('user_id',$user->id)->get();
+        $user = Auth::user();
+        $adoptions = Adoption::where('user_id', $user->id)->get();
         // dd($adoptions);
         //atau
         // $user->adoptions
 
-        $rescues=RescueRequest::where('user_id',$user->id)->get();
+        $rescues = RescueRequest::where('user_id', $user->id)->get();
         // dd($rescues);
 
-        $myDogs=Dog::where('user_id',$user->id)->get();
-        return view('dogs.my_dog', compact('adoptions','rescues','myDogs'));
+        $myDogs = Dog::where('user_id', $user->id)->get();
+        return view('dogs.my_dog', compact('adoptions', 'rescues', 'myDogs'));
     }
 
-    public function dog_list(){
-        $user=Auth::user();
-        $stray_dogs=Dog::where('user_id',$user->id)->get();
-        $count=$stray_dogs->count();
+    public function dog_list()
+    {
+        $user = Auth::user();
+        $stray_dogs = Dog::where('user_id', $user->id)->get();
+        $count = $stray_dogs->count();
 
-        return view('dogs.my_dog_list', compact('stray_dogs','count'));
+        return view('dogs.my_dog_list', compact('stray_dogs', 'count'));
     }
 
-    public function adoption_request(){
+    public function adoption_request()
+    {
 
-        $user=Auth::user();
-        $adoptions=Adoption::where('user_id',$user->id)->where('status','pending')->get();
-        $count=$adoptions->count();
+        $user = Auth::user();
+        $adoptions = Adoption::where('user_id', $user->id)->where('status', 'pending')->get();
+        $count = $adoptions->count();
 
-        $history = Adoption::where('user_id',$user->id)->where('status', 'accepted')->get();
-        $history_count=$history->count();
+        $history = Adoption::where('user_id', $user->id)->where('status', 'accepted')->get();
+        $history_count = $history->count();
         // dd($history);
 
-        return view('dogs.adoption_request', compact('adoptions','count','history','history_count'));
+        return view('dogs.adoption_request', compact('adoptions', 'count', 'history', 'history_count'));
     }
 
-    public function view_contact(Dog $dog){
+    public function view_contact(Dog $dog)
+    {
         $data = $dog;
         $user = Auth::user();
         return view('dogs.view_contact', compact('user', 'data'));
@@ -326,18 +328,25 @@ class DogController extends Controller
 
     public function update_contact(Request $request, User $user, Dog $dog)
     {
-        $user->update($request->only(['first_name', 'last_name']));
+        $area_name = $request->input('area');
+        $area = Area::where('name', $area_name)->first();
+        if (empty($area)) {
+            $area = Area::create(['name' => $area_name]);
+        };
 
+        $user->update($request->only(['first_name', 'last_name']));
+        $userInfo_params = array_merge($request->except(['_token', '_method', 'first_name', 'last_name', 'area']), ['user_id' => $user->id, 'area_id' => $area->id]);
         if ($user->userInfo()->exists()) {
-            $user->userInfo()->update($request->except(['_token', '_method', 'first_name', 'last_name']));
+            $user->userInfo()->update($userInfo_params);
         } else {
-            UserInfo::create(array_merge($request->except(['_token', '_method', 'first_name', 'last_name']), ['user_id' => $user->id]));
+            UserInfo::create($userInfo_params);
         }
 
         return redirect()->route('dogs.additional_contact', ['dog' => $dog->id]);
     }
 
-    public function additional_contact(Dog $dog){
+    public function additional_contact(Dog $dog)
+    {
         //request adoption
         $user = Auth::user();
 
@@ -361,6 +370,6 @@ class DogController extends Controller
 
         $controller_name = 'dog';
 
-        return view('dogs.additional_contact', compact('user', 'stray_dog', 'userAdoption', 'own', 'adoptions', 'controller_name','own_new'));
+        return view('dogs.additional_contact', compact('user', 'stray_dog', 'userAdoption', 'own', 'adoptions', 'controller_name', 'own_new'));
     }
 }

@@ -99,10 +99,14 @@
 <div class="row">
   <div class="col">
     <div class="form-floating mb-3">
-      <input id="city" type="text" name="city"
-              class="form-control @error('city') is-invalid @enderror"
-              autocomplete="city" placeholder="{{ __('app.profile.city') }}"
-              value="{{ optional(auth()->user()->userInfo)->city }}">
+      <select id="area" name="area" class="form-select required @error('area') is-invalid @enderror">
+        @php
+          $user_area = optional(optional(auth()->user()->userInfo)->area)->name;
+        @endphp
+        @foreach (['badung', 'bangli', 'buleleng', 'gianyar', 'jembrana', 'karangasem', 'klungkung', 'tabanan', 'denpasar'] as $area)
+          <option value="{{ $area }}" {{ $user_area == $area ? 'selected' : '' }}>{{ ucfirst($area) }}</option>
+        @endforeach
+      </select>
       <label for="city">{{ __('app.profile.city') }}</label>
       @error('city')
         <span class="invalid-feedback" role="alert">
@@ -115,8 +119,8 @@
     <div class="form-floating mb-3">
       <input id="province" type="text" name="province"
               class="form-control @error('province') is-invalid @enderror"
-              autocomplete="province" placeholder="{{ __('app.profile.province') }}"
-              value="{{ optional(auth()->user()->userInfo)->province }}">
+              autocomplete="province" placeholder="{{ __('app.profile.province') }}" disabled="disabled"
+              value="{{ is_null(optional(auth()->user()->userInfo)->province) ? ucfirst("bali") : optional(auth()->user()->userInfo)->province }}">
       <label for="province">{{ __('app.profile.province') }}</label>
       @error('province')
         <span class="invalid-feedback" role="alert">

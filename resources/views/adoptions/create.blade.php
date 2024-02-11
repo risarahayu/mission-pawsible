@@ -147,7 +147,7 @@
 
       var housing_type = {{ $is_indonesian ? 30 : 25 }};
       var housing_condition = 0;
-      var dog_experience = 0;
+      var pet_experience = 0;
       var vaccinated = 0;
       var pet_migration_plan = 0;
       var job = 0;
@@ -158,13 +158,15 @@
           housing_type = $(this).find('option:selected').data('score');
         } else if ($(this).prop('name') == "housing_condition") {
           housing_condition = $(this).data('score');
-        } else if ($(this).prop('name') == "dog_experience") {
+        } else if ($(this).prop('name') == "pet_experience") {
           if ($(this).val() == '1') {
-            $('#vaccinatedForm').toggleClass('d-none d-block');
+            $('#vaccinatedForm').removeClass('d-none');
+            $('#vaccinatedForm').addClass('d-block');
           } else {
-            $('#vaccinatedForm').toggleClass('d-block d-none');
+            $('#vaccinatedForm').removeClass('d-block');
+            $('#vaccinatedForm').addClass('d-none');
           }
-          dog_experience = $(this).data('score');
+          pet_experience = $(this).data('score');
         } else if ($(this).prop('name') == "vaccinated") {
           vaccinated = $(this).data('score');
         } else if ($(this).prop('name') == "pet_migration_plan") {
@@ -179,7 +181,7 @@
       $("form#adoption_form").submit(function(event) {
         event.preventDefault();
 
-        var total_score = housing_type + housing_condition + dog_experience + vaccinated + pet_migration_plan + job + house_occupants;
+        var total_score = housing_type + housing_condition + pet_experience + vaccinated + pet_migration_plan + job + house_occupants;
         $("input[name='score']").val(total_score);
         $(this).unbind('submit').submit();
       });

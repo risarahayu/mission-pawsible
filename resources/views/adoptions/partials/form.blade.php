@@ -77,18 +77,15 @@
 
     <!-- Pet Experience -->
     <div class="form-card">
-      <label>{{ __('adoption.question.dog_experience') }}</label><br>
+      <label>{{ __('adoption.question.pet_experience') }}</label><br>
       <div class="form-check">
-        <input class="form-check-input calculate-score" type="radio" name="dog_experience" id="dog_experience_good" data-score="{{ $is_indonesian ? 10 : 5 }}" value="1">
-        <label class="form-check-label" for="dog_experience_good">{{ __('app.option.yes') }}</label>
+        <input class="form-check-input calculate-score" type="radio" name="pet_experience" id="pet_experience_good" data-score="{{ $is_indonesian ? 10 : 5 }}" value="1">
+        <label class="form-check-label" for="pet_experience_good">{{ __('app.option.yes') }}</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input calculate-score" type="radio" name="dog_experience" id="dog_experience_poor" data-score="0" value="0">
-        <label class="form-check-label" for="dog_experience_poor">{{ __('app.option.no') }}</label>
+        <input class="form-check-input calculate-score" type="radio" name="pet_experience" id="pet_experience_poor" data-score="0" value="0">
+        <label class="form-check-label" for="pet_experience_poor">{{ __('app.option.no') }}</label>
       </div>
-
-      <!-- Tambahkan style="display: none;" pada textarea -->
-      <textarea id="petExperience" class="form-control" name="pet_experience" style="height: 200px; display: none;"  placeholder="Please give us details"></textarea>
     </div>
 
     <!-- Vaccinated Radio Buttons -->

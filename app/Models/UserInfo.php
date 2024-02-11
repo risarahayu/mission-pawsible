@@ -12,6 +12,16 @@ class UserInfo extends Model
     protected $fillable = [
         'user_id', 'birthday', 'whatsapp', 'facebook', 'instagram',
         'street_address', 'city', 'province', 'postal', 'map_link',
+        'area_id'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
 }

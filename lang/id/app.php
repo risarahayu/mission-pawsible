@@ -13,6 +13,9 @@ return [
         'save' => 'Simpan',
         'see_all_my_dog' => 'Lihat semua anjing saya',
         'continue' => 'Lanjut',
+        'cancel_adopter' => 'Batalkan Pengadopsi',
+        'accept_adopter' => 'Terima Pengadopsi',
+        'see_all_request' => 'Lihat Semua Permintaan'
     ],
 
     'option' => [
@@ -25,6 +28,8 @@ return [
         'second' => 'Langkah 2',
         'third' => 'Langkah 3',
         'waiting_adopter' => 'Menunggu Calon Pengadopsi',
+        'adopter_selection' => 'Pemilihan Pengadopsi',
+        'chat_adopter' => 'Chat pengadopsi baru anda!'
     ],
 
     'view_contact' => [
@@ -52,7 +57,7 @@ return [
         'city' => 'Kota',
         'province' => 'Provinsi',
         'postal' => 'Kode Pos',
-        'location' => 'Location',
+        'location' => 'Lokasi',
         'potential' => 'Berpotensi',
     ]
 ];

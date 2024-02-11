@@ -230,14 +230,18 @@ class RescueRequestController extends Controller
 
     public function update_contact(Request $request_params, User $user, RescueRequest $request)
     {
-        // $request dari route
-        // $request_params dimodifikasi karena penamaan sudah digunakan oleh route
-        $user->update($request_params->only(['first_name', 'last_name']));
+        $area_name = $request->input('area');
+        $area = Area::where('name', $area_name)->first();
+        if (empty($area)) {
+            $area = Area::create(['name' => $area_name]);
+        };
 
+        $user->update($request->only(['first_name', 'last_name']));
+        $userInfo_params = array_merge($request->except(['_token', '_method', 'first_name', 'last_name', 'area']), ['user_id' => $user->id, 'area_id' => $area->id]);
         if ($user->userInfo()->exists()) {
-            $user->userInfo()->update($request_params->except(['_token', '_method', 'first_name', 'last_name']));
+            $user->userInfo()->update($userInfo_params);
         } else {
-            UserInfo::create(array_merge($request_params->except(['_token', '_method', 'first_name', 'last_name']), ['user_id' => $user->id]));
+            UserInfo::create($userInfo_params);
         }
 
         return redirect()->route('requests.additional_contact', ['request' => $request->id]);

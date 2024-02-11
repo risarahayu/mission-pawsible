@@ -13,6 +13,9 @@ return [
         'save' => 'Save',
         'see_all_my_dog' => 'See all my dogs',
         'continue' => 'Continue',
+        'cancel_adopter' => 'Cancel Adopter',
+        'accept_adopter' => 'Accept Adopter',
+        'see_all_request' => 'See all request'
     ],
 
     'option' => [
@@ -25,6 +28,8 @@ return [
         'second' => 'Step 2',
         'third' => 'Step 3',
         'waiting_adopter' => 'Waiting for Potential Adopter',
+        'adopter_selection' => 'Adopter Selection',
+        'chat_adopter' => 'Chat your new dog adopter!',
     ],
 
     'view_contact' => [

@@ -230,7 +230,7 @@
         <input id="sterilization_certificate" type="file" name="sterilization_certificate[]"
               class="form-control preview-input"
               autocomplete="sterilization_certificate" placeholder="{{ __('Evidence that shows the dog has been sterilized (optional)') }}"
-              multiple> 
+              multiple>
         <div class="form-text">{!! __('dog.form.placeholder.sterilization_certificate') !!}</div>
         @error('sterilization_certificate')
           <span class="invalid-feedback" role="alert">

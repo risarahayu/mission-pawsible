@@ -10,4 +10,14 @@ class Area extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public function dogs()
+    {
+        return $this->hasMany(Dog::class);
+    }
+
+    public function userInfos()
+    {
+        return $this->hasMany(UserInfo::class);
+    }
 }

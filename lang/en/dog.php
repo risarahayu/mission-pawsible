@@ -90,4 +90,73 @@ return [
         ],
         'no_adopter' => 'No adopter yet',
     ],
+
+    'adopter_detail' => [
+        'review_potential' => 'Review the potential adopters and conduct interview by Whatsapp',
+        'review_profile' => 'You can review the social media profiles of potential adopters, then accept one adopter.',
+        'please_coordinate' => 'Please coordinate among yourselves for the pickup of the dog. Congratulations!',
+        'recommend_monitoring' => "We recommend monitoring your dog's condition during the first 2 weeks to ensure a smooth adjustment to the new environment. Sufficient monitoring can be done through private chat.",
+        'adopters' => 'Adopters',
+        'new_adopter' => 'New Adopter',
+        'found_adopter' => 'We found :count Potential adopters',
+        'term' => "All those who register as adopters have agreed to <span type='button' class='text-decoration-underline'  data-bs-toggle='modal' data-bs-target='#exampleModal'>the terms</span><br> and have permission from their family or those around them",
+
+        'housing_type' => [
+            'title' => 'Housing type',
+            'guesthouse' => 'Not all guesthouses are the same, make sure the guesthouse is safe and does not restrict the well-being of the dog',
+            'kos' => "Avoid adopters in dorms due to limited space. Opt for stable, spacious homes for pets' well-being.",
+        ],
+
+        'housing_condition' => [
+            'title' => 'Housing condition',
+            'yes' => 'Yard fully enclosed without the use of cages, chains, or unrestricted animal roaming',
+            'no' => 'Yard is not full enclose',
+            'alert' => 'We avoid adopters who are accustomed to using cages, chains, or allowing unrestricted animal roaming.',
+        ],
+
+        'residency_duration' => [
+            'title' => 'Residence Duration',
+            'description' => 'Has been living in Bali for :duration',
+            'alert' => 'Long-term residence in a place can indicate stability, which is a positive factor for the well-being of pets.',
+        ],
+
+        'residence_duration_planned' => [
+            'title' => 'Residence Duration Planned',
+            'description' => 'Plan to stay for :duration in Bali',
+            'alert' => 'Ensure that potential adopters can be relied upon for the long term or have a stable residence (not frequently moving).',
+        ],
+
+        'future_residency_country' => [
+            'title' => 'Future Residency Country',
+            'alert' => 'It is important to ensure that pet owners understand the requirements and needs of pets in the destination country due to differences in regulations, environmental conditions, and healthcare services between countries.',
+        ],
+
+        'pet_migration_plan' => [
+            'title' => 'Pet Migration Plan',
+            'yes' => 'Plan to relocate with the pet',
+            'no' => 'Have no plan to relocate with the pet',
+            'alert' => 'Ensure that potential adopters are responsible and committed in this matter',
+        ],
+
+        'job' => [
+            'title' => 'Job',
+            'alert' => "We recommend adopters who are already employed. However, what's crucial is that the adopter you choose is responsible and capable."
+        ],
+
+        'house_occupants' => [
+            'title' => 'House Occupants',
+            'alert' => 'There is someone present at home to look after the dogs throughout the day'
+        ],
+
+        'pet_experience' => [
+            'title' => 'Pet Experience',
+            'no' => "Don't have experience",
+        ],
+
+        'vaccinated' => [
+            'yes' => 'Have experience with vaccinated dog',
+            'no' => "Don't have experience with vaccinated dog",
+            'alert' => 'We recommend adopters who have experience in vaccination. Make sure that the potential adopter has knowledge in dog vaccination.',
+        ],
+    ],
 ];

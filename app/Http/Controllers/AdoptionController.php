@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Adoption;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Dog;
-use App\Models\User;
-use App\Models\Image;
-use App\Models\userInfo;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAdoptionRequest;
 use App\Http\Requests\UpdateAdoptionRequest;
+use App\Models\Adoption;
+use App\Models\Area;
+use App\Models\Dog;
+use App\Models\Image;
+use App\Models\User;
+use App\Models\UserInfo;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -75,12 +77,18 @@ class AdoptionController extends Controller
 
     public function update_contact(Request $request, User $user, Adoption $adoption)
     {
-        $user->update($request->only(['first_name', 'last_name']));
+        $area_name = $request->input('area');
+        $area = Area::where('name', $area_name)->first();
+        if (empty($area)) {
+            $area = Area::create(['name' => $area_name]);
+        };
 
+        $user->update($request->only(['first_name', 'last_name']));
+        $userInfo_params = array_merge($request->except(['_token', '_method', 'first_name', 'last_name', 'area']), ['user_id' => $user->id, 'area_id' => $area->id]);
         if ($user->userInfo()->exists()) {
-            $user->userInfo()->update($request->except(['_token', '_method', 'first_name', 'last_name']));
+            $user->userInfo()->update($userInfo_params);
         } else {
-            UserInfo::create(array_merge($request->except(['_token', '_method', 'first_name', 'last_name']), ['user_id' => $user->id]));
+            UserInfo::create($userInfo_params);
         }
 
         return redirect()->route('adoptions.additional_contact', ['adoption' => $adoption->id]);

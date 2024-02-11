@@ -52,9 +52,9 @@
                   <p class="fs-2">You get it</p>
                 @endif
               @elseif($stray_dog->adopted !== '1' && $userAdoption)
-                <p class="fs-2">Keep Update!</p>
-                <div class="btn btn-primary fw-bold fs-5">You already request this dog.</div>
-                <p class="fs-6 mt-3">Waiting for approval from the owener</p>
+                <p class="fs-2">{{ __('dog.show.keep_update') }}</p>
+                <div class="btn btn-primary fw-bold fs-5">{{ __('dog.show.already_request') }}</div>
+                <p class="fs-6 mt-3">{{ __('dog.show.waiting_approval') }}</p>
               @endif
             @endif
           </div>
