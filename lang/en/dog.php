@@ -5,6 +5,7 @@ return [
     'sub_title' => 'You can adopt some of them or you also can register your dog to find new adopter',
     'sub_title_request' => 'We will assist in rescuing the dog you find on the street',
     'alert' => "Hey there! The dogs featured on our website are all vaccinated and sterilized.<br> They're ready for a loving home!",
+    'your_dog' => "Your dog",
 
     // index
     'index' => [

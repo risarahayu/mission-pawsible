@@ -5,6 +5,7 @@ return [
     'sub_title' => 'Anda dapat mengadopsi beberapa dari mereka atau Anda juga dapat mendaftarkan anjing Anda untuk menemukan pengadopsi baru',
     'sub_title_request' => 'Kami akan membantu dalam menyelamatkan anjing yang Anda temukan di jalanan',
     'alert' => "Hai! Anjing yang ditampilkan di situs web kami sudah divaksinasi dan disterilisasi.<br> Mereka siap untuk memiliki rumah yang penuh kasih sayang!",
+    'your_dog' => "Anjing anda",
 
     // index
     'index' => [

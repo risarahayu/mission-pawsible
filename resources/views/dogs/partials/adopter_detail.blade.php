@@ -87,7 +87,7 @@
               <div class="brief">
                 <div class="wrapper">
                   <!-- ADOPTER CARD HERE -->
-                  @include('dogs.partials.adopters_card', ['user' => $own_new])
+                  @include('dogs.partials.adopters_card', ['user' => $own_new->user, 'adoption' => $own_new])
 
                   <!-- MODAL HERE -->
                   @include('dogs.partials.modal_adopter', ['adoption' => $own_new])

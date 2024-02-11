@@ -24,10 +24,10 @@
                   <form action="{{ route('dogs.destroy', $stray_dog->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
+                    <button type="button" class="btn btn-danger need-confirm">
+                      <i class="bi bi-trash me-2"></i> {{ __('app.button.delete') }}
+                    </button>
                   </form>
-                  <button class="btn btn-danger delete-dog">
-                    <i class="bi bi-trash me-2"></i> {{ __('app.button.delete') }}
-                  </button>
                 @endif
               @elseif(session('role')=='adopter')
                 @if (!$stray_dog->adopted && $user->adoptions->where('dog_id', $stray_dog->id)->isEmpty())
@@ -45,13 +45,13 @@
           <!-- Adoption button -->
           <div class="text-center w-100">
             @if($user->id != $own->id)
-              @if($stray_dog->adopted == '1')
-                @if($user->id != $stray_dog->user_id)
-                  <p class="fs-2">Someone already adopt this dog!</p>
+              @if($stray_dog->adopted)
+                @if($user->id == $own_new->user_id)
+                  <p class="fs-2">{{ __('dog.show.got_it') }}</p>
                 @else
-                  <p class="fs-2">You get it</p>
+                  <p class="fs-2">{{ __('dog.show.already_adopted') }}</p>
                 @endif
-              @elseif($stray_dog->adopted !== '1' && $userAdoption)
+              @elseif(!$stray_dog->adopted && $userAdoption)
                 <p class="fs-2">{{ __('dog.show.keep_update') }}</p>
                 <div class="btn btn-primary fw-bold fs-5">{{ __('dog.show.already_request') }}</div>
                 <p class="fs-6 mt-3">{{ __('dog.show.waiting_approval') }}</p>
@@ -76,7 +76,7 @@
   @if(Auth::id()==$stray_dog->user_id)
     <script type="module">
       $(function() {
-        $('.delete-dog').click(function() {
+        $('.need-confirm').click(function() {
           var self = $(this);
           Swal.fire({
             title: 'Are you sure?',
@@ -87,7 +87,7 @@
             cancelButtonText: 'No'
           }).then((result) => {
             if (result.isConfirmed) {
-              self.parent().find('form').submit();
+              self.parent().submit();
             }
           })
         });

@@ -213,7 +213,7 @@
             @csrf
             @method('PUT')
             <input type="hidden" name="status" value="cancel">
-            <button type="submit" class="btn btn-mps mt-3 fw-normal w-100 btn-cancel-adoption">
+            <button type="button" class="btn btn-mps mt-3 fw-normal w-100 btn-cancel-adoption need-confirm">
               {{ __('app.button.cancel_adopter') }}
             </button>
           </form>
@@ -222,7 +222,7 @@
             @csrf
             @method('PUT')
             <input type="hidden" name="status" value="accept">
-            <button type="submit" class="btn btn-mps mt-3 fw-normal w-100">
+            <button type="button" class="btn btn-mps mt-3 fw-normal w-100 need-confirm">
               {{ __('app.button.accept_adopter') }}
             </button>
           </form>

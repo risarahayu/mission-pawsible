@@ -43,7 +43,7 @@
                     </h5>
                   @else
                     <h5 class="position-absolute bg-danger-subtle p-2 m-2 rounded fs-6">
-                      <i class="bi bi-x-circle"> {{ __('app.status.adopted_by_other') }}
+                      <i class="bi bi-x-circle"></i> {{ __('app.status.adopted_by_other') }}
                     </h5>
                   @endif
                 @endif
