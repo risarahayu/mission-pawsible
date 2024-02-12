@@ -183,7 +183,7 @@
       </ol>
 
       <p>
-        Dengan menandatangani atau mengajukan permohonan adopsi, pemohon menyatakan kesediaannya untuk mematuhi dan menghormati syarat dan ketentuan ini selama dan setelah proses adopsi.
+        {{ __('adoption.term_and_condition.end_line') }}
       </p>
       <div class="form-check mt-3">
         <input class="form-check-input" type="checkbox" value="" id="agreementCheckbox" required>

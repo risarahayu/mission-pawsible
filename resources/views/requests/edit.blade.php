@@ -4,7 +4,7 @@
 <section>
   <div class="container">
     <div class="form-card">
-      <h1 class="fw-bold text-center mb-5">{{ __('Edit Stray Dog') }}</h1>
+      <h1 class="fw-bold text-center mb-5">{{ __('dog.edit_title') }}</h1>
 
       <div class="row justify-content-center">
         <div class="col-md-5">

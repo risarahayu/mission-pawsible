@@ -24,3 +24,21 @@ toastr.options = {
 };
 
 import './auth';
+
+$(function() {
+  $('.need-confirm').click(function() {
+    var self = $(this);
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#BD1A8D',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        self.parents('form').submit();
+      }
+    })
+  });
+})

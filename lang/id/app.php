@@ -9,13 +9,14 @@ return [
         'adopt' => 'Adopsi',
         'rescue' => 'Selamatkan',
         'see_detail' => 'Lihat detail',
-        'change_role' => 'Ganti Peran',
+        'change_role' => 'Ganti peran',
         'save' => 'Simpan',
         'see_all_my_dog' => 'Lihat semua anjing saya',
         'continue' => 'Lanjut',
-        'cancel_adopter' => 'Batalkan Pengadopsi',
-        'accept_adopter' => 'Terima Pengadopsi',
-        'see_all_request' => 'Lihat Semua Permintaan'
+        'cancel_adopter' => 'Batalkan pengadopsi',
+        'accept_adopter' => 'Terima pengadopsi',
+        'see_all_request' => 'Lihat semua permintaan',
+        'see_dog_details' => 'Lihat detil anjing',
     ],
 
     'option' => [
@@ -29,7 +30,8 @@ return [
         'third' => 'Langkah 3',
         'waiting_adopter' => 'Menunggu Calon Pengadopsi',
         'adopter_selection' => 'Pemilihan Pengadopsi',
-        'chat_adopter' => 'Chat pengadopsi baru anda!'
+        'chat_adopter' => 'Chat pengadopsi baru anda!',
+        'finish' => 'Selesai',
     ],
 
     'view_contact' => [
@@ -42,7 +44,9 @@ return [
         'adoptable' => 'Dapat diadopsi',
         'waiting_for_potential_adopter' => 'Menunggu calon pengadopsi',
         'you_got_it' => 'Anda mendapatkannya',
-        'adopted_by_other' => 'Telah diadopsi oleh orang lain'
+        'adopted_by_other' => 'Telah diadopsi oleh orang lain',
+        'waiting_for_rescue' => 'Menunggu penyelamatan',
+        'rescued' => 'Diselamatkan',
     ],
 
     'profile' => [

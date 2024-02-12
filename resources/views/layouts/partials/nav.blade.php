@@ -8,17 +8,15 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse mt-2 mt-md-0 pt-2 pt-md-0" id="navbarSupportedContent">
       <!-- Left Side Of Navbar -->
       <ul class="navbar-nav me-auto">
       </ul>
 
       <!-- Right Side Of Navbar -->
       <ul class="navbar-nav ms-auto" style="gap: 10px;">
-
         <!-- Authentication Links -->
         @guest
-
           <!-- Sepertinya tidak digunakan -->
           @if (Route::has('login'))
             <li class="nav-item">
@@ -31,63 +29,80 @@
               <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
             </li>
           @endif
-
         @else
           @if (session('role') == 'admin')
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('admins.index') }}"><i class="fa-solid fa-shield-dog"></i>{{ __('nav.solo_rescuer') }}</a>
+              <a class="nav-link" href="{{ route('admins.index') }}">
+                <div class="nav-icon">
+                  <i class="fa-solid fa-shield-dog"></i>
+                </div>
+                {{ __('nav.solo_rescuer') }}
+              </a>
             </li>
           @else
-            @if(session('role') == 'adopter')
+            {{-- @if (session('role') == 'adopter') --}}
               <!-- Route untuk rescuer atau adopter -->
               <li class="nav-item">
-                <a class="nav-link" href="{{ url('/') }}"><img src="{{asset('images/explore_dog.svg')}}" width="30px" class="img-fluid" alt="">{{ __('nav.explore') }}</a>
+                <a class="nav-link" href="{{ url('/') }}">
+                  <div class="nav-icon">
+                    <img src="{{ asset('images/explore_dog.svg') }}" width="30px" class="img-fluid" alt="">
+                  </div>
+                  {{ __('nav.explore') }}
+                </a>
               </li>
-            @endif
-              <!-- my dog dropdown -->
+            {{-- @endif --}}
+
+            <!-- my dog dropdown -->
             <li class="nav-item dropdown">
               <!-- <a class="nav-link" href="{{ route('dog.my_dog') }}"> -->
-              <a id="navbarDropdown" class="nav-link {{ request()->routeIs('dog.my_dog') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                <i class="fa-solid fa-dog px-2"></i>{{ __('nav.my_dog') }}<i class="bi bi-caret-down-fill"></i>
+              <a id="navbarDropdown" class="nav-link {{ request()->routeIs('dog.my_dog') ? 'active' : '' }}"
+                href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                <div class="nav-icon">
+                  <i class="fa-solid fa-dog px-2"></i>
+                </div>
+                {{ __('nav.my_dog') }}<i class="bi bi-caret-down-fill"></i>
               </a>
+
               <div class="dropdown-menu p-3 dropdown-menu-end row" aria-labelledby="navbarDropdown">
                 @if (session('role') == 'adopter')
-                <div class="card dropdown-item mb-3">
+                  <div class="card dropdown-item mb-3">
                     <div class="card-body">
                       <h5 class="card-title">{{ __('nav.my_adoption_requests.title') }}</h5>
                       <p class="card-text">{{ __('nav.my_adoption_requests.sub_title') }}</p>
-                      <a class="btn btn-primary" href="{{ route('dog.my_dog.adoption_request') }}">{{ __('app.button.see_detail') }}</a>
+                      <a class="btn btn-primary"
+                        href="{{ route('dog.my_dog.adoption_request') }}">{{ __('app.button.see_detail') }}</a>
                     </div>
                   </div>
                 @endif
 
-                  <div class="card dropdown-item">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ __('nav.my_dog_listing.title') }}</h5>
-                      @if(session('role') == 'adopter')
-                        <p class="card-text">{{ __('nav.my_dog_listing.adopter') }}</p>
-                        <a class="btn btn-primary" href="{{ route('dog.my_dog.list') }}">{{ __('app.button.see_detail') }}</a>
-                      @else
-                        <p class="card-text">{{ __('nav.my_dog_listing.rescuer') }}</p>
-                        <a class="btn btn-primary" href="{{ route('requests.my_dog.list') }}">{{ __('app.button.see_detail') }}</a>
-                      @endif
-                    </div>
+                <div class="card dropdown-item">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ __('nav.my_dog_listing.title') }}</h5>
+                    @if (session('role') == 'adopter')
+                      <p class="card-text">{{ __('nav.my_dog_listing.adopter') }}</p>
+                      <a class="btn btn-primary" href="{{ route('dog.my_dog.list') }}">{{ __('app.button.see_detail') }}</a>
+                    @else
+                      <p class="card-text">{{ __('nav.my_dog_listing.rescuer') }}</p>
+                      <a class="btn btn-primary" href="{{ route('requests.my_dog.list') }}">{{ __('app.button.see_detail') }}</a>
+                    @endif
+                  </div>
                 </div>
-
+              </div>
             </li>
-
-
           @endif
 
           <li class="nav-item dropdown">
-            <a id="navbarDropdown" class="nav-link {{ request()->routeIs('user_contacts.create') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-              <i class="bi bi-person-circle"></i>
-              {{Auth::user()->first_name}}<i class="bi bi-caret-down-fill"></i>
+            <a id="navbarDropdown" class="nav-link {{ request()->routeIs('user_contacts.create') ? 'active' : '' }}"
+              href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+              <div class="nav-icon">
+                <i class="fa-solid fa-circle-user px-2"></i>
+              </div>
+              {{ Auth::user()->first_name }}<i class="bi bi-caret-down-fill"></i>
             </a>
 
             <div class="dropdown-menu dropdown-menu-end p-2" aria-labelledby="navbarDropdown">
               @include('layouts.partials.lang')
-              @if(session('role')=='adopter'|| session('role') =='rescuer')
+              @if (session('role') == 'adopter' || session('role') == 'rescuer')
                 <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#personal_information">
                   <i class="bi bi-person-lines-fill px-2"></i> {{ __('nav.contact') }}
                 </a>
@@ -107,7 +122,8 @@
                   <div class="card-body">
                     <h5 class="card-title">{{ __('nav.adopter.title') }}</h5>
                     <p class="card-text">{!! __('nav.adopter.sub_title') !!}</p>
-                    <a class="btn btn-primary" href="{{ route('role.set', ['role' => 'adopter']) }}">{{ __('app.button.change_role') }}</a>
+                    <a class="btn btn-primary"
+                      href="{{ route('role.set', ['role' => 'adopter']) }}">{{ __('app.button.change_role') }}</a>
                   </div>
                 </div>
               @elseif (session('role') == 'adopter')
@@ -115,20 +131,21 @@
                   <div class="card-body">
                     <h5 class="card-title">{{ __('nav.rescuer.title') }}</h5>
                     <p class="card-text">{!! __('nav.rescuer.sub_title') !!}</p>
-                    <a class="btn btn-primary" href="{{ route('role.set', ['role' => 'rescuer']) }}">{{ __('app.button.change_role') }}</a>
+                    <a class="btn btn-primary"
+                      href="{{ route('role.set', ['role' => 'rescuer']) }}">{{ __('app.button.change_role') }}</a>
                   </div>
                 </div>
               @endif
             </div>
           </li>
-
         @endguest
       </ul>
     </div>
   </div>
 
   <!-- Modal -->
-  <div class="modal fade" id="personal_information" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="personal_information_label" aria-hidden="true">
+  <div class="modal fade" id="personal_information" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="personal_information_label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header justify-content-center">
@@ -143,7 +160,8 @@
             @include('auth.partials.form_contact')
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" style="min-width: 100px" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" style="min-width: 100px"
+              data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary" style="min-width: 100px">Save</button>
           </div>
         </form>

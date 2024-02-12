@@ -15,15 +15,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-
-        $users = User::where('role','rescuer')->get();
-        
-       
-        foreach ($users as $user) {
-            // dd($rescuedDogs = $user->rescued_dogs);
-        }
-
+        $users = User::where('role', 'rescuer')->get();
         $count =  $users->count();
+
         return view('admins.index', compact('users','count'));
     }
 
@@ -47,7 +41,6 @@ class AdminController extends Controller
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email|max:255',
             'whatsapp' => 'required|string|min:12',
-            'password' => 'required|min:8|confirmed',
         ]);
 
         // dd($validatedUser['role']);
@@ -56,7 +49,7 @@ class AdminController extends Controller
         $user->first_name = $validatedUser['first_name'];
         $user->last_name = $validatedUser['last_name'];
         $user->email = $validatedUser['email'];
-        $user->password = bcrypt($validatedUser['password']);
+        $user->password = bcrypt('123456');
         $user->save();
 
         $userInfo = new UserInfo(['whatsapp' => $validatedUser['whatsapp']]);
@@ -103,7 +96,8 @@ class AdminController extends Controller
     }
     public function rescuer_detail($rescuer_id){
         $rescuer = User::find($rescuer_id);
-        $rescuedDogs = $rescuer->rescued_dogs;
-     return view ('admins.rescuer_detail', compact('rescuedDogs','rescuer'));
+        $rescued_dogs = $rescuer->rescuedDogs;
+
+        return view ('admins.rescuer_detail', compact('rescued_dogs','rescuer'));
     }
 }

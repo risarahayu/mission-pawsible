@@ -7,6 +7,8 @@ return [
     'alert' => "Hai! Anjing yang ditampilkan di situs web kami sudah divaksinasi dan disterilisasi.<br> Mereka siap untuk memiliki rumah yang penuh kasih sayang!",
     'your_dog' => "Anjing anda",
 
+    'edit_title' => 'Edit informasi anjing',
+
     // index
     'index' => [
         'count' => 'Kami menemukan :count anjing liar di :area',
@@ -23,7 +25,7 @@ return [
         'adopted' => 'Telah diadopsi',
         'pending' => 'Menunggu persetujuan',
         'see_detail' => 'Lihat Detail',
-        'rescued_date' => 'Diselamatkan',
+        'rescued_date' => 'Diselamatkan :date',
     ],
 
     'show' => [

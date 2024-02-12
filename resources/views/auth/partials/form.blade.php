@@ -50,24 +50,26 @@
   @enderror
 </div>
 
-{{-- Password input --}}
-<div class="mb-3 d-none">
-  <label class="fw-bold mb-1" for="password">{{ __('session.password') }}</label>
-  <input id="password" placeholder="{{ __('session.placeholder.password') }}" value="12345678" type="password" class="form-control @error('password') is-invalid @enderror"
-    name="password" required autocomplete="new-password">
-  <p class="form-text text-white">Input minimal 8 charachter</p>
-  @error('password')
-    <span class="invalid-feedback" role="alert">
-      <strong>{{ $message }}</strong>
-    </span>
-  @enderror
-</div>
-{{-- End of password input --}}
+@if (empty(session('role')))
+  {{-- Password input --}}
+  <div class="mb-3">
+    <label class="fw-bold mb-1" for="password">{{ __('session.password') }}</label>
+    <input id="password" placeholder="{{ __('session.placeholder.password') }}" type="password" class="form-control @error('password') is-invalid @enderror"
+      name="password" required autocomplete="new-password">
+    <p class="form-text text-white">Input minimal 8 charachter</p>
+    @error('password')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+  </div>
+  {{-- End of password input --}}
 
-{{-- Password confirm input --}}
-<div class="mb-3 d-none">
-  <label class="fw-bold mb-1" for="password-confirm">{{ __('session.confirm_password') }}</label>
-  <input id="password-confirm" placeholder="{{ __('session.placeholder.confirm_password') }}" value="12345678" type="password" class="form-control" name="password_confirmation" required
-    autocomplete="new-password">
-</div>
-{{-- End of password confirm input --}}
+  {{-- Password confirm input --}}
+  <div class="mb-3">
+    <label class="fw-bold mb-1" for="password-confirm">{{ __('session.confirm_password') }}</label>
+    <input id="password-confirm" placeholder="{{ __('session.placeholder.confirm_password') }}" type="password" class="form-control" name="password_confirmation" required
+      autocomplete="new-password">
+  </div>
+  {{-- End of password confirm input --}}
+@endif

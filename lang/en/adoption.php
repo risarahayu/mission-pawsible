@@ -50,6 +50,7 @@ return [
         'line_5' => 'The administrator reserves the right to terminate the adoption in cases of neglect or mistreatment of the pet.',
         'line_6' => 'The applicant is deemed to have read, understood, and accepted these terms and conditions before submitting the adoption application.',
         'line_7' => 'Dog adoption is not for sale purposes.',
+        'end_line' => 'By signing or submitting an adoption application, the applicant acknowledges their willingness to abide by and respect these terms and conditions during and after the adoption process.',
 
         'checkbox' => 'I agree to all the terms and conditions above.',
     ],

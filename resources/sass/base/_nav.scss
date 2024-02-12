@@ -1,21 +1,29 @@
 .navbar-base {
   background-color: $base-color;
   font-family: "Inter Light", sans-serif;
-  height: 10vh;
+  min-height: 10vh;
 
-  .card-body{
-    .card-title{
-      font-weight: bolder !important;
-      color: $base-color;
-    }
-    a{
-      color: $accent !important;
-    }
-    
+  .navbar-collapse {
+    background-color: $base-color;
+    z-index: 1;
   }
-  
 
+  .nav-icon {
+    width: 30px;
+    aspect-ratio: 1/1;
+  }
 
+  .card {
+    .card-body{
+      .card-title{
+        font-weight: bolder !important;
+        color: $base-color;
+      }
+      a{
+        color: $accent !important;
+      }
+    }
+  }
 
   .navbar-brand {
     img {
@@ -79,6 +87,14 @@
           // color: $secondary;
         }
       }
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .navbar-base {
+    .card.dropdown-item {
+      white-space: unset;
     }
   }
 }

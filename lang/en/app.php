@@ -13,9 +13,10 @@ return [
         'save' => 'Save',
         'see_all_my_dog' => 'See all my dogs',
         'continue' => 'Continue',
-        'cancel_adopter' => 'Cancel Adopter',
-        'accept_adopter' => 'Accept Adopter',
-        'see_all_request' => 'See all request'
+        'cancel_adopter' => 'Cancel adopter',
+        'accept_adopter' => 'Accept adopter',
+        'see_all_request' => 'See all request',
+        'see_dog_details' => 'See dog details',
     ],
 
     'option' => [
@@ -30,6 +31,7 @@ return [
         'waiting_adopter' => 'Waiting for Potential Adopter',
         'adopter_selection' => 'Adopter Selection',
         'chat_adopter' => 'Chat your new dog adopter!',
+        'finish' => 'Finsih',
     ],
 
     'view_contact' => [
@@ -38,11 +40,13 @@ return [
     ],
 
     'status' => [
-    	  'waiting_for_approval' => 'Waiting for approval',
+		    'waiting_for_approval' => 'Waiting for approval',
         'adoptable' => 'Adoptable',
         'waiting_for_potential_adopter' => 'Waiting for potential adopter',
         'you_got_it' => 'You got it',
-        'adopted_by_other' => 'Adopted by other'
+        'adopted_by_other' => 'Adopted by other',
+        'waiting_for_rescue' => 'Waiting for rescue',
+        'rescued' => 'Rescued',
     ],
 
     'profile' => [

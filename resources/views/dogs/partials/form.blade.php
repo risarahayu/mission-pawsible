@@ -119,7 +119,7 @@
           <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger delete-old-image" data-delete-id="delete_image">{{ __('app.button.delete') }}</button>
           <p class="fw-bold">{{ __('dog.form.old_picture') }}</p>
           <div class="row row-cols-3">
-            @php $dog_images = $controller_name == 'dog' ? $images->where('category', null) : $images @endphp
+            @php $dog_images = $controller_name == 'dog' ? $images->where('category', null) : $images->where('category', 'requester') @endphp
             @foreach ($dog_images as $image)
               <div class="col mt-3">
                 <img src="{{$image->filename}}" class="preview-image" alt="Image Preview">

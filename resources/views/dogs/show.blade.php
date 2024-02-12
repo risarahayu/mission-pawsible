@@ -62,7 +62,7 @@
 
         <div class="col-lg-6 text-center position-relative">
           <!-- Dog picture carousel -->
-          @include('dogs.partials.dog_carousel')
+          @include('dogs.partials.dog_carousel', ['carousel_type' => 'dog'])
         </div>
       </div>
     </div>
@@ -70,28 +70,4 @@
 
   <!-- ADOPTER DETAIL HERE -->
   @include('dogs.partials.adopter_detail')
-@endsection
-
-@section('scripts')
-  @if(Auth::id()==$stray_dog->user_id)
-    <script type="module">
-      $(function() {
-        $('.need-confirm').click(function() {
-          var self = $(this);
-          Swal.fire({
-            title: 'Are you sure?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#BD1A8D',
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'No'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              self.parent().submit();
-            }
-          })
-        });
-      })
-    </script>
-  @endif
 @endsection

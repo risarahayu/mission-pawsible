@@ -151,11 +151,9 @@ class RescueRequestController extends Controller
             $dog->size = $request->input('size');
             $dog->description = $request->input('description');
             $dog->save();
-            // dd($request);
-            // Handle images update (if necessary)
 
             if ($request->input('delete_image')) {
-                $dog->images()->delete();
+                $dog->images->where('category', 'requester')->each->delete();
             }
 
             if ($request->hasFile('images')) {
@@ -168,6 +166,7 @@ class RescueRequestController extends Controller
 
                     $imageModel = new Image();
                     $imageModel->filename = $publicPath;
+                    $imageModel->category = 'requester';
                     $dog->images()->save($imageModel);
                 }
             }
@@ -195,11 +194,12 @@ class RescueRequestController extends Controller
 
     public function rescue(Request $rescueRequest, RescueRequest $request)
     {
-        $user = auth()->user();
+        $user = User::find($rescueRequest->input('rescuer_id'));
         $request->update([
             'rescuer_id' => $user->id,
             'rescued' => true,
         ]);
+
         if ($rescueRequest->hasFile('images')) {
             foreach ($rescueRequest->file('images') as $image) {
                 $filename = $image->getClientOriginalName();
@@ -230,14 +230,14 @@ class RescueRequestController extends Controller
 
     public function update_contact(Request $request_params, User $user, RescueRequest $request)
     {
-        $area_name = $request->input('area');
+        $area_name = $request_params->input('area');
         $area = Area::where('name', $area_name)->first();
         if (empty($area)) {
             $area = Area::create(['name' => $area_name]);
         };
 
-        $user->update($request->only(['first_name', 'last_name']));
-        $userInfo_params = array_merge($request->except(['_token', '_method', 'first_name', 'last_name', 'area']), ['user_id' => $user->id, 'area_id' => $area->id]);
+        $user->update($request_params->only(['first_name', 'last_name']));
+        $userInfo_params = array_merge($request_params->except(['_token', '_method', 'first_name', 'last_name', 'area']), ['user_id' => $user->id, 'area_id' => $area->id]);
         if ($user->userInfo()->exists()) {
             $user->userInfo()->update($userInfo_params);
         } else {

@@ -6,6 +6,6 @@
   </div>
 
   <div class="d-flex justify-content-center">
-    <a href="{{ route('requests.show', [$stray_dog]) }}" class="btn btn-custom-submit mt-3 m-auto"> See dogs details</a>
+    <a href="{{ route('requests.show', [$stray_dog]) }}" class="btn btn-custom-submit mt-3 m-auto">{{ __('app.button.see_dog_details') }}</a>
   </div>
 @endsection

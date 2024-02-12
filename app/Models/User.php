@@ -55,7 +55,7 @@ class User extends Authenticatable
         return $this->hasMany(RescueRequest::class, 'user_id');
     }
 
-    public function rescued_dogs()
+    public function rescuedDogs()
     {
         return $this->hasMany(RescueRequest::class, 'rescuer_id');
     }

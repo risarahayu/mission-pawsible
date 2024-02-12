@@ -50,11 +50,11 @@
               @elseif (session('role') == 'rescuer') {{-- if role is rescuer --}}
                 @if($stray_dog->rescued)
                   <h5 class="position-absolute bg-success-subtle p-2 m-2 rounded fs-6">
-                    <i class="bi bi-check-circle"></i> Rescued
+                    <i class="bi bi-check-circle"></i> {{ __('app.status.rescued') }}
                   </h5>
                 @else
                   <h5 class="position-absolute bg-warning-subtle p-2 m-2 rounded fs-6">
-                     Waiting for rescue
+                    {{ __('app.status.waiting_for_rescue') }}
                   </h5>
                 @endif
               @endif
@@ -101,10 +101,10 @@
                 <div class="size request-time border-top pt-2">
                   <div>
                     <small><i class="bi bi-person dtl-icon" style="margin-right: 10px"></i>
-                      @if (session('role') == 'rescuer')
-                        Registered by {{$stray_dog->user->first_name." ".$stray_dog->user->last_name }}
-                      @else
+                      @if (session('role') == 'adopter')
                         {{__('dog.index.request_by', ['count' => $stray_dog->adoptions->count()])}}
+                      @else
+                        Registered by {{$stray_dog->user->first_name." ".$stray_dog->user->last_name }}
                       @endif
                     </small><br/>
 
@@ -118,7 +118,7 @@
 
                 {{-- detail button --}}
                 <div class="button mt-1">
-                  <a href="{{ session('role') == 'rescuer'? route('requests.show', ['request' => $stray_dog->id]) : route('dogs.show', ['dog' => $stray_dog->id]) }}" class="btn btn-custom-submit w-100">
+                  <a href="{{ session('role') == 'adopter'? route('dogs.show', ['dog' => $stray_dog->id]) : route('requests.show', ['request' => $stray_dog->id]) }}" class="btn btn-custom-submit w-100">
                     {{ __('app.button.see_detail') }}
                   </a>
                 </div>

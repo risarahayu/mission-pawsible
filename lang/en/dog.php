@@ -7,6 +7,8 @@ return [
     'alert' => "Hey there! The dogs featured on our website are all vaccinated and sterilized.<br> They're ready for a loving home!",
     'your_dog' => "Your dog",
 
+    'edit_title' => 'Edit dog information',
+
     // index
     'index' => [
         'count' => 'We found :count at :area stray dog',
@@ -23,7 +25,7 @@ return [
         'adopted' => 'Adopted',
         'pending' => 'Waiting for approval',
         'see_detail' => 'See Detail',
-        'rescued_date' => 'Rescued',
+        'rescued_date' => 'Rescued :date',
     ],
 
     'show' => [

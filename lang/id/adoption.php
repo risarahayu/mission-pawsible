@@ -50,6 +50,7 @@ return [
         'line_5' => 'Pengelola berhak untuk memutuskan adopsi jika terdapat penelantaran atau perlakuan tidak baik terhadap hewan peliharaan.',
         'line_6' => 'Pemohon dianggap telah membaca, memahami, dan menerima syarat dan ketentuan ini sebelum mengajukan permohonan adopsi.',
         'line_7' => 'Adopsi anjing bukan untuk diperjualbelikan.',
+        'end_line' => 'Dengan menandatangani atau mengajukan permohonan adopsi, pemohon menyatakan kesediaannya untuk mematuhi dan menghormati syarat dan ketentuan ini selama dan setelah proses adopsi.',
 
         'checkbox' => 'Saya menyetujui semua syarat dan ketentuan di atas.',
     ],

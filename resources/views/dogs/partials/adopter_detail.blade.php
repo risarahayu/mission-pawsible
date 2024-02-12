@@ -58,15 +58,27 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel"><strong>{{ __('adoption.term_and_condition.title') }}</strong></h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                ...
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <p>
+                  {{ __('adoption.term_and_condition.sub_title') }}
+                </p>
+
+                <ol>
+                  <li>{{ __('adoption.term_and_condition.line_1') }}</li>
+                  <li>{{ __('adoption.term_and_condition.line_2') }}</li>
+                  <li>{{ __('adoption.term_and_condition.line_3') }}</li>
+                  <li>{{ __('adoption.term_and_condition.line_4') }}</li>
+                  <li>{{ __('adoption.term_and_condition.line_5') }}</li>
+                  <li>{{ __('adoption.term_and_condition.line_6') }}</li>
+                  <li>{{ __('adoption.term_and_condition.line_7') }}</li>
+                </ol>
+
+                <p>
+                  {{ __('adoption.term_and_condition.end_line') }}
+                </p>
               </div>
             </div>
           </div>

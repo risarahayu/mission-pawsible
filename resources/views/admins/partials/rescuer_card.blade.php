@@ -25,7 +25,9 @@
         <i class="fa-solid fa-shield-dog"></i>
         <div>
           <small>Rescue</small><br/>
-          <a href="{{route('admins.rescuer.detail', ['rescuer_id'=>$user->id])}}"><h6 class="fw-bold">{{ empty($user->rescued_dogs) ? "not set" : $user->rescued_dogs->count().''}} dog(s)</h6></a>
+          <a href="{{route('admins.rescuer.detail', ['rescuer_id'=>$user->id])}}">
+            <h6 class="fw-bold">{{ __('rescue.dog_count', ['count' => $user->rescuedDogs->count()]) }}</h6>
+          </a>
         </div>
       </div>
     </div>

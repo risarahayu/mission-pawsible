@@ -13,19 +13,19 @@ class RescueRequest extends Model
         'gender', 'size', 'description', 'map_link', 'rescued',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function area()
     {
         return $this->belongsTo(Area::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function rescuer()
     {
-        return $this->belongsTo(User::class); #->optional();
+        return $this->belongsTo(User::class, 'rescuer_id'); #->optional();
     }
 
     public function images()
