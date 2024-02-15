@@ -25,7 +25,7 @@
     <!-- Housing Type Dropdown -->
     <div class="form-card">
       <div>
-        <label for="housing_type" class="form-label">{{ __('adoption.question.housing_type') }}</label>
+        <label for="housing_type" class="form-label"><span class="text-danger">*</span>{{ __('adoption.question.housing_type') }}</label>
         <select class="form-select calculate-score" id="housing_type" name="housing_type" required>
           <option value="compound" data-score="{{ $is_indonesian ? 30 : 25 }}">{{ __('adoption.option.compound') }}</option>
           <option value="private_villa" data-score="{{ $is_indonesian ? 25 : 20 }}">{{ __('adoption.option.private_villa') }}</option>
@@ -37,7 +37,7 @@
 
     <!-- Housing Condition Radio Buttons -->
     <div class="form-card">
-      <label class="form-label">{{ __('adoption.question.housing_condition') }}</label>
+      <label class="form-label"><span class="text-danger">*</span>{{ __('adoption.question.housing_condition') }}</label>
       <div class="form-check">
         <input class="form-check-input calculate-score" type="radio" name="housing_condition" id="housing_condition_good" data-score="{{ $is_indonesian ? 30 : 25 }}" value="1">
         <label class="form-check-label" for="housing_condition_good">{{ __('app.option.yes') }}</label>
@@ -77,7 +77,7 @@
 
     <!-- Pet Experience -->
     <div class="form-card">
-      <label>{{ __('adoption.question.pet_experience') }}</label><br>
+      <label><span class="text-danger">*</span>{{ __('adoption.question.pet_experience') }}</label><br>
       <div class="form-check">
         <input class="form-check-input calculate-score" type="radio" name="pet_experience" id="pet_experience_good" data-score="{{ $is_indonesian ? 10 : 5 }}" value="1">
         <label class="form-check-label" for="pet_experience_good">{{ __('app.option.yes') }}</label>
@@ -90,7 +90,7 @@
 
     <!-- Vaccinated Radio Buttons -->
     <div class="form-card d-none" id="vaccinatedForm">
-      <label class="form-label">{{ __('adoption.question.vaccinated') }}</label>
+      <label class="form-label"><span class="text-danger">*</span>{{ __('adoption.question.vaccinated') }}</label>
       <div class="form-check">
         <input class="form-check-input calculate-score" type="radio" name="vaccinated" id="vaccinated_yes" data-score="{{ $is_indonesian ? 10 : 5 }}" value="1">
         <label class="form-check-label" for="vaccinated_yes">{{ __('app.option.yes') }}</label>
@@ -104,25 +104,25 @@
     @if(!$is_indonesian)
       <!-- Residency Duration -->
       <div class="form-card">
-        <label for="residency_duration" class="form-label">{{ __('adoption.question.residency_duration') }}</label>
-        <input type="text" class="form-control" id="residency_duration" name="residency_duration" required>
+        <label for="residency_duration" class="form-label"><span class="text-danger">*</span>{{ __('adoption.question.residency_duration') }}</label>
+        <input type="text" placeholder="Example: 1 year" class="form-control" id="residency_duration" name="residency_duration" required>
       </div>
 
       <!-- Planned Residency Duration -->
       <div class="form-card">
-        <label for="planned_residency_duration" class="form-label">{{ __('adoption.question.planned_residency_duration') }}</label>
-        <input type="text" class="form-control" id="planned_residency_duration" name="planned_residency_duration" required>
+        <label for="planned_residency_duration" class="form-label"><span class="text-danger">*</span>{{ __('adoption.question.planned_residency_duration') }}</label>
+        <input type="text" placeholder="Example: 1 year" class="form-control" id="planned_residency_duration" name="planned_residency_duration" required>
       </div>
 
       <!-- Future Residency Country -->
       <div class="form-card">
-        <label for="future_residency_country" class="form-label">{{ __('adoption.question.future_residency_country') }}</label>
+        <label for="future_residency_country" class="form-label"><span class="text-danger">*</span>{{ __('adoption.question.future_residency_country') }}</label>
         <input type="text" class="form-control" id="future_residency_country" name="future_residency_country" required>
       </div>
 
       <!-- Pet Migration Plan Radio Buttons -->
       <div class="form-card">
-        <label class="form-label">{{ __('adoption.question.pet_migration_plan') }}</label>
+        <label class="form-label"><span class="text-danger">*</span>{{ __('adoption.question.pet_migration_plan') }}</label>
         <div class="form-check">
           <input class="form-check-input calculate-score" type="radio" name="pet_migration_plan" id="pet_migration_plan_yes" data-score="20" value="1">
           <label class="form-check-label" for="pet_migration_plan_yes">{{ __('app.option.yes') }}</label>
@@ -136,7 +136,7 @@
 
     <!-- Job Dropdown -->
     <div class="form-card">
-      <label for="job" class="form-label">{{ __('adoption.question.job') }}</label>
+      <label for="job" class="form-label"><span class="text-danger">*</span>{{ __('adoption.question.job') }}</label>
       <select class="form-select calculate-score" id="job" name="job" required>
         <option value="wfo" data-score="0">{{ __('adoption.option.wfo') }}</option>
         <option value="wfh" data-score="20">{{ __('adoption.option.wfh') }}</option>
@@ -146,7 +146,7 @@
 
     <!-- Who is Home -->
     <div class="form-card" id="house_occupants">
-      <label for="house_occupants" class="form-label">{{ __('adoption.question.house_occupants') }}</label>
+      <label for="house_occupants" class="form-label"><span class="text-danger">*</span>{{ __('adoption.question.house_occupants') }}</label>
       <div class="form-check">
         <input class="form-check-input calculate-score" type="radio" name="house_occupants" id="house_occupants_good" data-score="15" value="1">
         <label class="form-check-label" for="house_occupants_good">{{ __('app.option.yes') }}</label>
@@ -159,7 +159,7 @@
 
     <!-- Canine Residence -->
     <div class="form-card d-none" id="canine_residence">
-      <label for="canine_residence" class="form-label">{{ __('adoption.question.canine_residence') }}</label>
+      <label for="canine_residence" class="form-label"><span class="text-danger">*</span>{{ __('adoption.question.canine_residence') }}</label>
       <input type="text" class="form-control" name="canine_residence" >
     </div>
 
