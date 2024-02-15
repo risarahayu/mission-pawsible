@@ -67,7 +67,7 @@
         @else
           <h6 class="fw-bold">{{ $own->email }}</h6>
         @endif -->
-        <a href=""><h6 class="fw-bold">{{ $own->first_name }} {{ $own->last_name }}</h6></a>
+        <a href="#"><h6 class="fw-bold">{{ $own->first_name }} {{ $own->last_name }}</h6></a>
       </div>
     </div>
   </div>

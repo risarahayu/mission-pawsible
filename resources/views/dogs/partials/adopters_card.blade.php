@@ -24,7 +24,16 @@
         <i class="bi bi-whatsapp dtl-icon"></i>
         <div>
           <small>{{ __('app.profile.whatsapp') }}</small><br/>
-          <h6 class="fw-bold">{{ empty($user->userInfo->whatsapp) ? "not set" : $user->userInfo->whatsapp }}</h6>
+          @php
+            $whatsapp = empty($user->userInfo->whatsapp) ? "not set" : $user->userInfo->whatsapp;
+            if($whatsapp == 'not set') {
+              $whatsapp_link = '#';
+            } else {
+              $text = urlencode("Halo, saya ingin berdiskusi untuk pengadopsian anjing!");
+              $whatsapp_link = "https://wa.me/62{$whatsapp}?text={$text}";
+            };
+          @endphp
+          <a href="{{ $whatsapp_link }}" class="h6 fw-bold">{{ $whatsapp }}</a>
         </div>
       </div>
 
