@@ -16,6 +16,7 @@ return [
         'email' => 'Enter your email address',
         'password' => 'Enter your password',
         'confirm_password' => 'Confirm your Password',
+        'whatsapp' => 'Enter your Whatsapp number',
     ],
 
     // Button

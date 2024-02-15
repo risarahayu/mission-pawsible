@@ -14,6 +14,7 @@ return [
         'email' => 'Masukkan alamat email Anda',
         'password' => 'Masukkan kata sandi Anda',
         'confirm_password' => 'Konfirmasi kata sandi Anda',
+        'whatsapp' => 'Masukan nomor Whatsapp anda',
     ],
 
     // Tombol

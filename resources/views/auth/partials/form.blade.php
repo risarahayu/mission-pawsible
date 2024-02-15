@@ -39,10 +39,10 @@
 {{-- End of email input --}}
 
 <div class="mb-3">
-  <label class="fw-bold mb-1" for="whatsapp">{{ __('whatsapp') }}</label>
+  <label class="fw-bold mb-1" for="whatsapp">{{ __('app.profile.whatsapp') }}</label>
   <input id="whatsapp" type="text" name="whatsapp"
           class="form-control @error('whatsapp') is-invalid @enderror"
-          autocomplete="whatsapp" placeholder="{{ __('whatsapp') }}">
+          autocomplete="whatsapp" placeholder="{{ __('session.placeholder.whatsapp') }}">
   @error('whatsapp')
     <span class="invalid-feedback" role="alert">
       <strong>{{ $message }}</strong>
