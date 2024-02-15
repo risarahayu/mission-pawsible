@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Adoption;
+use App\Models\Area;
+use App\Models\User;
 use App\Models\UserInfo;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -55,12 +57,18 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $user->update($request->only(['first_name', 'last_name']));
+        $area_name = $request->input('area');
+        $area = Area::where('name', $area_name)->first();
+        if (empty($area)) {
+            $area = Area::create(['name' => $area_name]);
+        };
 
+        $user->update($request->only(['first_name', 'last_name']));
+        $userInfo_params = array_merge($request->except(['_token', '_method', 'first_name', 'last_name', 'area']), ['user_id' => $user->id, 'area_id' => $area->id]);
         if ($user->userInfo()->exists()) {
-            $user->userInfo()->update($request->except(['_token', '_method', 'first_name', 'last_name']));
+            $user->userInfo()->update($userInfo_params);
         } else {
-            UserInfo::create(array_merge($request->except(['_token', '_method', 'first_name', 'last_name']), ['user_id' => $user->id]));
+            UserInfo::create($userInfo_params);
         }
 
         return redirect()->back();

@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Dog;
-use App\Models\User;
-use App\Models\Area;
-use App\Models\Adoption;
-use App\Models\RescueRequest;
-use App\Models\userInfo;
 use App\Http\Requests\StoreDogRequest;
 use App\Http\Requests\UpdateDogRequest;
+use App\Models\Adoption;
+use App\Models\Area;
+use App\Models\Dog;
+use App\Models\Image;
+use App\Models\RescueRequest;
+use App\Models\User;
+use App\Models\UserInfo;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
-use App\Models\Image;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 
