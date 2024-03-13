@@ -125,7 +125,7 @@ class AdminController extends Controller
         return redirect()->route("admins.index")->with([
             'flash' => [
                 'type' => 'success',
-                'message' => 'Stray dog has been updated successfully',
+                'message' => __('flash.update_rescuer'),
             ]
         ])->with('flash.once', true);
     }
@@ -135,7 +135,13 @@ class AdminController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('admins.index')->with([
+            'flash' => [
+                'type' => 'success',
+                'message' => __('flash.delete_rescuer'),
+            ]
+        ])->with('flash.once', true);
     }
     public function rescuer_detail($rescuer_id){
         $rescuer = User::find($rescuer_id);

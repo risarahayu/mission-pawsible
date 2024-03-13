@@ -47,7 +47,10 @@
           </a>
         </div>
       </div>
-      <a href="{{ route('admins.edit', $user->id) }}" class="btn btn-primary">Edit</a>
+      @if(session('role')=='admin')
+        <a href="{{ route('admins.edit', $user->id) }}" class="btn btn-primary">Edit</a>
+        <a href="{{ route('admins.destroy', $user->id) }}" class="btn ">Delete</a>
+      @endif
     </div>
   </div>
 </div>
