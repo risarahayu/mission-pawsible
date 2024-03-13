@@ -13,10 +13,10 @@ return [
     'index' => [
         'count' => 'Kami menemukan :count anjing liar di :area',
         'all_count' => 'Kami menemukan :count anjing liar di semua area',
-        'empty' => 'Belum ada anjing liar',
+        'empty' => 'Belum ada anjing yang terdaftar',
         'empty_adopted_dog' => 'Belum ada anjing yang diadopsi',
         'empty_rescued_dog' => 'Belum ada anjing yang diselamatkan',
-        'register' => 'Daftarkan anjing liar',
+        'register' => 'Daftarkan anjing Anda',
         'filter' => 'Filter',
         'all' => 'Semua',
         'request_by' => 'Diminta oleh :count orang',
@@ -45,6 +45,7 @@ return [
     'form' => [
         'dog_type' => 'Jenis Anjing',
         'color' => 'Warna',
+        'district'=>'Daerah',
         'temperament' => 'Temperamen',
         'gender' => 'Jenis Kelamin',
         'size' => 'Ukuran',

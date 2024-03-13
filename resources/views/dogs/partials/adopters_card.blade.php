@@ -3,8 +3,8 @@
   <div class="brief">
     <div class="wrapper">
       <h6 class="text-center fw-bold">{{ $user->first_name }} {{ $user->last_name }}</h6>
-
-      @if ($controller_name != 'adoption')
+      
+      @if ($with_potential && $controller_name != 'adoption')
         <div class="progress position-relative" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
           <div class="progress-bar" style="width: {{ $adoption->score }}%">{{ $adoption->score }}% {{ __('app.profile.potential') }}</div>
         </div>
@@ -57,11 +57,41 @@
         <i class="bi bi-geo-alt dtl-icon"></i>
         <div>
           <small>{{ __('app.profile.location') }}</small><br/>
-          <h6 class="fw-bold">{{ empty($user->userInfo->street_address) ? "not set" : $user->userInfo->street_address }}</h6>
-        </div>
+          <h6 class="fw-bold">{{ empty($user->userInfo->street_address) ? "" : $user->userInfo->street_address }}</h6>
+          <h6 class="fw-bold">{{ empty($user->userInfo->area_id) ? "not set" : ucfirst($user->userInfo->area->name) }}</h6>
+        </div> 
       </div>
 
-      @if ($controller_name != 'adoption')
+      <div class="size">
+        <!-- menghitung umur -->
+        @php
+            // Tanggal lahir dari database
+            $birthday = $user->userInfo->birthday;
+            
+            // Mengonversi tanggal lahir menjadi timestamp
+            $birthdate = strtotime($birthday);
+            
+            // Mendapatkan tanggal hari ini
+            $currentDate = strtotime(date('Y-m-d'));
+            
+            // Menghitung umur
+            $age = date('Y', $currentDate) - date('Y', $birthdate);
+            
+            // Periksa apakah sudah ulang tahun atau belum pada tahun ini
+            if (date('md', $currentDate) < date('md', $birthdate)) {
+                $age--;
+            }
+        @endphp
+        @if($with_potential && $controller_name != 'adoption')
+          <i class="bi bi-person-fill"></i>
+          <div>
+            <small>{{ __('app.profile.age') }}</small><br/>
+            <h6 class="fw-bold">{{$age}} {{ __('app.profile.old') }}</h6>
+          </div>
+        @endif
+      </div>
+
+      @if ($with_potential && $controller_name != 'adoption')
         <a class="btn btn-submit-custom-border" data-bs-toggle="modal" data-bs-target="#rescuer_information_{{ $adoption->id }}">
           <h6 class="mb-0 text-center fw-bold">{{ __('app.button.see_detail') }}</h6>
         </a>

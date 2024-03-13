@@ -66,7 +66,8 @@
                     $filename = explode('/', $filename);
                     $filename = end($filename);
                   @endphp
-                <img src="{{ asset($stray_dog->images->first()->filename) }}" alt="{{ $filename }}" style="max-wid:100px;"  class=" img-fluid">
+             
+                <img src="{{ asset($adoption->images->first()->filename) }}" alt="{{ $filename }}" style="max-wid:100px;"  class=" img-fluid">
               </div>
 
               @if(!$adoption->housing_condition)
@@ -196,8 +197,10 @@
                 </p>
               @endif
             @else
-              <i class='bi bi-info-circle-fill text-warning'></i>
-              <p class="fw-normal">{{ __('dog.adopter_detail.pet_experience.no') }}</p>
+              <p class="fw-normal mb-0">
+                <i class='bi bi-info-circle-fill text-warning'></i>
+                {{ __('dog.adopter_detail.pet_experience.no') }}
+              </p>
               <div class="alert alert-warning" role="alert">
                 {{ __('dog.adopter_detail.vaccinated.alert') }}
               </div>

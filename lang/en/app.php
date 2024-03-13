@@ -9,7 +9,7 @@ return [
         'adopt' => 'Adopt',
         'rescue' => 'Rescue',
         'see_detail' => 'See detail',
-        'change_role' => 'Change role',
+        'change_role' => 'Click here',
         'save' => 'Save',
         'see_all_my_dog' => 'See all my dogs',
         'continue' => 'Continue',
@@ -31,7 +31,7 @@ return [
         'waiting_adopter' => 'Waiting for Potential Adopter',
         'adopter_selection' => 'Adopter Selection',
         'chat_adopter' => 'Chat your new dog adopter!',
-        'finish' => 'Finsih',
+        'finish' => 'Finish',
     ],
 
     'view_contact' => [
@@ -63,5 +63,9 @@ return [
         'postal' => 'Postal Code',
         'location' => 'Location',
         'potential' => 'Potential',
+        'age' => 'Age',
+        'old' => 'years old',
+        'choose_one' => 'Choose one',
+
     ]
 ];

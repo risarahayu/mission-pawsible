@@ -77,6 +77,7 @@ class AdoptionController extends Controller
 
     public function update_contact(Request $request, User $user, Adoption $adoption)
     {
+        
         $area_name = $request->input('area');
         $area = Area::where('name', $area_name)->first();
         if (empty($area)) {

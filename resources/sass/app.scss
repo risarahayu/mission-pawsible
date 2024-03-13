@@ -195,3 +195,8 @@ form {
 .text-base-color{
   color: $base-color;
 }
+
+.text-base-color-background{
+  color: #FFF;
+  background-color: $base-color;
+}

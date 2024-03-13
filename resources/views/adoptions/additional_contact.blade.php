@@ -11,7 +11,7 @@
     <div class="dog-card">
       <div class="brief">
         <div class="wrapper">
-          @include('dogs.partials.adopters_card', ['user' => $adoption->dog->user])
+          @include('dogs.partials.adopters_card', ['user' => $adoption->dog->user, 'with_potential' => true])
         </div>
       </div>
     </div>

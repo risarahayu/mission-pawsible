@@ -6,7 +6,7 @@
               autocomplete="first_name" placeholder="{{ __('app.profile.first_name') }}"
               value="{{ auth()->user()->first_name }}"
               required>
-      <label for="first_name">{{ __('app.profile.first_name') }}</label>
+      <label for="first_name"><span class="text-danger">*</span>{{ __('app.profile.first_name') }}</label>
       @error('first_name')
         <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -21,7 +21,7 @@
               autocomplete="last_name" placeholder="{{ __('app.profile.last_name') }}"
               value="{{ auth()->user()->last_name }}"
               required>
-      <label for="last_name">{{ __('app.profile.last_name') }}</label>
+      <label for="last_name"><span class="text-danger">*</span>{{ __('app.profile.last_name') }}</label>
       @error('last_name')
         <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -32,11 +32,11 @@
 </div>
 
 <div class="form-floating mb-3">
-  <input id="birthday" type="date" name="birthday"
+  <input id="birthday" type="date" name="birthday" required
           class="form-control @error('birthday') is-invalid @enderror"
           autocomplete="birthday" placeholder="{{ __('app.profile.birthday') }}"
           value="{{ optional(auth()->user()->userInfo)->birthday }}">
-  <label for="birthday">{{ __('app.profile.birthday') }}</label>
+  <label for="birthday"><span class="text-danger">*</span>{{ __('app.profile.birthday') }}</label>
   @error('birthday')
     <span class="invalid-feedback" role="alert">
       <strong>{{ $message }}</strong>
@@ -45,11 +45,11 @@
 </div>
 
 <div class="form-floating mb-3">
-  <input id="whatsapp" type="text" name="whatsapp"
+  <input id="whatsapp" type="text" name="whatsapp" required
           class="form-control @error('whatsapp') is-invalid @enderror"
           autocomplete="whatsapp" placeholder="{{ __('app.profile.whatsapp') }}"
           value="{{ optional(auth()->user()->userInfo)->whatsapp }}">
-  <label for="whatsapp">{{ __('app.profile.whatsapp') }}</label>
+  <label for="whatsapp"><span class="text-danger">*</span>{{ __('app.profile.whatsapp') }}</label>
   @error('whatsapp')
     <span class="invalid-feedback" role="alert">
       <strong>{{ $message }}</strong>
@@ -99,7 +99,8 @@
 <div class="row">
   <div class="col">
     <div class="form-floating mb-3">
-      <select id="area" name="area" class="form-select required @error('area') is-invalid @enderror">
+      <select id="area" name="area" class="form-select required @error('area') is-invalid @enderror" required>
+        <option>{{ __('app.profile.choose_one') }}</option>
         @php
           $user_area = optional(optional(auth()->user()->userInfo)->area)->name;
         @endphp
@@ -107,7 +108,7 @@
           <option value="{{ $area }}" {{ $user_area == $area ? 'selected' : '' }}>{{ ucfirst($area) }}</option>
         @endforeach
       </select>
-      <label for="city">{{ __('app.profile.city') }}</label>
+      <label for="city"><span class="text-danger">*</span>{{ __('app.profile.city') }}</label>
       @error('city')
         <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -119,7 +120,7 @@
     <div class="form-floating mb-3">
       <input id="province" type="text" name="province"
               class="form-control @error('province') is-invalid @enderror"
-              autocomplete="province" placeholder="{{ __('app.profile.province') }}" disabled="disabled"
+              autocomplete="province" placeholder="{{ __('app.profile.province') }}" readonly="true"
               value="{{ is_null(optional(auth()->user()->userInfo)->province) ? ucfirst("bali") : optional(auth()->user()->userInfo)->province }}">
       <label for="province">{{ __('app.profile.province') }}</label>
       @error('province')

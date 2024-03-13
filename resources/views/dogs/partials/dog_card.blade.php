@@ -86,7 +86,7 @@
         <div class="d-flex flex-column align-items-center">
           <img src="{{ asset('images/single-dog.png') }}" alt="Single Dog" width="6rem">
           <!-- <p class="m-0 mt-2 txt-1">{{ __('dog.index.empty') }}</p> -->
-          <p class="m-0 txt-2"><i class="bi bi-plus-square-dotted me-3"></i>{{ __('dog.index.empty_adopted_dog') }}</p>
+          <p class="m-0 txt-2"><i class="bi bi-plus-square-dotted me-3"></i>{{ __('dog.index.empty') }}</p>
         </div>
       </a>
     </div>

@@ -21,7 +21,7 @@
                   <form action="{{ route('requests.destroy', $stray_dog->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger delete-dog need-confirm">
+                    <button type="button" class="btn btn-danger delete-dog need-confirm">
                       <i class="bi bi-trash me-2"></i> Delete
                     </button>
                   </form>

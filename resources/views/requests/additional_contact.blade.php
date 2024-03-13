@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="container">
-    @include('requests.partials.additional_contact', ['stray_dog' => $stray_dog, 'users' => $users])
+    @include('requests.partials.additional_contact', ['stray_dog' => $stray_dog, 'users' => $users, 'with_potential' => false])
   </div>
 
   <div class="d-flex justify-content-center">

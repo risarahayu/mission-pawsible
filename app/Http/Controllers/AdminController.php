@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use App\Models\Area;
 use App\Models\RescueRequest;
 use App\Models\UserInfo;
 use Illuminate\Http\Request;
@@ -26,7 +28,9 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admins.create');
+
+        $area=Area::all();
+        return view('admins.create', compact('area'));
 
     }
 
@@ -35,12 +39,13 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $validatedUser = $request->validate([
             'role' => 'required|string',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email|max:255',
-            'whatsapp' => 'required|string|min:12',
+            'whatsapp' => ['required', 'numeric', 'regex:/^[0-9]+$/'],
         ]);
 
         // dd($validatedUser['role']);
@@ -52,7 +57,11 @@ class AdminController extends Controller
         $user->password = bcrypt('123456');
         $user->save();
 
-        $userInfo = new UserInfo(['whatsapp' => $validatedUser['whatsapp']]);
+        $userInfo = new UserInfo([
+            'whatsapp' => $validatedUser['whatsapp'],
+            'area_id'  => $request['area_id'],
+            'province'  => $request['province']
+        ]);
         $user->userInfo()->save($userInfo);
 
         return redirect()->route("admins.index")->with([
@@ -74,9 +83,13 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(User $user, $request)
     {
-        //
+        // dd($request);
+        $users = User::where('role', 'rescuer')->find($request);
+        // $rescuer=User::find($id);
+        $area=Area::all();
+        return view('admins.rescuer_edit', compact('users','area'));
     }
 
     /**
@@ -84,7 +97,32 @@ class AdminController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        // Validasi data input
+        $validatedData = $request->validate([
+            'area_id' => 'required',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'whatsapp' => ['required', 'numeric', 'regex:/^[0-9]+$/'],
+        ]);
+
+        // Mengupdate informasi user
+        $user->update([
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'],
+            'password' => bcrypt('123456'),
+            'email' => $validatedData['email'],
+        ]);
+        // Mengupdate informasi userInfo
+        $userInfo = $user->userInfo;
+        if ($userInfo) {
+            $userInfo->update([
+                'whatsapp' => $validatedData['whatsapp'],
+                'area_id' => $validatedData['area_id'],
+            ]);
+        }
+    
+       
     }
 
     /**

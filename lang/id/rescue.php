@@ -18,6 +18,9 @@ return [
         'upload_proof' => 'Unggah bukti penyelamatan',
         'rescue_dog' => 'Selamatkan anjing ini',
         'picture' => 'Gambar',
+        'picture_text' => 'Anda juga bisa mengunggah kondisi terbaru anjing setelah penyelamatan',
+        'rescuer_placeholder' => 'Pilih salah satu',
         'thank_you' => 'Terima kasih atas bantuan anda!',
+        'choose_the_rescuer_who_has_helped_you'=>'Pilih rescuer yang telah membantu Anda',
     ],
 ];

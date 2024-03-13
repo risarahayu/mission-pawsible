@@ -89,7 +89,7 @@
             @foreach ($adoptions as $adoption)
               <div class="col-md-4 pb-3">
                 <!-- ADOPTIONS CARD HERE -->
-                @include('dogs.partials.adopters_card', ['user' => $adoption->user])
+                @include('dogs.partials.adopters_card', ['user' => $adoption->user, 'with_potential' => true])
                 <!-- MODAL HERE -->
                 @include('dogs.partials.modal_adopter', ['adoption' => $adoption])
               </div>
@@ -99,7 +99,7 @@
               <div class="brief">
                 <div class="wrapper">
                   <!-- ADOPTER CARD HERE -->
-                  @include('dogs.partials.adopters_card', ['user' => $own_new->user, 'adoption' => $own_new])
+                  @include('dogs.partials.adopters_card', ['user' => $own_new->user, 'adoption' => $own_new, 'with_potential' => true])
 
                   <!-- MODAL HERE -->
                   @include('dogs.partials.modal_adopter', ['adoption' => $own_new])

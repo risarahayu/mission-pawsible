@@ -1,5 +1,5 @@
 
-<div class="dog-card">
+<div class="dog-card mb-3">
   <div class="brief">
     <div class="wrapper">
       <!-- <a class="cursor-pointer custom-link" data-bs-toggle="modal" data-bs-target="#rescuer_information"> -->
@@ -39,6 +39,15 @@
           </a>
         </div>
       </div>
+      <div class="size">
+        <i class="bi bi-geo-alt"></i>
+        <div>
+          <small>Location</small><br/>
+            <h6 class="fw-bold">{{ ucfirst(optional(optional($user->userInfo)->area)->name) }}</h6>
+          </a>
+        </div>
+      </div>
+      <a href="{{route('admins.edit', $user->id)}}" class="btn btn-primary">Edit</a>
     </div>
   </div>
 </div>

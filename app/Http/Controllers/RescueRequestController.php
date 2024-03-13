@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class RescueRequestController extends Controller
 {
@@ -108,6 +109,7 @@ class RescueRequestController extends Controller
         $rescuer = $stray_dog;
         $user = Auth::user();
         $own = $stray_dog->user;
+        // $rescuer_name = RescueRequest::with('rescuer')->get();
         $users = User::all()->where('role', 'rescuer');
         return view('requests.show', compact('stray_dog', 'user', 'rescuer', 'own', 'controller_name', 'users'));
     }
@@ -194,7 +196,14 @@ class RescueRequestController extends Controller
 
     public function rescue(Request $rescueRequest, RescueRequest $request)
     {
-        $user = User::find($rescueRequest->input('rescuer_id'));
+        $validatedRequest = $rescueRequest->validate([
+            'rescuer_id' => 'required|integer',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg',
+        ]);
+        // dd($validatedRequest['rescuer_id']);
+
+        $user = User::find($validatedRequest['rescuer_id']);
+        // $user = User::find($rescueRequest->input('rescuer_id'));
         $request->update([
             'rescuer_id' => $user->id,
             'rescued' => true,
@@ -249,12 +258,22 @@ class RescueRequestController extends Controller
 
     public function additional_contact(RescueRequest $request)
     {
+       
+        
         $dog_finder = $request->user;
         $stray_dog = $request;
         // $find = RescueRequest::find($request->id);
         // $images =  $find->images()->where('category', 'rescuer')->get();
-
-        $users = User::all()->where('role', 'rescuer');
+        $users = User::where('role', 'rescuer')
+        ->whereHas('userInfo', function ($query) {
+            $query->whereHas('area');
+        })
+        ->with(['userInfo' => function ($query) {
+            $query->join('areas', 'user_infos.area_id', '=', 'areas.id')
+                  ->orderBy('areas.name');
+        }])
+        ->get();
+    
 
         return view('requests.additional_contact', compact('dog_finder', 'stray_dog', 'users'));
     }

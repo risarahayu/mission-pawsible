@@ -29,7 +29,7 @@ return [
     'solo_rescuer' => 'Solo Rescuer',
     'register_solo_rescuer' => 'Register Solo Rescuer',
 
-    'register' => 'Find a new adopter',
+    'register' => 'Find a new adopter to your dog',
     'request' => 'Make new rescue',
     'dog_list' => 'Dog List',
     'my_dog' => 'My Dog',

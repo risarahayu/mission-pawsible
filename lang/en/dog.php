@@ -13,7 +13,7 @@ return [
     'index' => [
         'count' => 'We found :count at :area stray dog',
         'all_count' => 'We found :count stray dog at All area',
-        'empty' => 'No stray dog yet',
+        'empty' => 'No registered dog yet',
         'empty_adopted_dog' => 'No dogs have been adopted yet',
         'empty_rescued_dog' => 'No dogs have been rescued yet',
         'register' => 'Register a stray dog',
@@ -44,6 +44,7 @@ return [
     // create
     'form' => [
         'dog_type' => 'Dog Type',
+        'district'=>'District',
         'color' => 'Color',
         'temperament' => 'Temperament',
         'gender' => 'Gender',
@@ -56,7 +57,7 @@ return [
         'vaccinated_date' => 'Last Vaccinated Date',
         'vaccination_certificate' => 'Vaccinated Proof',
         'sterilization_certificate' => 'Sterilization Proof',
-        'district' => 'Area',
+        
         'map_link' => 'Google Map Link',
         'option' => [
             'male' => 'Male',

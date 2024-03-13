@@ -40,7 +40,7 @@
               </a>
             </li>
           @else
-            {{-- @if (session('role') == 'adopter') --}}
+            @if (session('role') == 'adopter')
               <!-- Route untuk rescuer atau adopter -->
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/') }}">
@@ -50,7 +50,7 @@
                   {{ __('nav.explore') }}
                 </a>
               </li>
-            {{-- @endif --}}
+            @endif
 
             <!-- my dog dropdown -->
             <li class="nav-item dropdown">
@@ -103,7 +103,7 @@
             <div class="dropdown-menu dropdown-menu-end p-2" aria-labelledby="navbarDropdown">
               @include('layouts.partials.lang')
               @if (session('role') == 'adopter' || session('role') == 'rescuer')
-                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#personal_information">
+                <a class="dropdown-item btn" data-bs-toggle="modal" data-bs-target="#personal_information">
                   <i class="bi bi-person-lines-fill px-2"></i> {{ __('nav.contact') }}
                 </a>
               @endif

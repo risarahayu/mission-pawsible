@@ -3,13 +3,13 @@
 return [
   'my_dog_listing' => [
     'title' => 'Daftar Anjing Saya',
-    'adopter' => 'Pantau anjing Anda dan cari penerima adopsi baru untuk mereka',
+    'adopter' => 'Pantau anjing Anda dan cari adopter baru untuk mereka',
     'rescuer' => 'Pantau anjing Anda dan cari penyelamat untuk mereka',
   ],
 
   'my_adoption_requests' => [
     'title' => 'Permintaan Adopsi Saya',
-    'sub_title' => 'Jelajahi anjing-anjing yang menunggu persetujuan adopsi Anda'
+    'sub_title' => 'Jelajahi anjing-anjing yang menunggu persetujuan permintaan adopsi Anda'
   ],
 
   'settings' => 'Pengaturan',
@@ -21,7 +21,7 @@ return [
   ],
 
   'rescuer' => [
-    'title' => 'Cari anjing liar?',
+    'title' => 'Menemukan anjing liar?',
     'sub_title' => 'Mari temukan penyelamat atau pengasuh<br>untuk anjing-anjing tersebut',
   ],
 
@@ -29,7 +29,7 @@ return [
   'solo_rescuer' => 'Penyelamat Tunggal',
   'register_solo_rescuer' => 'Daftar Penyelamat Tunggal',
 
-  'register' => 'Cari penerima adopsi baru',
+  'register' => 'Cari adopter baru untuk anjing Anda',
   'request' => 'Buat penyelamatan baru',
   'dog_list' => 'Daftar Anjing',
   'my_dog' => 'Anjing Saya',

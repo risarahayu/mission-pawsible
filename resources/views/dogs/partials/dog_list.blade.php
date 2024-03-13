@@ -26,7 +26,7 @@
                       </h5>
                     @endif
                   @else {{-- if adopted --}}
-                    @if ($stray_dog->adoptions->where('status', 'pending')->contains('user_id', auth()->user()->id)) {{-- if pending adoptions containt logined user --}}
+                    @if ($stray_dog->adoptions->where('status', 'pending')->where('user_id', auth()->user()->id)) {{-- if pending adoptions containt logined user --}}
                       <h5 class="position-absolute bg-warning-subtle p-2 m-2 rounded fs-6">
                         <i class="bi bi-exclamation-circle"></i> {{ __('app.status.waiting_for_approval') }}
                       </h5>
@@ -39,7 +39,7 @@
                 @else
                   @if ($stray_dog->adoptions->where('status', 'accepted')->contains('user_id', auth()->user()->id))
                     <h5 class="position-absolute bg-success-subtle p-2 m-2 rounded fs-6">
-                      <i class="bi bi-check-circle"></i> {{ __('app.status.you_got_it') }}
+                      <i class="bi bi-check-circle" ></i> {{ __('app.status.you_got_it') }}
                     </h5>
                   @else
                     <h5 class="position-absolute bg-danger-subtle p-2 m-2 rounded fs-6">
@@ -130,11 +130,11 @@
     @endforeach
   @else
     <div class="dashboard-nodata-card dogs">
-      <a href="{{ route('dogs.create') }}">
+      <!-- <a href="{{ route('dogs.create') }}"> -->
         <div class="d-flex flex-column align-items-center">
           <img src="{{ asset('images/single-dog.png') }}" alt="Single Dog" width="6rem">
           <p class="m-0 mt-2 txt-1">{{ __('dog.index.empty') }}</p>
-          <p class="m-0 txt-2"><i class="bi bi-plus-square-dotted me-3"></i>{{ __('dog.index.register') }}</p>
+          <!-- <p class="m-0 txt-2"><i class="bi bi-plus-square-dotted me-3"></i>{{ __('dog.index.register') }}</p> -->
         </div>
       </a>
     </div>

@@ -9,7 +9,7 @@ return [
         'adopt' => 'Adopsi',
         'rescue' => 'Selamatkan',
         'see_detail' => 'Lihat detail',
-        'change_role' => 'Ganti peran',
+        'change_role' => 'Klik di sini',
         'save' => 'Simpan',
         'see_all_my_dog' => 'Lihat semua anjing saya',
         'continue' => 'Lanjut',
@@ -63,5 +63,8 @@ return [
         'postal' => 'Kode Pos',
         'location' => 'Lokasi',
         'potential' => 'Berpotensi',
+        'age' => 'Umur',
+        'old' => 'tahun',
+        'choose_one'=>'Pilih salah satu',
     ]
 ];

@@ -49,8 +49,8 @@
       <i class="bi bi-geo-alt dtl-icon"></i>
       <div>
         <small>Location</small><br/>
-          <a href="{{$stray_dog->map_link}}">
-            <h6 class="fw-bold">{{$stray_dog->area->name}}</h6>
+          <a href="{{$stray_dog->map_link}}" target="__blank">
+            <h6 class="fw-bold">{{ucfirst($stray_dog->area->name)}}</h6>
           </a>
       </div>
     </div>
@@ -67,7 +67,7 @@
         @else
           <h6 class="fw-bold">{{ $own->email }}</h6>
         @endif -->
-        <a href="#"><h6 class="fw-bold">{{ $own->first_name }} {{ $own->last_name }}</h6></a>
+        <a href="#modal_profile" data-bs-toggle="modal" data-bs-target="#modal_profile"><h6 class="fw-bold">{{ $own->first_name }} {{ $own->last_name }}</h6></a>
       </div>
     </div>
   </div>
@@ -107,7 +107,7 @@
   @endif
 
   <!-- description -->
-  <div class="col-sm-12">
+  <div class="col-sm-12 pt-2">
     <div class="d-flex align-items-center" style="gap: 15px;">
       <i class="bi bi-file-earmark-text dtl-icon"></i>
       <div>
@@ -122,13 +122,12 @@
       <div class="d-flex align-items-center" style="gap: 15px;">
         <i class="fa-solid fa-hand-holding-heart me-2"></i>
         <div>
-          <small>Rescued By {{ $own->name }}</small><br/>
-          <a class="cursor-pointer custom-link" data-bs-toggle="modal" data-bs-target="#rescuer_information">
-            <h6 class="fw-bold">{{ $own->first_name . ' ' . $own->last_name }}</h6>
-          </a>
+          <small>Rescued By<br/>
+            <h6 class="fw-bold">{{ $stray_dog->rescuer->first_name . ' ' . $stray_dog->rescuer->last_name }}</h6>
         </div>
       </div>
     </div>
   @endif
-
 </div>
+
+@include('auth.partials.profile', ['user' => $own])

@@ -16,7 +16,7 @@
           <div class="main-card">
             <!-- Action button -->
             <div class="d-flex justify-content-end" style="gap: 5px;">
-              @if(Auth::id()==$stray_dog->user_id)
+              @if(Auth::id()==$stray_dog->user_id && !$stray_dog->adopted)
                 <a type="button" class="btn btn-mps" href="{{ route('dogs.edit', $stray_dog->id) }}"><i class="bi bi-pencil-square me-2"></i> {{ __('app.button.edit') }}</a>
                 @if (!$stray_dog->adopted)
                   <form action="{{ route('dogs.destroy', $stray_dog->id) }}" method="POST">
@@ -45,14 +45,14 @@
             @if($user->id != $own->id)
               @if($stray_dog->adopted)
                 @if($user->id == $own_new->user_id)
-                  <p class="fs-2">{{ __('dog.show.got_it') }}</p>
+                  <p class="fs-2 alert alert-success">{{ __('dog.show.got_it') }}</p>
                 @else
                   <p class="fs-2">{{ __('dog.show.already_adopted') }}</p>
                 @endif
               @elseif(!$stray_dog->adopted && $userAdoption)
                 <p class="fs-2">{{ __('dog.show.keep_update') }}</p>
-                <div class="btn btn-primary fw-bold fs-5">{{ __('dog.show.already_request') }}</div>
-                <p class="fs-6 mt-3">{{ __('dog.show.waiting_approval') }}</p>
+                <div class="text-base-color-background btn-primary fw-bold fs-5">{{ __('dog.show.already_request') }}</div>
+                <p class="fs-6 mt-3 alert alert-warning">{{ __('dog.show.waiting_approval') }}</p>
               @endif
             @endif
           </div>
