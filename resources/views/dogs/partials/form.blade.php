@@ -1,8 +1,10 @@
 <input type="hidden" name="user_id" value="{{ $user->id }}">
 @if ($action_name == 'edit')
   <input type="hidden" id="delete_image" name="delete_image" value="0">
-  <input type="hidden" id="delete_vaccication" name="delete_vaccication" value="0">
-  <input type="hidden" id="delete_sterilization" name="delete_sterilization" value="0">
+  @if ($controller_name == 'dog')
+    <input type="hidden" id="delete_vaccination" name="delete_vaccination" value="0">
+    <input type="hidden" id="delete_sterilization" name="delete_sterilization" value="0">
+  @endif
 @endif
 
 {{-- First fieldset for dog information --}}
@@ -11,7 +13,7 @@
   <div class="mb-3">
     <label for="dog_type" class="form-label"><span class="text-danger">*</span>{{ __('dog.form.dog_type') }}</label>
     <input id="dog_type" type="text" name="dog_type"
-            class="form-control required @error('dog_type') is-invalid @enderror" 
+            class="form-control required @error('dog_type') is-invalid @enderror"
             autocomplete="dog_type" placeholder="{{ __('dog.form.placeholder.dog_type') }}"
             value="{{ $action_name === "create" ? old('dog_type') : $dog->dog_type }}" required>
     @error('dog_type')
@@ -96,8 +98,8 @@
     {{-- Dog picture, input only --}}
     <div class="mb-3">
       <label for="images" class="form-label"><span class="text-danger">*</span>{{ __('dog.form.dog_picture') }}</label>
-      <input id="images" required type="file" name="images[]"
-              class="form-control required preview-input @error('images') is-invalid @enderror"
+      <input id="images" @if($action_name === 'create') required @endif type="file" name="images[]"
+              class="form-control @if($action_name === 'create') required @endif preview-input @error('images') is-invalid @enderror"
               autocomplete="images" placeholder="{{ __('dog.form.placeholder.dog_picture') }}"
               multiple>
       <div class="form-text">{{ __('dog.form.placeholder.dog_picture') }}</div>
@@ -105,7 +107,7 @@
         <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
         </span>
-      @enderror 
+      @enderror
     </div>
 
     {{-- Picture preview --}}
@@ -168,9 +170,9 @@
       <div class="mb-3">
         <label for="vaccination_certificate" class="form-label"><span class="text-danger">*</span>{{ __('dog.form.vaccination_certificate') }}</label>
         <input id="vaccination_certificate" type="file" name="vaccination_certificate[]"
-                class="form-control required preview-input @error('vaccination_certificate') is-invalid @enderror"
+                class="form-control @if($action_name === 'create') required @endif preview-input @error('vaccination_certificate') is-invalid @enderror"
                 autocomplete="vaccination_certificate" placeholder="{!! __('dog.form.placeholder.vaccinated_certificate') !!}"
-                multiple required>
+                multiple @if($action_name === 'create') required @endif>
         <div class="form-text">{!! __('dog.form.placeholder.vaccination_certificate') !!}</div>
         @error('vaccination_certificate')
           <span class="invalid-feedback" role="alert">
@@ -183,7 +185,7 @@
       <div class="image-preview border p-3 w-100 mb-3 @if($action_name == "create") d-none @endif" data-preview-id="vaccination_certificate">
         @if ($action_name == "edit")
           <div id="old-images" class="position-relative mb-3 old-images">
-            <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger" data-delete-id="delete_vaccination">{{ __('app.button.delete') }}</button>
+            <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger delete-old-image" data-delete-id="delete_vaccination">{{ __('app.button.delete') }}</button>
             <p class="fw-bold">{{ __('dog.form.old_picture') }}</p>
             <div class="row row-cols-3">
               @foreach ($images->where('category', 'vaccination') as $image)
@@ -225,9 +227,9 @@
       <div class="mb-3">
         <label for="sterilization_certificate" class="form-label"><span class="text-danger">*</span>{{ __('dog.form.sterilization_certificate') }}</label>
         <input id="sterilization_certificate" type="file" name="sterilization_certificate[]"
-              class="form-control preview-input"
+              class="form-control preview-input @if($action_name === 'create') required @endif"
               autocomplete="sterilization_certificate" placeholder="{{ __('Evidence that shows the dog has been sterilized (optional)') }}"
-              multiple required>
+              multiple @if($action_name === 'create') required @endif>
         <div class="form-text">{!! __('dog.form.placeholder.sterilization_certificate') !!}</div>
         @error('sterilization_certificate')
           <span class="invalid-feedback" role="alert">
@@ -240,7 +242,7 @@
       <div class="image-preview border p-3 w-100 mb-3 @if($action_name == 'create' || $images->where('category', 'sterilization')->count() == 0) d-none @endif" data-preview-id="sterilization_certificate">
         @if ($action_name == "edit" && $images->where('category', 'sterilization')->count() > 0)
           <div id="old-images" class="position-relative mb-3 old-images">
-            <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger" data-delete-id="delete_sterilization">{{ __('app.button.delete') }}</button>
+            <button type="button" id="delete-old-image" class="btn-delete-images btn btn-danger delete-old-image" data-delete-id="delete_sterilization">{{ __('app.button.delete') }}</button>
             <p class="fw-bold">{{ __('dog.form.old_picture') }}</p>
             <div class="row row-cols-3">
               @foreach ($images->where('category', 'sterilization') as $image)

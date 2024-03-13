@@ -213,7 +213,7 @@ class DogController extends Controller
             if ($request->input('delete_image')) {
                 $dog->images->where('category', null)->each->delete();
             }
-            if ($request->input('delete_vaccication')) {
+            if ($request->input('delete_vaccination')) {
                 $dog->images->where('category', 'vaccination')->each->delete();
             }
             if ($request->input('delete_sterilization')) {

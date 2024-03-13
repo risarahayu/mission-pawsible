@@ -41,6 +41,7 @@
       if (parents.find('.old-images').length == 0 && $(`#${targetId}`).val() == '') {
         parents.addClass("d-none")
         $(`#${targetId}`).addClass("required");
+        $(`#${targetId}`).attr('required', true);
       } else {
         parents.removeClass("d-none")
       }
@@ -60,6 +61,7 @@
       if (parents.find('.old-images').length == 0) {
         parents.addClass("d-none");
         $(`#${targetId}`).addClass("required");
+        $(`#${targetId}`).attr('required', true);
       } else {
         parents.removeClass("d-none");
       }
@@ -93,10 +95,12 @@
       if (this.files.length > 0) {
         imagePreview.find('.new-images').removeClass('d-none');
         $(this).removeClass("required");
+        $(this).removeAttr('required');
         imagePreview.removeClass("d-none");
         imagePreview.addClass("border");
       } else {
         $(this).addClass("required");
+        $(this).attr('required', true);
         $('#new-images').addClass('d-none');
         imagePreview.addClass("d-none");
       }

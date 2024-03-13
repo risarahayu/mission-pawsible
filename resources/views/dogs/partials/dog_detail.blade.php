@@ -122,8 +122,8 @@
       <div class="d-flex align-items-center" style="gap: 15px;">
         <i class="fa-solid fa-hand-holding-heart me-2"></i>
         <div>
-          <small>Rescued By<br/>
-            <h6 class="fw-bold">{{ $stray_dog->rescuer->first_name . ' ' . $stray_dog->rescuer->last_name }}</h6>
+          <small>Rescued By</small><br/>
+          <h6 class="fw-bold">{{ $stray_dog->rescuer->first_name . ' ' . $stray_dog->rescuer->last_name }}</h6>
         </div>
       </div>
     </div>
