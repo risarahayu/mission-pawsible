@@ -47,9 +47,23 @@
           </a>
         </div>
       </div>
-      @if(session('role')=='admin')
-        <a href="{{ route('admins.edit', $user->id) }}" class="btn btn-primary">Edit</a>
-        <a href="{{ route('admins.destroy', $user->id) }}" class="btn ">Delete</a>
+
+      @if(session('role') == 'admin')
+        <div class="row">
+          <div class="col-6">
+            <a href="{{ route('admins.edit', $user->id) }}" class="btn btn-primary w-100"><i class="bi bi-pencil-square me-2"></i> Edit</a>
+          </div>
+
+          <div class="col-6">
+            <form action="{{ route('admins.destroy', ['admin' => $user->id]) }}" method="POST">
+              @csrf
+              @method('DELETE')
+              <button type="button" class="btn btn-danger need-confirm w-100">
+                <i class="bi bi-trash me-2"></i> {{ __('app.button.delete') }}
+              </button>
+            </form>
+          </div>
+        </div>
       @endif
     </div>
   </div>

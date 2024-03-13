@@ -133,8 +133,9 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(User $admin)
     {
+        $user = $admin;
         $user->delete();
         return redirect()->route('admins.index')->with([
             'flash' => [
@@ -143,6 +144,7 @@ class AdminController extends Controller
             ]
         ])->with('flash.once', true);
     }
+
     public function rescuer_detail($rescuer_id){
         $rescuer = User::find($rescuer_id);
         $rescued_dogs = $rescuer->rescuedDogs;
