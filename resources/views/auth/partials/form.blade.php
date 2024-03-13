@@ -2,10 +2,10 @@
 <div class="mb-3">
   <div class="row row-cols-lg-2">
     <div class="col">
-      
+
       <label class="fw-bold mb-1" for="name"><span class="text-danger">*</span>{{ __('session.first_name') }}</label>
       <input placeholder="{{ __('session.placeholder.first_name') }}" id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name"
-        value="{{ $users->first_name }}" required autocomplete="first_name" autofocus>
+        value="{{ $user->first_name }}" required autocomplete="first_name" autofocus>
       @error('first_name')
         <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -15,7 +15,7 @@
     <div class="col">
       <label class="fw-bold mb-1" for="name"><span class="text-danger">*</span>{{ __('session.last_name') }}</label>
       <input placeholder="{{ __('session.placeholder.last_name') }}" id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name"
-        value="{{ $users->last_name }}" required autocomplete="last_name" autofocus>
+        value="{{ $user->last_name }}" required autocomplete="last_name" autofocus>
       @error('last_name')
         <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -30,7 +30,7 @@
 <div class="mb-3">
   <label class="fw-bold mb-1" for="email"><span class="text-danger">*</span>{{ __('session.email_address') }}</label>
   <input id="email" placeholder="{{ __('session.placeholder.email') }}" type="email" class="form-control @error('email') is-invalid @enderror"
-    name="email" value="{{ $users->email }}" required autocomplete="email">
+    name="email" value="{{ $user->email }}" required autocomplete="email">
   @error('email')
     <span class="invalid-feedback" role="alert">
       <strong>{{ $message }}</strong>
@@ -44,7 +44,7 @@
   <input id="whatsapp" type="text" name="whatsapp"
           class="form-control @error('whatsapp') is-invalid @enderror"
           autocomplete="whatsapp" placeholder="{{ __('session.placeholder.whatsapp') }}"
-          value="{{$users->userInfo->whatsapp}}"
+          value="{{ optional($user->userInfo)->whatsapp }}"
           required>
   @error('whatsapp')
     <span class="invalid-feedback" role="alert">
@@ -61,7 +61,7 @@
       <select id="area" name="area_id" class="form-select required @error('area') is-invalid @enderror" required>
         <option value="" disabled selected >{{ __('app.profile.choose_one') }}</option>
         @foreach($area as $area)
-          <option value="{{ $area->id }}"  {{ $users->userInfo->area_id === $area->id ? 'selected' : '' }} >{{ ucfirst($area->name) }} </option>
+          <option value="{{ $area->id }}"  {{ optional($user->userInfo)->area_id === $area->id ? 'selected' : '' }} >{{ ucfirst($area->name) }} </option>
         @endforeach
       </select>
       <label for="city"><span class="text-danger">*</span>{{ __('app.profile.city') }}</label>

@@ -28,9 +28,9 @@ class AdminController extends Controller
      */
     public function create()
     {
-
-        $area=Area::all();
-        return view('admins.create', compact('area'));
+        $user = new User();
+        $area = Area::all();
+        return view('admins.create', compact('area', 'user'));
 
     }
 
@@ -75,7 +75,7 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(User $admin)
     {
         //
     }
@@ -83,20 +83,20 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user, $request)
+    public function edit(User $admin)
     {
-        // dd($request);
-        $users = User::where('role', 'rescuer')->find($request);
-        // $rescuer=User::find($id);
-        $area=Area::all();
-        return view('admins.rescuer_edit', compact('users','area'));
+        $user = $admin;
+        $area = Area::all();
+        return view('admins.edit', compact('user','area'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $admin)
     {
+        $user = $admin;
+
         // Validasi data input
         $validatedData = $request->validate([
             'area_id' => 'required',
@@ -121,8 +121,13 @@ class AdminController extends Controller
                 'area_id' => $validatedData['area_id'],
             ]);
         }
-    
-       
+
+        return redirect()->route("admins.index")->with([
+            'flash' => [
+                'type' => 'success',
+                'message' => 'Stray dog has been updated successfully',
+            ]
+        ])->with('flash.once', true);
     }
 
     /**

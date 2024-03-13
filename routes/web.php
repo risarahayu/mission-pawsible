@@ -65,6 +65,5 @@ Route::namespace('App\Http\Controllers')->group(function () {
   //Admin
   Route::resource('admins', 'AdminController');
   Route::get('admins/rescuer/{rescuer_id}', 'AdminController@rescuer_detail')->name('admins.rescuer.detail');
-
 });
 
