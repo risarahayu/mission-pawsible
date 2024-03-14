@@ -53,7 +53,7 @@
 
       &:hover {
         // color: #fefefec7;
-        color: $secondary;
+        color: #fff;
 
         &::before {
           width: 2rem;
@@ -88,6 +88,15 @@
         }
       }
     }
+  }
+}
+
+.navbar-toggler {
+  padding: 0;
+  border: unset;
+  .navbar-toggler-icon  {
+    width: 2em;
+    height: 2em;
   }
 }
 

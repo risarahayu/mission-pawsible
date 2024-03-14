@@ -12,6 +12,14 @@ use Illuminate\Support\Arr;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        // Redirect back ke halaman login ketika belum login
+        $this->middleware('auth');
+
+        // Redirect back ke [route('role.index')] ketika belum menerapkan role
+        $this->middleware('role');
+    }
     /**
      * Display a listing of the resource.
      */

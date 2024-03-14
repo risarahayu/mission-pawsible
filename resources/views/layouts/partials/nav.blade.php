@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-base shadow-sm">
+<nav class="navbar navbar-dark navbar-expand-md navbar-light navbar-base shadow-sm">
   <div class="container">
     <a class="navbar-brand" href="{{ url('/') }}">
       <img class="img-fluid" src="{{ asset('images/mp-logo.png') }}" alt="Mission Pawsible Logo">
