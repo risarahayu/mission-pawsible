@@ -49,20 +49,18 @@
       </div>
 
       @if(session('role') == 'admin')
-        <div class="row">
-          <div class="col-6">
-            <a href="{{ route('admins.edit', $user->id) }}" class="btn btn-primary w-100"><i class="bi bi-pencil-square me-2"></i> Edit</a>
-          </div>
-
-          <div class="col-6">
-            <form action="{{ route('admins.destroy', ['admin' => $user->id]) }}" method="POST">
+        <div class="d-flex" style="gap: 10px;">
+          <a href="{{ route('admins.edit', $user->id) }}" class="btn btn-primary w-100"><i class="bi bi-pencil-square me-2"></i> Edit</a>
+          
+          @if (!$user->rescuedDogs()->exists())
+            <form action="{{ route('admins.destroy', ['admin' => $user->id]) }}" method="POST" class="w-100">
               @csrf
               @method('DELETE')
               <button type="button" class="btn btn-danger need-confirm w-100">
                 <i class="bi bi-trash me-2"></i> {{ __('app.button.delete') }}
               </button>
             </form>
-          </div>
+          @endif
         </div>
       @endif
     </div>
