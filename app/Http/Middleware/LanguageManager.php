@@ -16,10 +16,12 @@ class LanguageManager
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (session()->has('locale')) {
-            App::setLocale(session()->get('locale'));
-        }
-          
+      if (session()->has('locale')) {
+          App::setLocale(session()->get('locale'));
+      } else {
+          App::setLocale(config('app.locale'));
+      }
+
         return $next($request);
     }
 }

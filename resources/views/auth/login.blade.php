@@ -29,7 +29,7 @@
               @enderror
             </div>
             {{-- End of email input --}}
-  
+
             {{-- Password input --}}
             <div class="mb-5">
               <label class="fw-bold mb-1" for="password">{{ __('session.password') }}</label>
@@ -40,9 +40,16 @@
                   <strong>{{ $message }}</strong>
                 </span>
               @enderror
+              @if (Route::has('password.request'))
+                <div class="my-2">
+                  <a class="text-white" href="{{ route('password.request') }}">
+                    {{ __('Forgot Your Password?') }}
+                  </a>
+                </div>
+              @endif
             </div>
             {{-- End of password input --}}
-  
+
             {{-- Buttons --}}
             <div class="d-flex mb-5 flex-column">
               <button type="submit" class="btn btn-auth w-100">
