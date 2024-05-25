@@ -101,7 +101,7 @@
       <input id="images" @if($action_name === 'create') required @endif type="file" name="images[]"
               class="form-control @if($action_name === 'create') required @endif preview-input @error('images') is-invalid @enderror"
               autocomplete="images" placeholder="{{ __('dog.form.placeholder.dog_picture') }}"
-              multiple>
+              accept="image/png, image/jpg, image/jpeg" multiple>
       <div class="form-text">{{ __('dog.form.placeholder.dog_picture') }}</div>
       @error('images')
         <span class="invalid-feedback" role="alert">
@@ -172,7 +172,7 @@
         <input id="vaccination_certificate" type="file" name="vaccination_certificate[]"
                 class="form-control @if($action_name === 'create') required @endif preview-input @error('vaccination_certificate') is-invalid @enderror"
                 autocomplete="vaccination_certificate" placeholder="{!! __('dog.form.placeholder.vaccinated_certificate') !!}"
-                multiple @if($action_name === 'create') required @endif>
+                accept="image/png, image/jpg, image/jpeg" multiple @if($action_name === 'create') required @endif>
         <div class="form-text">{!! __('dog.form.placeholder.vaccination_certificate') !!}</div>
         @error('vaccination_certificate')
           <span class="invalid-feedback" role="alert">
@@ -229,7 +229,7 @@
         <input id="sterilization_certificate" type="file" name="sterilization_certificate[]"
               class="form-control preview-input @if($action_name === 'create') required @endif"
               autocomplete="sterilization_certificate" placeholder="{{ __('Evidence that shows the dog has been sterilized (optional)') }}"
-              multiple @if($action_name === 'create') required @endif>
+              accept="image/png, image/jpg, image/jpeg" multiple @if($action_name === 'create') required @endif>
         <div class="form-text">{!! __('dog.form.placeholder.sterilization_certificate') !!}</div>
         @error('sterilization_certificate')
           <span class="invalid-feedback" role="alert">

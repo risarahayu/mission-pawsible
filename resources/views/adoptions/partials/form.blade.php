@@ -55,7 +55,7 @@
         <input id="images" type="file" name="images[]"
                 class="form-control required preview-input @error('images') is-invalid @enderror"
                 autocomplete="images" placeholder="{{ __('adoption.placeholder.housing_picture') }}"
-                multiple>
+                accept="image/png, image/jpg, image/jpeg" multiple>
         <div class="form-text">{{ __('adoption.placeholder.housing_picture') }}</div>
         @error('images')
           <span class="invalid-feedback" role="alert">

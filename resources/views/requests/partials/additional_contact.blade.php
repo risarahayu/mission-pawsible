@@ -52,7 +52,7 @@
                     <label for="images" class="form-label"><span class="text-danger">*</span>{{ __('rescue.additional_contact.picture') }}</label>
                     <input id="images" type="file" name="images[]"
                             class="form-control required preview-input @error('images') is-invalid @enderror"
-                            autocomplete="images" multiple>
+                            autocomplete="images" accept="image/png, image/jpg, image/jpeg" multiple>
                     <div class="form-text">{{ __('rescue.additional_contact.picture_text') }}</div>
                     @error('images')
                       <span class="invalid-feedback" role="alert">

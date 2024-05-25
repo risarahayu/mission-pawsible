@@ -34,7 +34,26 @@
       @yield('content')
     </main>
 
-    <footer class="d-none"></footer>
+    <footer class="py-2 text-base-color-background">
+      <div class="container base-color">
+        <div class="row">
+          <div class="col-2">
+            <img class="img-fluid" src="{{ asset('images/mp-logo.png') }}" alt="Mission Pawsible Logo">
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-1 text-end">
+            <i class="bi bi-instagram"></i>
+          </div>
+          <div class="col" >
+            <a class="text-white" href="https://www.instagram.com/missionpawsible/">missionpawsible</a>
+          </div>
+        </div>
+      </div>
+      
+    
+    </footer>
 
     <!-- Scripts agar script selalu dibawah -->
     @yield('scripts')

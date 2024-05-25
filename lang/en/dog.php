@@ -89,8 +89,8 @@ return [
 
     'additional_contact' => [
         'alert' => [
-            'title' => 'Pantau status anjing Anda',
-            'content' => 'Anda dapat mempromosikan anjing Anda di berbagai platform media sosial,<br>dan kami sangat menyarankan untuk mengarahkan individu yang tertarik<br>untuk mengirimkan aplikasi adopsi melalui situs web kami untuk tujuan keamanan.'
+            'title' => "Monitor your dog's status",
+            'content' => 'You can promote your dog on various social media platforms,<br>and we strongly recommend directing interested individuals<br>to submit an adoption application through our website for security purposes.'
         ],
         'no_adopter' => 'No adopter yet',
     ],

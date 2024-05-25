@@ -116,7 +116,7 @@
               <input id="${id_name}_certificate" type="file" name="${id_name}_certificate[]"
                       class="form-control"
                       autocomplete="${id_name}_certificate" placeholder="{{ __('Pictures') }}"
-                      multiple>
+                      accept="image/png, image/jpg, image/jpeg" multiple>
               <label for="${id_name}_certificate">{{ __('Pictures') }}</label>
             </div>
           `);

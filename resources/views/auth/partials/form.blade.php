@@ -5,7 +5,7 @@
 
       <label class="fw-bold mb-1" for="name"><span class="text-danger">*</span>{{ __('session.first_name') }}</label>
       <input placeholder="{{ __('session.placeholder.first_name') }}" id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name"
-        value="{{ $user->first_name }}" required autocomplete="first_name" autofocus>
+        value="@if(session('role')=='admin'){{$user->first_name}}@endif" required autocomplete="first_name" autofocus>
       @error('first_name')
         <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -15,7 +15,7 @@
     <div class="col">
       <label class="fw-bold mb-1" for="name"><span class="text-danger">*</span>{{ __('session.last_name') }}</label>
       <input placeholder="{{ __('session.placeholder.last_name') }}" id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name"
-        value="{{ $user->last_name }}" required autocomplete="last_name" autofocus>
+        value="@if(session('role')=='admin'){{$user->last_name}}@endif" required autocomplete="last_name" autofocus>
       @error('last_name')
         <span class="invalid-feedback" role="alert">
           <strong>{{ $message }}</strong>
@@ -30,7 +30,7 @@
 <div class="mb-3">
   <label class="fw-bold mb-1" for="email"><span class="text-danger">*</span>{{ __('session.email_address') }}</label>
   <input id="email" placeholder="{{ __('session.placeholder.email') }}" type="email" class="form-control @error('email') is-invalid @enderror"
-    name="email" value="{{ $user->email }}" required autocomplete="email">
+    name="email" value="@if(session('role')=='admin'){{$user->email}}@endif" required autocomplete="email">
   @error('email')
     <span class="invalid-feedback" role="alert">
       <strong>{{ $message }}</strong>
@@ -44,7 +44,7 @@
   <input id="whatsapp" type="text" name="whatsapp"
           class="form-control @error('whatsapp') is-invalid @enderror"
           autocomplete="whatsapp" placeholder="{{ __('session.placeholder.whatsapp') }}"
-          value="{{ optional($user->userInfo)->whatsapp }}"
+          value="@if(session('role')=='admin'){{optional($user->userInfo)->whatsapp}}@endif"
           required>
   @error('whatsapp')
     <span class="invalid-feedback" role="alert">

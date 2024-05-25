@@ -39,7 +39,6 @@ class AdminController extends Controller
         $user = new User();
         $area = Area::all();
         return view('admins.create', compact('area', 'user'));
-
     }
 
     /**
