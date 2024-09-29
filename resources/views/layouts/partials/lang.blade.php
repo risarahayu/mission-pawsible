@@ -1,4 +1,5 @@
-<div class="lang d-flex align-items-center p-3 @if(Auth::user() && session('role'))lang-home @else lang-role @endif">
+<div class="lang d-flex align-items-center p-3 @if(Auth::user() && session('role'))lang-home @else lang-role @endif" style="gap: 15px">
+  <a href="{{ asset('documents/user_manual.pdf') }}" target="_blank" class="btn btn-outline-light">Manual Guide</a>
   <div class="tabs">
     <input type="radio" id="radio-1" name="lang" value="en" @if(session()->get('locale') == 'en' || session()->get('locale') == '') checked='' @endif>
     <label class="tab" for="radio-1">EN</label>
@@ -6,7 +7,6 @@
     <label class="tab" for="radio-2">ID</label>
     <span class="glider"></span>
   </div>
-
 </div>
 
 
