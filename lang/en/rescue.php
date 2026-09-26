@@ -12,11 +12,11 @@ return [
     ],
 
     'additional_contact' => [
-        'title' => 'Here are rescuer from Mission Pawsible you can chat and help you!',
+        'title' => 'Here are the rescuers from Mission Pawsible who can help you. They will take care of the dog and find them a new home!',
         'rescuer_list' => 'Rescuer list',
-        'choose_rescuer' => 'You can choose one of rescuer to help you. Just chat by Whatsapp',
+        'choose_rescuer' => 'You can choose one of rescuer to help you, then chat by Whatsapp to schedule rescue the dog',
 
-        'upload_proof' => 'Upload rescue proof',
+        'upload_proof' => 'Upload proof of rescue if the dog has been rescued by Mission Pawsible',
         'rescue_dog' => 'Rescue this dog',
         'picture' => 'Picture',
         'picture_text' => 'You also can upload the newest dog condition after rescue',
