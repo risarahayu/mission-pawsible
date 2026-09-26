@@ -14,7 +14,7 @@
     @foreach ($carousel_images as $index => $image)
       <div class="carousel-item @if($index === 0) active @endif">
         <div class="dog-picture mx-auto">
-          <img class="rounded" src="{{ asset($image->filename) }}">
+          <img class="rounded" src="{{ str_replace('/storage/public/', '/storage/', $image->filename) }}">
         </div>
       </div>
     @endforeach

@@ -89,9 +89,8 @@ class DogController extends Controller
 
             if ($request->hasFile('images')) {
                 foreach ($request->file('images') as $image) {
-                    $filename = $image->getClientOriginalName();
-                    $path = $image->storeAs('public/stray_dog_images', $filename);
-                    $publicPath = Storage::url($path);
+                    $path = $image->store('stray_dog_images', 'public');
+                    $publicPath = Storage::disk('public')->url($path);
 
                     $imageModel = new Image();
                     $imageModel->filename = $publicPath;
@@ -101,9 +100,8 @@ class DogController extends Controller
 
             if ($request->hasFile('vaccination_certificate')) {
                 foreach ($request->file('vaccination_certificate') as $image) {
-                    $filename = $image->getClientOriginalName();
-                    $path = $image->storeAs('public/stray_dog_images', $filename);
-                    $publicPath = Storage::url($path);
+                    $path = $image->store('stray_dog_images', 'public');
+                    $publicPath = Storage::disk('public')->url($path);
 
                     $imageModel = new Image();
                     $imageModel->filename = $publicPath;
@@ -114,9 +112,8 @@ class DogController extends Controller
 
             if ($request->hasFile('sterilization_certificate')) {
                 foreach ($request->file('sterilization_certificate') as $image) {
-                    $filename = $image->getClientOriginalName();
-                    $path = $image->storeAs('public/stray_dog_images', $filename);
-                    $publicPath = Storage::url($path);
+                    $path = $image->store('stray_dog_images', 'public');
+                    $publicPath = Storage::disk('public')->url($path);
 
                     $imageModel = new Image();
                     $imageModel->filename = $publicPath;

@@ -61,11 +61,14 @@
 
               {{-- preparing variable for images --}}
               @php
-                $filename = $stray_dog->images()->orderBy('category')->first()->filename;
-                $filename = explode('/', $filename);
-                $filename = end($filename);
+                $dogImage = $stray_dog->images()->whereNull('category')->orderBy('id')->first()
+                    ?? $stray_dog->images()->orderBy('id')->first();
               @endphp
-              <img src="{{ asset($stray_dog->images()->orderBy('category')->first()->filename) }}" alt="{{ $filename }}">
+              @if ($dogImage)
+                <img src="{{ str_replace('/storage/public/', '/storage/', $dogImage->filename) }}" alt="{{ basename($dogImage->filename) }}">
+              @else
+                <img src="{{ asset('images/single-dog.png') }}" alt="{{ __('dog.form.dog_type') }}">
+              @endif
             </div>
 
             <div class="col-sm-6 brief">
