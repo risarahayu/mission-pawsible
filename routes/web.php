@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckRole;
+use Illuminate\Support\Facades\Artisan; 
 
 /*
 |--------------------------------------------------------------------------
@@ -71,5 +72,11 @@ Route::namespace('App\Http\Controllers')->group(function () {
     Route::resource('admins', 'AdminController');
     Route::get('admins/rescuer/{rescuer_id}', 'AdminController@rescuer_detail')->name('admins.rescuer.detail');
   });
-});
 
+});
+  
+Route::get('/make-storage-link', function () {
+    Artisan::call('storage:link');
+
+    return Artisan::output();
+});
