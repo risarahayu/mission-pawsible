@@ -6,10 +6,12 @@
       {{session('role') =='adopter' ? __('dog.sub_title') : __('dog.sub_title_request')}}
     </div>
     
-    @if(!empty($area_name))
-      <p class="m-0">{{ __('dog.index.count', ['count'=>$stray_dogs->count(), 'area'=> $area_name]) }}
-    @else
-      <p class="m-0">{{ __('dog.index.all_count', ['count'=>$stray_dogs->count()]) }}
+    @if (session('role') !== 'rescuer')
+      @if(!empty($area_name))
+        <p class="m-0">{{ __('dog.index.count', ['count'=>$stray_dogs->count(), 'area'=> $area_name]) }}</p>
+      @else
+        <p class="m-0">{{ __('dog.index.all_count', ['count'=>$stray_dogs->count()]) }}</p>
+      @endif
     @endif
   </div>
 
