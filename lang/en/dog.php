@@ -12,7 +12,7 @@ return [
     // index
     'index' => [
         'count' => 'We found :count at :area stray dog',
-        'all_count' => 'We found :count stray dog at All area',
+        'all_count' => 'We found :count dog(s) at All area',
         'empty' => 'No registered dog yet',
         'empty_adopted_dog' => 'No dogs have been adopted yet',
         'empty_rescued_dog' => 'No dogs have been rescued yet',
